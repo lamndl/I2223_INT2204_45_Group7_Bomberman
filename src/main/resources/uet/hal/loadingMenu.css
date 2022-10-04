@@ -1,0 +1,9 @@
+.anchor {
+    -fx-background-image:url("Pictures/loadingBackground.png");
+}
+
+#tipTextField{
+-fx-text-inner-color: white;
+}
+
+

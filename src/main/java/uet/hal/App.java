@@ -5,7 +5,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.scene.paint.*;
 
 /**
  * JavaFX App.
@@ -16,13 +18,22 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    scene = new Scene(loadFxml("primary"), 640, 480);
+    Image icon = new Image(App.class.getResource("Pictures/icon.png").toString());
+
+    scene = new Scene(loadFxml("loadingMenu"), 1024, 768);
+
     stage.setScene(scene);
+    stage.getIcons().add(icon);
+    stage.setResizable(false);
+    stage.setFullScreen(false);
+
     stage.show();
+
   }
 
   static void setRoot(String fxml) throws IOException {
     scene.setRoot(loadFxml(fxml));
+
   }
 
   private static Parent loadFxml(String fxml) throws IOException {
