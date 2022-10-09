@@ -1,6 +1,7 @@
 package uet.hal;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class MainMenu {
@@ -38,6 +39,7 @@ public class MainMenu {
   }
 
   public void exitGame() throws IOException {
-
+    Platform.exit();
+    System.exit(0);
   }
 }
