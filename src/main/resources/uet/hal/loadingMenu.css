@@ -5,5 +5,20 @@
 #tipTextField{
 -fx-text-inner-color: white;
 }
+.text-area {
+    -fx-background-color: transparent;
+-fx-text-inner-color: white;
 
-
+}
+.text-area {
+    -fx-background-color: transparent;
+}
+.text-area .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .content{
+    -fx-background-color: transparent;
+}
+.text-area *.text {
+    -fx-text-alignment: center;
+}

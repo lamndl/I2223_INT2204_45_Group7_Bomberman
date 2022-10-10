@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -16,23 +17,32 @@
     <URL value="@loadingMenu.css" />
   </stylesheets>
    <children>
-      <Button id="goButton" fx:id="goButton" layoutX="482.0" layoutY="475.0" mnemonicParsing="false" onAction="#switchToMainMenu" style="-fx-background-image: url(&quot;@Pictures/goButtonNormal.png&quot;);" text="GO">
-         <font>
+      <Button id="goButton" fx:id="goButton" alignment="CENTER" layoutX="426.0" layoutY="474.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="36.0" prefWidth="170.0" style="-fx-background-image: url(&quot;@Pictures/goButtonNormal.png&quot;);" text="GO">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+        <font>
             <Font name="Arial" size="12.0" />
          </font>
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </Button>
-      <TextField id="tipTextField" fx:id="tipTextField" alignment="CENTER" editable="false" layoutX="204.0" layoutY="310.0" onContextMenuRequested="#changeTip" onMouseClicked="#changeTip" prefHeight="70.0" prefWidth="615.0" style="-fx-background-color: none;" stylesheets="@loadingMenu.css" text="fsdfsdgs">
-         <font>
-            <Font size="18.0" />
-         </font>
+      <TextField id="guideTip" alignment="CENTER" layoutX="300.0" layoutY="401.0" prefHeight="26.0" prefWidth="422.0" style="-fx-background-color: none;-fx-text-inner-color: white;" text="(click to change tip)">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+        <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <TextArea id="tipTextField" fx:id="tipTextField" editable="false" layoutX="66.0" layoutY="312.0" onContextMenuRequested="#changeTip" onMouseClicked="#changeTip" prefHeight="88.0" prefWidth="890.0" stylesheets="@loadingMenu.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </TextField>
-      <TextField id="guideTip" alignment="CENTER" layoutX="300.0" layoutY="380.0" prefHeight="26.0" prefWidth="422.0" style="-fx-background-color: none;-fx-text-inner-color: white;" text="(click to change tip)" />
+         <font>
+            <Font size="19.0" />
+         </font>
+      </TextArea>
    </children>
 
 </AnchorPane>
