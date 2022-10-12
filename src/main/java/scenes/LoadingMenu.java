@@ -29,7 +29,7 @@ public class LoadingMenu {
     @Override
     protected Void call() throws Exception{
       try{
-        Thread.sleep(500);
+        Thread.sleep(5000);
       }catch(InterruptedException e){
 
       }
@@ -64,6 +64,8 @@ public class LoadingMenu {
     new Thread(goButtonSleep).start();
 
   }
+
+
   public void changeTip() throws IOException {
     if (helpfulTips.isEmpty()) {
       helpfulTips.add("Turn off the Unikey if you wonder why your character doesn't move.");
