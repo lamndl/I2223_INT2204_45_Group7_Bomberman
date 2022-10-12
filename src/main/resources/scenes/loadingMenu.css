@@ -1,5 +1,5 @@
 .anchor {
-    -fx-background-image:url("Pictures/loadingBackground.png");
+    -fx-background-image:url("../Pictures/loadingBackground.png");
 }
 
 #tipTextField{

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="anchor" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.hal.LoadingMenu">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="anchor" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.LoadingMenu">
   <padding>
     <Insets bottom="10" left="25" right="25" top="25" />
   </padding>
@@ -17,7 +17,7 @@
     <URL value="@loadingMenu.css" />
   </stylesheets>
    <children>
-      <Button id="goButton" fx:id="goButton" alignment="CENTER" layoutX="426.0" layoutY="474.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="36.0" prefWidth="170.0" style="-fx-background-image: url(&quot;@Pictures/goButtonNormal.png&quot;);" text="GO">
+      <Button id="goButton" fx:id="goButton" alignment="CENTER" layoutX="426.0" layoutY="474.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="36.0" prefWidth="170.0" style="-fx-background-image: url(../Pictures/goButtonNormal.png);" text="GO">
         <cursor>
           <Cursor fx:constant="HAND" />
         </cursor>

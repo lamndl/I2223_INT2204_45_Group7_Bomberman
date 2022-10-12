@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="exitButton" prefHeight="768.0" prefWidth="1024.0" styleClass="anchor" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uet.hal.MainMenu">
+<AnchorPane fx:id="exitButton" prefHeight="768.0" prefWidth="1024.0" styleClass="anchor" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.MainMenu">
   <padding>
     <Insets bottom="10" left="25" right="25" top="25" />
   </padding>
@@ -78,14 +78,14 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </Button>
-      <Button id="characterMainMenuButton" fx:id="characterMainMenuButton" alignment="CENTER" layoutX="699.0" layoutY="545.0" mnemonicParsing="false" onAction="#changeCharaterMainMenu" style="-fx-background-color: none;" stylesheets="@mainMenu.css" text="Unknown Charater" textAlignment="CENTER" textFill="WHITE">
+      <Button id="characterMainMenuButton" fx:id="characterMainMenuButton" alignment="CENTER" layoutX="699.0" layoutY="545.0" mnemonicParsing="false" onAction="#changeCharacterMainMenu" style="-fx-background-color: none;" stylesheets="@mainMenu.css" text="Unknown Charater" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Garamond" size="19.0" />
          </font>
       </Button>
       <ImageView fitHeight="296.0" fitWidth="192.0" layoutX="709.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Pictures/testTransparency.png" />
+            <Image url="@../Pictures/testTransparency.png" />
          </image>
       </ImageView>
 

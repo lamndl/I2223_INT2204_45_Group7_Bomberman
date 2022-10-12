@@ -1,5 +1,5 @@
-package uet.hal;
-
+package scenes;
+import mainClass.App;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 
 public class CreditScene {
@@ -58,7 +59,7 @@ gmailAlert.setTitle("Gmail information");
 gmailAlert.show();
 }
 public void switchToMainMenu() throws IOException{
-  App.setRoot("mainMenu");
+  App.setRoot("/scenes/mainMenu");
 }
 
 public void openGithub()throws IOException{

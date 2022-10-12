@@ -1,4 +1,5 @@
-package uet.hal;
+package scenes;
+import mainClass.App;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class LoadingMenu {
   private int currentIndex = (int)Math.round(Math.random()*10);
   public TextArea tipTextField;
 
-  public FXMLLoader testing = new FXMLLoader(getClass().getResource("loadingMenu.fxml"));
+  public FXMLLoader testing = new FXMLLoader(getClass().getResource("/scenes/loadingMenu.fxml"));
 
   public Button goButton = new Button();
 
@@ -28,7 +29,7 @@ public class LoadingMenu {
     @Override
     protected Void call() throws Exception{
       try{
-        Thread.sleep(5000);
+        Thread.sleep(500);
       }catch(InterruptedException e){
 
       }
@@ -38,7 +39,7 @@ public class LoadingMenu {
 
   @FXML
   private void switchToMainMenu() throws IOException {
-    App.setRoot("mainMenu");
+    App.setRoot("/scenes/mainMenu");
   }
 
   public void initialize(){

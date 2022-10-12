@@ -1,4 +1,4 @@
-package uet.hal;
+package mainClass;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -18,9 +18,9 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    Image icon = new Image(App.class.getResource("Pictures/icon.png").toString());
+    Image icon = new Image(App.class.getResource("/Pictures/icon.png").toString());
 
-    scene = new Scene(loadFxml("loadingMenu"), 1024, 768);
+    scene = new Scene(loadFxml("/scenes/loadingMenu"), 1024, 768);
 
     stage.setScene(scene);
     stage.getIcons().add(icon);
@@ -31,7 +31,7 @@ public class App extends Application {
 
   }
 
-  static void setRoot(String fxml) throws IOException {
+  public static void setRoot(String fxml) throws IOException {
     scene.setRoot(loadFxml(fxml));
 
   }

@@ -1,4 +1,5 @@
-package uet.hal;
+package scenes;
+import mainClass.App;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -10,10 +11,10 @@ public class HowToPlayScene {
 
   public ImageView imageViewHowToPlay = new ImageView();
 
-  public Image introductionImage = new Image(App.class.getResource("Pictures/HowToPlayScene/Introduction.png").toString());
-  public Image charactersImage = new Image(App.class.getResource("Pictures/HowToPlayScene/ComingSoon.png").toString());
-  public Image enemiesImage = new Image(App.class.getResource("Pictures/HowToPlayScene/ComingSoon.png").toString());
-  public Image keyboardImage = new Image(App.class.getResource("Pictures/HowToPlayScene/Keyboard.png").toString());
+  public Image introductionImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/Introduction.png").toString());
+  public Image charactersImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/ComingSoon.png").toString());
+  public Image enemiesImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/ComingSoon.png").toString());
+  public Image keyboardImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/Keyboard.png").toString());
   public void switchToIntroductionTab() throws IOException{
     imageViewHowToPlay.setImage(introductionImage);
   }
@@ -31,6 +32,6 @@ public class HowToPlayScene {
   }
 
   public void backToMainMenu() throws IOException{
-    App.setRoot("mainMenu");
+    App.setRoot("/scenes/mainMenu");
   }
 }

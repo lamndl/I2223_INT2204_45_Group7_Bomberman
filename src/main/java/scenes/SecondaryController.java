@@ -1,4 +1,5 @@
-package uet.hal;
+package scenes;
+import mainClass.App;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
