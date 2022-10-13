@@ -115,5 +115,11 @@
          </tooltip>
       </Button>
       <Text fx:id="statusText" fill="WHITE" layoutX="74.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changing" />
+      <Text fill="WHITE" layoutX="74.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game menu">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="inGameMenuButton" layoutX="461.0" layoutY="565.0" mnemonicParsing="false" onAction="#changeInGameMenu" prefHeight="26.0" prefWidth="158.0" text="Button" />
    </children>
 </AnchorPane>

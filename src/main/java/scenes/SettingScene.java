@@ -32,6 +32,8 @@ public class SettingScene {
 
   public Button bombPlacementButton = new Button();
 
+  public Button inGameMenuButton = new Button();
+
   ///public KeyEvent moveUpKey = new KeyEvent();
 
   public Text statusText= new Text();
@@ -64,6 +66,7 @@ public class SettingScene {
     statusKeyEvent.add(0);//left
     statusKeyEvent.add(0);//right
     statusKeyEvent.add(0);//place bomb
+    statusKeyEvent.add(0);//in game menu
     statusText.setText("");
     KB.printKeyCodeStatus();
     setTextForButtons();
@@ -99,8 +102,15 @@ public class SettingScene {
       moveUpButton.setOnKeyPressed(new EventHandler<KeyEvent>(){
         @Override
         public void handle(KeyEvent event){
+          KeyCode temp = KB.getMoveUp();
           KB.setMoveUp(event.getCode());
-          cancelAllChangeButton();
+          if(KB.validation()){
+            cancelAllChangeButton(true);
+          }else{
+            KB.setMoveUp(temp);
+            cancelAllChangeButton(false);
+          }
+
           statusKeyEvent.set(0,0);
           //KB.printKeyCodeStatus();
           setTextForButtons();
@@ -120,8 +130,14 @@ public class SettingScene {
       moveDownButton.setOnKeyPressed(new EventHandler<KeyEvent>(){
         @Override
         public void handle(KeyEvent event){
+          KeyCode temp = KB.getMoveDown();
           KB.setMoveDown(event.getCode());
-          cancelAllChangeButton();
+          if(KB.validation()){
+            cancelAllChangeButton(true);
+          }else{
+            KB.setMoveDown(temp);
+            cancelAllChangeButton(false);
+          }
           statusKeyEvent.set(1,0);
           //KB.printKeyCodeStatus();
           setTextForButtons();
@@ -140,8 +156,14 @@ public class SettingScene {
       moveLeftButton.setOnKeyPressed(new EventHandler<KeyEvent>(){
         @Override
         public void handle(KeyEvent event){
+          KeyCode temp = KB.getMoveLeft();
           KB.setMoveLeft(event.getCode());
-          cancelAllChangeButton();
+          if(KB.validation()){
+            cancelAllChangeButton(true);
+          }else{
+            KB.setMoveLeft(temp);
+            cancelAllChangeButton(false);
+          }
           statusKeyEvent.set(2,0);
           //KB.printKeyCodeStatus();
           setTextForButtons();
@@ -160,8 +182,14 @@ public class SettingScene {
       moveRightButton.setOnKeyPressed(new EventHandler<KeyEvent>(){
         @Override
         public void handle(KeyEvent event){
+          KeyCode temp = KB.getMoveRight();
           KB.setMoveRight(event.getCode());
-          cancelAllChangeButton();
+          if(KB.validation()){
+            cancelAllChangeButton(true);
+          }else{
+            KB.setMoveRight(temp);
+            cancelAllChangeButton(false);
+          }
           statusKeyEvent.set(3,0);
           //KB.printKeyCodeStatus();
           setTextForButtons();
@@ -180,8 +208,14 @@ public class SettingScene {
       bombPlacementButton.setOnKeyPressed(new EventHandler<KeyEvent>(){
         @Override
         public void handle(KeyEvent event){
+          KeyCode temp = KB.getBombPlacement();
           KB.setBombPlacement(event.getCode());
-          cancelAllChangeButton();
+          if(KB.validation()){
+            cancelAllChangeButton(true);
+          }else{
+            KB.setBombPlacement(temp);
+            cancelAllChangeButton(false);
+          }
           statusKeyEvent.set(4,0);
           //KB.printKeyCodeStatus();
           setTextForButtons();
@@ -192,7 +226,33 @@ public class SettingScene {
     }
   }
 
-  public void cancelAllChangeButton(){
+  public void changeInGameMenu() throws IOException{
+    diNgu.cancel();
+    statusText.setText("Changing the in game menu button...");
+    statusKeyEvent.set(5,1);
+    if(statusKeyEvent.get(5)==1){
+      inGameMenuButton.setOnKeyPressed(new EventHandler<KeyEvent>(){
+        @Override
+        public void handle(KeyEvent event){
+          KeyCode temp = KB.getInGameMenu();
+          KB.setInGameMenu(event.getCode());
+          if(KB.validation()){
+            cancelAllChangeButton(true);
+          }else{
+            KB.setInGameMenu(temp);
+            cancelAllChangeButton(false);
+          }
+          statusKeyEvent.set(5,0);
+          //KB.printKeyCodeStatus();
+          setTextForButtons();
+
+        }
+
+      });
+    }
+  }
+
+  public void cancelAllChangeButton(Boolean allowed){
     moveUpButton.setOnKeyPressed(null);
     moveDownButton.setOnKeyPressed(null);
     moveLeftButton.setOnKeyPressed(null);
@@ -200,7 +260,12 @@ public class SettingScene {
     bombPlacementButton.setOnKeyPressed(null);
 
     //need to disappear after 3 seconds
-    statusText.setText("Done!");
+    if(allowed){
+      statusText.setText("Done!");
+    }else{
+      statusText.setText("Unsuccessful. Please try again.");
+    }
+
 
   }
 
