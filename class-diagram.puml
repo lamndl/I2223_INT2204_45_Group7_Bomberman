@@ -1,0 +1,50 @@
+@startuml Bomberman
+Entity <|--Tile
+Entity <|--AnimatedEntity
+AnimatedEntity <|-- Bomb
+AnimatedEntity <|-- Mob
+Tile <|-- Wall
+Tile <|-- Brick
+Tile <|-- Grass
+Tile <|-- PowerUp
+Mob <|-- Bomber
+Mob <|-- Enemy
+Enemy <|-- Balloom
+Enemy <|-- Oneal
+
+
+abstract class Entity {
+    #int x
+    #int y 
+    #Sprite sprite
+    +draw()
+    +isCollidedWith(Entity other)
+}
+
+abstract class Tile
+
+abstract class AnimatedEntity {
+    +{abstract} update()
+}
+
+abstract class Mob  {
+    #hp
+    #velocityX
+    #velocityY
+    +die()
+}
+
+class Bomber {
+    -int maximumBombCount
+    -int currentBombCount
+    -int flameLength
+    -float speedModifier
+    +placeBomb()
+}
+
+class Bomb {
+    + explode()
+}
+
+abstract class Enemy{}
+@enduml

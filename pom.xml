@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>uet.hal</groupId>
-    <artifactId>bomberman</artifactId>
+    <artifactId>mainClass</artifactId>
     <version>0.01</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
