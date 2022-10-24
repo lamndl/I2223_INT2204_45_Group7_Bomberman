@@ -17,7 +17,7 @@ import java.time.*;
 public class LoadingMenu {
 
 
-  protected static ArrayList<String> helpfulTips = new ArrayList<String>(100);
+  protected static ArrayList<String> helpfulTips = new ArrayList<>();
   private int currentIndex = (int)Math.round(Math.random()*10);
   public TextArea tipTextField;
 

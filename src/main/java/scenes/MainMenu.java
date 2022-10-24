@@ -9,7 +9,7 @@ public class MainMenu {
 
   @FXML
   public void switchToCampaignScene() throws IOException {
-    App.setRoot("/scenes/campaignScene");
+    App.toMainGame();
   }
 
   public void switchToEndlessScene() throws IOException {

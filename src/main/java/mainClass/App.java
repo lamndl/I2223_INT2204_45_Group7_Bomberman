@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -14,20 +15,25 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static Scene scene;
+  private static Stage stage;
 
   @Override
   public void start(Stage stage) throws IOException {
+    this.stage = stage;
     Image icon = new Image(App.class.getResource("/Pictures/icon.png").toString());
-
-    Board.init();
-    scene = new Scene(Board.root, 1024, 768);
+    scene = new Scene(loadFxml("/scenes/loadingMenu"), 1024, 768);
     stage.setScene(scene);
     stage.getIcons().add(icon);
     stage.setResizable(false);
     stage.setFullScreen(false);
-
     stage.show();
 
+  }
+
+  public static void toMainGame() {
+    Board.init();
+    Scene newScene = new Scene(Board.root);
+    stage.setScene(newScene);
   }
 
   public static void setRoot(String fxml) throws IOException {

@@ -8,9 +8,11 @@ import entity.tile.Tile;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 
 public class Board {
@@ -29,6 +31,8 @@ public class Board {
     canvas = new Canvas(480, 480);
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
+    graphicsContext.setFill(Color.GREEN);
+    graphicsContext.setStroke(Color.GREEN);
     bomber = new Bomber();
     AnimationTimer timer = new AnimationTimer() {
       @Override
@@ -54,6 +58,6 @@ public class Board {
   }
 
   public static void update() {
-    //
+    // root.setOnKeyPressed();
   }
 }
