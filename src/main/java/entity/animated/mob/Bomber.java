@@ -1,5 +1,7 @@
 package entity.animated.mob;
 
+import sprite.Sprite;
+
 public class Bomber extends Mob {
   private int maximumBombCount;
   private int currentBombCount;
@@ -8,5 +10,11 @@ public class Bomber extends Mob {
 
   public void placeBomb() {
     //
+  }
+
+  public Bomber() {
+    x = 1;
+    y = 1;
+    image = Sprite.player_right.getFxImage();
   }
 }
