@@ -1,5 +1,5 @@
 package entity.animated.mob;
 
-public abstract class Enemy {
+public abstract class Enemy extends Mob{
   
 }

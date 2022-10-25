@@ -8,7 +8,6 @@ import entity.tile.Tile;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,23 +15,28 @@ import javafx.scene.paint.Color;
 
 
 public class Board {
-  public static Group root;
+  private static Group root;
   private static Canvas canvas;
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
-  private static List<Tile> tileList = new ArrayList<>();
-  private static List<Bomb> bombList = new ArrayList<>();
-  private static List<Enemy> enemyList = new ArrayList<Enemy>();
+  private static List<Entity> tileList = new ArrayList<>();
+  private static List<Entity> bombList = new ArrayList<>();
+  private static List<Entity> enemyList = new ArrayList<>();
   private static Bomber bomber;
+
+  public static Group getRoot() {
+    return root;
+  }
 
   public static void init() {
     root = new Group();
-    canvas = new Canvas(480, 480);
+    height = 480;
+    width = 480;
+    canvas = new Canvas(width, height);
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     graphicsContext.setFill(Color.GREEN);
-    graphicsContext.setStroke(Color.GREEN);
     bomber = new Bomber();
     AnimationTimer timer = new AnimationTimer() {
       @Override
@@ -46,6 +50,15 @@ public class Board {
 
   public static void addEntity(Entity entity) {
     // Design pattern ???
+    if (entity instanceof Tile) {
+      tileList.add(entity);
+    } else if (entity instanceof Bomb) {
+      bombList.add(entity);
+    } else if (entity instanceof Enemy) {
+      enemyList.add(entity);
+    } else {
+      bomber = (Bomber) entity;
+    }
   }
 
   public static void removeEntity(Entity entity) {
@@ -58,6 +71,6 @@ public class Board {
   }
 
   public static void update() {
-    // root.setOnKeyPressed();
+    //
   }
 }

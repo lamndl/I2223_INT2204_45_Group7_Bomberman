@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -32,7 +31,7 @@ public class App extends Application {
 
   public static void toMainGame() {
     Board.init();
-    Scene newScene = new Scene(Board.root);
+    Scene newScene = new Scene(Board.getRoot());
     stage.setScene(newScene);
   }
 
