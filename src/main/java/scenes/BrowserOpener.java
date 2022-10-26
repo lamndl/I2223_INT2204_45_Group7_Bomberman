@@ -1,10 +1,7 @@
 package scenes;
 import mainClass.App;
 import java.net.URI;
-/**
- *
- * @author Narayan
- */
+
 public class BrowserOpener {
 
 

@@ -71,12 +71,29 @@ public class SettingScene {
     KB.printKeyCodeStatus();
     setTextForButtons();
 
+    //fucking struggling. Luckily not vital.
     diNgu.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
       @Override
       public void handle(WorkerStateEvent workerStateEvent) {
         statusText.setText("");
       }
     });
+    diNgu.setOnCancelled(
+        new EventHandler<WorkerStateEvent>() {
+          @Override
+          public void handle(WorkerStateEvent workerStateEvent) {
+            statusText.setText("");
+          }
+        }
+    );
+    diNgu.setOnFailed(
+        new EventHandler<WorkerStateEvent>() {
+          @Override
+          public void handle(WorkerStateEvent workerStateEvent) {
+            statusText.setText("");
+          }
+        }
+    );
   }
 
 
@@ -275,6 +292,7 @@ public class SettingScene {
     moveLeftButton.setText(KB.getMoveLeft().toString());
     moveRightButton.setText(KB.getMoveRight().toString());
     bombPlacementButton.setText(KB.getBombPlacement().toString());
-
+    inGameMenuButton.setText(KB.getInGameMenu().toString());
+    new Thread(diNgu).start();
   }
 }//end of class

@@ -1,4 +1,12 @@
 package scenes;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.ProgressBar;
+import javafx.util.Duration;
 import mainClass.App;
 
 import java.io.IOException;
@@ -13,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import java.time.*;
+import mainClass.Keyboard;
 
 public class LoadingMenu {
 
@@ -25,11 +34,13 @@ public class LoadingMenu {
 
   public Button goButton = new Button();
 
+  public ProgressBar progressBar = new ProgressBar();
+
   Task<Void> goButtonSleep = new Task<Void>(){
     @Override
     protected Void call() throws Exception{
       try{
-        Thread.sleep(5000);
+        Thread.sleep(500); //change to 5000 later
       }catch(InterruptedException e){
 
       }
@@ -43,6 +54,7 @@ public class LoadingMenu {
   }
 
   public void initialize(){
+    progressBar.setProgress(0.0);
     goButton.setText("Please wait few seconds...");
     goButton.setDisable(true);
     tipTextField.setStyle("-fx-font-size: 22");
@@ -53,6 +65,11 @@ public class LoadingMenu {
       System.out.println("Sth wrong when init the changetip()");
     }
 
+
+
+
+
+
     goButtonSleep.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
       @Override
       public void handle(WorkerStateEvent workerStateEvent) {
@@ -61,7 +78,10 @@ public class LoadingMenu {
       }
     });
 
+
+
     new Thread(goButtonSleep).start();
+    //progressBar.progressProperty().bind(goButtonSleep.progressProperty());
 
   }
 
