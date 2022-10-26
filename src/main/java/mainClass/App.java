@@ -19,6 +19,7 @@ import entity.animated.*;
 import entity.tile.*;
 import sprite.Sprite;
 
+
 /**
  * JavaFX App.
  */
@@ -33,6 +34,8 @@ public class App extends Application {
   private List<Entity> stillObjects = new ArrayList<>();
 
   private static Scene scene;
+
+  private static boolean campaignOrEndless = true;
 
   @Override
   public void start(Stage stage) throws IOException {
@@ -113,6 +116,14 @@ public class App extends Application {
     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     stillObjects.forEach(g -> g.render(gc));
     entities.forEach(g -> g.render(gc));
+  }
+
+  public static void setCampaignOrEndless(boolean newValue){
+    campaignOrEndless=newValue;
+  }
+
+  public static boolean isCampaignOrEndless(){
+    return campaignOrEndless;
   }
 
   public static void main(String[] args) {
