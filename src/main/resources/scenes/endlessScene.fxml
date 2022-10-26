@@ -6,9 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx"
   xmlns:fx="http://javafx.com/fxml"
   fx:controller="scenes.EndlessScene"
-  prefHeight="400.0" prefWidth="600.0">
+  styleClass="background"
+  prefHeight="768.0" prefWidth="1024.0">
 
+  <stylesheets>
+    <URL value="@endlessScene.css" />
+  </stylesheets>
 </AnchorPane>

@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +18,7 @@
     <URL value="@loadingMenu.css" />
   </stylesheets>
    <children>
-      <Button id="goButton" fx:id="goButton" alignment="CENTER" layoutX="426.0" layoutY="474.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="36.0" prefWidth="170.0" style="-fx-background-image: url(../Pictures/goButtonNormal.png);" text="GO">
+      <Button id="goButton" fx:id="goButton" alignment="CENTER" layoutX="425.0" layoutY="502.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="36.0" prefWidth="170.0" style="-fx-background-image: url(../Pictures/goButtonNormal.png);" text="GO">
         <cursor>
           <Cursor fx:constant="HAND" />
         </cursor>
@@ -43,6 +44,7 @@
             <Font size="19.0" />
          </font>
       </TextArea>
+      <ProgressBar fx:id="progressBar" layoutX="258.0" layoutY="457.0" prefHeight="18.0" prefWidth="505.0" progress="0.0" />
    </children>
 
 </AnchorPane>

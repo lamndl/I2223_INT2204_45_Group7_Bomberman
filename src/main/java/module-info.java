@@ -5,8 +5,11 @@ module mainClass {
 
   opens mainClass to javafx.fxml;
   opens scenes to javafx.fxml;
-    exports mainClass;
+  opens experiment to javafx.fxml;
+  exports mainClass;
     exports scenes;
+    exports experiment;
+
 
 
 }
