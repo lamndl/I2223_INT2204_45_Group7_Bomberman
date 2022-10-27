@@ -35,7 +35,7 @@ public class App extends Application {
 
   private static Scene scene;
 
-  private static boolean campaignOrEndless = true;
+
 
   @Override
   public void start(Stage stage) throws IOException {
@@ -118,13 +118,7 @@ public class App extends Application {
     entities.forEach(g -> g.render(gc));
   }
 
-  public static void setCampaignOrEndless(boolean newValue){
-    campaignOrEndless=newValue;
-  }
 
-  public static boolean isCampaignOrEndless(){
-    return campaignOrEndless;
-  }
 
   public static void main(String[] args) {
     launch();

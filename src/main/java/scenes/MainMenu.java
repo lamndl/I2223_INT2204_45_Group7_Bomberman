@@ -1,21 +1,45 @@
 package scenes;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.image.ImageView;
 import mainClass.App;
 
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import scenes.CharacterChoosing;
+import scenes.*;
 public class MainMenu {
+  public Button campaignButton = new Button();
+  public Button endlessButton = new Button();
+  public Button settingButton = new Button();
+  public Button howToPlayButton = new Button();
+  public Button creditButton = new Button();
+  public CheckBox musicCheckBox = new CheckBox();
+  public Button nameButton = new Button();
+  public Button exitButton = new Button();
+  public Button characterMainMenuButton = new Button();
+  public ImageView characterMainMenuImage = new ImageView();
+  private int currentIndex;
+
+  private CharacterSceneManagement csm;
+  public void initialize(){
+    csm = new CharacterSceneManagement();
+    currentIndex = csm.getCurrentLength()*100;
+    characterMainMenuImage.setOnMouseClicked(e->changeCharacterMainMenu());
+    characterMainMenuImage.setImage(csm.getImageFromIndex(currentIndex%csm.getCurrentLength()));
+    characterMainMenuButton.setText(csm.getTextFromIndex(currentIndex%csm.getCurrentLength()));
+
+  }
 
   @FXML
   public void switchToCampaignScene() throws IOException {
     App.setRoot("/scenes/campaignScene");
-    App.setCampaignOrEndless(true);
+    CharacterChoosing.setCampaignOrEndless(true);
   }
 
   public void switchToEndlessScene() throws IOException {
     App.setRoot("/scenes/endlessScene");
-    App.setCampaignOrEndless(false);
+    CharacterChoosing.setCampaignOrEndless(false);
 
   }
 
@@ -31,8 +55,13 @@ public class MainMenu {
     App.setRoot("/scenes/creditScene");
   }
 
-  public void changeCharacterMainMenu() throws IOException{
-
+  public void changeCharacterMainMenu(){
+    if(currentIndex<csm.getCurrentLength()){
+      currentIndex+=csm.getCurrentLength()*100;
+    }
+    currentIndex--;
+    characterMainMenuImage.setImage(csm.getImageFromIndex(currentIndex%csm.getCurrentLength()));
+    characterMainMenuButton.setText(csm.getTextFromIndex(currentIndex%csm.getCurrentLength()));
   }
   public void togglePlayerButton() throws IOException {
 
