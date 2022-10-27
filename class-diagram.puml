@@ -1,6 +1,4 @@
 @startuml Bomberman
-Entity <|--Tile
-Entity <|--AnimatedEntity
 AnimatedEntity <|-- Bomb
 AnimatedEntity <|-- Mob
 Tile <|-- Wall
@@ -21,9 +19,9 @@ abstract class Entity {
     +isCollidedWith(Entity other)
 }
 
-abstract class Tile
+abstract class Tile extends Entity
 
-abstract class AnimatedEntity {
+abstract class AnimatedEntity extends Entity {
     +{abstract} update()
 }
 
