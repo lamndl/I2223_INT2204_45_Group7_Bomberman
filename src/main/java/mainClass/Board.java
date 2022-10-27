@@ -44,7 +44,7 @@ public class Board {
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     graphicsContext.setFill(Color.GREEN);
-    bomber = new Bomber(16, 16);
+    bomber = new Bomber(32, 32);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {

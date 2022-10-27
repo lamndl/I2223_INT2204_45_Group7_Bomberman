@@ -1,6 +1,4 @@
 package scenes;
-import mainClass.App;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.concurrent.Task;
@@ -11,8 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import java.time.*;
+import mainClass.App;
 
 public class LoadingMenu {
 

@@ -3,7 +3,6 @@ package level;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Wall;
-import exceptions.LoadLevelException;
 import java.io.FileReader;
 import java.util.Scanner;
 import mainClass.Board;
@@ -50,17 +49,17 @@ public class FileLevelLoader extends LevelLoader {
   public void createEntities() {
     // TODO: tạo các Entity của màn chơi
     // TODO: sau khi tạo xong, gọi _board.addEntity() để thêm Entity vào game
-    Board.setHeight(height * 16);
-    Board.setWidth(width * 16);
+    Board.setHeight(height * 32);
+    Board.setWidth(width * 32);
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         char c = map[y][x];
         switch (c) {
           case '#':
-            Board.addEntity(new Wall(x * 16, y * 16));
+            Board.addEntity(new Wall(x * 32, y * 32));
             break;
           case '*':
-            Board.addEntity(new Brick(x * 16, y * 16));
+            Board.addEntity(new Brick(x * 32, y * 32));
             break;
           // add Bomber
           // case 'p':
@@ -123,7 +122,7 @@ public class FileLevelLoader extends LevelLoader {
           // break;
           // //con lai la grass
           default:
-            Board.addEntity(new Grass(x * 16, y * 16));
+            Board.addEntity(new Grass(x * 32, y * 32));
             break;
         }
       }

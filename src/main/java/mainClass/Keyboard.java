@@ -2,7 +2,6 @@ package mainClass;
 
 import java.util.ArrayList;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 public class Keyboard {
 
@@ -62,7 +61,7 @@ public class Keyboard {
     this.bombPlacement = bombPlacement;
   }
 
-  public Boolean validation(){
+  public Boolean validation() {
     ArrayList<String> arr = new ArrayList<String>();
     arr.add(getMoveUp().toString());
     arr.add(getBombPlacement().toString());
@@ -70,17 +69,19 @@ public class Keyboard {
     arr.add(getMoveLeft().toString());
     arr.add(getMoveRight().toString());
     arr.add(getMoveDown().toString());
-    for(int i = 0; i < arr.size()-1;i++){
-      for(int j = i+1;j<arr.size();j++){
-        if(arr.get(i).equals(arr.get(j))){
+    for (int i = 0; i < arr.size() - 1; i++) {
+      for (int j = i + 1; j < arr.size(); j++) {
+        if (arr.get(i).equals(arr.get(j))) {
           return false;
         }
       }
     }
     return true;
   }
-  public void printKeyCodeStatus(){
-    System.out.println(this.getMoveUp() + " " + this.getMoveDown() + " "+ this.getMoveLeft() + " " + this.getMoveRight() + " " + this.getBombPlacement() + " " + this.getInGameMenu());
+
+  public void printKeyCodeStatus() {
+    System.out.println(this.getMoveUp() + " " + this.getMoveDown() + " " + this.getMoveLeft() + " "
+        + this.getMoveRight() + " " + this.getBombPlacement() + " " + this.getInGameMenu());
 
   }
 }
