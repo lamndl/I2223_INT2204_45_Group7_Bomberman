@@ -1,7 +1,10 @@
 package scenes;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import mainClass.App;
 
 import java.io.IOException;
@@ -20,7 +23,15 @@ public class MainMenu {
   public Button exitButton = new Button();
   public Button characterMainMenuButton = new Button();
   public ImageView characterMainMenuImage = new ImageView();
+  public AnchorPane insidePane = new AnchorPane();
+  public Button insidePaneExitButton = new Button();
+  public Text insidePaneStatusText = new Text();
+  public TextField insidePaneUsernameTextField = new TextField();
+  public TextField insidePanePasswordTextField = new TextField();
+  public Text insidePaneResultText = new Text();
   private int currentIndex;
+
+  //private boolean loginOrRegister = true;
 
   private CharacterSceneManagement csm;
   public void initialize(){
@@ -29,7 +40,14 @@ public class MainMenu {
     characterMainMenuImage.setOnMouseClicked(e->changeCharacterMainMenu());
     characterMainMenuImage.setImage(csm.getImageFromIndex(currentIndex%csm.getCurrentLength()));
     characterMainMenuButton.setText(csm.getTextFromIndex(currentIndex%csm.getCurrentLength()));
-
+    if(!App.inAccount){
+      nameButton.setText("Log in");
+    }else{
+      nameButton.setText(App.currentPlayer.getUserName());
+    }
+    insidePane.setVisible(false);
+    insidePaneStatusText.setText("Login/Register");
+    insidePaneResultText.setText("");
   }
 
   @FXML
@@ -65,15 +83,29 @@ public class MainMenu {
     characterMainMenuButton.setText(csm.getTextFromIndex(currentIndex%csm.getCurrentLength()));
   }
   public void togglePlayerButton() throws IOException {
-
+    insidePane.setVisible(true);
   }
 
   public void toggleMusicCheckBox() throws IOException {
     if(!musicCheckBox.isSelected()){
-      Sound.getMediaPlayer().setMute(true);
-    }else{
-      Sound.getMediaPlayer().setMute(false);
+      Sound.toggleMuteBackgroundSound(true);
     }
+    if(musicCheckBox.isSelected()){
+      Sound.toggleMuteBackgroundSound(false);
+    }
+  }
+
+  public void insidePaneExit()throws IOException{
+    insidePane.setVisible(false);
+    insidePaneResultText.setText("");
+  }
+
+  public void registerPlayer()throws IOException{
+    insidePaneResultText.setText("In developing. Sorry for the inconvenience.");
+  }
+
+  public void loginPlayer() throws IOException{
+    insidePaneResultText.setText("In developing. Sorry for the inconvenience.");
   }
 
   public void exitGame() throws IOException {

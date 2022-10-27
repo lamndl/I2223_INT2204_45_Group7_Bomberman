@@ -75,12 +75,7 @@ public class SettingScene {
     statusText.setText("");
     KB.printKeyCodeStatus();
     setTextForButtons();
-//    soundSlider.setOnMouseMoved(e->{
-//      NumberAxis axis = (NumberAxis) soundSlider.lookup("");
-//      Point2D locationInAxis = axis.sceneToLocal(e.getSceneX(), e.getSceneY());
-//      double mouseX = locationInAxis.getX() ;
-//      setSoundValue(axis.getValueForDisplay(mouseX).doubleValue());
-//    });
+
     //fucking struggling. Luckily not vital.
     diNgu.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
       @Override
@@ -122,7 +117,7 @@ public class SettingScene {
 
   public void changeSound() throws IOException {
      // System.out.println("Sound value: "+ getSoundValue());
-    Sound.getMediaPlayer().setVolume(getSoundValue()/100.0);
+    Sound.setBackgroundSoundVolume(getSoundValue()/100.0);
   }
 
   public void changeMoveUp() throws IOException{

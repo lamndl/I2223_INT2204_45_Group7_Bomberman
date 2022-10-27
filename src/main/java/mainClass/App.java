@@ -1,5 +1,7 @@
 package mainClass;
 
+import static mainClass.Sound.*;
+
 import entity.animated.mob.Bomber;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,6 +39,8 @@ public class App extends Application {
 
   public Sound sound;
 
+  public static boolean inAccount = false;
+  public static Player currentPlayer;
 
   @Override
   public void start(Stage stage) throws IOException {
@@ -70,6 +74,7 @@ public class App extends Application {
 //    entities.add(bomberman);
 
 
+
     //end testing
     Image icon = new Image(App.class.getResource("/Pictures/icon.png").toString());
 
@@ -81,7 +86,7 @@ public class App extends Application {
     stage.setFullScreen(false);
 
     sound = new Sound();
-    sound.playMedia();
+    playMedia(0);
     stage.show();
 
   }
