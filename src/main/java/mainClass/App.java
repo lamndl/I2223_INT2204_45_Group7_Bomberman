@@ -31,8 +31,7 @@ public class App extends Application {
 
   public static void toMainGame() {
     Board.init();
-    Scene newScene = new Scene(Board.getRoot());
-    stage.setScene(newScene);
+    stage.setScene(Board.getScene());
   }
 
   public static void setRoot(String fxml) throws IOException {
