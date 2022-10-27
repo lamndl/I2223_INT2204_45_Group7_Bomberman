@@ -1,19 +1,17 @@
 package scenes;
 
 import java.util.ArrayList;
+
+import input.Keyboard;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.text.*;
 import mainClass.App;
-import mainClass.Keyboard;
+
 import java.io.IOException;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
+
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 public class SettingScene {
 

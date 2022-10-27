@@ -13,8 +13,8 @@ public class Bomber extends Mob {
   }
 
   public Bomber() {
-    x = 1;
-    y = 1;
+    _x = 1;
+    _y = 1;
     image = Sprite.player_right.getFxImage();
   }
 }
