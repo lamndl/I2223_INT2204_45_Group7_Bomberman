@@ -1,32 +1,29 @@
 package level;
 
-import exceptions.LoadLevelException;
-import mainClass.Board;
-
 public abstract class LevelLoader {
-    protected int _width, _height;
-    protected int _level;
-    protected Board _board;
+  protected int width;
+  protected int height;
+  protected int level;
 
-    public LevelLoader(Board board, int level) throws LoadLevelException {
-        _board = board;
-        loadLevel(level);
-    }
+  protected LevelLoader(int level) {
 
-    public abstract void loadLevel(int level) throws LoadLevelException;
+    loadLevel(level);
+  }
 
-    public abstract void createEntities();
+  public abstract void loadLevel(int level);
 
-    public int getWidth() {
-        return _width;
-    }
+  public abstract void createEntities();
 
-    public int getHeight() {
-        return _height;
-    }
+  public int getWidth() {
+    return width;
+  }
 
-    public int getLevel() {
-        return _level;
-    }
+  public int getHeight() {
+    return height;
+  }
+
+  public int getLevel() {
+    return level;
+  }
 
 }

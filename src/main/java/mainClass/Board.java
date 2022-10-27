@@ -15,6 +15,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import level.FileLevelLoader;
+import level.LevelLoader;
 
 
 public class Board {
@@ -36,15 +38,14 @@ public class Board {
   public static void init() {
     root = new Group();
     scene = new Scene(root);
-    height = 480;
-    width = 480;
+    LevelLoader lvd = new FileLevelLoader(1);
+    lvd.createEntities();
     canvas = new Canvas(width, height);
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     graphicsContext.setFill(Color.GREEN);
-    bomber = new Bomber(1,1);
+    bomber = new Bomber(16, 16);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
       @Override
       public void handle(KeyEvent event) {
         bomber.update(event);
@@ -79,13 +80,22 @@ public class Board {
 
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-    bomber.draw(graphicsContext);
     tileList.forEach(i -> i.draw(graphicsContext));
     bombList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
+    bomber.draw(graphicsContext);
   }
 
   public static void update() {
     //
   }
+
+  public static void setHeight(int height) {
+    Board.height = height;
+  }
+
+  public static void setWidth(int width) {
+    Board.width = width;
+  }
+
 }
