@@ -42,8 +42,8 @@ public class Board {
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     graphicsContext.setFill(Color.GREEN);
-    bomber = new Bomber();
-    scene.setOnKeyPressed(new EventHandler<KeyEvent>()  {
+    bomber = new Bomber(1,1);
+    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
       @Override
       public void handle(KeyEvent event) {
@@ -80,6 +80,9 @@ public class Board {
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     bomber.draw(graphicsContext);
+    tileList.forEach(i -> i.draw(graphicsContext));
+    bombList.forEach(i -> i.draw(graphicsContext));
+    enemyList.forEach(i -> i.draw(graphicsContext));
   }
 
   public static void update() {

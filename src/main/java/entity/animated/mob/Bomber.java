@@ -13,10 +13,8 @@ public class Bomber extends Mob {
     //
   }
 
-  public Bomber() {
-    x = 1;
-    y = 1;
-    image = Sprite.player_right.getFxImage();
+  public Bomber(int x, int y) {
+    super(x, y, Sprite.player_right.getFxImage());
   }
 
   public void update(KeyEvent keyEvent) {

@@ -1,5 +1,11 @@
 package entity.tile;
 
-public class Wall extends Tile{
-  
+import sprite.Sprite;
+
+public class Wall extends Tile {
+
+  public Wall(int x, int y) {
+    super(x, y, Sprite.wall.getFxImage());
+  }
+
 }

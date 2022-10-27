@@ -17,5 +17,15 @@ public abstract class Entity {
     //
     return false;
   }
-  
+
+  protected Entity() {
+
+  }
+
+  protected Entity(int x, int y, Image image) {
+    this.x = x;
+    this.y = y;
+    this.image = image;
+  }
+
 }
