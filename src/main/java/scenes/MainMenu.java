@@ -7,6 +7,7 @@ import mainClass.App;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import mainClass.Sound;
 import scenes.*;
 public class MainMenu {
   public Button campaignButton = new Button();
@@ -68,7 +69,11 @@ public class MainMenu {
   }
 
   public void toggleMusicCheckBox() throws IOException {
-
+    if(!musicCheckBox.isSelected()){
+      Sound.getMediaPlayer().setMute(true);
+    }else{
+      Sound.getMediaPlayer().setMute(false);
+    }
   }
 
   public void exitGame() throws IOException {

@@ -35,6 +35,7 @@ public class App extends Application {
 
   private static Scene scene;
 
+  public Sound sound;
 
 
   @Override
@@ -79,6 +80,8 @@ public class App extends Application {
     stage.setResizable(false);
     stage.setFullScreen(false);
 
+    sound = new Sound();
+    sound.playMedia();
     stage.show();
 
   }

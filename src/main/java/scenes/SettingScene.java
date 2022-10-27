@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.text.*;
 import mainClass.App;
 import mainClass.Keyboard;
@@ -15,6 +17,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import mainClass.Sound;
+
 public class SettingScene {
 
   public Button backButton = new Button();
@@ -60,6 +64,7 @@ public class SettingScene {
     }
   };
   public void initialize() {
+    soundSlider.adjustValue(99.0);
     soundValue= soundSlider.getValue();
     statusKeyEvent.add(0);//up
     statusKeyEvent.add(0);//down
@@ -70,7 +75,12 @@ public class SettingScene {
     statusText.setText("");
     KB.printKeyCodeStatus();
     setTextForButtons();
-
+//    soundSlider.setOnMouseMoved(e->{
+//      NumberAxis axis = (NumberAxis) soundSlider.lookup("");
+//      Point2D locationInAxis = axis.sceneToLocal(e.getSceneX(), e.getSceneY());
+//      double mouseX = locationInAxis.getX() ;
+//      setSoundValue(axis.getValueForDisplay(mouseX).doubleValue());
+//    });
     //fucking struggling. Luckily not vital.
     diNgu.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
       @Override
@@ -103,12 +113,16 @@ public class SettingScene {
     return this.soundValue;
   }
 
+  public void setSoundValue(double newValue){
+    soundValue=newValue;
+  }
   public void backToMainMenu() throws IOException {
     App.setRoot("/scenes/mainMenu");
   }
 
   public void changeSound() throws IOException {
-      System.out.println("Sound value: "+ getSoundValue());
+     // System.out.println("Sound value: "+ getSoundValue());
+    Sound.getMediaPlayer().setVolume(getSoundValue()/100.0);
   }
 
   public void changeMoveUp() throws IOException{

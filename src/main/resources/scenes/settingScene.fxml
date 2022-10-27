@@ -54,7 +54,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Slider fx:id="soundSlider" layoutX="266.0" layoutY="124.0" onDragDetected="#changeSound" prefHeight="14.0" prefWidth="551.0" value="50.0">
+      <Slider fx:id="soundSlider" layoutX="266.0" layoutY="124.0" onDragDetected="#changeSound" onDragDone="#changeSound" onDragDropped="#changeSound" onDragExited="#changeSound" onMouseDragExited="#changeSound" onMouseDragOver="#changeSound" onMouseDragReleased="#changeSound" onMouseExited="#changeSound" onMouseMoved="#changeSound" onMouseReleased="#changeSound" prefHeight="14.0" prefWidth="551.0" value="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
