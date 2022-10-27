@@ -14,20 +14,24 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static Scene scene;
+  private static Stage stage;
 
   @Override
   public void start(Stage stage) throws IOException {
+    this.stage = stage;
     Image icon = new Image(App.class.getResource("/Pictures/icon.png").toString());
-
     scene = new Scene(loadFxml("/scenes/loadingMenu"), 1024, 768);
-
     stage.setScene(scene);
     stage.getIcons().add(icon);
     stage.setResizable(false);
     stage.setFullScreen(false);
-
     stage.show();
 
+  }
+
+  public static void toMainGame() {
+    Board.init();
+    stage.setScene(Board.getScene());
   }
 
   public static void setRoot(String fxml) throws IOException {
