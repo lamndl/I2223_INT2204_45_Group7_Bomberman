@@ -1,9 +1,11 @@
 package mainClass;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javafx.scene.input.KeyCode;
 
-public class Keyboard {
+public class Keyboard implements KeyListener {
 
   private KeyCode moveUp = KeyCode.W;
   private KeyCode moveDown = KeyCode.S;
@@ -82,6 +84,21 @@ public class Keyboard {
   public void printKeyCodeStatus() {
     System.out.println(this.getMoveUp() + " " + this.getMoveDown() + " " + this.getMoveLeft() + " "
         + this.getMoveRight() + " " + this.getBombPlacement() + " " + this.getInGameMenu());
+
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
 
   }
 }

@@ -27,6 +27,9 @@ public class App extends Application {
     stage.setFullScreen(false);
     stage.show();
 
+    // skip menu for dev
+    toMainGame();
+
   }
 
   public static void toMainGame() {
