@@ -126,8 +126,7 @@ public class Board {
 
           }
       }
-    System.out.println("null");
-    return null;
+      return null;
   }
 
   public static void setHeight(int height) {
