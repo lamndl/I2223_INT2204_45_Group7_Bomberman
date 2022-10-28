@@ -1,7 +1,6 @@
 package entity.animated.mob;
 
 import entity.Entity;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import mainClass.Board;
 import mainClass.Keyboard;
@@ -20,15 +19,16 @@ public class Bomber extends Mob {
   }
 
   public Bomber(int x, int y) {
-    super(x, y,Sprite.player_down);
+    super(x, y, Sprite.player_down);
   }
 
   public void update(KeyEvent keyEvent) {
 
-    if (_alive)
+    if (alive) {
       chooseSprite();
-    else
-      _sprite = Sprite.player_dead1;
+    } else {
+      sprite = Sprite.player_dead1;
+    }
 
     animate();
 
@@ -40,36 +40,41 @@ public class Bomber extends Mob {
   public boolean isCollidedWith(Entity e) {
     // TODO: xử lý va chạm với Flame
     // TODO: xử lý va chạm với Enemy
-//    if (e instanceof Flame)
-//    {
-//      kill();
-//    }
-//
-//    if (e instanceof Enemy)
-//    {
-//      kill();
-//    }
+    // if (e instanceof Flame)
+    // {
+    // kill();
+    // }
+    //
+    // if (e instanceof Enemy)
+    // {
+    // kill();
+    // }
     return true;
   }
 
   @Override
   protected boolean canMove(double _x, double _y) {
-    // TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-    for (int c = 0; c<4; c ++){
-      double xt = (x + _x) + c%2*23;    // *23: thu hẹp chiều rộng
-      double yt = (y + _y) + c/2*30;    // c%2: check 4 góc bomber
-        Entity a = Board.getEntity(xt,yt,this);
-        if (!a.isCollidedWith(this)) return false;
+    // TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay
+    // không
+    for (int c = 0; c < 4; c++) {
+      double xt = (x + _x) + c % 2 * 23; // *23: thu hẹp chiều rộng
+      double yt = (y + _y) + c / 2 * 30; // c%2: check 4 góc bomber
+      Entity a = Board.getEntity(xt, yt, this);
+      if (!a.isCollidedWith(this)) {
+        return false;
+      }
 
-      yt = (y + _y) + 15;       // check ở giữa bomber
-        a = Board.getEntity(xt,yt,this);
-        if (!a.isCollidedWith(this)) return false;
+      yt = (y + _y) + 15; // check ở giữa bomber
+      a = Board.getEntity(xt, yt, this);
+      if (!a.isCollidedWith(this)) {
+        return false;
+      }
     }
     return true;
   }
 
   /**
-   * nhận key event, tính toán hướng đi
+   * nhận key event, tính toán hướng đi .
    */
   @Override
   protected void calculateMove() {
@@ -77,7 +82,8 @@ public class Bomber extends Mob {
   }
 
   public void getKeyEvent(KeyEvent keyEvent) {
-    int x = 0, y = 0;
+    int x = 0;
+    int y = 0;
     switch (keyEvent.getCode()) {
       case UP:
         y -= 2;
@@ -91,62 +97,74 @@ public class Bomber extends Mob {
       case RIGHT:
         x += 2;
         break;
+      default:
+        break;
     }
 
-    if (x!=0||y!=0)
-    {
+    if (x != 0 || y != 0) {
       move(x, y);
-      _moving = true;
-    } else _moving = false;
+      moving = true;
+    } else {
+      moving = false;
+    }
   }
 
   @Override
   protected void move(double xa, double ya) {
-    // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ x, y
+    // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và
+    // thực hiện thay đổi tọa độ x, y
     // TODO: cập nhật giá trị _direction sau khi di chuyển
-    if (xa >0) _direction = 1;
-    if (xa <0) _direction = 3;
-    if (ya >0) _direction = 2;
-    if (ya <0) _direction = 0;
+    if (xa > 0) {
+      direction = 1;
+    }
+    if (xa < 0) {
+      direction = 3;
+    }
+    if (ya > 0) {
+      direction = 2;
+    }
+    if (ya < 0) {
+      direction = 0;
+    }
 
-    if (canMove(0,ya)) y += ya;
-    if (canMove(xa,0)) x += xa;
+    if (canMove(0, ya)) {
+      y += ya;
+    }
+    if (canMove(xa, 0)) {
+      x += xa;
+    }
   }
 
   /**
-   * animate cho bomber
-   * sử dụng direction
+   * animate cho bomber sử dụng direction
    */
   private void chooseSprite() {
-    switch (_direction) {
+    switch (direction) {
       case 0:
-        _sprite = Sprite.player_up;
-        if (_moving) {
-          _sprite = Sprite.movingSprite(Sprite.player_up_1, Sprite.player_up_2, _animate, 10);
-        }
-        break;
-      case 1:
-        _sprite = Sprite.player_right;
-        if (_moving) {
-          _sprite = Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, _animate, 10);
+        sprite = Sprite.player_up;
+        if (moving) {
+          sprite = Sprite.movingSprite(Sprite.player_up_1, Sprite.player_up_2, animateIndex, 10);
         }
         break;
       case 2:
-        _sprite = Sprite.player_down;
-        if (_moving) {
-          _sprite = Sprite.movingSprite(Sprite.player_down_1, Sprite.player_down_2, _animate, 10);
+        sprite = Sprite.player_down;
+        if (moving) {
+          sprite =
+              Sprite.movingSprite(Sprite.player_down_1, Sprite.player_down_2, animateIndex, 10);
         }
         break;
       case 3:
-        _sprite = Sprite.player_left;
-        if (_moving) {
-          _sprite = Sprite.movingSprite(Sprite.player_left_1, Sprite.player_left_2, _animate, 10);
+        sprite = Sprite.player_left;
+        if (moving) {
+          sprite =
+              Sprite.movingSprite(Sprite.player_left_1, Sprite.player_left_2, animateIndex, 10);
         }
         break;
       default:
-        _sprite = Sprite.player_right;
-        if (_moving) {
-          _sprite = Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, _animate, 10);
+        sprite = Sprite.player_right;
+        if (moving) {
+          sprite =
+              Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, animateIndex, 10);
         }
         break;
     }

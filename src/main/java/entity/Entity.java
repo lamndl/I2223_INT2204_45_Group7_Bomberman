@@ -9,10 +9,9 @@ public abstract class Entity {
   protected int y;
 
   protected Image image;
-  protected Sprite _sprite;
+  protected Sprite sprite;
 
-  public void draw(GraphicsContext gc) {
-  }
+  public void draw(GraphicsContext gc) {}
 
   /**
    * xử lý 2 Entity va chạm
@@ -32,10 +31,10 @@ public abstract class Entity {
     this.image = image;
   }
 
-  protected Entity(int x, int y, Sprite _sprite) {
+  protected Entity(int x, int y, Sprite sprite) {
     this.x = x;
     this.y = y;
-    this._sprite = _sprite;
+    this.sprite = sprite;
   }
 
   public int getX() {
@@ -46,7 +45,7 @@ public abstract class Entity {
     return y;
   }
 
-  public Sprite get_sprite() {
-    return _sprite;
+  public Sprite getSprite() {
+    return sprite;
   }
 }

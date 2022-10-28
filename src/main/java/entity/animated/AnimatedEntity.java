@@ -5,19 +5,23 @@ import javafx.scene.image.Image;
 import sprite.Sprite;
 
 public class AnimatedEntity extends Entity {
-  protected int _animate = 0;
-  protected final int MAX_ANIMATE = 7500;
+  protected int animateIndex = 0;
+  protected static final int MAX_ANIMATE = 7500;
 
   protected void animate() {
-    if(_animate < MAX_ANIMATE) _animate++; else _animate = 0;
+    if (animateIndex < MAX_ANIMATE) {
+      animateIndex++;
+    } else {
+      animateIndex = 0;
+    }
   }
 
   protected AnimatedEntity(int x, int y, Image image) {
     super(x, y, image);
   }
 
-  public AnimatedEntity(int x, int y, Sprite _sprite) {
-    super(x, y, _sprite);
+  public AnimatedEntity(int x, int y, Sprite sprite) {
+    super(x, y, sprite);
   }
 
   public void update() {
