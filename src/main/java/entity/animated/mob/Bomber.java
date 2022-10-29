@@ -2,6 +2,7 @@ package entity.animated.mob;
 
 import entity.Entity;
 import entity.animated.Bomb;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import mainClass.Board;
 import mainClass.Keyboard;
@@ -20,21 +21,11 @@ public class Bomber extends Mob {
   }
 
   public Bomber(int x, int y) {
-    super(x, y, Sprite.player_down);
+    super(x, y);
   }
 
   public void update(KeyEvent keyEvent) {
-
-    animate();
     calculalteMove(keyEvent);
-
-    if (alive) {
-      chooseSprite();
-    } else {
-      sprite = Sprite.player_dead1;
-    }
-
-
   }
 
   @Override
@@ -77,10 +68,6 @@ public class Bomber extends Mob {
   /**
    * nhận key event, tính toán hướng đi .
    */
-  @Override
-  protected void calculateMove() {
-
-  }
 
   public void calculalteMove(KeyEvent keyEvent) {
     int x = 0;
@@ -139,40 +126,40 @@ public class Bomber extends Mob {
     }
   }
 
-  /**
-   * animate cho bomber sử dụng direction
-   */
-  public void chooseSprite() {
+  @Override
+  public Image getImage() {
+    Image sprite;
     switch (direction) {
       case 0:
         sprite = Sprite.player_up;
         if (moving) {
-          sprite = Sprite.movingSprite(Sprite.player_up_1, Sprite.player_up_2, animateIndex, 10);
+          sprite = Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1, Sprite.player_up_2,
+              (int) Board.frame, 120);
         }
         break;
       case 2:
         sprite = Sprite.player_down;
         if (moving) {
-          sprite =
-              Sprite.movingSprite(Sprite.player_down_1, Sprite.player_down_2, animateIndex, 10);
+          sprite = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1,
+              Sprite.player_down_2, (int) Board.frame, 120);
         }
         break;
       case 3:
         sprite = Sprite.player_left;
         if (moving) {
-          sprite =
-              Sprite.movingSprite(Sprite.player_left_1, Sprite.player_left_2, animateIndex, 10);
+          sprite = Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1,
+              Sprite.player_left_2, (int) Board.frame, 120);
         }
         break;
       default:
         sprite = Sprite.player_right;
         if (moving) {
-          sprite =
-              Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, animateIndex, 10);
+          sprite = Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1,
+              Sprite.player_right_2, (int) Board.frame, 120);
         }
         break;
     }
+    return sprite;
   }
-
 
 }

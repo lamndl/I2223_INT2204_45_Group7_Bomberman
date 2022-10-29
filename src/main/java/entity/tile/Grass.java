@@ -1,14 +1,13 @@
 package entity.tile;
 
 import entity.Entity;
+import javafx.scene.image.Image;
 import sprite.Sprite;
 
 public class Grass extends Tile {
 
-  public Grass() {}
-
   public Grass(int x, int y) {
-    super(x, y, Sprite.grass.getFxImage());
+    super(x, y);
   }
 
 
@@ -18,5 +17,11 @@ public class Grass extends Tile {
   @Override
   public boolean isCollidedWith(Entity other) {
     return true;
+  }
+
+
+  @Override
+  public Image getImage() {
+    return Sprite.grass;
   }
 }

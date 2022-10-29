@@ -1,11 +1,12 @@
 package entity.animated.mob;
 
+import javafx.scene.image.Image;
 import sprite.Sprite;
 
 public class Oneal extends Enemy {
 
   public Oneal(int x, int y) {
-    super(x, y, Sprite.oneal_right1.getFxImage());
+    super(x, y);
   }
 
   @Override
@@ -14,12 +15,13 @@ public class Oneal extends Enemy {
   }
 
   @Override
-  protected void calculateMove() {
+  protected void move(double xa, double ya) {
     //
   }
 
   @Override
-  protected void move(double xa, double ya) {
-    //
+  public Image getImage() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

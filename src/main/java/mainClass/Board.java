@@ -16,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import level.FileLevelLoader;
 import level.LevelLoader;
 
@@ -28,10 +27,12 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
-  private static List<Entity> tileList = new ArrayList<>();
-  private static List<Entity> bombList = new ArrayList<>();
-  private static List<Entity> enemyList = new ArrayList<>();
+  private static List<Tile> tileList = new ArrayList<>();
+  private static List<Bomb> bombList = new ArrayList<>();
+  private static List<Enemy> enemyList = new ArrayList<>();
   private static Bomber bomber;
+
+  public static long frame;
 
   public static Scene getScene() {
     return scene;
@@ -45,7 +46,6 @@ public class Board {
     canvas = new Canvas(width, height);
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
-    graphicsContext.setFill(Color.GREEN);
     bomber = new Bomber(32, 32);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
@@ -57,14 +57,14 @@ public class Board {
       @Override
       public void handle(KeyEvent keyEvent) {
         bomber.setMoving(false);
-        bomber.chooseSprite();
       }
     });
     AnimationTimer timer = new AnimationTimer() {
       @Override
-      public void handle(long l) {
+      public void handle(long now) {
+        frame++;
+        frame %= 120;
         render();
-        update();
       }
     };
     timer.start();
@@ -73,11 +73,11 @@ public class Board {
   public static void addEntity(Entity entity) {
     // Design pattern ???
     if (entity instanceof Tile) {
-      tileList.add(entity);
+      tileList.add((Tile) entity);
     } else if (entity instanceof Bomb) {
-      bombList.add(entity);
+      bombList.add((Bomb) entity);
     } else if (entity instanceof Enemy) {
-      enemyList.add(entity);
+      enemyList.add((Enemy) entity);
     } else {
       bomber = (Bomber) entity;
     }
@@ -90,9 +90,9 @@ public class Board {
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     tileList.forEach(i -> i.draw(graphicsContext));
+    bombList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
-    bombList.forEach(i -> i.draw(graphicsContext));
   }
 
   public static void update() {
@@ -117,7 +117,7 @@ public class Board {
   /**
    * lấy tile entity tại vị trí (x, y)
    */
-  public static Entity getTileEntityAt(double x, double y) { // x, y tọa độ pixel
+  public static Entity getTileEntityAt(int x, int y) { // x, y tọa độ pixel
     for (int i = 0; i < tileList.size(); i++) {
       int tileX = tileList.get(i).getX();
       int tileY = tileList.get(i).getY();
@@ -128,7 +128,7 @@ public class Board {
           if (jj < 25 && x == tileX + ii && y == tileY + jj) {
             return tileList.get(i);
           } else if (jj >= 25 && x == tileX + ii && y == tileY + jj)
-            return new Grass();
+            return new Grass(x, y);
 
         }
     }
