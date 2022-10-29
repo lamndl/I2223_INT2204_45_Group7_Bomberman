@@ -24,15 +24,15 @@ public class Bomber extends Mob {
 
   public void update(KeyEvent keyEvent) {
 
+    animate();
+    calculalteMove(keyEvent);
+
     if (alive) {
       chooseSprite();
     } else {
       sprite = Sprite.player_dead1;
     }
 
-    animate();
-
-    getKeyEvent(keyEvent);
 
   }
 
@@ -81,7 +81,7 @@ public class Bomber extends Mob {
 
   }
 
-  public void getKeyEvent(KeyEvent keyEvent) {
+  public void calculalteMove(KeyEvent keyEvent) {
     int x = 0;
     int y = 0;
     switch (keyEvent.getCode()) {
@@ -138,7 +138,7 @@ public class Bomber extends Mob {
   /**
    * animate cho bomber sử dụng direction
    */
-  private void chooseSprite() {
+  public void chooseSprite() {
     switch (direction) {
       case 0:
         sprite = Sprite.player_up;

@@ -44,4 +44,8 @@ public abstract class Mob extends AnimatedEntity {
   protected abstract void calculateMove();
 
   protected abstract void move(double xa, double ya);
+
+  public void setMoving(boolean moving) {
+    this.moving = moving;
+  }
 }

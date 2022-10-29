@@ -53,6 +53,13 @@ public class Board {
         bomber.update(event);
       }
     });
+    scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+      @Override
+      public void handle(KeyEvent keyEvent) {
+        bomber.setMoving(false);
+        bomber.chooseSprite();
+      }
+    });
     AnimationTimer timer = new AnimationTimer() {
       @Override
       public void handle(long l) {
