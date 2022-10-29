@@ -1,7 +1,6 @@
 package entity.animated.mob;
 
 import javafx.scene.image.Image;
-import sprite.Sprite;
 
 public class Oneal extends Enemy {
 

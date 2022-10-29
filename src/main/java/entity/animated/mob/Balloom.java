@@ -17,24 +17,7 @@ public class Balloom extends Enemy {
 
   @Override
   public Image getImage() {
-    Image sprite;
-    switch (direction) {
-      case 3:
-        sprite = Sprite.balloom_left1;
-        if (moving) {
-          sprite = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2,
-              Sprite.balloom_left3, (int) Board.frame, 120);
-        }
-        break;
-      default:
-        sprite = Sprite.balloom_right1;
-        if (moving) {
-          sprite = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2,
-              Sprite.balloom_right3, (int) Board.frame, 120);
-        }
-        break;
-    }
-    return sprite;
+    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 40)];
   }
 
   @Override

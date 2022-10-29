@@ -7,9 +7,9 @@ public abstract class Mob extends AnimatedEntity {
   protected int velocityX;
   protected int velocityY;
 
-  protected int direction = -1;
+  protected int direction = 1;
   protected boolean alive = true;
-  protected boolean moving = false;
+  protected int moving = 0;
 
   public void die() {
     //
@@ -27,7 +27,7 @@ public abstract class Mob extends AnimatedEntity {
 
   protected abstract void move(double xa, double ya);
 
-  public void setMoving(boolean moving) {
+  public void setMoving(int moving) {
     this.moving = moving;
   }
 }

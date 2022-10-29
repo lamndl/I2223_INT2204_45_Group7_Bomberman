@@ -56,7 +56,7 @@ public class Board {
     scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent keyEvent) {
-        bomber.setMoving(false);
+        bomber.setMoving(0);
       }
     });
     AnimationTimer timer = new AnimationTimer() {

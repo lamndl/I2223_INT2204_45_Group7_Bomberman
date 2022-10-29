@@ -94,9 +94,9 @@ public class Bomber extends Mob {
 
     if (x != 0 || y != 0) {
       move(x, y);
-      moving = true;
+      moving = 1;
     } else {
-      moving = false;
+      moving = 0;
     }
   }
 
@@ -105,17 +105,17 @@ public class Bomber extends Mob {
     // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và
     // thực hiện thay đổi tọa độ x, y
     // TODO: cập nhật giá trị _direction sau khi di chuyển
+    if (xa < 0) {
+      direction = 0;
+    }
     if (xa > 0) {
       direction = 1;
     }
-    if (xa < 0) {
-      direction = 3;
-    }
-    if (ya > 0) {
+    if (ya < 0) {
       direction = 2;
     }
-    if (ya < 0) {
-      direction = 0;
+    if (ya > 0) {
+      direction = 3;
     }
 
     if (canMove(0, ya)) {
@@ -128,38 +128,7 @@ public class Bomber extends Mob {
 
   @Override
   public Image getImage() {
-    Image sprite;
-    switch (direction) {
-      case 0:
-        sprite = Sprite.player_up;
-        if (moving) {
-          sprite = Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1, Sprite.player_up_2,
-              (int) Board.frame, 120);
-        }
-        break;
-      case 2:
-        sprite = Sprite.player_down;
-        if (moving) {
-          sprite = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1,
-              Sprite.player_down_2, (int) Board.frame, 120);
-        }
-        break;
-      case 3:
-        sprite = Sprite.player_left;
-        if (moving) {
-          sprite = Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1,
-              Sprite.player_left_2, (int) Board.frame, 120);
-        }
-        break;
-      default:
-        sprite = Sprite.player_right;
-        if (moving) {
-          sprite = Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1,
-              Sprite.player_right_2, (int) Board.frame, 120);
-        }
-        break;
-    }
-    return sprite;
+    return Sprite.player[(int) (direction * 3 + Board.frame * moving / 40)];
   }
 
 }

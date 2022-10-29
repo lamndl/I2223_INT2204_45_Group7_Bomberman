@@ -269,6 +269,13 @@ public class Sprite {
   public static Image powerup_flamepass =
       new Sprite(DEFAULT_SIZE, 6, 10, SpriteSheet.tiles, 16, 16).getFxImage();
 
+
+  public static Image[] player =
+      {player_left, player_left_1, player_left_2, player_right, player_right_1, player_right_2,
+          player_up, player_up_1, player_up_2, player_down, player_down_1, player_down_2};
+
+  public static Image[] balloom =
+      {balloom_left1, balloom_left2, balloom_left3, balloom_right1, balloom_right2, balloom_right3};
   /*
    * ---------------------------------------- End of sprite image
    * ----------------------------------------
