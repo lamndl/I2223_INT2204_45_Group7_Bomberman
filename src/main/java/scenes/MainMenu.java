@@ -1,18 +1,23 @@
 package scenes;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import mainClass.App;
 
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import mainClass.Player;
+import mainClass.PlayerManagement;
 import mainClass.Sound;
 import scenes.*;
 public class MainMenu {
+
   public Button campaignButton = new Button();
   public Button endlessButton = new Button();
   public Button settingButton = new Button();
@@ -29,10 +34,17 @@ public class MainMenu {
   public TextField insidePaneUsernameTextField = new TextField();
   public TextField insidePanePasswordTextField = new TextField();
   public Text insidePaneResultText = new Text();
+  public TextArea insidePaneTextArea = new TextArea();
+  public Button insidePaneStatButton = new Button();
+  public Button insidePaneLogoutButton = new Button();
+  public Button insidePaneRegisterButton = new Button();
+  public Button insidePaneLoginButton = new Button();
   private int currentIndex;
 
   //private boolean loginOrRegister = true;
-
+  private boolean insidePaneStatClicked = false;
+  private static Player currentPlayer;
+  //static so can be accessed anywhere
   private CharacterSceneManagement csm;
   public void initialize(){
     csm = new CharacterSceneManagement();
@@ -45,9 +57,12 @@ public class MainMenu {
     }else{
       nameButton.setText(App.currentPlayer.getUserName());
     }
+    PlayerManagement.readDataLineByLine("/test.csv");
     insidePane.setVisible(false);
     insidePaneStatusText.setText("Login/Register");
     insidePaneResultText.setText("");
+    insidePaneLogoutButton.setVisible(false);
+    insidePaneTextArea.setVisible(false);
   }
 
   @FXML
@@ -100,15 +115,84 @@ public class MainMenu {
     insidePaneResultText.setText("");
   }
 
-  public void registerPlayer()throws IOException{
-    insidePaneResultText.setText("In developing. Sorry for the inconvenience.");
+  public boolean checkValidInformation(){
+    if(insidePaneUsernameTextField.getText().length()>=6&&insidePanePasswordTextField.getText().length()>=6){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public void insidePaneShowGuide(){
+    insidePaneResultText.setText("Username and password must contain at least 6 characters.");
+  }
+  public void setUpAfterLoginAndRegister(){
+    insidePanePasswordTextField.setVisible(false);
+    insidePaneUsernameTextField.setVisible(false);
+    insidePaneLogoutButton.setVisible(true);
+    nameButton.setText(currentPlayer.getUserName());
+    insidePaneStatusText.setText("Welcome, " + currentPlayer.getUserName()+".");
+    insidePaneStatButton.setVisible(true);
+    insidePaneResultText.setText("");
+    insidePaneLoginButton.setVisible(false);
+    insidePaneRegisterButton.setVisible(false);
+
+  }
+
+  public void registerPlayer()throws IOException{ //change
+    if(checkValidInformation()){
+      Player newPlayer = new Player(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText());
+      PlayerManagement.addPlayer(newPlayer);
+      currentPlayer= newPlayer;
+      setUpAfterLoginAndRegister();
+    }else{
+      insidePaneResultText.setText("You have to enter information before click to that button.");
+    }
   }
 
   public void loginPlayer() throws IOException{
-    insidePaneResultText.setText("In developing. Sorry for the inconvenience.");
+    if(checkValidInformation()){
+      if(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText())!=-1){
+        currentPlayer = PlayerManagement.getPlayer(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText()));
+        setUpAfterLoginAndRegister();
+
+      }else{
+        insidePaneResultText.setText("Wrong information. Please try again");
+      }
+    }else{
+      insidePaneResultText.setText("Please conform the guide (click on i button for more information)");
+    }
   }
 
+  public void insidePaneLogout(){
+    currentPlayer=null;
+    insidePaneStatClicked=true;
+    insidePaneShowStat();
+    insidePaneStatusText.setText("Login/Register");
+    insidePaneResultText.setText("");
+    insidePaneLogoutButton.setVisible(false);
+    insidePanePasswordTextField.setVisible(true);
+    insidePaneUsernameTextField.setVisible(true);
+    insidePaneStatButton.setVisible(false);
+    nameButton.setText("Login");
+    insidePaneLoginButton.setVisible(true);
+    insidePaneRegisterButton.setVisible(true);
+  }
+
+  public void insidePaneShowStat(){
+    if(!insidePaneStatClicked){
+      insidePaneTextArea.setVisible(true);
+      insidePaneTextArea.setText(currentPlayer.toString());
+      insidePaneStatButton.setVisible(true);
+      insidePaneStatClicked=true;
+    }else{
+      insidePaneTextArea.setVisible(false);
+      insidePaneStatClicked=false;
+    }
+
+  }
   public void exitGame() throws IOException {
+    PlayerManagement.writeDataLineByLine("/test.csv");
     Platform.exit();
     System.exit(0);
   }
