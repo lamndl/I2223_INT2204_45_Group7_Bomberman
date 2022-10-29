@@ -11,7 +11,9 @@ public abstract class Entity {
   protected Image image;
   protected Sprite sprite;
 
-  public void draw(GraphicsContext gc) {}
+  public void draw(GraphicsContext gc) {
+    gc.drawImage(image, x, y);
+  }
 
   /**
    * xử lý 2 Entity va chạm

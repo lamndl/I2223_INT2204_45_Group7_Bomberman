@@ -1,6 +1,7 @@
 package entity.animated.mob;
 
 import entity.Entity;
+import entity.animated.Bomb;
 import javafx.scene.input.KeyEvent;
 import mainClass.Board;
 import mainClass.Keyboard;
@@ -15,7 +16,7 @@ public class Bomber extends Mob {
   private double speedMultiplier;
 
   public void placeBomb() {
-    //
+    Board.addEntity(new Bomb(x / 32 * 32, y / 32 * 32));
   }
 
   public Bomber(int x, int y) {
@@ -96,6 +97,9 @@ public class Bomber extends Mob {
         break;
       case RIGHT:
         x += 2;
+        break;
+      case SPACE:
+        placeBomb();
         break;
       default:
         break;
