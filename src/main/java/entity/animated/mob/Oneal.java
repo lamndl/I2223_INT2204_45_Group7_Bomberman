@@ -15,11 +15,11 @@ public class Oneal extends Enemy {
 
   @Override
   protected void calculateMove() {
-
+    //
   }
 
   @Override
   protected void move(double xa, double ya) {
-
+    //
   }
 }

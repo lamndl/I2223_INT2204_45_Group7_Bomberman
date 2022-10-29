@@ -10,7 +10,7 @@ import mainClass.Board;
 public class FileLevelLoader extends LevelLoader {
 
   /**
-   * Ma trận chứa thông tin bản đồ, đọc từ tệp cấu hình
+   * Ma trận chứa thông tin bản đồ, đọc từ tệp cấu hình .
    */
   private char[][] map;
 

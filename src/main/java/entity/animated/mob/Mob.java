@@ -3,7 +3,6 @@ package entity.animated.mob;
 import entity.animated.AnimatedEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import sprite.Sprite;
 
 public abstract class Mob extends AnimatedEntity {
@@ -11,9 +10,9 @@ public abstract class Mob extends AnimatedEntity {
   protected int velocityX;
   protected int velocityY;
 
-  protected int _direction = -1;
-  protected boolean _alive = true;
-  protected boolean _moving = false;
+  protected int direction = -1;
+  protected boolean alive = true;
+  protected boolean moving = false;
 
   public void die() {
     //
@@ -26,7 +25,7 @@ public abstract class Mob extends AnimatedEntity {
 
   @Override
   public void draw(GraphicsContext gc) {
-    image = _sprite.getFxImage();
+    image = sprite.getFxImage();
     gc.drawImage(image, x, y);
   }
 
@@ -34,8 +33,8 @@ public abstract class Mob extends AnimatedEntity {
     super(x, y, image);
   }
 
-  public Mob(int x, int y, Sprite _sprite) {
-    super(x, y, _sprite);
+  protected Mob(int x, int y, Sprite sprite) {
+    super(x, y, sprite);
   }
 
   // kiểm tra xem Mob có thể move được không
