@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="background" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.CharacterChoosing">
+
+  <stylesheets>
+    <URL value="@characterChoosing.css" />
+  </stylesheets>
+   <children>
+      <Button fx:id="backButton" layoutX="935.0" layoutY="35.0" mnemonicParsing="false" onAction="#goBack" text="Back">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text fill="WHITE" layoutX="388.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your character">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="showCharacterName" fill="WHITE" layoutX="398.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unknown character" textAlignment="CENTER" wrappingWidth="226.8609619140625">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="prevButton" layoutX="336.0" layoutY="419.0" mnemonicParsing="false" onAction="#goPreviousCharacter" text="Prev">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="nextButton" layoutX="635.0" layoutY="419.0" mnemonicParsing="false" onAction="#goNextCharacter" text="Next">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Text fill="WHITE" layoutX="34.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="34.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Map: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="34.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="currentCharacterImage" fitHeight="300.0" fitWidth="150.0" layoutX="437.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="previousCharacterImage" fitHeight="300.0" fitWidth="150.0" layoutX="69.0" layoutY="97.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="nextCharacterImage" fitHeight="300.0" fitWidth="150.0" layoutX="758.0" layoutY="97.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="goButton" layoutX="468.0" layoutY="687.0" mnemonicParsing="false" onAction="#switchToMainGame" text="Let's go">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

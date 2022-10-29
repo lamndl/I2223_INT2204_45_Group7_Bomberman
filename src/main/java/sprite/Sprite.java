@@ -202,6 +202,13 @@ public class Sprite {
   public static Sprite powerup_flamepass =
       new Sprite(DEFAULT_SIZE, 6, 10, SpriteSheet.tiles, 16, 16);
 
+  /*
+   * ----------------------------------------
+   * End of sprite image
+   * ----------------------------------------
+   */
+
+
   public Sprite(int size, int x, int y, SpriteSheet sheet, int rw, int rh) {
     SIZE = size;
     _pixels = new int[SIZE * SIZE];
@@ -300,4 +307,6 @@ public class Sprite {
 
     return output;
   }
+
+
 }

@@ -1,15 +1,11 @@
 package entity.tile;
 
-import entity.Entity;
-import javafx.scene.image.Image;
+import sprite.Sprite;
 
-public class Wall extends Entity {
-  public Wall(int x, int y, Image img) {
-    super(x, y, img);
+public class Wall extends Tile {
+
+  public Wall(int x, int y) {
+    super(x, y, Sprite.wall.getFxImage());
   }
 
-
-  public void update() {
-
-  }
 }

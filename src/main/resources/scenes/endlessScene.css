@@ -1,3 +1,5 @@
 .background {
-    -fx-background-image:url("../Pictures/background.png");
+
+    -fx-background-image:url("../Pictures/EndlessScene/endlessBackground.png");
+
     }

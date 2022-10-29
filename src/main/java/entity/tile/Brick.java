@@ -1,15 +1,10 @@
 package entity.tile;
 
-import entity.Entity;
-import javafx.scene.image.Image;
+import sprite.Sprite;
 
-public class Brick extends Entity {
-  public Brick(int x, int y, Image img) {
-    super(x, y, img);
-  }
+public class Brick extends Tile {
 
-  @Override
-  public void update() {
-
+  public Brick(int x, int y) {
+    super(x, y, Sprite.brick.getFxImage());
   }
 }

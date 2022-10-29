@@ -1,3 +1,6 @@
 .anchor {
     -fx-background-image:url("../Pictures/mainBackground.png");
 }
+.insidePane{
+-fx-background-image:url("../Pictures/backgroundInside.png");
+}
