@@ -2,17 +2,13 @@ package entity;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import sprite.Sprite;
 
 public abstract class Entity {
   protected int x;
   protected int y;
 
-  protected Image image;
-  protected Sprite sprite;
-
-  public void draw(GraphicsContext gc) {
-    gc.drawImage(image, x, y);
+  public final void draw(GraphicsContext gc) {
+    gc.drawImage(getImage(), x, y);
   }
 
   /**
@@ -23,20 +19,9 @@ public abstract class Entity {
     return false;
   }
 
-  protected Entity() {
-
-  }
-
-  protected Entity(int x, int y, Image image) {
+  protected Entity(int x, int y) {
     this.x = x;
     this.y = y;
-    this.image = image;
-  }
-
-  protected Entity(int x, int y, Sprite sprite) {
-    this.x = x;
-    this.y = y;
-    this.sprite = sprite;
   }
 
   public int getX() {
@@ -47,7 +32,5 @@ public abstract class Entity {
     return y;
   }
 
-  public Sprite getSprite() {
-    return sprite;
-  }
+  public abstract Image getImage();
 }

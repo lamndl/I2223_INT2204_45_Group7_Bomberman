@@ -1,5 +1,6 @@
 package level;
 
+import entity.animated.mob.Balloom;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Wall;
@@ -69,8 +70,10 @@ public class FileLevelLoader extends LevelLoader {
           // _board.addEntity(pos, new Grass(x, y, Sprite.grass));
           // break;
           // add enemy 1
-          // case '1':
-          // _board.addCharacter(new Balloon(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y)
+          case '1':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Balloom(x * 32, y * 32));
+            break;
           // + Game.TILES_SIZE, _board));
           // _board.addEntity(pos, new Grass(x, y, Sprite.grass));
           // break;
