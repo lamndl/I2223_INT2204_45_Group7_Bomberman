@@ -1,6 +1,7 @@
 package entity.tile;
 
 import entity.Entity;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import sprite.Sprite;
 
@@ -23,5 +24,11 @@ public class Grass extends Tile {
   @Override
   public Image getImage() {
     return Sprite.grass;
+  }
+
+
+  @Override
+  protected BoundingBox getBoundingBox() {
+    return new BoundingBox(0, 0, 0, 0);
   }
 }

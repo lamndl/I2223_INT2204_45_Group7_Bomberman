@@ -1,6 +1,7 @@
 package entity.tile;
 
 import entity.Entity;
+import javafx.geometry.BoundingBox;
 
 public abstract class Tile extends Entity {
 
@@ -8,11 +9,8 @@ public abstract class Tile extends Entity {
     super(x, y);
   }
 
-  /**
-   * Mặc định không cho bất cứ một đối tượng nào đi qua
-   */
   @Override
-  public boolean isCollidedWith(Entity other) {
-    return false;
+  protected BoundingBox getBoundingBox() {
+    return new BoundingBox(x,y,32,32);
   }
 }

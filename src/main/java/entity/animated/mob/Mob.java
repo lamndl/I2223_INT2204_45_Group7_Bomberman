@@ -1,6 +1,9 @@
 package entity.animated.mob;
 
 import entity.animated.AnimatedEntity;
+import entity.tile.Tile;
+import javafx.geometry.BoundingBox;
+import mainClass.Board;
 
 public abstract class Mob extends AnimatedEntity {
   protected int hp;
@@ -15,17 +18,18 @@ public abstract class Mob extends AnimatedEntity {
     //
   }
 
+  @Override
+  protected BoundingBox getBoundingBox() {
+    return new BoundingBox(x + 4, y + 4, 24, 24);
+  }
+
   protected Mob(int x, int y) {
     super(x, y);
   }
 
-  // kiểm tra xem Mob có thể move được không
-  protected abstract boolean canMove(double x, double y);
+  protected abstract void move();
 
-  // tính toán hướng đi
-  // protected abstract void calculateMove();
-
-  protected abstract void move(double xa, double ya);
+  public abstract void calculateMove();
 
   public void setMoving(int moving) {
     this.moving = moving;

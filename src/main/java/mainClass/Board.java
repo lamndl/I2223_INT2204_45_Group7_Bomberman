@@ -30,7 +30,7 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
-  private static List<Tile> tileList = new ArrayList<>();
+  public static List<Tile> tileList = new ArrayList<>();
   private static List<Bomb> bombList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static Bomber bomber;
@@ -103,6 +103,7 @@ public class Board {
     frame %= 90;
     if (frame % 2 == 0) {
       bomber.update();
+      enemyList.forEach(i -> i.update());
     }
   }
 

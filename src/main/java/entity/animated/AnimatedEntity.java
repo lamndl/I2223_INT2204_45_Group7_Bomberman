@@ -7,4 +7,5 @@ public abstract class AnimatedEntity extends Entity {
     super(x, y);
   }
 
+  public abstract void update();
 }

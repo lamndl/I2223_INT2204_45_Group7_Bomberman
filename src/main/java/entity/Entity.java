@@ -1,5 +1,6 @@
 package entity;
 
+import javafx.geometry.BoundingBox;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -11,12 +12,8 @@ public abstract class Entity {
     gc.drawImage(getImage(), x, y);
   }
 
-  /**
-   * xử lý 2 Entity va chạm
-   */
   public boolean isCollidedWith(Entity other) {
-    //
-    return false;
+    return getBoundingBox().intersects(other.getBoundingBox());
   }
 
   protected Entity(int x, int y) {
@@ -33,4 +30,6 @@ public abstract class Entity {
   }
 
   public abstract Image getImage();
+
+  protected abstract BoundingBox getBoundingBox();
 }
