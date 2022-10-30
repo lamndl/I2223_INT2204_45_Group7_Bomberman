@@ -1,18 +1,16 @@
 package entity.animated.mob;
 
+import static mainClass.App.KB;
 import entity.animated.Bomb;
 import entity.tile.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import mainClass.Board;
-//import mainClass.Keyboard;
-import static mainClass.App.KB;
-
 import sprite.Sprite;
 
 public class Bomber extends Mob {
 
-  //protected Keyboard input;
+  // protected Keyboard input;
   private int maximumBombCount;
   private int currentBombCount;
   private int flameLength;
@@ -33,29 +31,23 @@ public class Bomber extends Mob {
         direction = 2;
         velocityY = -1;
         moving = 1;
-      }
-      if (i == KB.getMoveDown()) {
+      } else if (i == KB.getMoveDown()) {
         direction = 3;
         velocityY = 1;
         moving = 1;
-      }
-      if (i == KB.getMoveLeft()) {
+      } else if (i == KB.getMoveLeft()) {
         direction = 0;
         velocityX = -1;
         moving = 1;
-      }
-      if (i == KB.getMoveRight()) {
+      } else if (i == KB.getMoveRight()) {
         direction = 1;
         velocityX = 1;
         moving = 1;
-      }
-      if (i == KB.getBombPlacement()) {
+      } else if (i == KB.getBombPlacement()) {
         placeBomb();
+      } else if (i == KB.getInGameMenu()) {
+        // To do: tao in game menu
       }
-      if (i == KB.getInGameMenu()) {
-        //To do: tao in game menu
-      }
-
     }
   }
 
@@ -89,3 +81,4 @@ public class Bomber extends Mob {
 
 
 }
+        
