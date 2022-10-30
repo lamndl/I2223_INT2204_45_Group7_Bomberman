@@ -3,7 +3,7 @@ package entity.animated.mob;
 import entity.Entity;
 import entity.animated.Bomb;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import mainClass.Board;
 import mainClass.Keyboard;
 import sprite.Sprite;
@@ -24,8 +24,13 @@ public class Bomber extends Mob {
     super(x, y);
   }
 
-  public void update(KeyEvent keyEvent) {
-    calculalteMove(keyEvent);
+  public void update() {
+    velocityX = 0;
+    velocityY = 0;
+    moving = 0;
+    calculalteMove();
+    move(velocityX, velocityY);
+
   }
 
   @Override
@@ -65,59 +70,40 @@ public class Bomber extends Mob {
     return true;
   }
 
-  /**
-   * nhận key event, tính toán hướng đi .
-   */
-
-  public void calculalteMove(KeyEvent keyEvent) {
-    int x = 0;
-    int y = 0;
-    switch (keyEvent.getCode()) {
-      case UP:
-        y -= 2;
-        break;
-      case DOWN:
-        y += 2;
-        break;
-      case LEFT:
-        x -= 2;
-        break;
-      case RIGHT:
-        x += 2;
-        break;
-      case SPACE:
-        placeBomb();
-        break;
-      default:
-        break;
-    }
-
-    if (x != 0 || y != 0) {
-      move(x, y);
-      moving = 1;
-    } else {
-      moving = 0;
+  public void calculalteMove() {
+    for (KeyCode i : Board.input) {
+      switch (i) {
+        case UP:
+          direction = 2;
+          velocityY = -1;
+          moving = 1;
+          break;
+        case DOWN:
+          direction = 3;
+          velocityY = 1;
+          moving = 1;
+          break;
+        case LEFT:
+          direction = 0;
+          velocityX = -1;
+          moving = 1;
+          break;
+        case RIGHT:
+          direction = 1;
+          velocityX = 1;
+          moving = 1;
+          break;
+        case SPACE:
+          placeBomb();
+          break;
+        default:
+          break;
+      }
     }
   }
 
   @Override
   protected void move(double xa, double ya) {
-    // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và
-    // thực hiện thay đổi tọa độ x, y
-    // TODO: cập nhật giá trị _direction sau khi di chuyển
-    if (xa < 0) {
-      direction = 0;
-    }
-    if (xa > 0) {
-      direction = 1;
-    }
-    if (ya < 0) {
-      direction = 2;
-    }
-    if (ya > 0) {
-      direction = 3;
-    }
-
     if (canMove(0, ya)) {
       y += ya;
     }
@@ -128,7 +114,7 @@ public class Bomber extends Mob {
 
   @Override
   public Image getImage() {
-    return Sprite.player[(int) (direction * 3 + Board.frame * moving / 40)];
+    return Sprite.player[(int) (direction * 3 + Board.frame * moving / 30)];
   }
 
 }

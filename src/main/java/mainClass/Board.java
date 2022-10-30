@@ -8,13 +8,16 @@ import entity.animated.mob.Mob;
 import entity.tile.Grass;
 import entity.tile.Tile;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import level.FileLevelLoader;
 import level.LevelLoader;
@@ -33,6 +36,7 @@ public class Board {
   private static Bomber bomber;
 
   public static long frame;
+  public static Set<KeyCode> input = new HashSet<>();
 
   public static Scene getScene() {
     return scene;
@@ -50,20 +54,19 @@ public class Board {
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {
-        bomber.update(event);
+        input.add(event.getCode());
       }
     });
     scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent keyEvent) {
-        bomber.setMoving(0);
+        input.remove(keyEvent.getCode());
       }
     });
     AnimationTimer timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
-        frame++;
-        frame %= 120;
+        update();
         render();
       }
     };
@@ -96,7 +99,11 @@ public class Board {
   }
 
   public static void update() {
-    //
+    frame++;
+    frame %= 90;
+    if (frame % 2 == 0) {
+      bomber.update();
+    }
   }
 
 
