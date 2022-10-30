@@ -61,7 +61,9 @@ public class Board {
     Canvas canvas1 = new Canvas();
 
     canvas = new Canvas(width, height);
-
+    canvas.setLayoutX(16);
+    canvas.setLayoutY(30);
+    //ve lai background tu y=476
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     bomber = new Bomber(32, 32);
