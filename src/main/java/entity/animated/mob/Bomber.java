@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import mainClass.Board;
 //import mainClass.Keyboard;
 import static mainClass.App.KB;
+
 import sprite.Sprite;
 
 public class Bomber extends Mob {
@@ -18,7 +19,7 @@ public class Bomber extends Mob {
   private double speedMultiplier;
 
   public void placeBomb() {
-    Board.addEntity(new Bomb(x / 32 * 32, (y / 32 * 32)+32));
+    Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
   }
 
   public Bomber(int x, int y) {
@@ -28,30 +29,30 @@ public class Bomber extends Mob {
 
   public void calculateMove() {
     for (KeyCode i : Board.input) {
-      if(i==KB.getMoveUp()){
+      if (i == KB.getMoveUp()) {
         direction = 2;
         velocityY = -1;
         moving = 1;
       }
-      if(i==KB.getMoveDown()){
+      if (i == KB.getMoveDown()) {
         direction = 3;
         velocityY = 1;
         moving = 1;
       }
-      if(i==KB.getMoveLeft()){
+      if (i == KB.getMoveLeft()) {
         direction = 0;
         velocityX = -1;
         moving = 1;
       }
-      if(i==KB.getMoveRight()){
+      if (i == KB.getMoveRight()) {
         direction = 1;
         velocityX = 1;
         moving = 1;
       }
-      if(i==KB.getBombPlacement()){
+      if (i == KB.getBombPlacement()) {
         placeBomb();
       }
-      if(i==KB.getInGameMenu()){
+      if (i == KB.getInGameMenu()) {
         //To do: tao in game menu
       }
 
