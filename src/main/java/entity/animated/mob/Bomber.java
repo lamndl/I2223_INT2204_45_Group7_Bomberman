@@ -62,7 +62,11 @@ public class Bomber extends Mob {
 
   @Override
   public Image getImage() {
-    return Sprite.player[(int) (direction * 3 + Board.frame * moving / 30)];
+    int deltaAnimate = (int) Board.frame * moving / 30;
+    if (moving != 0 && deltaAnimate == 0) {
+      deltaAnimate += Board.frame > 15 ? 1 : 2;
+    }
+    return Sprite.player[(int) (direction * 3 + deltaAnimate)];
   }
 
   @Override
