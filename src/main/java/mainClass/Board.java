@@ -7,12 +7,14 @@ import entity.animated.mob.Enemy;
 import entity.animated.mob.Mob;
 import entity.tile.Grass;
 import entity.tile.Tile;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -42,12 +44,24 @@ public class Board {
     return scene;
   }
 
+
   public static void init() {
     root = new Group();
+
+      FXMLLoader fx  = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
+    try{
+      root.getChildren().add(fx.load());
+    }catch (IOException i){
+
+    }
+
     scene = new Scene(root);
     LevelLoader lvd = new FileLevelLoader(1);
     lvd.createEntities();
+    Canvas canvas1 = new Canvas();
+
     canvas = new Canvas(width, height);
+
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     bomber = new Bomber(32, 32);
@@ -92,10 +106,12 @@ public class Board {
 
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
     tileList.forEach(i -> i.draw(graphicsContext));
     bombList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
+
   }
 
   public static void update() {

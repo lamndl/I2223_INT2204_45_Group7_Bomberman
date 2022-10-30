@@ -22,6 +22,9 @@ public class App extends Application {
   public static boolean inAccount = false;
   public static Player currentPlayer;
 
+  public static final int WIDTH = 1024;
+  public static final int HEIGHT = 768;
+
   @Override
   public void start(Stage stage) throws IOException {
 
@@ -34,11 +37,10 @@ public class App extends Application {
     toMainGame();
 
 
-
     /**
      * vao menu:
      */
-    //scene = new Scene(loadFxml("/scenes/loadingMenu"), 1024, 768);
+    //scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
     //stage.setScene(scene);
 
 
@@ -68,6 +70,11 @@ public class App extends Application {
   }
 
   private static Parent loadFxml(String fxml) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+    return fxmlLoader.load();
+  }
+
+  public static Parent publicLoadFxml(String fxml) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
     return fxmlLoader.load();
   }

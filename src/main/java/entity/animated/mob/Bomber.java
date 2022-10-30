@@ -18,7 +18,7 @@ public class Bomber extends Mob {
   private double speedMultiplier;
 
   public void placeBomb() {
-    Board.addEntity(new Bomb(x / 32 * 32, y / 32 * 32));
+    Board.addEntity(new Bomb(x / 32 * 32, (y / 32 * 32)+32));
   }
 
   public Bomber(int x, int y) {

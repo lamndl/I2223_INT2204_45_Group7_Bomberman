@@ -7,6 +7,7 @@ import entity.tile.Wall;
 import java.io.FileReader;
 import java.util.Scanner;
 import mainClass.Board;
+import mainClass.App;
 
 public class FileLevelLoader extends LevelLoader {
 
@@ -50,8 +51,8 @@ public class FileLevelLoader extends LevelLoader {
   public void createEntities() {
     // TODO: tạo các Entity của màn chơi
     // TODO: sau khi tạo xong, gọi _board.addEntity() để thêm Entity vào game
-    Board.setHeight(height * 32);
-    Board.setWidth(width * 32);
+    Board.setHeight(App.HEIGHT);
+    Board.setWidth(App.WIDTH);
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         char c = map[y][x];
