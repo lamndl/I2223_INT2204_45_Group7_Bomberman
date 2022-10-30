@@ -7,10 +7,10 @@ import javafx.scene.input.KeyCode;
 
 public class Keyboard implements KeyListener {
 
-  private KeyCode moveUp = KeyCode.W;
-  private KeyCode moveDown = KeyCode.S;
-  private KeyCode moveLeft = KeyCode.A;
-  private KeyCode moveRight = KeyCode.D;
+  private KeyCode moveUp = KeyCode.UP;
+  private KeyCode moveDown = KeyCode.DOWN;
+  private KeyCode moveLeft = KeyCode.LEFT;
+  private KeyCode moveRight = KeyCode.RIGHT;
   private KeyCode bombPlacement = KeyCode.SPACE;
 
   private KeyCode inGameMenu = KeyCode.ESCAPE;

@@ -1,7 +1,9 @@
 package mainClass;
 
 import java.io.IOException;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
  * JavaFX App.
  */
 public class App extends Application {
-
+  public static Keyboard KB = new Keyboard();
   private static Scene scene;
   private static Stage stage;
   public Sound sound;
@@ -30,6 +32,8 @@ public class App extends Application {
      */
     this.stage = stage;
     toMainGame();
+
+
 
     /**
      * vao menu:
@@ -54,6 +58,9 @@ public class App extends Application {
     stage.setScene(Board.getScene());
     stage.centerOnScreen();
   }
+
+
+
 
   public static void setRoot(String fxml) throws IOException {
     scene.setRoot(loadFxml(fxml));

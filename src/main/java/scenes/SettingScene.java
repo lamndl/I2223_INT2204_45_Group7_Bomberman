@@ -1,5 +1,7 @@
 package scenes;
 
+import static mainClass.App.KB;
+
 import java.util.ArrayList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -44,7 +46,7 @@ public class SettingScene {
 
   public Text statusText= new Text();
 
-  public Keyboard KB = new Keyboard(); // have to refactor later to use in-game
+
   private double soundValue; // have to refactor later to use in-game
   //first show that status is changing
   //then show finished after changed

@@ -5,12 +5,13 @@ import entity.animated.Bomb;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import mainClass.Board;
-import mainClass.Keyboard;
+//import mainClass.Keyboard;
+import static mainClass.App.KB;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
 
-  protected Keyboard input;
+  //protected Keyboard input;
   private int maximumBombCount;
   private int currentBombCount;
   private int flameLength;
@@ -72,33 +73,33 @@ public class Bomber extends Mob {
 
   public void calculalteMove() {
     for (KeyCode i : Board.input) {
-      switch (i) {
-        case UP:
-          direction = 2;
-          velocityY = -1;
-          moving = 1;
-          break;
-        case DOWN:
-          direction = 3;
-          velocityY = 1;
-          moving = 1;
-          break;
-        case LEFT:
-          direction = 0;
-          velocityX = -1;
-          moving = 1;
-          break;
-        case RIGHT:
-          direction = 1;
-          velocityX = 1;
-          moving = 1;
-          break;
-        case SPACE:
-          placeBomb();
-          break;
-        default:
-          break;
+      if(i==KB.getMoveUp()){
+        direction = 2;
+        velocityY = -1;
+        moving = 1;
       }
+      if(i==KB.getMoveDown()){
+        direction = 3;
+        velocityY = 1;
+        moving = 1;
+      }
+      if(i==KB.getMoveLeft()){
+        direction = 0;
+        velocityX = -1;
+        moving = 1;
+      }
+      if(i==KB.getMoveRight()){
+        direction = 1;
+        velocityX = 1;
+        moving = 1;
+      }
+      if(i==KB.getBombPlacement()){
+        placeBomb();
+      }
+      if(i==KB.getInGameMenu()){
+        //To do: tao in game menu
+      }
+
     }
   }
 
