@@ -1,9 +1,7 @@
 package entity.animated.mob;
 
 import entity.animated.AnimatedEntity;
-import entity.tile.Tile;
 import javafx.geometry.BoundingBox;
-import mainClass.Board;
 
 public abstract class Mob extends AnimatedEntity {
   protected int hp;

@@ -80,8 +80,12 @@ public class Board {
     AnimationTimer timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
-        update();
-        render();
+        frame++;
+        frame %= 90;
+        if (frame % 2 == 0) {
+          update();
+          render();
+        }
       }
     };
     timer.start();
@@ -115,12 +119,9 @@ public class Board {
   }
 
   public static void update() {
-    frame++;
-    frame %= 90;
-    if (frame % 2 == 0) {
-      bomber.update();
-      enemyList.forEach(i -> i.update());
-    }
+    bomber.update();
+    enemyList.forEach(i -> i.update());
+
   }
 
 
