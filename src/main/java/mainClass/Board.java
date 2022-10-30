@@ -48,17 +48,15 @@ public class Board {
   public static void init() {
     root = new Group();
 
-      FXMLLoader fx  = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
-    try{
+    FXMLLoader fx = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
+    try {
       root.getChildren().add(fx.load());
-    }catch (IOException i){
+    } catch (IOException i) {
 
     }
-
     scene = new Scene(root);
     LevelLoader lvd = new FileLevelLoader(1);
     lvd.createEntities();
-    Canvas canvas1 = new Canvas();
 
     canvas = new Canvas(width, height);
 
