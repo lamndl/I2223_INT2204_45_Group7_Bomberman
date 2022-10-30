@@ -3,6 +3,7 @@ package entity.animated.mob;
 import static mainClass.App.KB;
 import entity.animated.Bomb;
 import entity.tile.Tile;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import mainClass.Board;
@@ -75,7 +76,6 @@ public class Bomber extends Mob {
     x += velocityX;
     for (Tile i : Board.tileList) {
       if (isCollidedWith(i)) {
-        moving = 0;
         x -= velocityX;
         y -= velocityY;
         return;
@@ -83,6 +83,9 @@ public class Bomber extends Mob {
     }
   }
 
-
+  @Override
+  protected BoundingBox getBoundingBox() {
+    return new BoundingBox(x + 4, y + 4, 17, 24);
+  }
 }
         
