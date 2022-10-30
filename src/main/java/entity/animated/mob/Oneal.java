@@ -8,19 +8,31 @@ public class Oneal extends Enemy {
     super(x, y);
   }
 
-  @Override
-  protected boolean canMove(double x, double y) {
-    return false;
-  }
-
-  @Override
-  protected void move(double xa, double ya) {
-    //
-  }
 
   @Override
   public Image getImage() {
     // TODO Auto-generated method stub
     return null;
+  }
+
+
+  @Override
+  public void calculateMove() {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  protected void move() {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void update() {
+    // TODO Auto-generated method stub
+    
   }
 }
