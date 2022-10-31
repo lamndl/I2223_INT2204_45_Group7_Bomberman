@@ -1,6 +1,7 @@
 package entity.animated.mob;
 
 import static mainClass.App.KB;
+
 import entity.animated.Bomb;
 import entity.tile.Tile;
 import javafx.geometry.BoundingBox;
@@ -10,15 +11,15 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
-
-  // protected Keyboard input;
-  private int maximumBombCount;
-  private int currentBombCount;
+  private int bombCount = 1;
   private int flameLength;
   private double speedMultiplier;
 
   public void placeBomb() {
-    Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
+    if (bombCount > 0) {
+      bombCount--;
+      Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
+    }
   }
 
   public Bomber(int x, int y) {
@@ -63,11 +64,7 @@ public class Bomber extends Mob {
 
   @Override
   public Image getImage() {
-    int deltaAnimate = (int) Board.frame * moving / 30;
-    if (moving != 0 && deltaAnimate == 0) {
-      deltaAnimate += Board.frame > 15 ? 1 : 2;
-    }
-    return Sprite.player[(int) (direction * 3 + deltaAnimate)];
+    return Sprite.player[(int) (direction * 3 + moving* (Board.frame / 20))];
   }
 
   @Override
@@ -84,8 +81,11 @@ public class Bomber extends Mob {
   }
 
   @Override
-  protected BoundingBox getBoundingBox() {
+  public BoundingBox getBoundingBox() {
     return new BoundingBox(x + 4, y + 4, 17, 24);
   }
+
+  public void increaseBomb() {
+    bombCount++;
+  }
 }
-        

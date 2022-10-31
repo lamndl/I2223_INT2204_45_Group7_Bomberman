@@ -15,7 +15,7 @@ public class Balloom extends Enemy {
 
   @Override
   public Image getImage() {
-    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 30)];
+    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 20)];
   }
 
 

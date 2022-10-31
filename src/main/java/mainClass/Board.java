@@ -2,6 +2,7 @@ package mainClass;
 
 import entity.Entity;
 import entity.animated.Bomb;
+import entity.animated.Flame;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
 import entity.animated.mob.Mob;
@@ -34,8 +35,9 @@ public class Board {
   private static int width;
   public static List<Tile> tileList = new ArrayList<>();
   private static List<Bomb> bombList = new ArrayList<>();
+  private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
-  private static Bomber bomber;
+  public static Bomber bomber;
 
   public static long frame;
   public static Set<KeyCode> input = new HashSet<>();
@@ -48,22 +50,20 @@ public class Board {
   public static void init() {
     root = new Group();
 
-      FXMLLoader fx  = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
-    try{
+    FXMLLoader fx = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
+    try {
       root.getChildren().add(fx.load());
-    }catch (IOException i){
+    } catch (IOException i) {
 
     }
 
     scene = new Scene(root);
     LevelLoader lvd = new FileLevelLoader(1);
     lvd.createEntities();
-    Canvas canvas1 = new Canvas();
-
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
     canvas.setLayoutY(30);
-    //ve lai background tu y=476
+    // ve lai background tu y=476
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
     bomber = new Bomber(32, 32);
@@ -83,7 +83,7 @@ public class Board {
       @Override
       public void handle(long now) {
         frame++;
-        frame %= 90;
+        frame %= 60;
         if (frame % 2 == 0) {
           update();
           render();
@@ -99,7 +99,11 @@ public class Board {
       tileList.add((Tile) entity);
     } else if (entity instanceof Bomb) {
       bombList.add((Bomb) entity);
-    } else if (entity instanceof Enemy) {
+    } else if (entity instanceof Flame) {
+      flameList.add((Flame) entity);
+    } else if (entity instanceof Enemy)
+
+    {
       enemyList.add((Enemy) entity);
     } else {
       bomber = (Bomber) entity;
@@ -107,7 +111,17 @@ public class Board {
   }
 
   public static void removeEntity(Entity entity) {
-    //
+    if (entity instanceof Tile) {
+      tileList.removeIf(i -> i.equals(entity));
+    } else if (entity instanceof Bomb) {
+      bombList.removeIf(i -> i.equals(entity));
+    } else if (entity instanceof Flame) {
+      flameList.removeIf(i -> i.equals(entity));
+    } else if (entity instanceof Enemy) {
+      enemyList.removeIf(i -> i.equals(entity));
+    } else {
+      bomber = new Bomber(-32, -32);
+    }
   }
 
   public static void render() {
@@ -115,6 +129,7 @@ public class Board {
 
     tileList.forEach(i -> i.draw(graphicsContext));
     bombList.forEach(i -> i.draw(graphicsContext));
+    flameList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
 
@@ -123,7 +138,8 @@ public class Board {
   public static void update() {
     bomber.update();
     enemyList.forEach(i -> i.update());
-
+    bombList.forEach(i -> i.update());
+    flameList.forEach(i -> i.update());
   }
 
 
@@ -135,8 +151,9 @@ public class Board {
     // if( res != null) return res;
 
     res = getTileEntityAt((int) x, (int) y);
-    if (res != null)
+    if (res != null) {
       return res;
+    }
 
     return null;
   }
@@ -150,14 +167,15 @@ public class Board {
       int tileY = tileList.get(i).getY();
 
 
-      for (int ii = 0; ii < 32; ii++)
+      for (int ii = 0; ii < 32; ii++) {
         for (int jj = 0; jj < 32; jj++) {
           if (jj < 25 && x == tileX + ii && y == tileY + jj) {
             return tileList.get(i);
-          } else if (jj >= 25 && x == tileX + ii && y == tileY + jj)
+          } else if (jj >= 25 && x == tileX + ii && y == tileY + jj) {
             return new Grass(x, y);
-
+          }
         }
+      }
     }
     return null;
   }
