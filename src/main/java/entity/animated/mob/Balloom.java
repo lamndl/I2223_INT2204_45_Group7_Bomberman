@@ -15,7 +15,7 @@ public class Balloom extends Enemy {
 
   @Override
   public Image getImage() {
-    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 30)];
+    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 20)];
   }
 
 
@@ -27,7 +27,7 @@ public class Balloom extends Enemy {
   protected void move() {
     moving = 1;
     x += velocityX;
-    for (Tile i : Board.tileList) {
+    for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         x -= velocityX;
         velocityX = -velocityX;
@@ -35,7 +35,7 @@ public class Balloom extends Enemy {
       }
     }
     y += velocityY;
-    for (Tile i : Board.tileList) {
+    for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         y -= velocityY;
         break;
@@ -45,6 +45,7 @@ public class Balloom extends Enemy {
   }
 
   public void update() {
+    checkHit();
     calculateMove();
     move();
 

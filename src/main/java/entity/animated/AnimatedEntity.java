@@ -6,6 +6,4 @@ public abstract class AnimatedEntity extends Entity {
   protected AnimatedEntity(int x, int y) {
     super(x, y);
   }
-
-  public abstract void update();
 }

@@ -1,6 +1,7 @@
 package entity.animated.mob;
 
 import static mainClass.App.KB;
+
 import entity.animated.Bomb;
 import entity.tile.Tile;
 import javafx.geometry.BoundingBox;
@@ -10,15 +11,15 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
-
-  // protected Keyboard input;
-  private int maximumBombCount;
-  private int currentBombCount;
+  private int bombCount = 1;
   private int flameLength;
   private double speedMultiplier;
 
   public void placeBomb() {
-    Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
+    if (bombCount > 0) {
+      bombCount--;
+      Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
+    }
   }
 
   public Bomber(int x, int y) {
@@ -48,11 +49,15 @@ public class Bomber extends Mob {
         placeBomb();
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
+        // respawn
+        x = 32;
+        y = 32;
       }
     }
   }
 
   public void update() {
+    checkHit();
     velocityX = 0;
     velocityY = 0;
     moving = 0;
@@ -62,19 +67,26 @@ public class Bomber extends Mob {
   }
 
   @Override
-  public Image getImage() {
-    int deltaAnimate = (int) Board.frame * moving / 30;
-    if (moving != 0 && deltaAnimate == 0) {
-      deltaAnimate += Board.frame > 15 ? 1 : 2;
+  protected void checkHit() {
+    super.checkHit();
+    for (Enemy i :Board.getEnemyList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        die();
+        return;
+      }
     }
-    return Sprite.player[(int) (direction * 3 + deltaAnimate)];
+  }
+
+  @Override
+  public Image getImage() {
+    return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
   }
 
   @Override
   protected void move() {
     y += velocityY;
     x += velocityX;
-    for (Tile i : Board.tileList) {
+    for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         x -= velocityX;
         y -= velocityY;
@@ -84,8 +96,11 @@ public class Bomber extends Mob {
   }
 
   @Override
-  protected BoundingBox getBoundingBox() {
+  public BoundingBox getBoundingBox() {
     return new BoundingBox(x + 4, y + 4, 17, 24);
   }
+
+  public void increaseBomb() {
+    bombCount++;
+  }
 }
-        

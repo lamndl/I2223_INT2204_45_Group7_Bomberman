@@ -6,8 +6,15 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Bomb extends AnimatedEntity {
+  private int timer = 90;
+
   public void explode() {
-    //
+    Board.addEntity(new Flame(x, y));
+    Board.addEntity(new Flame(x + 32, y));
+    Board.addEntity(new Flame(x - 32, y));
+    Board.addEntity(new Flame(x, y + 32));
+    Board.addEntity(new Flame(x, y - 32));
+    Board.removeEntity(this);
   }
 
   public Bomb(int x, int y) {
@@ -20,13 +27,16 @@ public class Bomb extends AnimatedEntity {
   }
 
   @Override
-  protected BoundingBox getBoundingBox() {
+  public BoundingBox getBoundingBox() {
     return new BoundingBox(x, y, 32, 32);
   }
 
   @Override
   public void update() {
-    // TODO Auto-generated method stub
-    
+    timer--;
+    if (timer == 0) {
+      Board.getBomber().increaseBomb();
+      explode();
+    }
   }
 }
