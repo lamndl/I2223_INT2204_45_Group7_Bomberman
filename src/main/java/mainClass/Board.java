@@ -27,6 +27,7 @@ import level.LevelLoader;
 
 
 public class Board {
+
   private static Scene scene;
   private static Group root;
   private static Canvas canvas;
@@ -101,9 +102,7 @@ public class Board {
       bombList.add((Bomb) entity);
     } else if (entity instanceof Flame) {
       flameList.add((Flame) entity);
-    } else if (entity instanceof Enemy)
-
-    {
+    } else if (entity instanceof Enemy) {
       enemyList.add((Enemy) entity);
     } else {
       bomber = (Bomber) entity;
@@ -138,8 +137,15 @@ public class Board {
   public static void update() {
     bomber.update();
     enemyList.forEach(i -> i.update());
-    bombList.forEach(i -> i.update());
-    flameList.forEach(i -> i.update());
+    for (int i = 0; i < enemyList.size(); i++) {
+      enemyList.get(i).update();
+    }
+    for (int i = 0; i < bombList.size(); i++) {
+      bombList.get(i).update();
+    }
+    for (int i = 0; i < flameList.size(); i++) {
+      flameList.get(i).update();
+    }
   }
 
 
@@ -165,7 +171,6 @@ public class Board {
     for (int i = 0; i < tileList.size(); i++) {
       int tileX = tileList.get(i).getX();
       int tileY = tileList.get(i).getY();
-
 
       for (int ii = 0; ii < 32; ii++) {
         for (int jj = 0; jj < 32; jj++) {
