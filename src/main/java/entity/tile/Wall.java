@@ -14,4 +14,10 @@ public class Wall extends Tile {
     return Sprite.wall;
   }
 
+  @Override
+  public void update() {
+    // TODO Auto-generated method stub
+    
+  }
+
 }

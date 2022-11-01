@@ -34,11 +34,35 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
-  public static List<Tile> tileList = new ArrayList<>();
+  public static List<Tile> getTileList() {
+    return tileList;
+  }
+
+
+  public static List<Bomb> getBombList() {
+    return bombList;
+  }
+
+
+  public static List<Flame> getFlameList() {
+    return flameList;
+  }
+
+
+  public static List<Enemy> getEnemyList() {
+    return enemyList;
+  }
+
+
+  public static Bomber getBomber() {
+    return bomber;
+  }
+
+  private static List<Tile> tileList = new ArrayList<>();
   private static List<Bomb> bombList = new ArrayList<>();
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
-  public static Bomber bomber;
+  private static Bomber bomber;
 
   public static long frame;
   public static Set<KeyCode> input = new HashSet<>();
@@ -136,7 +160,6 @@ public class Board {
 
   public static void update() {
     bomber.update();
-    enemyList.forEach(i -> i.update());
     for (int i = 0; i < enemyList.size(); i++) {
       enemyList.get(i).update();
     }
@@ -145,6 +168,9 @@ public class Board {
     }
     for (int i = 0; i < flameList.size(); i++) {
       flameList.get(i).update();
+    }
+    for (int i = 0; i < tileList.size(); i++) {
+      tileList.get(i).update();
     }
   }
 

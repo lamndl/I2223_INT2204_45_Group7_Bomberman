@@ -10,10 +10,10 @@ public class Bomb extends AnimatedEntity {
 
   public void explode() {
     Board.addEntity(new Flame(x, y));
-    Board.addEntity(new Flame(x+32, y));
-    Board.addEntity(new Flame(x-32, y));
-    Board.addEntity(new Flame(x, y+32));
-    Board.addEntity(new Flame(x, y-32));
+    Board.addEntity(new Flame(x + 32, y));
+    Board.addEntity(new Flame(x - 32, y));
+    Board.addEntity(new Flame(x, y + 32));
+    Board.addEntity(new Flame(x, y - 32));
     Board.removeEntity(this);
   }
 
@@ -27,7 +27,7 @@ public class Bomb extends AnimatedEntity {
   }
 
   @Override
-  protected BoundingBox getBoundingBox() {
+  public BoundingBox getBoundingBox() {
     return new BoundingBox(x, y, 32, 32);
   }
 
@@ -35,7 +35,7 @@ public class Bomb extends AnimatedEntity {
   public void update() {
     timer--;
     if (timer == 0) {
-      Board.bomber.increaseBomb();
+      Board.getBomber().increaseBomb();
       explode();
     }
   }

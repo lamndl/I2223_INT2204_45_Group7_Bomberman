@@ -10,7 +10,7 @@ public abstract class Tile extends Entity {
   }
 
   @Override
-  protected BoundingBox getBoundingBox() {
+  public BoundingBox getBoundingBox() {
     return new BoundingBox(x,y,32,32);
   }
 }

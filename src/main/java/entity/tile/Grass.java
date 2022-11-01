@@ -28,7 +28,14 @@ public class Grass extends Tile {
 
 
   @Override
-  protected BoundingBox getBoundingBox() {
+  public BoundingBox getBoundingBox() {
     return new BoundingBox(0, 0, 0, 0);
+  }
+
+
+  @Override
+  public void update() {
+    // TODO Auto-generated method stub
+    
   }
 }

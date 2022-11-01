@@ -15,9 +15,6 @@ public class Flame extends AnimatedEntity {
   @Override
   public void update() {
     timer--;
-    if (getBoundingBox().intersects(Board.bomber.getBoundingBox())) {
-      Board.removeEntity(Board.bomber);
-    }
     if (timer == 0) {
       Board.removeEntity(this);
     }
@@ -29,8 +26,8 @@ public class Flame extends AnimatedEntity {
   }
 
   @Override
-  protected BoundingBox getBoundingBox() {
-    return new BoundingBox(x, y, 32, 32);
+  public BoundingBox getBoundingBox() {
+    return new BoundingBox(x, y, 30, 30);
   }
   
 }

@@ -49,11 +49,15 @@ public class Bomber extends Mob {
         placeBomb();
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
+        // respawn
+        x = 32;
+        y = 32;
       }
     }
   }
 
   public void update() {
+    checkHit();
     velocityX = 0;
     velocityY = 0;
     moving = 0;
@@ -63,15 +67,26 @@ public class Bomber extends Mob {
   }
 
   @Override
+  protected void checkHit() {
+    super.checkHit();
+    for (Enemy i :Board.getEnemyList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        die();
+        return;
+      }
+    }
+  }
+
+  @Override
   public Image getImage() {
-    return Sprite.player[(int) (direction * 3 + moving* (Board.frame / 20))];
+    return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
   }
 
   @Override
   protected void move() {
     y += velocityY;
     x += velocityX;
-    for (Tile i : Board.tileList) {
+    for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         x -= velocityX;
         y -= velocityY;

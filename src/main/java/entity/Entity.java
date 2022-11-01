@@ -29,7 +29,9 @@ public abstract class Entity {
     return y;
   }
 
+  public abstract void update();
+
   public abstract Image getImage();
 
-  protected abstract BoundingBox getBoundingBox();
+  public abstract BoundingBox getBoundingBox();
 }
