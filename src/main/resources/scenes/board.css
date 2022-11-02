@@ -1,0 +1,7 @@
+.background {
+    -fx-background-image:url("../Pictures/IngameScene/ingameBackground.png");
+    }
+
+.insidePaneBackground{
+  -fx-background-image:url("../Pictures/IngameScene/IngameMenu.png");
+}

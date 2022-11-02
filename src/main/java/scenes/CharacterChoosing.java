@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
 import mainClass.App;
+import mainClass.Board;
 
 
 public class CharacterChoosing {
@@ -78,7 +79,17 @@ public class CharacterChoosing {
   }
 
   public void switchToMainGame() throws IOException {
-    System.out.println("In developing...");
+    currentIndex = (currentIndex - 1) % csm.getCurrentLength();
+    if(csm.getTextFromIndex(currentIndex+1).equals("green")){
+      Board.setPlayerNumber(2);
+    }else if(csm.getTextFromIndex(currentIndex+1).equals("blue")){
+      Board.setPlayerNumber(1);
+    }else{
+      Board.setPlayerNumber(3);
+    }
+
+    App.toMainGame();
+
   }
 
 }

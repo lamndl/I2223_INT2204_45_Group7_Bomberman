@@ -34,6 +34,7 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
+  private static int playerNumber=1; //by default
   public static List<Tile> getTileList() {
     return tileList;
   }
@@ -56,6 +57,14 @@ public class Board {
 
   public static Bomber getBomber() {
     return bomber;
+  }
+
+  public static int getPlayerNumber(){
+    return playerNumber;
+  }
+
+  public static void setPlayerNumber(int number){
+    playerNumber=number;
   }
 
   private static List<Tile> tileList = new ArrayList<>();

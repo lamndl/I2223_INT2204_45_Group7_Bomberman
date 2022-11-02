@@ -9,9 +9,9 @@ private ArrayList<Image> characterImageList = new ArrayList<Image>();
 private ArrayList<String> characterNameList = new ArrayList<String>();
 
 public CharacterSceneManagement(){
-  addImageAndText("/Pictures/Characters/blu.png","Blue");
-  addImageAndText("/Pictures/Characters/red.png","Red");
   addImageAndText("/Pictures/Characters/green.png","Green");
+  addImageAndText("/Pictures/Characters/red.png","Red");
+  addImageAndText("/Pictures/Characters/blu.png","Blue");
 
 }
 

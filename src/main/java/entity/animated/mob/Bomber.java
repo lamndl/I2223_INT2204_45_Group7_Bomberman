@@ -15,6 +15,7 @@ public class Bomber extends Mob {
   private int flameLength;
   private double speedMultiplier;
 
+
   public void placeBomb() {
     if (bombCount > 0) {
       bombCount--;
@@ -79,7 +80,15 @@ public class Bomber extends Mob {
 
   @Override
   public Image getImage() {
-    return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+    if(Board.getPlayerNumber()==0){
+      return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+    } else if(Board.getPlayerNumber()==1){
+      return Sprite.player1[(int) (direction * 3 + moving * (Board.frame / 20))];
+    }else if(Board.getPlayerNumber()==2){
+      return Sprite.player2[(int) (direction * 3 + moving * (Board.frame / 20))];
+    }else{
+      return Sprite.player3[(int) (direction * 3 + moving * (Board.frame / 20))];
+    }
   }
 
   @Override
