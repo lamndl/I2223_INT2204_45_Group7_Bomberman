@@ -276,6 +276,10 @@ public class Sprite {
 
   public static Image[] balloom =
       {balloom_left1, balloom_left2, balloom_left3, balloom_right1, balloom_right2, balloom_right3};
+
+  public static Image[] oneal =
+      {oneal_left1, oneal_left2, oneal_left3, oneal_right1, oneal_right2, oneal_right3};
+
   /*
    * ---------------------------------------- End of sprite image
    * ----------------------------------------

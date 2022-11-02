@@ -27,7 +27,7 @@ public class Flame extends AnimatedEntity {
 
   @Override
   public BoundingBox getBoundingBox() {
-    return new BoundingBox(x, y, 30, 30);
+    return new BoundingBox(x + 2, y + 2, 28, 28);
   }
   
 }

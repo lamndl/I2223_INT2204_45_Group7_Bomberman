@@ -7,6 +7,9 @@ import sprite.Sprite;
 
 public class Brick extends Tile {
 
+  private int timer = 90;
+  private boolean destroy = false;
+
   public Brick(int x, int y) {
     super(x, y);
   }
@@ -14,21 +17,37 @@ public class Brick extends Tile {
   protected void checkHit() {
     for (AnimatedEntity i : Board.getFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
-        Board.removeEntity(this);
-        Board.addEntity(new Grass(x, y));
+        destroy = true;
+        Board.removeEntity(i);
         return;
       }
     }
   }
 
-
   @Override
   public Image getImage() {
-    return Sprite.brick;
+    if (destroy == false) {
+      return Sprite.brick;
+    }
+    if (timer > 60) {
+      return Sprite.brick_exploded;
+    }
+    if (timer > 30) {
+      return Sprite.brick_exploded1;
+    }
+    return Sprite.brick_exploded2;
   }
+
 
   @Override
   public void update() {
-    checkHit();
+    if (destroy == false) {
+      checkHit();
+    } else {
+      timer--;
+      if (timer == 0) {
+        Board.removeEntity(this);
+      }
+    }
   }
 }

@@ -151,10 +151,10 @@ public class Board {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
     tileList.forEach(i -> i.draw(graphicsContext));
-    bombList.forEach(i -> i.draw(graphicsContext));
-    flameList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
+    bombList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
+    flameList.forEach(i -> i.draw(graphicsContext));
 
   }
 

@@ -1,8 +1,10 @@
 package level;
 
 import entity.animated.mob.Balloom;
+import entity.animated.mob.Oneal;
 import entity.tile.Brick;
 import entity.tile.Grass;
+import entity.tile.Portal;
 import entity.tile.Wall;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -61,39 +63,26 @@ public class FileLevelLoader extends LevelLoader {
             Board.addEntity(new Wall(x * 32, y * 32));
             break;
           case '*':
+            Board.addEntity(new Grass(x * 32, y * 32));
             Board.addEntity(new Brick(x * 32, y * 32));
             break;
-          // add Bomber
-          // case 'p':
-          // _board.addEntity(new Bomber(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) +
-          // App.TILES_SIZE, _board));
-          // Screen.setOffset(0, 0);
-          // _board.addEntity(pos, new Grass(x, y, Sprite.grass));
-          // break;
+
           // add enemy 1
           case '1':
             Board.addEntity(new Grass(x * 32, y * 32));
             Board.addEntity(new Balloom(x * 32, y * 32));
             break;
-          // + Game.TILES_SIZE, _board));
-          // _board.addEntity(pos, new Grass(x, y, Sprite.grass));
-          // break;
-          // //add enemy 2
-          // case '2':
-          // _board.addCharacter(new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) +
-          // Game.TILES_SIZE, _board));
-          // _board.addEntity(pos, new Grass(x, y, Sprite.grass));
-          // break;
-          // //add portal: cong ket thuc game
-          // case 'x':
-          // _board.addEntity(pos,
-          // new LayeredEntity(x, y,
-          // new Grass(x, y, Sprite.grass),
-          // new Portal(x, y, Sprite.portal, _board),
-          // new Brick(x, y, Sprite.brick)
-          // )
-          // );
-          // break;
+
+          case '2':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Oneal(x * 32, y * 32));
+            break;
+
+          //add portal: cong ket thuc game
+          case 'x':
+            Board.addEntity(new Portal(x * 32, y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
           // //add Bomb Item: vat pham tang so luong bom
           // case 'b':
           // _board.addEntity(pos,

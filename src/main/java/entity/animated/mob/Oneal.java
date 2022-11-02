@@ -1,6 +1,8 @@
 package entity.animated.mob;
 
 import javafx.scene.image.Image;
+import mainClass.Board;
+import sprite.Sprite;
 
 public class Oneal extends Enemy {
 
@@ -11,8 +13,7 @@ public class Oneal extends Enemy {
 
   @Override
   public Image getImage() {
-    // TODO Auto-generated method stub
-    return null;
+    return Sprite.oneal[direction * 3 + (int) (moving * Board.frame / 20)];
   }
 
 
