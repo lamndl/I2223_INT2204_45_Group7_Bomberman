@@ -1,10 +1,13 @@
 package level;
 
+import entity.animated.Flame;
 import entity.animated.mob.Balloom;
+import entity.animated.mob.Bomber;
 import entity.animated.mob.Oneal;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Portal;
+import entity.tile.PowerUpFlame;
 import entity.tile.Wall;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -81,6 +84,17 @@ public class FileLevelLoader extends LevelLoader {
           //add portal: cong ket thuc game
           case 'x':
             Board.addEntity(new Portal(x * 32, y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
+
+          case 'p':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Bomber(x*32,y*32));
+            break;
+
+          case 'f':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new PowerUpFlame(x * 32,y * 32));
             Board.addEntity(new Brick(x * 32, y * 32));
             break;
           // //add Bomb Item: vat pham tang so luong bom

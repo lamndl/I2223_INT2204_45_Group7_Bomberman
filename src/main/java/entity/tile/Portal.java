@@ -1,6 +1,7 @@
 package entity.tile;
 
 import javafx.scene.image.Image;
+import mainClass.Board;
 import sprite.Sprite;
 
 public class Portal extends Tile {
@@ -16,7 +17,7 @@ public class Portal extends Tile {
 
   @Override
   public void update() {
-
+    Board.whenCompleted(true);
   }
 
 }

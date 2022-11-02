@@ -3,7 +3,10 @@ package entity.animated.mob;
 import static mainClass.App.KB;
 
 import entity.animated.Bomb;
+import entity.animated.Flame;
+import entity.tile.PowerUpFlame;
 import entity.tile.Tile;
+import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -12,9 +15,51 @@ import sprite.Sprite;
 
 public class Bomber extends Mob {
   private int bombCount = 1;
-  private int flameLength;
+  private int flameRadius = 1; //increase +1 if receive flame item
   private double speedMultiplier;
 
+  public int getFlameRadius(){
+    return flameRadius;
+  }
+
+  public void setFlameRadius(int radius){
+    flameRadius= radius;
+  }
+
+  public void explode(int x, int y){
+    //Todo: Custom with different radius
+    Board.addEntity(new Flame(x, y));
+    boolean north = true;
+    boolean south = true;
+    boolean east = true;
+    boolean west = true;
+    for(int i = 1; i<=getFlameRadius(); i++){
+      if(Board.getTileEntityAt(x,y+32*i) instanceof Wall){
+        south = false;
+      }
+      if(Board.getTileEntityAt(x,y-32*i) instanceof Wall){
+        north = false;
+      }
+      if(Board.getTileEntityAt(x+32*i,y) instanceof Wall){
+        east = false;
+      }
+      if(Board.getTileEntityAt(x-32*i,y) instanceof Wall){
+        west = false;
+      }
+      if(east){
+        Board.addEntity(new Flame(x + 32*i, y));
+      }
+      if(west){
+        Board.addEntity(new Flame(x - 32*i, y));
+      }
+      if(south){
+        Board.addEntity(new Flame(x, y + 32*i));
+      }
+      if(north){
+        Board.addEntity(new Flame(x, y - 32*i));
+      }
+    }
+  }
 
   public void placeBomb() {
     if (bombCount > 0) {
@@ -59,6 +104,7 @@ public class Bomber extends Mob {
 
   public void update() {
     checkHit();
+    checkFlameReceived();
     velocityX = 0;
     velocityY = 0;
     moving = 0;
@@ -73,6 +119,17 @@ public class Bomber extends Mob {
     for (Enemy i :Board.getEnemyList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         die();
+        return;
+      }
+    }
+  }
+
+  public void checkFlameReceived(){
+    for (PowerUpFlame i :Board.getPowerUpFlameList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        this.flameRadius++;
+        Board.removeEntity(i);
+        System.out.println("Increased power up flame");
         return;
       }
     }
@@ -96,7 +153,7 @@ public class Bomber extends Mob {
     y += velocityY;
     x += velocityX;
     for (Tile i : Board.getTileList()) {
-      if (isCollidedWith(i)) {
+      if (isCollidedWith(i)&& i instanceof Wall) {
         x -= velocityX;
         y -= velocityY;
         return;

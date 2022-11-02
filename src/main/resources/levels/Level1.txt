@@ -32,8 +32,8 @@ p - Bomber
 2 - Oneal
 
 Items:
-b - Bomb Item
-f - Flame Item
-s - Speed Item
+b - PowerUpBomb Item
+f - PowerUpFlame Item
+s - PowerUpSpeed Item
 
 Kí tự khác các kí tự trên - Grass

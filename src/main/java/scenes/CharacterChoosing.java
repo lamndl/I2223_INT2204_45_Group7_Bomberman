@@ -80,9 +80,9 @@ public class CharacterChoosing {
 
   public void switchToMainGame() throws IOException {
     currentIndex = (currentIndex - 1) % csm.getCurrentLength();
-    if(csm.getTextFromIndex(currentIndex+1).equals("green")){
+    if(csm.getTextFromIndex((currentIndex+1)% csm.getCurrentLength()).equals("green")){
       Board.setPlayerNumber(2);
-    }else if(csm.getTextFromIndex(currentIndex+1).equals("blue")){
+    }else if(csm.getTextFromIndex((currentIndex+1)% csm.getCurrentLength()).equals("blue")){
       Board.setPlayerNumber(1);
     }else{
       Board.setPlayerNumber(3);

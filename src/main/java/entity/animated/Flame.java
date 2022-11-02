@@ -8,7 +8,7 @@ import sprite.Sprite;
 public class Flame extends AnimatedEntity {
   private int timer = 90;
 
-  protected Flame(int x, int y) {
+  public Flame(int x, int y) {
     super(x, y);
   }
 

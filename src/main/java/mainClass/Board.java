@@ -7,6 +7,7 @@ import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
 import entity.animated.mob.Mob;
 import entity.tile.Grass;
+import entity.tile.PowerUpFlame;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class Board {
     return tileList;
   }
 
+  public static List<PowerUpFlame> getPowerUpFlameList(){ return powerUpFlameList; }
 
   public static List<Bomb> getBombList() {
     return bombList;
@@ -71,6 +73,7 @@ public class Board {
   private static List<Bomb> bombList = new ArrayList<>();
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
+  private static List<PowerUpFlame> powerUpFlameList = new ArrayList<>();
   private static Bomber bomber;
 
   public static long frame;
@@ -92,7 +95,7 @@ public class Board {
     }
 
     scene = new Scene(root);
-    LevelLoader lvd = new FileLevelLoader(1);
+    LevelLoader lvd = new FileLevelLoader(2);
     lvd.createEntities();
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
@@ -100,7 +103,7 @@ public class Board {
     // ve lai background tu y=476
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
-    bomber = new Bomber(32, 32);
+    //bomber = new Bomber(32, 32);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {
@@ -131,6 +134,9 @@ public class Board {
     // Design pattern ???
     if (entity instanceof Tile) {
       tileList.add((Tile) entity);
+      if(entity instanceof PowerUpFlame){
+        powerUpFlameList.add((PowerUpFlame) entity);
+      }
     } else if (entity instanceof Bomb) {
       bombList.add((Bomb) entity);
     } else if (entity instanceof Flame) {
@@ -145,6 +151,9 @@ public class Board {
   public static void removeEntity(Entity entity) {
     if (entity instanceof Tile) {
       tileList.removeIf(i -> i.equals(entity));
+      if(entity instanceof PowerUpFlame){
+        powerUpFlameList.removeIf(i->i.equals(entity));
+      }
     } else if (entity instanceof Bomb) {
       bombList.removeIf(i -> i.equals(entity));
     } else if (entity instanceof Flame) {
@@ -164,6 +173,7 @@ public class Board {
     bombList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
     flameList.forEach(i -> i.draw(graphicsContext));
+    //powerUpFlameList.forEach(i->i.draw(graphicsContext));
 
   }
 
@@ -181,6 +191,11 @@ public class Board {
     for (int i = 0; i < tileList.size(); i++) {
       tileList.get(i).update();
     }
+    for(int i = 0 ; i< powerUpFlameList.size();i++){
+      powerUpFlameList.get(i).update();
+    }
+
+
   }
 
 
@@ -220,6 +235,10 @@ public class Board {
     return null;
   }
 
+  public static void whenCompleted(boolean win){
+    //todo: Show noti, people can choose action.
+  }
+
   public static void setHeight(int height) {
     Board.height = height;
   }
@@ -227,6 +246,11 @@ public class Board {
   public static void setWidth(int width) {
     Board.width = width;
   }
+
+  public static void explode(int x, int y){
+    bomber.explode(x,y);
+  }
+
 
 
 }

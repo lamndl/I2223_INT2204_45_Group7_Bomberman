@@ -9,11 +9,7 @@ public class Bomb extends AnimatedEntity {
   private int timer = 90;
 
   public void explode() {
-    Board.addEntity(new Flame(x, y));
-    Board.addEntity(new Flame(x + 32, y));
-    Board.addEntity(new Flame(x - 32, y));
-    Board.addEntity(new Flame(x, y + 32));
-    Board.addEntity(new Flame(x, y - 32));
+    Board.explode(x,y);
     Board.removeEntity(this);
   }
 
