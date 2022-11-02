@@ -27,7 +27,6 @@ import javafx.scene.input.KeyEvent;
 import level.FileLevelLoader;
 import level.LevelLoader;
 
-
 public class Board {
 
   private static Scene scene;
@@ -175,43 +174,6 @@ public class Board {
     for (int i = 0; i < tileList.size(); i++) {
       tileList.get(i).update();
     }
-  }
-
-
-  public static Entity getEntity(double x, double y, Mob m) {
-    // TODO: Check xem vị trí x, y có entity nào
-    Entity res = null;
-
-    // res = getBombAt(x, y);
-    // if( res != null) return res;
-
-    res = getTileEntityAt((int) x, (int) y);
-    if (res != null) {
-      return res;
-    }
-
-    return null;
-  }
-
-  /**
-   * lấy tile entity tại vị trí (x, y)
-   */
-  public static Entity getTileEntityAt(int x, int y) { // x, y tọa độ pixel
-    for (int i = 0; i < tileList.size(); i++) {
-      int tileX = tileList.get(i).getX();
-      int tileY = tileList.get(i).getY();
-
-      for (int ii = 0; ii < 32; ii++) {
-        for (int jj = 0; jj < 32; jj++) {
-          if (jj < 25 && x == tileX + ii && y == tileY + jj) {
-            return tileList.get(i);
-          } else if (jj >= 25 && x == tileX + ii && y == tileY + jj) {
-            return new Grass(x, y);
-          }
-        }
-      }
-    }
-    return null;
   }
 
   public static void setHeight(int height) {

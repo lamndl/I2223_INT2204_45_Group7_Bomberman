@@ -17,7 +17,10 @@ public class Portal extends Tile {
 
   @Override
   public void update() {
-
   }
 
+  @Override
+  public BoundingBox getBoundingBox() {
+    return new BoundingBox(x + 14, y + 14, 1 , 1);
+  }
 }

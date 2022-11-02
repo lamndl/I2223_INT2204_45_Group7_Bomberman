@@ -31,7 +31,6 @@ public class Bomber extends Mob {
     super(x, y);
   }
 
-
   public void calculateMove() {
     for (KeyCode i : Board.input) {
       if (i == KB.getMoveUp()) {
@@ -77,7 +76,6 @@ public class Bomber extends Mob {
 
   public void update() {
     if (alive) {
-      checkWin();
       checkHit();
       velocityX = 0;
       velocityY = 0;
@@ -106,10 +104,10 @@ public class Bomber extends Mob {
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
-    }
 
-    // go to the scene end game and replay
-    Board.goEndGame();
+      // go to scene end game and replay
+      Board.goEndGame();
+    }
 
   }
 
@@ -132,6 +130,9 @@ public class Bomber extends Mob {
   protected void move() {
     y += velocityY;
     x += velocityX;
+
+    checkWin();
+
     for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         x -= velocityX;
@@ -154,7 +155,7 @@ public class Bomber extends Mob {
 
   @Override
   public BoundingBox getBoundingBox() {
-    return new BoundingBox(x + 4, y + 4, 17, 24);
+    return new BoundingBox(x + 4, y + 5, 17, 24);
   }
 
   public void increaseBomb() {
@@ -167,10 +168,8 @@ public class Bomber extends Mob {
     }
     for (Tile i : Board.getTileList()) {
       if ((i instanceof Portal) && this.isCollidedWith(i)) {
-        System.out.println("3");
-        Board.removeEntity(this);
+        // to next level
         Board.goEndGame();
-        // đoạn này đang lỗi, chưa in ra được END GAME
         return;
       }
     }

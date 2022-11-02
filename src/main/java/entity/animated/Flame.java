@@ -7,9 +7,15 @@ import sprite.Sprite;
 
 public class Flame extends AnimatedEntity {
   private int timer = 30;
+  int pos;
 
   protected Flame(int x, int y) {
     super(x, y);
+  }
+
+  protected Flame(int pos, int x, int y) {
+    super(x, y);
+    this.pos = pos;
   }
 
   @Override
@@ -22,7 +28,13 @@ public class Flame extends AnimatedEntity {
 
   @Override
   public Image getImage() {
-    return Sprite.bomb_exploded2;
+    if (timer > 20) {
+      return Sprite.flame[pos * 3];
+    }
+    if (timer > 10) {
+      return Sprite.flame[pos * 3 + 1];
+    }
+    return Sprite.flame[pos * 3 + 2];
   }
 
   @Override
