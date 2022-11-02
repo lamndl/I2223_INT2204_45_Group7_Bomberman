@@ -80,6 +80,7 @@ public class FileLevelLoader extends LevelLoader {
 
           //add portal: cong ket thuc game
           case 'x':
+            Board.addEntity(new Grass(x * 32, y *32));
             Board.addEntity(new Portal(x * 32, y * 32));
             Board.addEntity(new Brick(x * 32, y * 32));
             break;

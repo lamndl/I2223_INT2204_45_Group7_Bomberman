@@ -1,5 +1,6 @@
 package entity.animated.mob;
 
+import entity.animated.Bomb;
 import entity.tile.Tile;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -15,12 +16,18 @@ public class Balloom extends Enemy {
 
   @Override
   public Image getImage() {
-    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 20)];
+    if (alive) {
+      return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 20)];
+    } else {
+      return Sprite.balloom_dead;
+    }
   }
 
 
   @Override
-  public void calculateMove() {}
+  public void calculateMove() {
+    move();
+  }
 
 
   @Override
@@ -33,6 +40,15 @@ public class Balloom extends Enemy {
         velocityX = -velocityX;
         break;
       }
+
+      for (Bomb j : Board.getBombList()) {
+        if (isCollidedWith(j)) {
+          x -= velocityX;
+          velocityX = -velocityX;
+          break;
+        }
+      }
+
     }
     y += velocityY;
     for (Tile i : Board.getTileList()) {
@@ -42,12 +58,20 @@ public class Balloom extends Enemy {
       }
     }
 
+    if (velocityX > 0) {
+      direction = 1;
+    } else {
+      direction = 0;
+    }
   }
 
   public void update() {
-    checkHit();
-    calculateMove();
-    move();
+    if (alive) {
+      checkHit();
+      calculateMove();
+    } else {
+      die();
+    }
 
   }
 }

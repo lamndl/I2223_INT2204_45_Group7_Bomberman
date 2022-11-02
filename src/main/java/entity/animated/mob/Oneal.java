@@ -13,27 +13,36 @@ public class Oneal extends Enemy {
 
   @Override
   public Image getImage() {
-    return Sprite.oneal[direction * 3 + (int) (moving * Board.frame / 20)];
+    if (alive) {
+      return Sprite.oneal[direction * 3 + (int) (moving * Board.frame / 20)];
+    } else {
+      return Sprite.oneal_dead;
+    }
   }
 
 
   @Override
   public void calculateMove() {
     // TODO Auto-generated method stub
-    
+
   }
 
 
   @Override
   protected void move() {
     // TODO Auto-generated method stub
-    
+
   }
 
 
   @Override
   public void update() {
-    // TODO Auto-generated method stub
-    
+    if (alive) {
+      checkHit();
+      calculateMove();
+    } else {
+      die();
+    }
+
   }
 }

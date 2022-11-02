@@ -1,10 +1,10 @@
 package entity.tile;
 
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import sprite.Sprite;
 
 public class Portal extends Tile {
-
   public Portal(int x, int y) {
     super(x, y);
   }
@@ -16,7 +16,10 @@ public class Portal extends Tile {
 
   @Override
   public void update() {
-
   }
 
+  @Override
+  public BoundingBox getBoundingBox() {
+    return new BoundingBox(x + 14, y + 14, 1 , 1);
+  }
 }

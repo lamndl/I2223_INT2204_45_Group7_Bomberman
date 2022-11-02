@@ -12,15 +12,20 @@ public abstract class Mob extends AnimatedEntity {
   protected int direction = 1;
   protected boolean alive = true;
   protected int moving = 0;
+  public static boolean allowThroughBomb = true;
+  protected int timer = 60;
 
   public void die() {
-    Board.removeEntity(this);
+    timer--;
+    if (timer == 0) {
+      Board.removeEntity(this);
+    }
   }
 
   protected void checkHit() {
     for (AnimatedEntity i : Board.getFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
-        die();
+        alive = false;
         return;
       }
     }
@@ -42,4 +47,5 @@ public abstract class Mob extends AnimatedEntity {
   public void setMoving(int moving) {
     this.moving = moving;
   }
+
 }

@@ -1,5 +1,6 @@
 package entity.animated;
 
+import entity.animated.mob.Bomber;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -9,12 +10,13 @@ public class Bomb extends AnimatedEntity {
   private int timer = 90;
 
   public void explode() {
-    Board.addEntity(new Flame(x, y));
-    Board.addEntity(new Flame(x + 32, y));
-    Board.addEntity(new Flame(x - 32, y));
-    Board.addEntity(new Flame(x, y + 32));
-    Board.addEntity(new Flame(x, y - 32));
+    Board.addEntity(new Flame(0, x, y));
+    Board.addEntity(new Flame(2, x + 32, y));
+    Board.addEntity(new Flame(1, x - 32, y));
+    Board.addEntity(new Flame(4, x, y + 32));
+    Board.addEntity(new Flame(3, x, y - 32));
     Board.removeEntity(this);
+    Bomber.allowThroughBomb = true;
   }
 
   public Bomb(int x, int y) {
