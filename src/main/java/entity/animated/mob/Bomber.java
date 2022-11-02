@@ -4,7 +4,9 @@ import static mainClass.App.KB;
 
 import entity.animated.Bomb;
 import entity.animated.Flame;
+import entity.tile.Portal;
 import entity.tile.Tile;
+import java.util.concurrent.TimeoutException;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -75,6 +77,7 @@ public class Bomber extends Mob {
 
   public void update() {
     if (alive) {
+      checkWin();
       checkHit();
       velocityX = 0;
       velocityY = 0;
@@ -91,7 +94,7 @@ public class Bomber extends Mob {
   protected void checkHit() {
     super.checkHit();
     for (Enemy i : Board.getEnemyList()) {
-      if (getBoundingBox().intersects(i.getBoundingBox())) {
+      if (isCollidedWith(i)) {
         alive = false;
         return;
       }
@@ -106,6 +109,7 @@ public class Bomber extends Mob {
     }
 
     // go to the scene end game and replay
+    Board.goEndGame();
 
   }
 
@@ -156,4 +160,20 @@ public class Bomber extends Mob {
   public void increaseBomb() {
     bombCount++;
   }
+
+  public void checkWin() {
+    if (!Board.getEnemyList().isEmpty()) {
+      return;
+    }
+    for (Tile i : Board.getTileList()) {
+      if ((i instanceof Portal) && this.isCollidedWith(i)) {
+        System.out.println("3");
+        Board.removeEntity(this);
+        Board.goEndGame();
+        // đoạn này đang lỗi, chưa in ra được END GAME
+        return;
+      }
+    }
+  }
+
 }

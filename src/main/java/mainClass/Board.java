@@ -20,6 +20,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import level.FileLevelLoader;
@@ -34,6 +36,7 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
+
   public static List<Tile> getTileList() {
     return tileList;
   }
@@ -219,5 +222,13 @@ public class Board {
     Board.width = width;
   }
 
+  //demo
+  public static void goEndGame() {
+    Button b = new Button("END GAME");
+    b.setMinSize(200, 200);
+    b.setLayoutX(width / 2 - 100);
+    b.setLayoutY(50);
+    root.getChildren().add(b);
+  }
 
 }
