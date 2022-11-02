@@ -1,5 +1,6 @@
 package entity.animated;
 
+import entity.animated.mob.Bomber;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -15,6 +16,7 @@ public class Bomb extends AnimatedEntity {
     Board.addEntity(new Flame(x, y + 32));
     Board.addEntity(new Flame(x, y - 32));
     Board.removeEntity(this);
+    Bomber.allowThroughBomb = true;
   }
 
   public Bomb(int x, int y) {

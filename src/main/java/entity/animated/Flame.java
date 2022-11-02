@@ -6,7 +6,7 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Flame extends AnimatedEntity {
-  private int timer = 90;
+  private int timer = 30;
 
   protected Flame(int x, int y) {
     super(x, y);

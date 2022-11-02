@@ -7,7 +7,7 @@ import sprite.Sprite;
 
 public class Brick extends Tile {
 
-  private int timer = 90;
+  private int timer = 60;
   private boolean destroy = false;
 
   public Brick(int x, int y) {
@@ -26,13 +26,13 @@ public class Brick extends Tile {
 
   @Override
   public Image getImage() {
-    if (destroy == false) {
+    if (!destroy) {
       return Sprite.brick;
     }
-    if (timer > 60) {
+    if (timer > 40) {
       return Sprite.brick_exploded;
     }
-    if (timer > 30) {
+    if (timer > 20) {
       return Sprite.brick_exploded1;
     }
     return Sprite.brick_exploded2;
@@ -41,7 +41,7 @@ public class Brick extends Tile {
 
   @Override
   public void update() {
-    if (destroy == false) {
+    if (!destroy) {
       checkHit();
     } else {
       timer--;

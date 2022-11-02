@@ -3,6 +3,7 @@ package entity.animated.mob;
 import static mainClass.App.KB;
 
 import entity.animated.Bomb;
+import entity.animated.Flame;
 import entity.tile.Tile;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
@@ -11,9 +12,11 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
+
   private int bombCount = 1;
   private int flameLength;
   private double speedMultiplier;
+  protected int timer = 120;
 
   public void placeBomb() {
     if (bombCount > 0) {
@@ -31,19 +34,19 @@ public class Bomber extends Mob {
     for (KeyCode i : Board.input) {
       if (i == KB.getMoveUp()) {
         direction = 2;
-        velocityY = -1;
+        velocityY = -2;
         moving = 1;
       } else if (i == KB.getMoveDown()) {
         direction = 3;
-        velocityY = 1;
+        velocityY = 2;
         moving = 1;
       } else if (i == KB.getMoveLeft()) {
         direction = 0;
-        velocityX = -1;
+        velocityX = -2;
         moving = 1;
       } else if (i == KB.getMoveRight()) {
         direction = 1;
-        velocityX = 1;
+        velocityX = 2;
         moving = 1;
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
@@ -54,32 +57,71 @@ public class Bomber extends Mob {
         y = 32;
       }
     }
+
+
+    if (allowThroughBomb == true) {
+      boolean fl = false;
+      for (Bomb i : Board.getBombList()) {
+        if (isCollidedWith(i)) {
+          fl = true;
+          break;
+        }
+      }
+      if (fl == false && !Board.getBombList().isEmpty()) {
+        allowThroughBomb = false;
+      }
+    }
   }
 
   public void update() {
-    checkHit();
-    velocityX = 0;
-    velocityY = 0;
-    moving = 0;
-    calculateMove();
-    move();
+    if (alive) {
+      checkHit();
+      velocityX = 0;
+      velocityY = 0;
+      moving = 0;
+      calculateMove();
+      move();
+    } else {
+      die();
+    }
 
   }
 
   @Override
   protected void checkHit() {
     super.checkHit();
-    for (Enemy i :Board.getEnemyList()) {
+    for (Enemy i : Board.getEnemyList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
-        die();
+        alive = false;
         return;
       }
     }
   }
 
   @Override
+  public void die() {
+    timer--;
+    if (timer == 0) {
+      Board.removeEntity(this);
+    }
+
+    // go to the scene end game and replay
+
+  }
+
+  @Override
   public Image getImage() {
-    return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+    if (alive) {
+      return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+    } else {
+      if (timer > 80) {
+        return Sprite.player_dead1;
+      }
+      if (timer > 40) {
+        return Sprite.player_dead2;
+      }
+      return Sprite.player_dead3;
+    }
   }
 
   @Override
@@ -93,6 +135,17 @@ public class Bomber extends Mob {
         return;
       }
     }
+
+    if (allowThroughBomb == false) {
+      for (Bomb i : Board.getBombList()) {
+        if (isCollidedWith(i)) {
+          x -= velocityX;
+          y -= velocityY;
+          return;
+        }
+      }
+    }
+
   }
 
   @Override
