@@ -14,7 +14,7 @@ public class PowerUpBomb extends Tile{
   }
 
   public Image getImage(){
-    return Sprite.powerup_flames;
+    return Sprite.powerup_bombs;
   }
 
   public BoundingBox getBoundingBox() {

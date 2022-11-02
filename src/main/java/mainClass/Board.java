@@ -3,9 +3,11 @@ package mainClass;
 import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
+import entity.animated.mob.Balloom;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
 import entity.animated.mob.Mob;
+import entity.animated.mob.Oneal;
 import entity.tile.Grass;
 import entity.tile.PowerUpFlame;
 import entity.tile.Tile;
@@ -79,6 +81,7 @@ public class Board {
   public static long frame;
   public static Set<KeyCode> input = new HashSet<>();
 
+
   public static Scene getScene() {
     return scene;
   }
@@ -137,6 +140,7 @@ public class Board {
       if(entity instanceof PowerUpFlame){
         powerUpFlameList.add((PowerUpFlame) entity);
       }
+      //todo:Add more power up
     } else if (entity instanceof Bomb) {
       bombList.add((Bomb) entity);
     } else if (entity instanceof Flame) {
@@ -159,7 +163,7 @@ public class Board {
     } else if (entity instanceof Flame) {
       flameList.removeIf(i -> i.equals(entity));
     } else if (entity instanceof Enemy) {
-      enemyList.removeIf(i -> i.equals(entity));
+      enemyList.removeIf(i -> i.equals(entity)&&i.getHealth()<=0);
     } else {
       bomber = new Bomber(-32, -32);
     }
@@ -233,6 +237,17 @@ public class Board {
       }
     }
     return null;
+  }
+
+  public static String getEnemyType(Enemy e){
+    if(e instanceof Balloom){
+      return "Ballom";
+    }
+    if(e instanceof Oneal){
+      return "Oneal";
+    }
+    //todo: (LOW PRIORITY) Add more enemys beyond, although idea was falled
+    return "no";
   }
 
   public static void whenCompleted(boolean win){

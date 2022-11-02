@@ -7,7 +7,9 @@ import entity.animated.mob.Oneal;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Portal;
+import entity.tile.PowerUpBomb;
 import entity.tile.PowerUpFlame;
+import entity.tile.PowerUpSpeed;
 import entity.tile.Wall;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -95,6 +97,18 @@ public class FileLevelLoader extends LevelLoader {
           case 'f':
             Board.addEntity(new Grass(x * 32, y * 32));
             Board.addEntity(new PowerUpFlame(x * 32,y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
+
+          case 's':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new PowerUpSpeed(x * 32,y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
+
+          case 'b':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new PowerUpBomb(x * 32,y * 32));
             Board.addEntity(new Brick(x * 32, y * 32));
             break;
           // //add Bomb Item: vat pham tang so luong bom

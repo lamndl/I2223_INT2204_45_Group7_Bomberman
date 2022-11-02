@@ -24,6 +24,29 @@ public abstract class Mob extends AnimatedEntity {
         return;
       }
     }
+//    for (Enemy i :Board.getEnemyList()) {
+//      if (Board.getBomber().getBoundingBox().intersects(i.getBoundingBox())) {
+//        if(Board.getEnemyType(i).equals("Ballom")){
+//          Balloom b = (Balloom)i;
+//          if(b.getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier())<=0){
+//            die();
+//          }else{
+//            b.setHealth(b.getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier()));
+//            System.out.println("Current health: " + b.getHealth());
+//          }
+//        }else if(Board.getEnemyType(i).equals("Oneal")){
+//          Oneal b = (Oneal) i;
+//          if(b.getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier())<=0){
+//            die();
+//          }else{
+//            b.setHealth(b.getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier()));
+//            System.out.println("Current health: " + b.getHealth());
+//          }
+//        }
+//        die();
+//        return;
+//      }
+//    }
   }
 
   @Override

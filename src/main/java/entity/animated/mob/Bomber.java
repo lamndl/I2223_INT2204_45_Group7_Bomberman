@@ -2,6 +2,7 @@ package entity.animated.mob;
 
 import static mainClass.App.KB;
 
+import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
 import entity.tile.PowerUpFlame;
@@ -16,8 +17,41 @@ import sprite.Sprite;
 public class Bomber extends Mob {
   private int bombCount = 1;
   private int flameRadius = 1; //increase +1 if receive flame item
-  private double speedMultiplier;
+  private double speedMultiplier = 1;
+  private double damageMultiplier = 1;
 
+  private double damage  =1;
+
+  public int getBombCount() {
+    return bombCount;
+  }
+
+  public void setBombCount(int bombCount) {
+    this.bombCount = bombCount;
+  }
+
+  public double getDamage() {
+    return damage;
+  }
+
+  public void setDamage(double damage) {
+    this.damage = damage;
+  }
+
+  public double getDamageMultiplier(){
+    return damageMultiplier;
+  }
+
+  public void setDamageMultiplier(double d){
+    damageMultiplier=d;
+  }
+  public double getSpeedMultiplier(){
+    return speedMultiplier;
+  }
+
+  public void setSpeedMultiplier(double speedMultiplier){
+    this.speedMultiplier=speedMultiplier;
+  }
   public int getFlameRadius(){
     return flameRadius;
   }
@@ -105,6 +139,8 @@ public class Bomber extends Mob {
   public void update() {
     checkHit();
     checkFlameReceived();
+    checkSpeedReceived();
+    checkBombPowerUpReceived();
     velocityX = 0;
     velocityY = 0;
     moving = 0;
@@ -116,7 +152,7 @@ public class Bomber extends Mob {
   @Override
   protected void checkHit() {
     super.checkHit();
-    for (Enemy i :Board.getEnemyList()) {
+    for (Flame i : Board.getFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         die();
         return;
@@ -133,6 +169,14 @@ public class Bomber extends Mob {
         return;
       }
     }
+  }
+
+  public void checkSpeedReceived(){
+    //todo:you already knew
+  }
+
+  public void checkBombPowerUpReceived(){
+    //todo:you already knew
   }
 
   @Override
@@ -153,7 +197,7 @@ public class Bomber extends Mob {
     y += velocityY;
     x += velocityX;
     for (Tile i : Board.getTileList()) {
-      if (isCollidedWith(i)&& i instanceof Wall) {
+      if (isCollidedWith(i)&& i instanceof Wall) { //specify only the wall
         x -= velocityX;
         y -= velocityY;
         return;
