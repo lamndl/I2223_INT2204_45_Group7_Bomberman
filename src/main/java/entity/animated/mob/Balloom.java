@@ -16,7 +16,7 @@ public class Balloom extends Enemy {
 
   @Override
   public Image getImage() {
-    if (alive == true) {
+    if (alive) {
       return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 20)];
     } else {
       return Sprite.balloom_dead;

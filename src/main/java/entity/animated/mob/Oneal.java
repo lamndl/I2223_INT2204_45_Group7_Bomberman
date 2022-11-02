@@ -13,7 +13,7 @@ public class Oneal extends Enemy {
 
   @Override
   public Image getImage() {
-    if (alive == true) {
+    if (alive) {
       return Sprite.oneal[direction * 3 + (int) (moving * Board.frame / 20)];
     } else {
       return Sprite.oneal_dead;

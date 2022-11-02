@@ -3,10 +3,8 @@ package entity.animated.mob;
 import static mainClass.App.KB;
 
 import entity.animated.Bomb;
-import entity.animated.Flame;
 import entity.tile.Portal;
 import entity.tile.Tile;
-import java.util.concurrent.TimeoutException;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -60,7 +58,7 @@ public class Bomber extends Mob {
     }
 
 
-    if (allowThroughBomb == true) {
+    if (allowThroughBomb) {
       boolean fl = false;
       for (Bomb i : Board.getBombList()) {
         if (isCollidedWith(i)) {
@@ -68,7 +66,7 @@ public class Bomber extends Mob {
           break;
         }
       }
-      if (fl == false && !Board.getBombList().isEmpty()) {
+      if (!fl && !Board.getBombList().isEmpty()) {
         allowThroughBomb = false;
       }
     }
@@ -141,7 +139,7 @@ public class Bomber extends Mob {
       }
     }
 
-    if (allowThroughBomb == false) {
+    if (!allowThroughBomb) {
       for (Bomb i : Board.getBombList()) {
         if (isCollidedWith(i)) {
           x -= velocityX;

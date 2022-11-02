@@ -2,7 +2,6 @@ package entity.tile;
 
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
-import mainClass.Board;
 import sprite.Sprite;
 
 public class Portal extends Tile {
