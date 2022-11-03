@@ -16,10 +16,16 @@ public class Kondoria extends Enemy{
  * SHOULD BE SPECIFIED PATH INSTEAD.
  */
 private int health = 4; //buff health
+  private long lastestFrame;
 
   public Kondoria(int x, int y) {
     super(x, y);
     velocityX = 3; //buff speed
+    setLastestFrame(Board.getUnresetFrame());
+  }
+
+  public void setLastestFrame(long frame){
+    lastestFrame=frame;
   }
 
   @Override
@@ -67,6 +73,10 @@ private int health = 4; //buff health
 
   }
 
+  public void rotate(){
+    velocityX = -velocityX;
+  }
+
   @Override
   public void checkHit(){
     for (int i = 0; i< Board.getFlameList().size();i++) {
@@ -77,6 +87,10 @@ private int health = 4; //buff health
         }else{
           setHealth(getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier()));
           System.out.println("Current health: " + getHealth());
+          if(Board.getUnresetFrame()-lastestFrame>=90){
+            rotate();
+            lastestFrame=Board.getUnresetFrame();
+          }
           Board.removeEntity(Board.getFlameList().get(i));
         }
       }

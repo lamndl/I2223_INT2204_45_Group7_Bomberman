@@ -69,6 +69,8 @@ public class Doll extends Enemy {
 
   }
 
+
+
   @Override
   public void checkHit(){
     for (int i = 0; i< Board.getFlameList().size();i++) {

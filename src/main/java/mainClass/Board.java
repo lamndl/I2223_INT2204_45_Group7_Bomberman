@@ -96,7 +96,7 @@ public class Board {
   private static List<PowerUpSpeed> powerUpSpeedList = new ArrayList<>();
   private static List<PowerUpBomb> powerUpBombList = new ArrayList<>();
   private static Bomber bomber;
-
+  private static long unresetFrame =0 ;
   public static long frame;
   public static Set<KeyCode> input = new HashSet<>();
 
@@ -142,10 +142,14 @@ public class Board {
       @Override
       public void handle(long now) {
         frame++;
+        unresetFrame++;
         frame %= 60;
         if (frame % 2 == 0) {
           update();
           render();
+        }
+        if(unresetFrame==Long.MAX_VALUE){
+          unresetFrame=0;
         }
       }
     };
@@ -235,8 +239,6 @@ public class Board {
       powerUpSpeedList.get(i).update();
     }
 
-
-
   }
 
 
@@ -301,6 +303,14 @@ public class Board {
 
   public static void explode(int x, int y){
     bomber.explode(x,y);
+  }
+
+  public static long getUnresetFrame(){
+    return unresetFrame;
+  }
+
+  public static void setUnresetFrame(long frame){
+    unresetFrame=frame;
   }
 
 

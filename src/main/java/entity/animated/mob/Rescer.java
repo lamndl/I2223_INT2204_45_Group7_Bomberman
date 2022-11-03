@@ -9,15 +9,18 @@ import sprite.Sprite;
 
 public class Rescer extends Enemy{
   /**
-   * like a boss.
-   * todo: DON'T SET UP A* FOR THIS ENEMY, SINCE THERE'S NO WAY TO WIN THIS GAME.
-   * SHOULD BE SPECIFIED PATH INSTEAD.
+   * last enemy. Thinking...
    */
   private int health = 3; //buff health
-
+  private long lastestFrame;
   public Rescer(int x, int y) {
     super(x, y);
     velocityX = 1; //buff speed
+    setLastestFrame(Board.getUnresetFrame());
+  }
+
+  public void setLastestFrame(long frame){
+    lastestFrame=frame;
   }
 
   @Override
@@ -65,6 +68,10 @@ public class Rescer extends Enemy{
 
   }
 
+  public void rotate(){
+    velocityX = -velocityX;
+  }
+
   @Override
   public void checkHit(){
     for (int i = 0; i< Board.getFlameList().size();i++) {
@@ -75,6 +82,10 @@ public class Rescer extends Enemy{
         }else{
           setHealth(getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier()));
           System.out.println("Current health: " + getHealth());
+          if(Board.getUnresetFrame()-lastestFrame>=90){
+            rotate();
+            lastestFrame=Board.getUnresetFrame();
+          }
           Board.removeEntity(Board.getFlameList().get(i));
         }
       }
