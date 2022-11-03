@@ -50,15 +50,15 @@ public class Oneal extends Enemy {
 
   @Override
   public void checkHit(){
-    for (Flame i : Board.getFlameList()) {
-      if (getBoundingBox().intersects(i.getBoundingBox())) {
+    for (int i = 0; i< Board.getFlameList().size();i++) {
+      if (getBoundingBox().intersects(Board.getFlameList().get(i).getBoundingBox())) {
         if(getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier())<=0){
           setHealth(getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier()));
           die();
         }else{
           setHealth(getHealth()- (int)(Board.getBomber().getDamage()*Board.getBomber().getDamageMultiplier()));
           System.out.println("Current health: " + getHealth());
-          Board.removeEntity(i);
+          Board.removeEntity(Board.getFlameList().get(i));
         }
       }
     }
