@@ -39,7 +39,7 @@ public class Bomber extends Mob {
   }
 
   public double getDamage() {
-    return damage*(int)(damageMultiplier);
+    return damage;
   }
 
   public void setDamage(double damage) {
@@ -69,7 +69,6 @@ public class Bomber extends Mob {
   }
 
   public void explode(int x, int y){
-    //Todo: Custom with different radius
     Board.addEntity(new Flame(x, y));
     boolean north = true;
     boolean south = true;

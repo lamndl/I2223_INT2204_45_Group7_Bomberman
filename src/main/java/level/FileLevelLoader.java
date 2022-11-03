@@ -3,6 +3,9 @@ package level;
 import entity.animated.Flame;
 import entity.animated.mob.Balloom;
 import entity.animated.mob.Bomber;
+import entity.animated.mob.Doll;
+import entity.animated.mob.Kondoria;
+import entity.animated.mob.Minvo;
 import entity.animated.mob.Oneal;
 import entity.tile.Brick;
 import entity.tile.Grass;
@@ -83,6 +86,20 @@ public class FileLevelLoader extends LevelLoader {
             Board.addEntity(new Oneal(x * 32, y * 32));
             break;
 
+          case '3':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Doll(x * 32, y * 32));
+            break;
+
+          case '4':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Minvo(x * 32, y * 32));
+            break;
+
+          case '5':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Kondoria(x * 32, y * 32));
+            break;
           //add portal: cong ket thuc game
           case 'x':
             Board.addEntity(new Portal(x * 32, y * 32));

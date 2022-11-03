@@ -369,19 +369,31 @@ public class Sprite {
       {player_left, player_left_1, player_left_2, player_right, player_right_1, player_right_2,
           player_up, player_up_1, player_up_2, player_down, player_down_1, player_down_2};
   public static Image[] player1 =
-      {player1_left, player1_left_1, player1_left_2, player1_right, player1_right_1, player1_right_2,
+      {player1_left, player1_left_1, player1_left_2, player1_right, player1_right_1,
+          player1_right_2,
           player1_up, player1_up_1, player1_up_2, player1_down, player1_down_1, player1_down_2};
   public static Image[] player2 =
-      {player2_left, player2_left_1, player2_left_2, player2_right, player2_right_1, player2_right_2,
+      {player2_left, player2_left_1, player2_left_2, player2_right, player2_right_1,
+          player2_right_2,
           player2_up, player2_up_1, player2_up_2, player2_down, player2_down_1, player2_down_2};
   public static Image[] player3 =
-      {player3_left, player3_left_1, player3_left_2, player3_right, player3_right_1, player3_right_2,
+      {player3_left, player3_left_1, player3_left_2, player3_right, player3_right_1,
+          player3_right_2,
           player3_up, player3_up_1, player3_up_2, player3_down, player3_down_1, player3_down_2};
   public static Image[] balloom =
       {balloom_left1, balloom_left2, balloom_left3, balloom_right1, balloom_right2, balloom_right3};
 
   public static Image[] oneal =
       {oneal_left1, oneal_left2, oneal_left3, oneal_right1, oneal_right2, oneal_right3};
+
+  public static Image[] doll = {
+      doll_left1, doll_left2, doll_left3, doll_right1, doll_right2, doll_right3};
+
+  public static Image[] minvo ={
+      minvo_left1, minvo_left2, minvo_left3, minvo_right1, minvo_right2, minvo_right3};
+
+  public static Image[] kondoria = {
+      kondoria_left1,kondoria_left2,kondoria_left3,kondoria_right1,kondoria_right2,kondoria_right3};
 
   /*
    * ---------------------------------------- End of sprite image

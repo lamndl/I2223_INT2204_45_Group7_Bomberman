@@ -9,9 +9,20 @@ import javafx.scene.image.Image;
 import mainClass.Board;
 import sprite.Sprite;
 
-public class Balloom extends Enemy {
-  private int health = 1;
+public class Kondoria extends Enemy{
+/**
+ * like a boss.
+ * todo: DON'T SET UP A* FOR THIS ENEMY, SINCE THERE'S NO WAY TO WIN THIS GAME.
+ * SHOULD BE SPECIFIED PATH INSTEAD.
+ */
+private int health = 4; //buff health
 
+  public Kondoria(int x, int y) {
+    super(x, y);
+    velocityX = 3; //buff speed
+  }
+
+  @Override
   public int getHealth() {
     return health;
   }
@@ -20,28 +31,20 @@ public class Balloom extends Enemy {
     this.health = health;
   }
 
-  public Balloom(int x, int y) {
-    super(x, y);
-    velocityX = 1;
-  }
-
-
   @Override
   public Image getImage() {
-    return Sprite.balloom[direction * 3 + (int) (moving * Board.frame / 20)];
+    return Sprite.kondoria[direction * 3 + (int) (moving * Board.frame / 20)];
   }
-
 
   @Override
   public void calculateMove() {}
-
 
   @Override
   protected void move() {
     moving = 1;
     x += velocityX;
     for (Tile i : Board.getTileList()) {
-      if (isCollidedWith(i)&& (i instanceof Wall|| i instanceof Brick)) {
+      if (isCollidedWith(i)&& (i instanceof Wall || i instanceof Brick)) {
         x -= velocityX;
         velocityX = -velocityX;
         break;
