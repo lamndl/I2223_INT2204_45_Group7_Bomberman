@@ -6,7 +6,7 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Oneal extends Enemy {
-  private int health = 2; //set 2 for testing purpose
+  private int health = 1; //set 2 for testing purpose
 
   public Oneal(int x, int y) {
     super(x, y);
@@ -63,4 +63,5 @@ public class Oneal extends Enemy {
       }
     }
   }
+
 }

@@ -5,7 +5,9 @@ import static mainClass.App.KB;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
+import entity.tile.PowerUpBomb;
 import entity.tile.PowerUpFlame;
+import entity.tile.PowerUpSpeed;
 import entity.tile.Tile;
 import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
@@ -22,6 +24,12 @@ public class Bomber extends Mob {
 
   private double damage  =1;
 
+  /**
+   * I separate damage and damage multiplier so other characters can have different strengths
+   * Of course only if we have time
+   * Todo: (MEDIUM PRIORITY) custom strengths for different characters.
+   */
+
   public int getBombCount() {
     return bombCount;
   }
@@ -31,7 +39,7 @@ public class Bomber extends Mob {
   }
 
   public double getDamage() {
-    return damage;
+    return damage*(int)(damageMultiplier);
   }
 
   public void setDamage(double damage) {
@@ -111,19 +119,19 @@ public class Bomber extends Mob {
     for (KeyCode i : Board.input) {
       if (i == KB.getMoveUp()) {
         direction = 2;
-        velocityY = -1;
+        velocityY = -1*(int)(speedMultiplier);
         moving = 1;
       } else if (i == KB.getMoveDown()) {
         direction = 3;
-        velocityY = 1;
+        velocityY = 1*(int)(speedMultiplier);
         moving = 1;
       } else if (i == KB.getMoveLeft()) {
         direction = 0;
-        velocityX = -1;
+        velocityX = -1*(int)(speedMultiplier);
         moving = 1;
       } else if (i == KB.getMoveRight()) {
         direction = 1;
-        velocityX = 1;
+        velocityX = 1*(int)(speedMultiplier);
         moving = 1;
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
@@ -172,11 +180,26 @@ public class Bomber extends Mob {
   }
 
   public void checkSpeedReceived(){
-    //todo:you already knew
+    //todo: CHECK IF CONFLICT WITH VVA CODE.
+    for (PowerUpSpeed i :Board.getPowerUpSpeedList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        this.speedMultiplier++;
+        Board.removeEntity(i);
+        System.out.println("Increased power up speed");
+        return;
+      }
+    }
   }
 
   public void checkBombPowerUpReceived(){
-    //todo:you already knew
+    for (PowerUpBomb i :Board.getPowerUpBombList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        this.damageMultiplier++;
+        Board.removeEntity(i);
+        System.out.println("Increased power up bomb");
+        return;
+      }
+    }
   }
 
   @Override

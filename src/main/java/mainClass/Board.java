@@ -9,7 +9,9 @@ import entity.animated.mob.Enemy;
 import entity.animated.mob.Mob;
 import entity.animated.mob.Oneal;
 import entity.tile.Grass;
+import entity.tile.PowerUpBomb;
 import entity.tile.PowerUpFlame;
+import entity.tile.PowerUpSpeed;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +60,21 @@ public class Board {
     return enemyList;
   }
 
+  public static List<PowerUpSpeed> getPowerUpSpeedList() {
+    return powerUpSpeedList;
+  }
+
+  public static void setPowerUpSpeedList(List<PowerUpSpeed> powerUpSpeedList) {
+    Board.powerUpSpeedList = powerUpSpeedList;
+  }
+
+  public static List<PowerUpBomb> getPowerUpBombList() {
+    return powerUpBombList;
+  }
+
+  public static void setPowerUpBombList(List<PowerUpBomb> powerUpBombList) {
+    Board.powerUpBombList = powerUpBombList;
+  }
 
   public static Bomber getBomber() {
     return bomber;
@@ -76,6 +93,8 @@ public class Board {
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static List<PowerUpFlame> powerUpFlameList = new ArrayList<>();
+  private static List<PowerUpSpeed> powerUpSpeedList = new ArrayList<>();
+  private static List<PowerUpBomb> powerUpBombList = new ArrayList<>();
   private static Bomber bomber;
 
   public static long frame;
@@ -140,7 +159,12 @@ public class Board {
       if(entity instanceof PowerUpFlame){
         powerUpFlameList.add((PowerUpFlame) entity);
       }
-      //todo:Add more power up
+      if(entity instanceof PowerUpSpeed){
+        powerUpSpeedList.add((PowerUpSpeed) entity);
+      }
+      if(entity instanceof PowerUpBomb){
+        powerUpBombList.add((PowerUpBomb) entity);
+      }
     } else if (entity instanceof Bomb) {
       bombList.add((Bomb) entity);
     } else if (entity instanceof Flame) {
@@ -158,6 +182,12 @@ public class Board {
       if(entity instanceof PowerUpFlame){
         powerUpFlameList.removeIf(i->i.equals(entity));
       }
+      if(entity instanceof PowerUpSpeed){
+        powerUpSpeedList.removeIf(i->i.equals(entity));
+      }
+      if(entity instanceof PowerUpBomb){
+        powerUpBombList.removeIf(i->i.equals(entity));
+      }
     } else if (entity instanceof Bomb) {
       bombList.removeIf(i -> i.equals(entity));
     } else if (entity instanceof Flame) {
@@ -171,7 +201,7 @@ public class Board {
 
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
+    //this already loaded power up list.
     tileList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
     bombList.forEach(i -> i.draw(graphicsContext));
@@ -197,6 +227,12 @@ public class Board {
     }
     for(int i = 0 ; i< powerUpFlameList.size();i++){
       powerUpFlameList.get(i).update();
+    }
+    for(int i =0;i<powerUpBombList.size();i++){
+      powerUpBombList.get(i).update();
+    }
+    for(int i =0;i<powerUpSpeedList.size();i++){
+      powerUpSpeedList.get(i).update();
     }
 
 
