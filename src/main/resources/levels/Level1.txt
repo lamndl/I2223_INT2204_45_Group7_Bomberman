@@ -33,6 +33,7 @@ p - Bomber
 3 - Doll
 4 - Minvo
 5 - Kondoria
+6 - Rescer
 
 Items:
 b - PowerUpBomb Item

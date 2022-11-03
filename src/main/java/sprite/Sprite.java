@@ -263,6 +263,22 @@ public class Sprite {
   public static Image kondoria_dead =
       new Sprite(DEFAULT_SIZE, 10, 8, SpriteSheet.tiles, 16, 16).getFxImage();
 
+  //Rescer
+  public static Image rescer_left1 = new Sprite(DEFAULT_SIZE, 4, 5, SpriteSheet.tiles, 16,
+      16).getFxImage();
+  public static Image rescer_left2 = new Sprite(DEFAULT_SIZE, 4, 6, SpriteSheet.tiles, 16,
+      16).getFxImage();
+  public static Image rescer_left3 = new Sprite(DEFAULT_SIZE, 4, 7, SpriteSheet.tiles, 16,
+      16).getFxImage();
+  public static Image rescer_right1 = new Sprite(DEFAULT_SIZE, 5, 5, SpriteSheet.tiles, 16,
+      16).getFxImage();
+  public static Image rescer_right2 = new Sprite(DEFAULT_SIZE, 5, 6, SpriteSheet.tiles, 16,
+      16).getFxImage();
+  public static Image rescer_right3 = new Sprite(DEFAULT_SIZE, 5, 7, SpriteSheet.tiles, 16,
+      16).getFxImage();
+  public static Image rescer_dead = new Sprite(DEFAULT_SIZE, 4, 8, SpriteSheet.tiles, 16,
+      16).getFxImage();
+
   // ALL
   public static Image mob_dead1 =
       new Sprite(DEFAULT_SIZE, 15, 0, SpriteSheet.tiles, 16, 16).getFxImage();
@@ -389,11 +405,16 @@ public class Sprite {
   public static Image[] doll = {
       doll_left1, doll_left2, doll_left3, doll_right1, doll_right2, doll_right3};
 
-  public static Image[] minvo ={
+  public static Image[] minvo = {
       minvo_left1, minvo_left2, minvo_left3, minvo_right1, minvo_right2, minvo_right3};
 
   public static Image[] kondoria = {
-      kondoria_left1,kondoria_left2,kondoria_left3,kondoria_right1,kondoria_right2,kondoria_right3};
+      kondoria_left1, kondoria_left2, kondoria_left3, kondoria_right1, kondoria_right2,
+      kondoria_right3};
+
+  public static Image[] rescer = {rescer_left1, rescer_left2, rescer_left3, rescer_right1,
+      rescer_right2, rescer_right3};
+
 
   /*
    * ---------------------------------------- End of sprite image

@@ -7,6 +7,7 @@ import entity.animated.mob.Doll;
 import entity.animated.mob.Kondoria;
 import entity.animated.mob.Minvo;
 import entity.animated.mob.Oneal;
+import entity.animated.mob.Rescer;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Portal;
@@ -99,6 +100,11 @@ public class FileLevelLoader extends LevelLoader {
           case '5':
             Board.addEntity(new Grass(x * 32, y * 32));
             Board.addEntity(new Kondoria(x * 32, y * 32));
+            break;
+
+          case '6':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Rescer(x * 32, y * 32));
             break;
           //add portal: cong ket thuc game
           case 'x':
