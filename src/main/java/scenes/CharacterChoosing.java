@@ -48,13 +48,13 @@ public class CharacterChoosing {
     }
     currentIndex--;
     applyToScene();
-    System.out.println(currentIndex);
+    //System.out.println(currentIndex);
   }
 
   public void goNextCharacter() {
     currentIndex++;
     applyToScene();
-    System.out.println(currentIndex);
+    //System.out.println(currentIndex);
   }
 
   public void applyToScene(){
@@ -89,7 +89,7 @@ public class CharacterChoosing {
 //    }else{
 //      Board.setPlayerNumber(3);
 //    }
-    System.out.println(currentIndex+1);
+    //System.out.println(currentIndex+1);
     Board.setPlayerNumber(currentIndex+1);
     App.toMainGame(Board.getBoardLevel());
     //todo: Change above code, so right level can be chosen.
