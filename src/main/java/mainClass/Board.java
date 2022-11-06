@@ -13,6 +13,7 @@ import entity.tile.PowerUpBomb;
 import entity.tile.PowerUpFlame;
 import entity.tile.PowerUpSpeed;
 import entity.tile.Tile;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,12 +22,24 @@ import java.util.Set;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import level.FileLevelLoader;
 import level.LevelLoader;
 
@@ -40,6 +53,12 @@ public class Board {
   private static int height;
   private static int width;
   private static int playerNumber=1; //by default
+
+  /**
+   * setup the level of game.
+   * MUST BE SET BEFORE LOAD
+   */
+  private static int boardLevel = 1;
   public static List<Tile> getTileList() {
     return tileList;
   }
@@ -88,6 +107,18 @@ public class Board {
     playerNumber=number;
   }
 
+  public static int getBoardLevel() {
+    return boardLevel;
+  }
+
+  /**
+   * Needed because SCENES AND CHILDREN ROOT MUST BE LOADED SEQUENTIALLY.
+   * @param boardLevel indicate level we want to play.
+   */
+  public static void setBoardLevel(int boardLevel) {
+    Board.boardLevel = boardLevel;
+  }
+
   private static List<Tile> tileList = new ArrayList<>();
   private static List<Bomb> bombList = new ArrayList<>();
   private static List<Flame> flameList = new ArrayList<>();
@@ -100,11 +131,35 @@ public class Board {
   public static long frame;
   public static Set<KeyCode> input = new HashSet<>();
 
+  public static LevelLoader lvd;
 
+  private static AnchorPane ap = new AnchorPane();
+  private static AnimationTimer timer = new AnimationTimer() {
+    @Override
+    public void handle(long now) {
+      frame++;
+      unresetFrame++;
+      frame %= 60;
+      if (frame % 2 == 0) {
+        update();
+        render();
+      }
+      if(unresetFrame==Long.MAX_VALUE){
+        unresetFrame=0;
+      }
+    }
+  };
   public static Scene getScene() {
     return scene;
   }
 
+  public static Group getRoot(){
+    return root;
+  }
+
+  public static void setRoot(Group g){
+    root = g;
+  }
 
   public static void init() {
     root = new Group();
@@ -117,8 +172,8 @@ public class Board {
     }
 
     scene = new Scene(root);
-    LevelLoader lvd = new FileLevelLoader(2);
-    lvd.createEntities();
+
+    setLevelLoader(getBoardLevel());
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
     canvas.setLayoutY(30);
@@ -138,21 +193,7 @@ public class Board {
         input.remove(keyEvent.getCode());
       }
     });
-    AnimationTimer timer = new AnimationTimer() {
-      @Override
-      public void handle(long now) {
-        frame++;
-        unresetFrame++;
-        frame %= 60;
-        if (frame % 2 == 0) {
-          update();
-          render();
-        }
-        if(unresetFrame==Long.MAX_VALUE){
-          unresetFrame=0;
-        }
-      }
-    };
+
     timer.start();
   }
 
@@ -211,6 +252,7 @@ public class Board {
     bombList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
     flameList.forEach(i -> i.draw(graphicsContext));
+    System.out.println(getPlayerNumber());
     //powerUpFlameList.forEach(i->i.draw(graphicsContext));
 
   }
@@ -285,13 +327,10 @@ public class Board {
     if(e instanceof Oneal){
       return "Oneal";
     }
-    //todo: (LOW PRIORITY) Add more enemys beyond, although idea was falled
+    //todo: (LOW PRIORITY) Add more enemys beyond, although idea of this function was falled
     return "no";
   }
 
-  public static void whenCompleted(boolean win){
-    //todo: Show noti, people can choose action.
-  }
 
   public static void setHeight(int height) {
     Board.height = height;
@@ -311,6 +350,93 @@ public class Board {
 
   public static void setUnresetFrame(long frame){
     unresetFrame=frame;
+  }
+
+  public static void setLevelLoader(int index){
+    if(!(lvd == null)){
+      lvd.removeAll();
+    }
+    if(root.getChildren().contains(ap)){
+      root.getChildren().remove(ap);
+    }
+    lvd  = new FileLevelLoader(index);
+    lvd.createEntities();
+  }
+  public static void goEndGame(boolean status){
+    //todo: Show noti, people can choose action.
+    timer.stop();
+
+    ap.setLayoutX(219.0);
+    ap.setLayoutY(259.0);
+    ap.setPrefHeight(250.0);
+    ap.setPrefWidth(586.0);
+    ap.setMinSize(290.0,250.0);
+    BackgroundFill bgfill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
+    Background bg  = new Background(bgfill);
+    ap.setBackground(bg);
+    //Text
+    Text statusText = new Text();
+    if(status){
+      statusText.setText("You win!");
+    }else{
+      statusText.setText("You lose!");
+    }
+    Font f = new Font("System",24);
+    statusText.setFont(f);
+    statusText.setWrappingWidth(296.607);
+    statusText.setLayoutX(145.0);
+    statusText.setLayoutY(54.0);
+    statusText.setTextAlignment(TextAlignment.valueOf("CENTER"));
+    //Button
+    Button b1 = new Button("Back");
+    Button b2 = new Button("Next");
+    Button b3 = new Button("Replay");
+    b1.setPadding(new Insets(10,10,10,10));
+    b1.setPrefWidth(100.0);
+    b1.setPrefHeight(38.0);
+    b1.setLayoutX(57.0);
+    b1.setLayoutY(164.0);
+    b1.setOnAction(e->{
+      timer.start();
+      App.goBackMainMenu();
+
+      //setLevelLoader(1);
+    });
+    b2.setPadding(new Insets(10,10,10,10));
+    b2.setPrefWidth(100.0);
+    b2.setPrefHeight(38.0);
+    b2.setLayoutX(243.0);
+    b2.setLayoutY(164.0);
+    b2.setOnAction(e->{
+      timer.start();
+      if(getBoardLevel()==2){
+        //todo: Create more map and change above number
+        System.out.println("In developing...");
+      }else{
+        setBoardLevel(getBoardLevel()+1);
+        setLevelLoader(getBoardLevel());
+      }
+
+    });
+    b3.setPadding(new Insets(10,10,10,10));
+    b3.setPrefWidth(100.0);
+    b3.setPrefHeight(38.0);
+    b3.setLayoutX(422.0);
+    b3.setLayoutY(164.0);
+    b3.setOnAction(e->{
+      timer.start();
+      setLevelLoader(getBoardLevel());
+    });
+
+    ap.getChildren().add(statusText);
+    ap.getChildren().add(b1);
+    //todo:Remove comment.
+    //if(status){
+      ap.getChildren().add(b2);
+    //}
+    ap.getChildren().add(b3);
+    root.getChildren().add(ap);
+
   }
 
 

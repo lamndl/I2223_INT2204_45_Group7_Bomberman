@@ -1,9 +1,10 @@
 package mainClass;
 
-import java.time.Duration;
+//import java.time.Duration;
 import java.util.ArrayList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Sound {
 
@@ -68,6 +69,16 @@ public class Sound {
    */
   public static void playMedia(int index) {
     backgroundSoundMediaPlayer.get(index).play();
+    /**
+     * get background replay.
+     */
+    backgroundSoundMediaPlayer.get(index).setOnEndOfMedia(new Runnable() {
+      @Override
+      public void run() {
+        backgroundSoundMediaPlayer.get(index).seek(Duration.ZERO);
+        backgroundSoundMediaPlayer.get(index).play();
+      }
+    });
     currentIndexBackgroundSound = index;
   }
 

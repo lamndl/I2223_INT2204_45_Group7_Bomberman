@@ -14,6 +14,8 @@ public abstract class LevelLoader {
 
   public abstract void createEntities();
 
+  public abstract void removeAll();
+
   public int getWidth() {
     return width;
   }

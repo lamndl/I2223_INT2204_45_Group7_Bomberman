@@ -5,6 +5,7 @@ import static mainClass.Sound.*;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
+import entity.tile.Portal;
 import entity.tile.PowerUpBomb;
 import entity.tile.PowerUpFlame;
 import entity.tile.PowerUpSpeed;
@@ -150,6 +151,7 @@ public class Bomber extends Mob {
     checkFlameReceived();
     checkSpeedReceived();
     checkBombPowerUpReceived();
+    checkAllEnemiesGone();
     velocityX = 0;
     velocityY = 0;
     moving = 0;
@@ -173,7 +175,19 @@ public class Bomber extends Mob {
         return;
       }
     }
+    for(Tile i: Board.getTileList()){
+      if (getBoundingBox().intersects(i.getBoundingBox())&& i instanceof Portal) {
+        ((Portal) i).whenReceived();
+        return;
+      }
+    }
 
+  }
+
+  public void checkAllEnemiesGone(){
+    if(Board.getEnemyList().isEmpty()){
+      Board.goEndGame(true);
+    }
   }
 
   public void checkFlameReceived(){
@@ -215,11 +229,14 @@ public class Bomber extends Mob {
 
   @Override
   public Image getImage() {
+    /**
+     * It's weird because of my error. Don't change anything in here.
+     */
     if(Board.getPlayerNumber()==0){
       return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
-    } else if(Board.getPlayerNumber()==1){
+    } else if(Board.getPlayerNumber()==2){
       return Sprite.player1[(int) (direction * 3 + moving * (Board.frame / 20))];
-    }else if(Board.getPlayerNumber()==2){
+    }else if(Board.getPlayerNumber()==1){
       return Sprite.player2[(int) (direction * 3 + moving * (Board.frame / 20))];
     }else{
       return Sprite.player3[(int) (direction * 3 + moving * (Board.frame / 20))];

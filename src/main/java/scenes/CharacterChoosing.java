@@ -48,11 +48,13 @@ public class CharacterChoosing {
     }
     currentIndex--;
     applyToScene();
+    System.out.println(currentIndex);
   }
 
   public void goNextCharacter() {
     currentIndex++;
     applyToScene();
+    System.out.println(currentIndex);
   }
 
   public void applyToScene(){
@@ -79,16 +81,18 @@ public class CharacterChoosing {
   }
 
   public void switchToMainGame() throws IOException {
-    currentIndex = (currentIndex - 1) % csm.getCurrentLength();
-    if(csm.getTextFromIndex((currentIndex+1)% csm.getCurrentLength()).equals("green")){
-      Board.setPlayerNumber(2);
-    }else if(csm.getTextFromIndex((currentIndex+1)% csm.getCurrentLength()).equals("blue")){
-      Board.setPlayerNumber(1);
-    }else{
-      Board.setPlayerNumber(3);
-    }
-
-    App.toMainGame();
+    currentIndex = currentIndex % csm.getCurrentLength();
+//    if(csm.getTextFromIndex(currentIndex% csm.getCurrentLength()).equals("Green")){
+//      Board.setPlayerNumber(2);
+//    }else if(csm.getTextFromIndex(currentIndex% csm.getCurrentLength()).equals("Blue")){
+//      Board.setPlayerNumber(1);
+//    }else{
+//      Board.setPlayerNumber(3);
+//    }
+    System.out.println(currentIndex+1);
+    Board.setPlayerNumber(currentIndex+1);
+    App.toMainGame(Board.getBoardLevel());
+    //todo: Change above code, so right level can be chosen.
 
   }
 

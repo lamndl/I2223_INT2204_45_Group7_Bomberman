@@ -172,4 +172,15 @@ public class FileLevelLoader extends LevelLoader {
       }
     }
   }
+
+  public void removeAll(){
+    Board.getEnemyList().removeAll(Board.getEnemyList());
+    Board.getFlameList().removeAll(Board.getFlameList());
+    Board.getTileList().removeAll(Board.getTileList());
+    Board.getBombList().removeAll(Board.getBombList());
+    Board.getPowerUpFlameList().removeAll(Board.getPowerUpFlameList());
+    Board.getPowerUpBombList().removeAll(Board.getPowerUpBombList());
+    Board.getPowerUpSpeedList().removeAll(Board.getPowerUpSpeedList());
+  }
+
 }

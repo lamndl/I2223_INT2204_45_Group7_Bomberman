@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -57,11 +58,33 @@ public class App extends Application {
      */
   }
 
-  public static void toMainGame() {
+  public static void toMainGame(int boardLevel) {
     //this.stage = stage;
+    Board.setBoardLevel(boardLevel);
     Board.init();
     stage.setScene(Board.getScene());
     stage.centerOnScreen();
+  }
+
+  public static void goBackMainMenu(){
+    Board.setRoot(new Group());
+    stage.setScene(null);
+    try{
+      scene = new Scene(loadFxml("/scenes/mainMenu"), WIDTH, HEIGHT);
+      stage.setScene(scene);
+    }catch(Exception eie){
+      System.out.println(eie);
+    }
+
+
+
+    stage.setScene(scene);
+//    try{
+//      App.setRoot("/scenes/mainMenu");
+//      System.out.println("Reached");
+//    }catch(Exception ex){
+//
+//    }
   }
 
 

@@ -19,8 +19,10 @@ public abstract class Mob extends AnimatedEntity {
     if(this instanceof Bomber){
       Sound.playInGameSound(2);
       //todo: Add more
+      Board.goEndGame(false);
     }else{
       Sound.playInGameSound(1);
+
     }
 
   }

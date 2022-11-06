@@ -1,5 +1,7 @@
 package entity.tile;
 
+import entity.Entity;
+import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import mainClass.Board;
 import sprite.Sprite;
@@ -17,7 +19,21 @@ public class Portal extends Tile {
 
   @Override
   public void update() {
-    Board.whenCompleted(true);
+
+  }
+
+  public void whenReceived(){
+    Board.goEndGame(true);
+  }
+
+  @Override
+  public boolean isCollidedWith(Entity other) {
+    return true;
+  }
+
+  @Override
+  public BoundingBox getBoundingBox() {
+    return new BoundingBox(0, 0, 0, 0);
   }
 
 }
