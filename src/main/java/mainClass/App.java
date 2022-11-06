@@ -1,5 +1,7 @@
 package mainClass;
 
+import static mainClass.Sound.*;
+
 import java.io.IOException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -49,7 +51,7 @@ public class App extends Application {
     stage.setFullScreen(false);
     stage.show();
     sound = new Sound();
-    //playMedia(0);
+    playMedia(0);
     /**
      * Tam thoi tat tieng. Dcm tieng game buoi dem nghe kinh vcl
      */

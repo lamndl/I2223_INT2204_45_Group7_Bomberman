@@ -1,7 +1,7 @@
 package entity.animated.mob;
 
 import static mainClass.App.KB;
-
+import static mainClass.Sound.*;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
@@ -13,7 +13,9 @@ import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import mainClass.App;
 import mainClass.Board;
+import mainClass.Sound;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
@@ -165,12 +167,20 @@ public class Bomber extends Mob {
         return;
       }
     }
+    for (AnimatedEntity i : Board.getEnemyList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        die();
+        return;
+      }
+    }
+
   }
 
   public void checkFlameReceived(){
     for (PowerUpFlame i :Board.getPowerUpFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         this.flameRadius++;
+        Sound.playInGameSound(0);
         Board.removeEntity(i);
         System.out.println("Increased power up flame");
         return;
@@ -183,6 +193,7 @@ public class Bomber extends Mob {
     for (PowerUpSpeed i :Board.getPowerUpSpeedList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         this.speedMultiplier++;
+        Sound.playInGameSound(0);
         Board.removeEntity(i);
         System.out.println("Increased power up speed");
         return;
@@ -194,6 +205,7 @@ public class Bomber extends Mob {
     for (PowerUpBomb i :Board.getPowerUpBombList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         this.damageMultiplier++;
+        Sound.playInGameSound(0);
         Board.removeEntity(i);
         System.out.println("Increased power up bomb");
         return;

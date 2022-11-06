@@ -1,5 +1,6 @@
 package mainClass;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -50,6 +51,12 @@ public class Sound {
     // mediaPlayer
     for (Media m : backgroundSoundList) {
       backgroundSoundMediaPlayer.add(new MediaPlayer(m));
+    }
+    soundList.add(new Media(getClass().getResource("/audio/EnemyDead.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/ReceivedBuff.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/PlayerDead.wav").toExternalForm()));
+    for(Media m: soundList){
+      mediaPlayers.add(new MediaPlayer(m));
     }
 
   }
@@ -121,6 +128,10 @@ public class Sound {
     }
   }
 
-
+  public static void playInGameSound(int index){
+    mediaPlayers.get(index).stop();
+    mediaPlayers.get(index).play();
+    //System.out.println(mediaPlayers.get(index).getStatus());
+  }
 
 }
