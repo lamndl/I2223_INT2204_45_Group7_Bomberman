@@ -252,7 +252,7 @@ public class Board {
     bombList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
     flameList.forEach(i -> i.draw(graphicsContext));
-    System.out.println(getPlayerNumber());
+    //System.out.println(getPlayerNumber());
     //powerUpFlameList.forEach(i->i.draw(graphicsContext));
 
   }
@@ -362,7 +362,12 @@ public class Board {
     lvd  = new FileLevelLoader(index);
     lvd.createEntities();
   }
-  public static void goEndGame(boolean status){
+  public static void goInGamePane(int status){
+    /**
+     * 0: Win
+     * 1: Loss
+     * 2: Pause in-game
+     */
     //todo: Show noti, people can choose action.
     timer.stop();
 
@@ -376,10 +381,12 @@ public class Board {
     ap.setBackground(bg);
     //Text
     Text statusText = new Text();
-    if(status){
+    if(status==0){
       statusText.setText("You win!");
-    }else{
+    }else if(status==1){
       statusText.setText("You lose!");
+    }else{
+      statusText.setText("In-game pause.");
     }
     Font f = new Font("System",24);
     statusText.setFont(f);
@@ -407,15 +414,26 @@ public class Board {
     b2.setPrefHeight(38.0);
     b2.setLayoutX(243.0);
     b2.setLayoutY(164.0);
+    if(status==2){
+      b2.setText("Continue");
+    }
+
     b2.setOnAction(e->{
       timer.start();
-      if(getBoardLevel()==2){
-        //todo: Create more map and change above number
-        System.out.println("In developing...");
-      }else{
-        setBoardLevel(getBoardLevel()+1);
-        setLevelLoader(getBoardLevel());
+      if(status==2){
+        if(root.getChildren().contains(ap)){
+          root.getChildren().remove(ap);
+        }
+      }else if(status==0){
+        if(getBoardLevel()==2){
+          //todo: Create more map and change above number
+          System.out.println("In developing...");
+        }else{
+          setBoardLevel(getBoardLevel()+1);
+          setLevelLoader(getBoardLevel());
+        }
       }
+
 
     });
     b3.setPadding(new Insets(10,10,10,10));
@@ -430,10 +448,10 @@ public class Board {
 
     ap.getChildren().add(statusText);
     ap.getChildren().add(b1);
-    //todo:Remove comment.
-    //if(status){
+
+    if(status!=1){
       ap.getChildren().add(b2);
-    //}
+    }
     ap.getChildren().add(b3);
     root.getChildren().add(ap);
 

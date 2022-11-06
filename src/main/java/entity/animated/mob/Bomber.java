@@ -139,9 +139,10 @@ public class Bomber extends Mob {
         placeBomb();
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
+        Board.goInGamePane(2);
         // respawn
-        x = 32;
-        y = 32;
+//        x = 32;
+//        y = 32;
       }
     }
   }
@@ -186,7 +187,7 @@ public class Bomber extends Mob {
 
   public void checkAllEnemiesGone(){
     if(Board.getEnemyList().isEmpty()){
-      Board.goEndGame(true);
+      Board.goInGamePane(0);
     }
   }
 

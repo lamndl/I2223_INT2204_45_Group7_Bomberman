@@ -23,7 +23,7 @@ public class Portal extends Tile {
   }
 
   public void whenReceived(){
-    Board.goEndGame(true);
+    Board.goInGamePane(0);
   }
 
   @Override
