@@ -169,7 +169,7 @@ public class Player {
 
   @Override
   public String toString() {
-    return "Player{" +
+    return
         "username='" + username + '\'' +
         "\n password='" + password + '\'' +
         "\n highestScore=" + highestScore +
@@ -178,7 +178,6 @@ public class Player {
         "\n enemiesKilled=" + enemiesKilled +
         "\n numberOfDead=" + numberOfDead +
         "\n blocksBroke=" + blocksBroke +
-        "\n accumulateScore=" + accumulateScore +
-        '}';
+        "\n accumulateScore=" + accumulateScore;
   }
 }

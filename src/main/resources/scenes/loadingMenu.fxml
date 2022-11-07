@@ -29,7 +29,7 @@
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </Button>
-      <TextField id="guideTip" alignment="CENTER" layoutX="300.0" layoutY="401.0" prefHeight="26.0" prefWidth="422.0" style="-fx-background-color: none;-fx-text-inner-color: white;" text="(click to change tip)">
+      <TextField id="guideTip" fx:id="indicationText" alignment="CENTER" editable="false" layoutX="300.0" layoutY="401.0" onAction="#changeTip" onMousePressed="#changeTip" prefHeight="26.0" prefWidth="422.0" style="-fx-background-color: none;-fx-text-inner-color: white;" text="(click to change tip)">
         <cursor>
           <Cursor fx:constant="HAND" />
         </cursor>

@@ -43,6 +43,8 @@ public class MainMenu {
   public Button insidePaneLogoutButton = new Button();
   public Button insidePaneRegisterButton = new Button();
   public Button insidePaneLoginButton = new Button();
+  public Button insidePaneChangeInformationButton = new Button();
+  private boolean chaging = false;
   private Alert alert = new Alert(AlertType.ERROR);
   private int currentIndex;
 
@@ -152,8 +154,10 @@ public class MainMenu {
     insidePaneResultText.setText("Username and password must contain at least 6 characters.");
   }
   public void setUpAfterLoginAndRegister(){
+    chaging=false;
     insidePanePasswordTextField.setVisible(false);
     insidePaneUsernameTextField.setVisible(false);
+    insidePaneLoginButton.setText("Login");
     insidePaneLogoutButton.setVisible(true);
     nameButton.setText(App.currentPlayer.getUserName());
     insidePaneStatusText.setText("Welcome, " + App.currentPlayer.getUserName()+".");
@@ -161,6 +165,19 @@ public class MainMenu {
     insidePaneResultText.setText("");
     insidePaneLoginButton.setVisible(false);
     insidePaneRegisterButton.setVisible(false);
+    insidePaneChangeInformationButton.setVisible(true);
+  }
+
+  public void insidePaneShowChangeInformation(){
+    chaging = true;
+    insidePaneChangeInformationButton.setVisible(false);
+    insidePaneLoginButton.setVisible(true);
+    if(chaging){
+      insidePaneLoginButton.setText("Change");
+    }
+    insidePanePasswordTextField.setVisible(true);
+    insidePaneUsernameTextField.setVisible(true);
+    //todo: Add more
 
   }
 
@@ -178,16 +195,24 @@ public class MainMenu {
 
   public void loginPlayer() throws IOException{
     if(checkValidInformation()){
-      if(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText())!=-1){
-        App.currentPlayer = PlayerManagement.getPlayer(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText()));
-        App.currentPlayer.setLogged(true);
-        setUpAfterLoginAndRegister();
+      if(!chaging){
+        if(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText())!=-1){
+          App.currentPlayer = PlayerManagement.getPlayer(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText()));
+          App.currentPlayer.setLogged(true);
+          setUpAfterLoginAndRegister();
 
+        }else{
+          insidePaneResultText.setText("Wrong information. Please try again");
+        }
       }else{
-        insidePaneResultText.setText("Wrong information. Please try again");
+        //todo:Addmore.
+        App.currentPlayer.setUsername(insidePaneUsernameTextField.getText());
+        App.currentPlayer.setPassword(insidePanePasswordTextField.getText());
+        setUpAfterLoginAndRegister();
       }
+
     }else{
-      insidePaneResultText.setText("Please conform the guide (click on i button for more information)");
+        insidePaneResultText.setText("Please conform the guide (click on i button for more information)");
     }
   }
 
@@ -209,6 +234,7 @@ public class MainMenu {
     nameButton.setText("Login");
     insidePaneLoginButton.setVisible(true);
     insidePaneRegisterButton.setVisible(true);
+    insidePaneChangeInformationButton.setVisible(false);
   }
 
   public void insidePaneShowStat(){

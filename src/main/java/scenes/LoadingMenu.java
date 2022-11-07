@@ -1,11 +1,13 @@
 package scenes;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import mainClass.App;
 
@@ -30,7 +32,7 @@ public class LoadingMenu {
   protected static ArrayList<String> helpfulTips = new ArrayList<String>(100);
   private int currentIndex = (int)Math.round(Math.random()*10);
   public TextArea tipTextField;
-
+  public TextField indicationText = new TextField();
   public FXMLLoader testing = new FXMLLoader(getClass().getResource("/scenes/loadingMenu.fxml"));
 
   public Button goButton = new Button();
@@ -40,10 +42,17 @@ public class LoadingMenu {
   Task<Void> goButtonSleep = new Task<Void>(){
     @Override
     protected Void call() throws Exception{
-      try{
-        Thread.sleep(500); //change to 5000 later
-      }catch(InterruptedException e){
+      // Set the total number of steps in our process
+      int steps = 500;
 
+      // Simulate a long running task
+      for (int i = 0; i < steps; i++) {
+
+        Thread.sleep(10); // Pause briefly
+
+        // Update our progress and message properties
+        updateProgress(i, steps);
+        updateMessage(String.valueOf(i));
       }
       return null;
     }
@@ -70,9 +79,6 @@ public class LoadingMenu {
 
 
 
-
-
-
     goButtonSleep.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
       @Override
       public void handle(WorkerStateEvent workerStateEvent) {
@@ -80,11 +86,14 @@ public class LoadingMenu {
         goButton.setDisable(false);
       }
     });
+    //todo:Remove 2 below line after finish game.
+    goButton.setText("Go!");
+    goButton.setDisable(false);
 
 
-
+    progressBar.progressProperty().bind(goButtonSleep.progressProperty());
     new Thread(goButtonSleep).start();
-    //progressBar.progressProperty().bind(goButtonSleep.progressProperty());
+
 
   }
 
