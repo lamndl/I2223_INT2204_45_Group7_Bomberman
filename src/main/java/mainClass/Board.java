@@ -454,6 +454,10 @@ public class Board {
 
   }
 
+  public static void clearInput(){
+    input = new HashSet<>();
+  }
+
   public static void goInGamePane(int status) {
     /**
      * 0: Win
@@ -461,6 +465,9 @@ public class Board {
      * 2: Pause in-game
      */
     //todo: Show noti, people can choose action.
+
+
+
     if(!accountUpdated) {
       timer.stop();
       //Some change inside account
@@ -511,10 +518,11 @@ public class Board {
       b1.setLayoutX(57.0);
       b1.setLayoutY(164.0);
       b1.setOnAction(e -> {
-        timer.start();
+        //timer.start();
         currentPlayer.setLastestScore(0);
         accountUpdated = false;
         statusText.setText("");
+        clearInput();
         App.goBackMainMenu();
 
         //setLevelLoader(1);
@@ -529,7 +537,7 @@ public class Board {
       }
 
       b2.setOnAction(e -> {
-        timer.start();
+        //timer.start();
         if (status == 2) {
           if (root.getChildren().contains(ap)) {
             root.getChildren().remove(ap);
@@ -547,7 +555,7 @@ public class Board {
           }
         }
         accountUpdated = false;
-
+        clearInput();
       });
       b3.setPadding(new Insets(10, 10, 10, 10));
       b3.setPrefWidth(100.0);
@@ -555,11 +563,15 @@ public class Board {
       b3.setLayoutX(422.0);
       b3.setLayoutY(164.0);
       b3.setOnAction(e -> {
-        timer.start();
-        setLevelLoader(getBoardLevel());
+        clearInput();
+        App.goBackMainMenu();
+        App.toMainGame(Board.getBoardLevel());
+//        setLevelLoader(getBoardLevel());
         currentPlayer.setLastestScore(0);
         statusText.setText("");
         accountUpdated = false;
+        clearInput();
+
       });
 
       ap.getChildren().add(statusText);
