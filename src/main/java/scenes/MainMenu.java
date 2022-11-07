@@ -1,4 +1,8 @@
 package scenes;
+import static mainClass.App.currentPlayer;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
@@ -39,42 +43,61 @@ public class MainMenu {
   public Button insidePaneLogoutButton = new Button();
   public Button insidePaneRegisterButton = new Button();
   public Button insidePaneLoginButton = new Button();
+  private Alert alert = new Alert(AlertType.ERROR);
   private int currentIndex;
 
   //private boolean loginOrRegister = true;
   private boolean insidePaneStatClicked = false;
-  private static Player currentPlayer;
-  //static so can be accessed anywhere
+
   private CharacterSceneManagement csm;
+
+  /**
+   * If no logged account -> Create new dummy account
+   */
+
   public void initialize(){
     csm = new CharacterSceneManagement();
     currentIndex = csm.getCurrentLength()*100;
     characterMainMenuImage.setOnMouseClicked(e->changeCharacterMainMenu());
     characterMainMenuImage.setImage(csm.getImageFromIndex(currentIndex%csm.getCurrentLength()));
     characterMainMenuButton.setText(csm.getTextFromIndex(currentIndex%csm.getCurrentLength()));
-    if(!App.inAccount){
-      nameButton.setText("Log in");
-    }else{
-      nameButton.setText(App.currentPlayer.getUserName());
-    }
     PlayerManagement.readDataLineByLine("/test.csv");
+    currentPlayer=PlayerManagement.getLoggedAccount();
+    if(currentPlayer!=null){
+      nameButton.setText(currentPlayer.getUserName());
+    }else{
+      Player newPlayer = new Player(PlayerManagement.generateRandomString(),PlayerManagement.generateRandomString(),true);
+      newPlayer.setLogged(true);
+      currentPlayer=newPlayer;
+      PlayerManagement.addPlayer(newPlayer);
+    }
+    App.inAccount=true;
     insidePane.setVisible(false);
     insidePaneStatusText.setText("Login/Register");
     insidePaneResultText.setText("");
     insidePaneLogoutButton.setVisible(false);
     insidePaneTextArea.setVisible(false);
+    setUpAfterLoginAndRegister();
   }
 
   @FXML
   public void switchToCampaignScene() throws IOException {
-    App.setRoot("/scenes/campaignScene");
-    CharacterChoosing.setCampaignOrEndless(true);
+    if(!App.inAccount||currentPlayer==null){
+      showAlert("You have to log in your account before playing campaign.","Error");
+    }else{
+      App.setRoot("/scenes/campaignScene");
+      CharacterChoosing.setCampaignOrEndless(true);
+    }
+
   }
 
   public void switchToEndlessScene() throws IOException {
-    App.setRoot("/scenes/endlessScene");
-    CharacterChoosing.setCampaignOrEndless(false);
-
+    if(!App.inAccount||currentPlayer==null){
+      showAlert("You have to log in your account before playing endless.","Error");
+    }else{
+      App.setRoot("/scenes/endlessScene");
+      CharacterChoosing.setCampaignOrEndless(false);
+    }
   }
 
   public void switchToSettingScene() throws IOException {
@@ -144,6 +167,7 @@ public class MainMenu {
       Player newPlayer = new Player(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText());
       PlayerManagement.addPlayer(newPlayer);
       currentPlayer= newPlayer;
+      currentPlayer.setLogged(true);
       setUpAfterLoginAndRegister();
     }else{
       insidePaneResultText.setText("You have to enter information before click to that button.");
@@ -154,6 +178,7 @@ public class MainMenu {
     if(checkValidInformation()){
       if(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText())!=-1){
         currentPlayer = PlayerManagement.getPlayer(PlayerManagement.checkIfExistPlayer(insidePaneUsernameTextField.getText(),insidePanePasswordTextField.getText()));
+        currentPlayer.setLogged(true);
         setUpAfterLoginAndRegister();
 
       }else{
@@ -165,7 +190,12 @@ public class MainMenu {
   }
 
   public void insidePaneLogout(){
+    currentPlayer.setLogged(false);
+    if(currentPlayer.isDummyAccount()){
+      PlayerManagement.removePlayer(currentPlayer);
+    }
     currentPlayer=null;
+    App.inAccount=false;
     insidePaneStatClicked=true;
     insidePaneShowStat();
     insidePaneStatusText.setText("Login/Register");
@@ -192,8 +222,25 @@ public class MainMenu {
 
   }
   public void exitGame() throws IOException {
+    //dummy account must be deleted
+    if(currentPlayer!=null){
+      if(currentPlayer.isDummyAccount()){
+        PlayerManagement.getArrayListPlayer().remove(currentPlayer);
+      }
+    }
     PlayerManagement.writeDataLineByLine("/test.csv");
     Platform.exit();
     System.exit(0);
   }
+
+  public void showAlert(String text,String title){
+    alert.setContentText(text);
+    alert.setTitle(title);
+    alert.show();
+  }
+
+  public void setNameButton(String label){
+    nameButton.setText(label);
+  }
+
 }

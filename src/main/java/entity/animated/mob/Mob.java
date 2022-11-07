@@ -1,5 +1,7 @@
 package entity.animated.mob;
 
+import static mainClass.App.currentPlayer;
+
 import entity.animated.AnimatedEntity;
 import javafx.geometry.BoundingBox;
 import mainClass.Board;
@@ -20,9 +22,11 @@ public abstract class Mob extends AnimatedEntity {
       Sound.playInGameSound(2);
       //todo: Add more
       Board.goInGamePane(1);
+
     }else{
       Sound.playInGameSound(1);
-
+      currentPlayer.setEnemiesKilled(currentPlayer.getEnemiesKilled()+1);
+      currentPlayer.setLastestScore(currentPlayer.getLastestScore()+50);
     }
 
   }

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import scenes.MainMenu;
 
 /**
  * JavaFX App.
@@ -24,25 +25,19 @@ public class App extends Application {
 
   public static boolean inAccount = false;
   public static Player currentPlayer;
-
+  //static so can be accessed anywhere
   public static final int WIDTH = 1024;
   public static final int HEIGHT = 768;
+
+
 
   @Override
   public void start(Stage stage) throws IOException {
 
     Image icon = new Image(App.class.getResource("/Pictures/icon.png").toString());
 
-    /**
-     * vao in-game bomberman:
-     */
     this.stage = stage;
-    //toMainGame();
 
-
-    /**
-     * vao menu:
-     */
     scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
     stage.setScene(scene);
 
@@ -53,9 +48,7 @@ public class App extends Application {
     stage.show();
     sound = new Sound();
     playMedia(0);
-    /**
-     * Tam thoi tat tieng. Dcm tieng game buoi dem nghe kinh vcl
-     */
+
   }
 
   public static void toMainGame(int boardLevel) {
@@ -70,13 +63,12 @@ public class App extends Application {
     Board.setRoot(new Group());
     stage.setScene(null);
     try{
-      scene = new Scene(loadFxml("/scenes/mainMenu"), WIDTH, HEIGHT);
-      stage.setScene(scene);
+//      scene = new Scene(loadFxml("/scenes/mainMenu"), WIDTH, HEIGHT);
+//      stage.setScene(scene);
+      setRoot("/scenes/mainMenu");
     }catch(Exception eie){
       System.out.println(eie);
     }
-
-
 
     stage.setScene(scene);
 //    try{
@@ -86,8 +78,6 @@ public class App extends Application {
 //
 //    }
   }
-
-
 
 
   public static void setRoot(String fxml) throws IOException {
@@ -104,6 +94,8 @@ public class App extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
     return fxmlLoader.load();
   }
+
+
 
   public static void main(String[] args) {
     launch();

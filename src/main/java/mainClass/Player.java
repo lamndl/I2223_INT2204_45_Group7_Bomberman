@@ -4,13 +4,16 @@ public class Player {
 
   private String username;
   private String password;
-  private double highestScore;
+  private double highestScore; //ok
   private double longestTimeSurvivalInEndlessMode;
-  private int secondsPlayed;
-  private int enemiesKilled;
-  private int numberOfDead;
-  private int blocksBroke;
+  private int secondsPlayed; //ok
+  private int enemiesKilled; //ok
+  private int numberOfDead; //ok
+  private int blocksBroke; //ok
   private long accumulateScore;
+  private long lastestScore; //ok
+  private boolean logged; //must be set individually
+  private boolean dummyAccount;//not dummy anymore if scored.
 
   public Player(String userName, String password) {
     this.username = userName;
@@ -21,11 +24,30 @@ public class Player {
     numberOfDead = 0;
     blocksBroke = 0;
     accumulateScore = 0;
+    lastestScore =0;
+    logged = false;
+    dummyAccount=false;
+  }
 
+  /**
+   * dummy account creation
+   */
+  public Player(String u1, String p1, boolean da){
+    this.username = u1;
+    this.password = p1;
+    this.highestScore = 0.0;
+    longestTimeSurvivalInEndlessMode = 0.0;
+    secondsPlayed = 0;
+    numberOfDead = 0;
+    blocksBroke = 0;
+    accumulateScore = 0;
+    lastestScore =0;
+    logged = false;
+    dummyAccount=da;
   }
 
   public Player(String u1, String p1, double hs, double lts, int sp, int nod,
-      int bb, int as){
+      int bb, int as, long ls){
     this.username = u1;
     this.password = p1;
     this.highestScore = hs;
@@ -34,6 +56,8 @@ public class Player {
     numberOfDead = nod;
     blocksBroke = bb;
     accumulateScore = as;
+    lastestScore=ls;
+    logged=false;
   }
 
   public String getUserName() {
@@ -106,6 +130,38 @@ public class Player {
 
   public void setAccumulateScore(long accumulateScore) {
     this.accumulateScore = accumulateScore;
+  }
+
+  public long getLastestScore() {
+    return lastestScore;
+  }
+
+  public void setLastestScore(long lastestScore) {
+    this.lastestScore = lastestScore;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public boolean isLogged() {
+    return logged;
+  }
+
+  public void setLogged(boolean logged) {
+    this.logged = logged;
+  }
+
+  public boolean isDummyAccount() {
+    return dummyAccount;
+  }
+
+  public void setDummyAccount(boolean dummyAccount) {
+    this.dummyAccount = dummyAccount;
   }
 
   @Override

@@ -1,6 +1,7 @@
 package entity.animated.mob;
 
 import static mainClass.App.KB;
+import static mainClass.App.currentPlayer;
 import static mainClass.Sound.*;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;

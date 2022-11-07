@@ -1,5 +1,7 @@
 package entity.tile;
 
+import static mainClass.App.currentPlayer;
+
 import entity.animated.AnimatedEntity;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -19,6 +21,8 @@ public class Brick extends Tile {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         destroy = true;
         Board.removeEntity(i);
+        currentPlayer.setBlocksBroke(currentPlayer.getBlocksBroke()+1);
+        currentPlayer.setLastestScore(currentPlayer.getLastestScore()+20);
         return;
       }
     }

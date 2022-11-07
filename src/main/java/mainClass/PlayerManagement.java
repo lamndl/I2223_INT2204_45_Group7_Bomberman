@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class PlayerManagement {
@@ -113,7 +114,7 @@ public class PlayerManagement {
         players.add(new Player(nextRecord[0], nextRecord[1], Double.parseDouble(nextRecord[2]),
             Double.parseDouble(nextRecord[3]),Integer.parseInt(nextRecord[4]) ,
             Integer.parseInt(nextRecord[5]), Integer.parseInt(nextRecord[6]),
-            Integer.parseInt(nextRecord[7])));
+            Integer.parseInt(nextRecord[7]),Long.parseLong(nextRecord[8])));
       }
     }
     catch (Exception e) {
@@ -122,6 +123,29 @@ public class PlayerManagement {
   }
 
 
+  public static String generateRandomString() {
+    int leftLimit = 48; // numeral '0'
+    int rightLimit = 122; // letter 'z'
+    int targetStringLength = 10;
+    Random random = new Random();
+
+    String generatedString = random.ints(leftLimit, rightLimit + 1)
+        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+        .limit(targetStringLength)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
+
+    return generatedString;
+  }
+
+  public static Player getLoggedAccount(){
+    for(Player p: players){
+      if(p.isLogged()){
+        return p;
+      }
+    }
+    return null;
+  }
 
 
 }

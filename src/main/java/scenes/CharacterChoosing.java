@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import mainClass.App;
 import mainClass.Board;
+import mainClass.Player;
+import mainClass.PlayerManagement;
 
 
 public class CharacterChoosing {
@@ -91,8 +93,10 @@ public class CharacterChoosing {
 //    }
     //System.out.println(currentIndex+1);
     Board.setPlayerNumber(currentIndex+1);
+
+
     App.toMainGame(Board.getBoardLevel());
-    //todo: Change above code, so right level can be chosen.
+
 
   }
 
