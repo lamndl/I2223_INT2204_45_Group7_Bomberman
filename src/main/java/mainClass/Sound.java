@@ -56,6 +56,9 @@ public class Sound {
     soundList.add(new Media(getClass().getResource("/audio/EnemyDead.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/ReceivedBuff.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/PlayerDead.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/PlayerMove.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/PlayerPlaceBomb.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/Start.wav").toExternalForm()));
     for(Media m: soundList){
       mediaPlayers.add(new MediaPlayer(m));
     }

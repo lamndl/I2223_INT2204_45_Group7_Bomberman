@@ -125,20 +125,25 @@ public class Bomber extends Mob {
         direction = 2;
         velocityY = -1 * (int) (speedMultiplier);
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getMoveDown()) {
         direction = 3;
         velocityY = 1 * (int) (speedMultiplier);
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getMoveLeft()) {
         direction = 0;
         velocityX = -1 * (int) (speedMultiplier);
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getMoveRight()) {
         direction = 1;
         velocityX = 1 * (int) (speedMultiplier);
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
+        Sound.playInGameSound(4);
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
         Board.goInGamePane(2);

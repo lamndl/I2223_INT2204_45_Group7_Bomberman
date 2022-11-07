@@ -60,6 +60,7 @@ public class App extends Application {
     // System.gc();
     Board.setBoardLevel(boardLevel);
     Board.init(boardLevel);
+    Sound.playInGameSound(5);
     stage.setScene(Board.getScene());
     stage.centerOnScreen();
   }
@@ -76,6 +77,7 @@ public class App extends Application {
     }
 
     stage.setScene(scene);
+    Sound.toggleMuteBackgroundSound(false);
     // try{
     // App.setRoot("/scenes/mainMenu");
     // System.out.println("Reached");

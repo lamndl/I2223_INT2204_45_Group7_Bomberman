@@ -161,7 +161,7 @@ public class Board {
 
   public static void init(int boardLevel) {
     setBoardLevel(boardLevel);
-
+    Sound.toggleMuteBackgroundSound(true);
     root = new Group();
     // load background of this class
     FXMLLoader fx = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
@@ -541,6 +541,7 @@ public class Board {
       b2.setOnAction(e -> {
         // timer.start();
         if (status == 2) {
+          timer.start();
           if (root.getChildren().contains(ap)) {
             root.getChildren().remove(ap);
           }
