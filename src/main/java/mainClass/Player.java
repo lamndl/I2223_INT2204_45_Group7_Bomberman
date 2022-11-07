@@ -21,6 +21,7 @@ public class Player {
     this.highestScore = 0.0;
     longestTimeSurvivalInEndlessMode = 0.0;
     secondsPlayed = 0;
+    enemiesKilled=0;
     numberOfDead = 0;
     blocksBroke = 0;
     accumulateScore = 0;
@@ -46,18 +47,20 @@ public class Player {
     dummyAccount=da;
   }
 
-  public Player(String u1, String p1, double hs, double lts, int sp, int nod,
-      int bb, int as, long ls){
+  public Player(String u1, String p1, double hs, double lts, int sp, int ek, int nod,
+      int bb, long as, long ls, boolean log, boolean dum){
     this.username = u1;
     this.password = p1;
     this.highestScore = hs;
     longestTimeSurvivalInEndlessMode = lts;
+    enemiesKilled=ek;
     secondsPlayed = sp;
     numberOfDead = nod;
     blocksBroke = bb;
     accumulateScore = as;
     lastestScore=ls;
-    logged=false;
+    logged=log;
+    dummyAccount=dum;
   }
 
   public String getUserName() {

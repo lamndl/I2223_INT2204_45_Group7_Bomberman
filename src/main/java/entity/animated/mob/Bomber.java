@@ -153,6 +153,7 @@ public class Bomber extends Mob {
     checkFlameReceived();
     checkSpeedReceived();
     checkBombPowerUpReceived();
+    checkIfGoToPortal();
     checkAllEnemiesGone();
     velocityX = 0;
     velocityY = 0;
@@ -177,18 +178,23 @@ public class Bomber extends Mob {
         return;
       }
     }
-    for(Tile i: Board.getTileList()){
-      if (getBoundingBox().intersects(i.getBoundingBox())&& i instanceof Portal) {
-        ((Portal) i).whenReceived();
-        return;
-      }
-    }
+
 
   }
 
   public void checkAllEnemiesGone(){
     if(Board.getEnemyList().isEmpty()){
       Board.goInGamePane(0);
+    }
+  }
+
+  public void checkIfGoToPortal(){
+    for(Tile i: Board.getTileList()){
+      if (getBoundingBox().intersects(i.getBoundingBox())&& i instanceof Portal) {
+        ((Portal) i).whenReceived();
+        System.out.println("Received");
+        return;
+      }
     }
   }
 

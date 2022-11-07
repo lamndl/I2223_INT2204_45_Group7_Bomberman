@@ -161,7 +161,9 @@ public class Board {
     root = g;
   }
 
-  public static void init() {
+  public static void init(int boardLevel) {
+    setBoardLevel(boardLevel);
+
     root = new Group();
     //load background of this class
     FXMLLoader fx = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
@@ -192,6 +194,8 @@ public class Board {
         input.remove(keyEvent.getCode());
       }
     });
+    //ap init
+    ap = new AnchorPane();
     //init of ingameInformation
     ingameName = new Text();
     ingameName.setWrappingWidth(500.0);
@@ -253,6 +257,7 @@ public class Board {
       }
     };
     timer.start();
+
   }
 
   public static void addEntity(Entity entity) {
@@ -458,6 +463,12 @@ public class Board {
     input = new HashSet<>();
   }
 
+  public static void removeInRoot(Node n){
+    if(root.getChildren().contains(n)){
+      root.getChildren().remove(n);
+    }
+  }
+
   public static void goInGamePane(int status) {
     /**
      * 0: Win
@@ -518,6 +529,10 @@ public class Board {
       b1.setLayoutX(57.0);
       b1.setLayoutY(164.0);
       b1.setOnAction(e -> {
+        removeInRoot(b1);
+        removeInRoot(b2);
+        removeInRoot(b3);
+        removeInRoot(statusText);
         //timer.start();
         currentPlayer.setLastestScore(0);
         accountUpdated = false;
@@ -543,7 +558,7 @@ public class Board {
             root.getChildren().remove(ap);
           }
         } else if (status == 0) {
-          if (getBoardLevel() == 2) {
+          if (getBoardLevel() == 5) {
             //todo: Create more map and change above number
             System.out.println("In developing...");
             currentPlayer.setLastestScore(0);
@@ -551,6 +566,13 @@ public class Board {
             statusText.setText("");
             setBoardLevel(getBoardLevel() + 1);
             setLevelLoader(getBoardLevel());
+            clearInput();
+            removeInRoot(b1);
+            removeInRoot(b2);
+            removeInRoot(b3);
+            removeInRoot(statusText);
+            App.goBackMainMenu();
+            App.toMainGame(Board.getBoardLevel());
             currentPlayer.setLastestScore(0);
           }
         }
@@ -564,6 +586,10 @@ public class Board {
       b3.setLayoutY(164.0);
       b3.setOnAction(e -> {
         clearInput();
+        removeInRoot(b1);
+        removeInRoot(b2);
+        removeInRoot(b3);
+        removeInRoot(statusText);
         App.goBackMainMenu();
         App.toMainGame(Board.getBoardLevel());
 //        setLevelLoader(getBoardLevel());
@@ -585,6 +611,5 @@ public class Board {
 
     }
   }
-
 
 }

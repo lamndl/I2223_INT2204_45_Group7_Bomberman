@@ -22,6 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import java.time.*;
 import mainClass.Keyboard;
+import mainClass.PlayerManagement;
 
 public class LoadingMenu {
 
@@ -54,6 +55,8 @@ public class LoadingMenu {
   }
 
   public void initialize(){
+    PlayerManagement.init();
+    PlayerManagement.readDataLineByLine("/test.csv");
     progressBar.setProgress(0.0);
     goButton.setText("Please wait few seconds...");
     goButton.setDisable(true);

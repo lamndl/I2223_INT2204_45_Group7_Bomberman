@@ -53,8 +53,9 @@ public class App extends Application {
 
   public static void toMainGame(int boardLevel) {
     //this.stage = stage;
+    //System.gc();
     Board.setBoardLevel(boardLevel);
-    Board.init();
+    Board.init(boardLevel);
     stage.setScene(Board.getScene());
     stage.centerOnScreen();
   }

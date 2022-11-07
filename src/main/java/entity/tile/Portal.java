@@ -33,7 +33,7 @@ public class Portal extends Tile {
 
   @Override
   public BoundingBox getBoundingBox() {
-    return new BoundingBox(0, 0, 0, 0);
+    return new BoundingBox(x + 2, y + 2, 28, 28);
   }
 
 }
