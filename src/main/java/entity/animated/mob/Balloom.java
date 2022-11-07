@@ -10,6 +10,7 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Balloom extends Enemy {
+
   private int health = 1;
 
   public int getHealth() {
@@ -20,7 +21,7 @@ public class Balloom extends Enemy {
     this.health = health;
   }
 
-  private boolean[] canMove = new boolean[] {true, true, true, true};
+  private boolean[] canMove = new boolean[]{true, true, true, true};
 
   public Balloom(int x, int y) {
     super(x, y);
@@ -154,10 +155,8 @@ public class Balloom extends Enemy {
   public void checkHit() {
     for (int i = 0; i < Board.getFlameList().size(); i++) {
       if (getBoundingBox().intersects(Board.getFlameList().get(i).getBoundingBox())) {
-        if (getHealth() - (int) (Board.getBomber().getDamage()
-            * Board.getBomber().getDamageMultiplier()) <= 0) {
-          setHealth(getHealth()
-              - (int) (Board.getBomber().getDamage() * Board.getBomber().getDamageMultiplier()));
+        if (getHealth() - (int) (Board.getBomber().getDamage() * Board.getBomber().getDamageMultiplier()) <= 0) {
+          setHealth(getHealth() - (int) (Board.getBomber().getDamage() * Board.getBomber().getDamageMultiplier()));
           die();
         } else {
           setHealth(getHealth()

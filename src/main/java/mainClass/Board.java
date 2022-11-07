@@ -450,8 +450,6 @@ public class Board {
                   + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
           ingameTime.setText(tempTime);
         }
-
-
       }
     };
 
@@ -548,7 +546,7 @@ public class Board {
           }
         } else if (status == 0) {
           if (getBoardLevel() == 5) {
-            // todo: Create more map and change above number
+
             System.out.println("In developing...");
             currentPlayer.setLastestScore(0);
           } else {
@@ -592,21 +590,11 @@ public class Board {
       ap.getChildren().add(statusText);
       ap.getChildren().add(b1);
 
-      if (status != 1) {
+      if (status != 1||getBoardLevel()==5) {
         ap.getChildren().add(b2);
       }
       ap.getChildren().add(b3);
       root.getChildren().add(ap);
     }
   }
-
-  // demo
-  public static void goEndGame() {
-    Button b = new Button("END GAME");
-    b.setMinSize(200, 200);
-    b.setLayoutX(width / 2 - 100);
-    b.setLayoutY(50);
-    root.getChildren().add(b);
-  }
-
 }

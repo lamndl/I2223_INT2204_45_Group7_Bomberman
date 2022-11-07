@@ -26,13 +26,14 @@ public abstract class Mob extends AnimatedEntity {
 
     } else {
       Sound.playInGameSound(1);
-      currentPlayer.setEnemiesKilled(currentPlayer.getEnemiesKilled() + 1);
-      currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 50);
+
     }
 
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
+      currentPlayer.setEnemiesKilled(currentPlayer.getEnemiesKilled() + 1);
+      currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 50);
     }
   }
 

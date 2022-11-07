@@ -164,27 +164,21 @@ public class Bomber extends Mob {
   }
 
   public void update() {
-    checkHit();
-    checkFlameReceived();
-    checkSpeedReceived();
-    checkBombPowerUpReceived();
-    checkIfGoToPortal();
-    checkAllEnemiesGone();
-    velocityX = 0;
-    velocityY = 0;
-    moving = 0;
-    calculateMove();
-    move();
-    // if (alive) {
-    // checkHit();
-    // velocityX = 0;
-    // velocityY = 0;
-    // moving = 0;
-    // calculateMove();
-    // move();
-    // } else {
-    // die();
-    // }
+    if(alive){
+      checkHit();
+      checkFlameReceived();
+      checkSpeedReceived();
+      checkBombPowerUpReceived();
+      checkIfGoToPortal();
+      checkAllEnemiesGone();
+      velocityX = 0;
+      velocityY = 0;
+      moving = 0;
+      calculateMove();
+      move();
+    }else{
+      die();
+    }
 
   }
 
@@ -265,9 +259,8 @@ public class Bomber extends Mob {
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
-
       // go to scene end game and replay
-      Board.goEndGame();
+      Board.goInGamePane(1);
     }
 
   }
@@ -277,16 +270,17 @@ public class Bomber extends Mob {
     /**
      * It's weird because of my error. Don't change anything in here.
      */
-    // if(Board.getPlayerNumber()==0){
-    // return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
-    // } else if(Board.getPlayerNumber()==2){
-    // return Sprite.player1[(int) (direction * 3 + moving * (Board.frame / 20))];
-    // }else if(Board.getPlayerNumber()==1){
-    // return Sprite.player2[(int) (direction * 3 + moving * (Board.frame / 20))];
-    // }else{
-    // return Sprite.player3[(int) (direction * 3 + moving * (Board.frame / 20))];
+
     if (alive) {
-      return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+       if(Board.getPlayerNumber()==0){
+       return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+       } else if(Board.getPlayerNumber()==2){
+       return Sprite.player1[(int) (direction * 3 + moving * (Board.frame / 20))];
+       }else if(Board.getPlayerNumber()==1){
+       return Sprite.player2[(int) (direction * 3 + moving * (Board.frame / 20))];
+       }else {
+         return Sprite.player3[(int) (direction * 3 + moving * (Board.frame / 20))];
+       }
     } else {
       if (timer > 80) {
         return Sprite.player_dead1;
@@ -303,7 +297,7 @@ public class Bomber extends Mob {
     y += velocityY;
     x += velocityX;
 
-    checkWin();
+    //checkWin();
 
     for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i) && i instanceof Wall) { // specify only the wall
@@ -334,17 +328,6 @@ public class Bomber extends Mob {
     bombCount++;
   }
 
-  public void checkWin() {
-    if (!Board.getEnemyList().isEmpty()) {
-      return;
-    }
-    for (Tile i : Board.getTileList()) {
-      if ((i instanceof Portal) && this.isCollidedWith(i)) {
-        // to next level
-        Board.goEndGame();
-        return;
-      }
-    }
-  }
+
 
 }
