@@ -7,7 +7,6 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Portal extends Tile {
-
   public Portal(int x, int y) {
     super(x, y);
   }
@@ -19,7 +18,6 @@ public class Portal extends Tile {
 
   @Override
   public void update() {
-
   }
 
   public void whenReceived(){
@@ -35,5 +33,4 @@ public class Portal extends Tile {
   public BoundingBox getBoundingBox() {
     return new BoundingBox(x + 2, y + 2, 28, 28);
   }
-
 }

@@ -1,8 +1,6 @@
 package scenes;
 
 import java.io.IOException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;

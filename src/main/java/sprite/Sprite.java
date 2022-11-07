@@ -415,6 +415,13 @@ public class Sprite {
   public static Image[] rescer = {rescer_left1, rescer_left2, rescer_left3, rescer_right1,
       rescer_right2, rescer_right3};
 
+  public static Image[] flame =
+      {bomb_exploded, bomb_exploded1, bomb_exploded2, explosion_horizontal_left_last,
+          explosion_horizontal_left_last1, explosion_horizontal_left_last2,
+          explosion_horizontal_right_last, explosion_horizontal_right_last1,
+          explosion_horizontal_right_last2, explosion_vertical_top_last,
+          explosion_vertical_top_last1, explosion_vertical_top_last2, explosion_vertical_down_last,
+          explosion_vertical_down_last1, explosion_vertical_down_last2};
 
   /*
    * ---------------------------------------- End of sprite image

@@ -25,7 +25,6 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -45,7 +44,6 @@ import javafx.scene.text.TextAlignment;
 import level.FileLevelLoader;
 import level.LevelLoader;
 
-
 public class Board {
 
   private static Scene scene;
@@ -54,7 +52,7 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
-  private static int playerNumber = 1; //by default
+  private static int playerNumber = 1; // by default
 
   /**
    * setup the level of game. MUST BE SET BEFORE LOAD
@@ -165,7 +163,7 @@ public class Board {
     setBoardLevel(boardLevel);
 
     root = new Group();
-    //load background of this class
+    // load background of this class
     FXMLLoader fx = new FXMLLoader(App.class.getResource("/scenes/board.fxml"));
     try {
       root.getChildren().add(fx.load());
@@ -173,7 +171,7 @@ public class Board {
     }
 
     scene = new Scene(root);
-    //load level game and initial render
+    // load level game and initial render
     setLevelLoader(getBoardLevel());
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
@@ -181,7 +179,7 @@ public class Board {
     // ve lai background tu y=476
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
-    //bomber = new Bomber(32, 32);
+    // bomber = new Bomber(32, 32);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {
@@ -194,16 +192,16 @@ public class Board {
         input.remove(keyEvent.getCode());
       }
     });
-    //ap init
+    // ap init
     ap = new AnchorPane();
-    //init of ingameInformation
+    // init of ingameInformation
     ingameName = new Text();
     ingameName.setWrappingWidth(500.0);
     ingameName.setLayoutX(39.0);
     ingameName.setLayoutY(503.0);
     ingameName.setText("Name: " + currentPlayer.getUserName());
     ingameHealth = new Text("Health: 1");
-    //change if we customize the characters
+    // change if we customize the characters
     ingameHealth.setWrappingWidth(500.0);
     ingameHealth.setLayoutX(39.0);
     ingameHealth.setLayoutY(531.0);
@@ -215,15 +213,15 @@ public class Board {
     ingameTime.setWrappingWidth(500.0);
     ingameTime.setLayoutX(39.0);
     ingameTime.setLayoutY(587.0);
-    ingameName.setFont(new Font("System",20));
-    ingameTime.setFont(new Font("System",20));
-    ingameHealth.setFont(new Font("System",20));
-    ingameScore.setFont(new Font("System",20));
+    ingameName.setFont(new Font("System", 20));
+    ingameTime.setFont(new Font("System", 20));
+    ingameHealth.setFont(new Font("System", 20));
+    ingameScore.setFont(new Font("System", 20));
     root.getChildren().add(ingameName);
     root.getChildren().add(ingameHealth);
     root.getChildren().add(ingameScore);
     root.getChildren().add(ingameTime);
-    //init of timing
+    // init of timing
     timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
@@ -237,19 +235,19 @@ public class Board {
         if (unresetFrame == Long.MAX_VALUE) {
           unresetFrame = 0;
         }
-        if (unresetFrame % 180 == 0) { //increase point per 3 seconds
+        if (unresetFrame % 180 == 0) { // increase point per 3 seconds
           currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
-          ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+          ingameScore.setText("Score: " + currentPlayer.getLastestScore());
         }
-        if (unresetFrame % 60 == 0) { //increase second played
+        if (unresetFrame % 60 == 0) { // increase second played
           currentPlayer.setSecondsPlayed(currentPlayer.getSecondsPlayed() + 1);
-          currentPlayer.setDummyAccount(false);//not dummy account any more.
+          currentPlayer.setDummyAccount(false);// not dummy account any more.
           long tempSeconds = unresetFrame / 60;
           long tempMinutes = tempSeconds / 60;
-          tempSeconds%=60;
-          String tempTime = "Time: "+
-              ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
-              (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+          tempSeconds %= 60;
+          String tempTime =
+              "Time: " + ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes))
+                  + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
           ingameTime.setText(tempTime);
         }
 
@@ -309,7 +307,7 @@ public class Board {
 
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-    //this already loaded power up list.
+    // this already loaded power up list.
     tileList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
     bombList.forEach(i -> i.draw(graphicsContext));
@@ -389,7 +387,7 @@ public class Board {
     if (e instanceof Oneal) {
       return "Oneal";
     }
-    //todo: (LOW PRIORITY) Add more enemys beyond, although idea of this function was falled
+    // todo: (LOW PRIORITY) Add more enemys beyond, although idea of this function was falled
     return "no";
   }
 
@@ -423,7 +421,7 @@ public class Board {
     }
     lvd = new FileLevelLoader(index);
     lvd.createEntities();
-    //init of timing
+    // init of timing
     timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
@@ -437,19 +435,19 @@ public class Board {
         if (unresetFrame == Long.MAX_VALUE) {
           unresetFrame = 0;
         }
-        if (unresetFrame % 180 == 0) { //increase point per 3 seconds
+        if (unresetFrame % 180 == 0) { // increase point per 3 seconds
           currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
-          ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+          ingameScore.setText("Score: " + currentPlayer.getLastestScore());
         }
-        if (unresetFrame % 60 == 0) { //increase second played
+        if (unresetFrame % 60 == 0) { // increase second played
           currentPlayer.setSecondsPlayed(currentPlayer.getSecondsPlayed() + 1);
-          currentPlayer.setDummyAccount(false);//not dummy account any more.
+          currentPlayer.setDummyAccount(false);// not dummy account any more.
           long tempSeconds = unresetFrame / 60;
           long tempMinutes = tempSeconds / 60;
-          tempSeconds%=60;
-          String tempTime = "Time: "+
-              ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
-              (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+          tempSeconds %= 60;
+          String tempTime =
+              "Time: " + ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes))
+                  + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
           ingameTime.setText(tempTime);
         }
 
@@ -459,29 +457,20 @@ public class Board {
 
   }
 
-  public static void clearInput(){
+  public static void clearInput() {
     input = new HashSet<>();
   }
 
-  public static void removeInRoot(Node n){
-    if(root.getChildren().contains(n)){
+  public static void removeInRoot(Node n) {
+    if (root.getChildren().contains(n)) {
       root.getChildren().remove(n);
     }
   }
 
   public static void goInGamePane(int status) {
-    /**
-     * 0: Win
-     * 1: Loss
-     * 2: Pause in-game
-     */
-    //todo: Show noti, people can choose action.
-
-
-
-    if(!accountUpdated) {
+    if (!accountUpdated) {
       timer.stop();
-      //Some change inside account
+      // Some change inside account
       if (status != 2) {
         currentPlayer.setAccumulateScore(
             currentPlayer.getAccumulateScore() + currentPlayer.getLastestScore());
@@ -490,12 +479,12 @@ public class Board {
           currentPlayer.setHighestScore(currentPlayer.getLastestScore());
         }
       }
-      if(status==1){
-        currentPlayer.setNumberOfDead(currentPlayer.getNumberOfDead()+1);
+      if (status == 1) {
+        currentPlayer.setNumberOfDead(currentPlayer.getNumberOfDead() + 1);
       }
       accountUpdated = true;
-      //because by unknown reason accu score was + 2 times.
-      //Anchor pane
+      // because by unknown reason accu score was + 2 times.
+      // Anchor pane
       ap.setLayoutX(219.0);
       ap.setLayoutY(259.0);
       ap.setPrefHeight(250.0);
@@ -504,7 +493,7 @@ public class Board {
       BackgroundFill bgfill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
       Background bg = new Background(bgfill);
       ap.setBackground(bg);
-      //Text
+      // Text
       Text statusText = new Text();
       if (status == 0) {
         statusText.setText("You win! Score: " + currentPlayer.getLastestScore());
@@ -519,7 +508,7 @@ public class Board {
       statusText.setLayoutX(145.0);
       statusText.setLayoutY(54.0);
       statusText.setTextAlignment(TextAlignment.valueOf("CENTER"));
-      //Button
+      // Button
       Button b1 = new Button("Back");
       Button b2 = new Button("Next");
       Button b3 = new Button("Replay");
@@ -533,14 +522,14 @@ public class Board {
         removeInRoot(b2);
         removeInRoot(b3);
         removeInRoot(statusText);
-        //timer.start();
+        // timer.start();
         currentPlayer.setLastestScore(0);
         accountUpdated = false;
         statusText.setText("");
         clearInput();
         App.goBackMainMenu();
 
-        //setLevelLoader(1);
+        // setLevelLoader(1);
       });
       b2.setPadding(new Insets(10, 10, 10, 10));
       b2.setPrefWidth(100.0);
@@ -552,14 +541,14 @@ public class Board {
       }
 
       b2.setOnAction(e -> {
-        //timer.start();
+        // timer.start();
         if (status == 2) {
           if (root.getChildren().contains(ap)) {
             root.getChildren().remove(ap);
           }
         } else if (status == 0) {
           if (getBoardLevel() == 5) {
-            //todo: Create more map and change above number
+            // todo: Create more map and change above number
             System.out.println("In developing...");
             currentPlayer.setLastestScore(0);
           } else {
@@ -592,7 +581,7 @@ public class Board {
         removeInRoot(statusText);
         App.goBackMainMenu();
         App.toMainGame(Board.getBoardLevel());
-//        setLevelLoader(getBoardLevel());
+        // setLevelLoader(getBoardLevel());
         currentPlayer.setLastestScore(0);
         statusText.setText("");
         accountUpdated = false;
@@ -608,8 +597,16 @@ public class Board {
       }
       ap.getChildren().add(b3);
       root.getChildren().add(ap);
-
     }
+  }
+
+  // demo
+  public static void goEndGame() {
+    Button b = new Button("END GAME");
+    b.setMinSize(200, 200);
+    b.setLayoutX(width / 2 - 100);
+    b.setLayoutY(50);
+    root.getChildren().add(b);
   }
 
 }

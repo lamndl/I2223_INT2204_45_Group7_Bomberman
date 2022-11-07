@@ -3,9 +3,7 @@ package mainClass;
 import static mainClass.Sound.*;
 
 import java.io.IOException;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -18,6 +16,7 @@ import scenes.MainMenu;
  * JavaFX App.
  */
 public class App extends Application {
+
   public static Keyboard KB = new Keyboard();
   private static Scene scene;
   private static Stage stage;
@@ -25,7 +24,7 @@ public class App extends Application {
 
   public static boolean inAccount = false;
   public static Player currentPlayer;
-  //static so can be accessed anywhere
+  // static so can be accessed anywhere
   public static final int WIDTH = 1024;
   public static final int HEIGHT = 768;
 
@@ -41,9 +40,14 @@ public class App extends Application {
     scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
     stage.setScene(scene);
 
+    /**
+     * vao menu:
+     */
+    // scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
+    // stage.setScene(scene);
 
     stage.getIcons().add(icon);
-    stage.setResizable(false);
+    stage.setResizable(true);
     stage.setFullScreen(false);
     stage.show();
     sound = new Sound();
@@ -52,32 +56,32 @@ public class App extends Application {
   }
 
   public static void toMainGame(int boardLevel) {
-    //this.stage = stage;
-    //System.gc();
+    // this.stage = stage;
+    // System.gc();
     Board.setBoardLevel(boardLevel);
     Board.init(boardLevel);
     stage.setScene(Board.getScene());
     stage.centerOnScreen();
   }
 
-  public static void goBackMainMenu(){
+  public static void goBackMainMenu() {
     Board.setRoot(new Group());
     stage.setScene(null);
-    try{
-//      scene = new Scene(loadFxml("/scenes/mainMenu"), WIDTH, HEIGHT);
-//      stage.setScene(scene);
+    try {
+      // scene = new Scene(loadFxml("/scenes/mainMenu"), WIDTH, HEIGHT);
+      // stage.setScene(scene);
       setRoot("/scenes/mainMenu");
-    }catch(Exception eie){
+    } catch (Exception eie) {
       System.out.println(eie);
     }
 
     stage.setScene(scene);
-//    try{
-//      App.setRoot("/scenes/mainMenu");
-//      System.out.println("Reached");
-//    }catch(Exception ex){
-//
-//    }
+    // try{
+    // App.setRoot("/scenes/mainMenu");
+    // System.out.println("Reached");
+    // }catch(Exception ex){
+    //
+    // }
   }
 
 

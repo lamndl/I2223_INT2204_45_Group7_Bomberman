@@ -1,7 +1,5 @@
 package entity.animated.mob;
 
-import entity.animated.AnimatedEntity;
-import entity.animated.Flame;
 import entity.tile.Brick;
 import entity.tile.Tile;
 import entity.tile.Wall;
