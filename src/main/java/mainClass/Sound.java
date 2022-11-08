@@ -1,8 +1,10 @@
 package mainClass;
 
+//import java.time.Duration;
 import java.util.ArrayList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Sound {
 
@@ -51,16 +53,35 @@ public class Sound {
     for (Media m : backgroundSoundList) {
       backgroundSoundMediaPlayer.add(new MediaPlayer(m));
     }
+    soundList.add(new Media(getClass().getResource("/audio/EnemyDead.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/ReceivedBuff.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/PlayerDead.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/PlayerMove.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/PlayerPlaceBomb.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/Start.wav").toExternalForm()));
+    for(Media m: soundList){
+      mediaPlayers.add(new MediaPlayer(m));
+    }
 
   }
 
   /**
    * start the sound
-   * 
+   *
    * @param index to choose soundtrack
    */
   public static void playMedia(int index) {
     backgroundSoundMediaPlayer.get(index).play();
+    /**
+     * get background replay.
+     */
+    backgroundSoundMediaPlayer.get(index).setOnEndOfMedia(new Runnable() {
+      @Override
+      public void run() {
+        backgroundSoundMediaPlayer.get(index).seek(Duration.ZERO);
+        backgroundSoundMediaPlayer.get(index).play();
+      }
+    });
     currentIndexBackgroundSound = index;
   }
 
@@ -112,7 +133,7 @@ public class Sound {
 
   /**
    * change how loud it is
-   * 
+   *
    * @param volumeStandardized is in [0.0,1.0]. 1.0 means loudest.
    */
   public static void setBackgroundSoundVolume(double volumeStandardized) {
@@ -121,6 +142,10 @@ public class Sound {
     }
   }
 
-
+  public static void playInGameSound(int index){
+    mediaPlayers.get(index).stop();
+    mediaPlayers.get(index).play();
+    //System.out.println(mediaPlayers.get(index).getStatus());
+  }
 
 }
