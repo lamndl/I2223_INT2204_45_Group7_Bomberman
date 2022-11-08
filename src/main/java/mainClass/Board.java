@@ -138,7 +138,9 @@ public class Board {
   }
 
   public static void removeEntity(Entity entity) {
-    if (entity instanceof Tile) {
+    if (entity instanceof PowerUp) {
+      powerUpList.remove(entity);
+    } else if (entity instanceof Tile) {
       tileList.remove(entity);
     } else if (entity instanceof Bomb) {
       bombList.remove(entity);
