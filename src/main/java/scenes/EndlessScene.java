@@ -1,7 +1,6 @@
 package scenes;
 
 import java.io.IOException;
-import javafx.scene.control.Button;
 import mainClass.App;
 import mainClass.Sound;
 
