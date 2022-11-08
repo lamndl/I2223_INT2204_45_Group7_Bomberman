@@ -5,6 +5,7 @@ import entity.animated.Bomb;
 import entity.animated.Flame;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
+import entity.tile.PowerUp;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,6 +62,8 @@ public class Board {
   private static List<Bomb> bombList = new ArrayList<>();
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
+  private static List<PowerUp> powerUpList = new ArrayList<>();
+
   private static Bomber bomber;
 
   public static long frame;
@@ -119,7 +122,9 @@ public class Board {
 
   public static void addEntity(Entity entity) {
     // Design pattern ???
-    if (entity instanceof Tile) {
+    if (entity instanceof PowerUp) {
+      powerUpList.add((PowerUp) entity);
+    } else if (entity instanceof Tile) {
       tileList.add((Tile) entity);
     } else if (entity instanceof Bomb) {
       bombList.add((Bomb) entity);
@@ -134,13 +139,13 @@ public class Board {
 
   public static void removeEntity(Entity entity) {
     if (entity instanceof Tile) {
-      tileList.removeIf(i -> i.equals(entity));
+      tileList.remove(entity);
     } else if (entity instanceof Bomb) {
-      bombList.removeIf(i -> i.equals(entity));
+      bombList.remove(entity);
     } else if (entity instanceof Flame) {
-      flameList.removeIf(i -> i.equals(entity));
+      flameList.remove(entity);
     } else if (entity instanceof Enemy) {
-      enemyList.removeIf(i -> i.equals(entity));
+      enemyList.remove(entity);
     } else {
       bomber = new Bomber(-32, -32);
     }
@@ -148,7 +153,7 @@ public class Board {
 
   public static void render() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
+    powerUpList.forEach(i -> i.draw(graphicsContext));
     tileList.forEach(i -> i.draw(graphicsContext));
     enemyList.forEach(i -> i.draw(graphicsContext));
     bombList.forEach(i -> i.draw(graphicsContext));
@@ -171,6 +176,9 @@ public class Board {
     for (int i = 0; i < tileList.size(); i++) {
       tileList.get(i).update();
     }
+    for (int i = 0; i < powerUpList.size(); i++) {
+      powerUpList.get(i).update();
+    }
   }
 
   public static void setHeight(int height) {
@@ -181,7 +189,7 @@ public class Board {
     Board.width = width;
   }
 
-  //demo
+  // demo
   public static void goEndGame() {
     Button b = new Button("END GAME");
     b.setMinSize(200, 200);

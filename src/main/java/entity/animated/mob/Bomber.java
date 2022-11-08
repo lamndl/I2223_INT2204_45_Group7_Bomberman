@@ -14,8 +14,8 @@ import sprite.Sprite;
 public class Bomber extends Mob {
 
   private int bombCount = 1;
-  private int flameLength;
-  private double speedMultiplier;
+  private int flameLength = 1;
+  private double speedMultiplier = 1;
   protected int timer = 120;
 
   public void placeBomb() {
@@ -49,6 +49,7 @@ public class Bomber extends Mob {
         moving = 1;
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
+        Board.input.remove(KeyCode.SPACE);
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
         // respawn
@@ -104,7 +105,7 @@ public class Bomber extends Mob {
       Board.removeEntity(this);
 
       // go to scene end game and replay
-      Board.goEndGame();
+      // Board.goEndGame();
     }
 
   }
@@ -158,6 +159,14 @@ public class Bomber extends Mob {
 
   public void increaseBomb() {
     bombCount++;
+  }
+
+  public void increaseFlamLength() {
+    flameLength++;
+  }
+
+  public void increaseSpeed() {
+    speedMultiplier += 0.2;
   }
 
   public void checkWin() {
