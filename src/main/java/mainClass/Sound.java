@@ -1,9 +1,10 @@
 package mainClass;
 
-//import java.time.Duration;
+// import java.time.Duration;
 import java.util.ArrayList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 
 public class Sound {
@@ -27,7 +28,6 @@ public class Sound {
    * these below arrayList should change to static or not (static right now)
    */
   private static ArrayList<Media> soundList = new ArrayList<Media>();
-  private static ArrayList<MediaPlayer> mediaPlayers = new ArrayList<MediaPlayer>();
 
   /**
    * constructor. HAVE TO CALLED TO INIT BELOW IMPORTANT FUNCTIONS. welcome to change if there's a
@@ -59,9 +59,7 @@ public class Sound {
     soundList.add(new Media(getClass().getResource("/audio/PlayerMove.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/PlayerPlaceBomb.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/Start.wav").toExternalForm()));
-    for(Media m: soundList){
-      mediaPlayers.add(new MediaPlayer(m));
-    }
+    soundList.add(new Media(getClass().getResource("/audio/clickButton.mp3").toExternalForm()));
 
   }
 
@@ -142,10 +140,11 @@ public class Sound {
     }
   }
 
-  public static void playInGameSound(int index){
-    mediaPlayers.get(index).stop();
-    mediaPlayers.get(index).play();
-    //System.out.println(mediaPlayers.get(index).getStatus());
+  public static void playInGameSound(int index) {
+    MediaPlayer player = new MediaPlayer(soundList.get(index));
+    if (index == 3) { // decrease volume when moving
+      player.setVolume(0.4);
+    }
+    player.play();
   }
-
 }

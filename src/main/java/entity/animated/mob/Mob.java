@@ -3,6 +3,7 @@ package entity.animated.mob;
 import entity.animated.AnimatedEntity;
 import javafx.geometry.BoundingBox;
 import mainClass.Board;
+import mainClass.Sound;
 
 public abstract class Mob extends AnimatedEntity {
   protected int hp;
@@ -26,9 +27,18 @@ public abstract class Mob extends AnimatedEntity {
     for (AnimatedEntity i : Board.getFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         alive = false;
+        if (this instanceof Enemy) {
+          Sound.playInGameSound(0);
+        } else {
+          Sound.playInGameSound(2);
+        }
         return;
       }
     }
+  }
+
+  public int getMoving() {
+    return moving;
   }
 
   @Override

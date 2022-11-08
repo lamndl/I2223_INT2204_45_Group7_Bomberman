@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
 import mainClass.App;
+import mainClass.Sound;
 
 
 public class CharacterChoosing {
@@ -38,7 +39,7 @@ public class CharacterChoosing {
     } else {
       App.setRoot("/scenes/mainMenu");
     }
-
+    Sound.playInGameSound(6);
   }
 
   public void goPreviousCharacter() {
@@ -47,11 +48,13 @@ public class CharacterChoosing {
     }
     currentIndex--;
     applyToScene();
+    Sound.playInGameSound(6);
   }
 
   public void goNextCharacter() {
     currentIndex++;
     applyToScene();
+    Sound.playInGameSound(6);
   }
 
   public void applyToScene(){
@@ -79,6 +82,7 @@ public class CharacterChoosing {
 
   public void switchToMainGame() throws IOException {
     System.out.println("In developing...");
+    Sound.playInGameSound(6);
   }
 
 }

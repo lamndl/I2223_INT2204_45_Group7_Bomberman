@@ -115,6 +115,9 @@ public class Board {
           update();
           render();
         }
+        if (frame % 25 == 0 && bomber.getMoving() == 1) {
+          Sound.playInGameSound(3);
+        }
       }
     };
     timer.start();

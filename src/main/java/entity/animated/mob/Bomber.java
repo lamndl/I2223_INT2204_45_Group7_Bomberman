@@ -10,6 +10,7 @@ import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import mainClass.Board;
+import mainClass.Sound;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
@@ -53,7 +54,9 @@ public class Bomber extends Mob {
         moving = 1;
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
+        Sound.playInGameSound(4);
         iterator.remove();
+
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
         // respawn
@@ -101,6 +104,7 @@ public class Bomber extends Mob {
     for (Enemy i : Board.getEnemyList()) {
       if (isCollidedWith(i)) {
         alive = false;
+        Sound.playInGameSound(2);
         return;
       }
     }

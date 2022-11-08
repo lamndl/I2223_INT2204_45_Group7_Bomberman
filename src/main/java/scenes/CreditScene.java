@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+import mainClass.Sound;
 
 
 public class CreditScene {
@@ -45,6 +45,7 @@ public void facebookOpen(String fxId){
   }catch (Exception e){
     System.out.println("There is a error in facebookOpen");
   }
+  Sound.playInGameSound(6);
 }
 
 public void gmailOpen(String fxId){
@@ -57,6 +58,7 @@ if(fxId.equals("gmailNDL")){
 }
 gmailAlert.setTitle("Gmail information");
 gmailAlert.show();
+  Sound.playInGameSound(6);
 }
 public void switchToMainMenu() throws IOException{
   App.setRoot("/scenes/mainMenu");
@@ -68,12 +70,14 @@ public void openGithub()throws IOException{
   }catch(Exception e){
     System.out.println("There is a error in openGithub");
   }
+  Sound.playInGameSound(6);
 }
 
 public void openMusic() throws IOException{
   musicAlert.setAlertType(AlertType.INFORMATION);
   musicAlert.setContentText("Music message!");
   musicAlert.show();
+  Sound.playInGameSound(6);
 }
 
 public void openDocumentation() throws IOException{
@@ -82,6 +86,7 @@ public void openDocumentation() throws IOException{
   }catch(Exception e){
     System.out.println("There is a error in openDocumentation");
   }
+  Sound.playInGameSound(6);
 }
 
 public void openTreeDiagram() throws IOException{
@@ -90,6 +95,7 @@ public void openTreeDiagram() throws IOException{
   }catch(Exception e){
     System.out.println("There is a error in openTreeDiagram");
   }
+  Sound.playInGameSound(6);
 }
 
 

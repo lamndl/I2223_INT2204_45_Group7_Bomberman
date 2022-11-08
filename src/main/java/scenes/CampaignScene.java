@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
 import mainClass.App;
+import mainClass.Sound;
 
 public class CampaignScene {
 
@@ -41,6 +42,7 @@ public class CampaignScene {
 
   public void goMainMenu() throws IOException {
     App.setRoot("/scenes/mainMenu");
+    Sound.playInGameSound(6);
   }
 
   public Image getImageSample(){
@@ -54,6 +56,7 @@ public class CampaignScene {
 
   public void goChoosingCharacterScene() throws IOException{
     App.setRoot("/scenes/characterChoosing");
+    Sound.playInGameSound(6);
   }
 
 }
