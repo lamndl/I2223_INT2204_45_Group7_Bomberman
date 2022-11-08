@@ -12,7 +12,7 @@ import sprite.Sprite;
 public class Bomb extends AnimatedEntity {
   private int timer = 90;
 
-  private int checkHit(Flame flame) {
+  private int checkWall(Flame flame) {
     for (Tile t : Board.getTileList()) {
       if (t instanceof Wall && t.isCollidedWith(flame)) {
         return 1;
@@ -25,6 +25,7 @@ public class Bomb extends AnimatedEntity {
   }
 
   public void explode() {
+    Board.getBomber().increaseBomb();
     Board.addEntity(new Flame(0, x, y));
     int length = Board.getBomber().getFlameLength();
 
@@ -34,7 +35,7 @@ public class Bomb extends AnimatedEntity {
         pos = 2;
       }
       Flame flame = new Flame(pos, x + 32 * i, y);
-      int check = checkHit(flame);
+      int check = checkWall(flame);
       if (check == 1) {
         break;
       } else {
@@ -50,7 +51,7 @@ public class Bomb extends AnimatedEntity {
         pos = 1;
       }
       Flame flame = new Flame(pos, x - 32 * i, y);
-      int check = checkHit(flame);
+      int check = checkWall(flame);
       if (check == 1) {
         break;
       } else {
@@ -66,7 +67,7 @@ public class Bomb extends AnimatedEntity {
         pos = 4;
       }
       Flame flame = new Flame(pos, x, y + 32 * i);
-      int check = checkHit(flame);
+      int check = checkWall(flame);
       if (check == 1) {
         break;
       } else {
@@ -82,7 +83,7 @@ public class Bomb extends AnimatedEntity {
         pos = 3;
       }
       Flame flame = new Flame(pos, x, y - 32 * i);
-      int check = checkHit(flame);
+      int check = checkWall(flame);
       if (check == 1) {
         break;
       } else {
@@ -113,8 +114,13 @@ public class Bomb extends AnimatedEntity {
   @Override
   public void update() {
     timer--;
+    for (AnimatedEntity i : Board.getFlameList()) {
+      if (getBoundingBox().intersects(i.getBoundingBox())) {
+        explode();
+        return;
+      }
+    }
     if (timer == 0) {
-      Board.getBomber().increaseBomb();
       explode();
     }
   }
