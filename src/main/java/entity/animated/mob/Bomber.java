@@ -22,6 +22,7 @@ public class Bomber extends Mob {
     if (bombCount > 0) {
       bombCount--;
       Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
+      allowThroughBomb = true;
     }
   }
 
