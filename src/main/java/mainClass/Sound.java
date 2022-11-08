@@ -14,6 +14,7 @@ public class Sound {
    */
   private static ArrayList<Media> backgroundSoundList = new ArrayList<Media>();
 
+
   /**
    * MediaPlayer for background sound
    */
@@ -143,8 +144,14 @@ public class Sound {
   public static void playInGameSound(int index) {
     MediaPlayer player = new MediaPlayer(soundList.get(index));
     if (index == 3) { // decrease volume when moving
-      player.setVolume(0.4);
+      player.setVolume(0.1);
     }
     player.play();
+    player.setOnEndOfMedia(new Runnable() {
+      @Override
+      public void run() {
+          player.dispose();
+      }
+    });
   }
 }
