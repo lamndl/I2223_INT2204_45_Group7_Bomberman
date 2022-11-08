@@ -11,15 +11,6 @@ public class Wall extends Tile {
     super(x, y);
   }
 
-  protected void checkHit() {
-    for (AnimatedEntity i : Board.getFlameList()) {
-      if (getBoundingBox().intersects(i.getBoundingBox())) {
-        Board.removeEntity(i);
-        return;
-      }
-    }
-  }
-
   @Override
   public Image getImage() {
     return Sprite.wall;
@@ -27,7 +18,6 @@ public class Wall extends Tile {
 
   @Override
   public void update() {
-    checkHit();
   }
 
 }

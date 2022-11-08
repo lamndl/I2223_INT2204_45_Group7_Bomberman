@@ -13,7 +13,7 @@ public class Grass extends Tile {
 
 
   /**
-   * grass cho tất cả đi qua
+   * grass cho tất cả đi qua .
    */
   @Override
   public boolean isCollidedWith(Entity other) {
@@ -35,7 +35,5 @@ public class Grass extends Tile {
 
   @Override
   public void update() {
-    // TODO Auto-generated method stub
-    
   }
 }

@@ -16,6 +16,7 @@ public class Portal extends Tile {
 
   @Override
   public void update() {
+    
   }
 
   @Override

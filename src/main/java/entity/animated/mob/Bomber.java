@@ -1,10 +1,11 @@
 package entity.animated.mob;
 
 import static mainClass.App.KB;
-import java.util.Iterator;
+
 import entity.animated.Bomb;
 import entity.tile.Portal;
 import entity.tile.Tile;
+import java.util.Iterator;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -74,6 +75,10 @@ public class Bomber extends Mob {
         allowThroughBomb = false;
       }
     }
+  }
+
+  public int getFlameLength() {
+    return flameLength;
   }
 
   public void update() {

@@ -1,6 +1,9 @@
 package entity.animated;
 
 import entity.animated.mob.Bomber;
+import entity.tile.Brick;
+import entity.tile.Tile;
+import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -9,12 +12,86 @@ import sprite.Sprite;
 public class Bomb extends AnimatedEntity {
   private int timer = 90;
 
+  private int checkHit(Flame flame) {
+    for (Tile t : Board.getTileList()) {
+      if (t instanceof Wall && t.isCollidedWith(flame)) {
+        return 1;
+      }
+      if (t instanceof Brick && t.isCollidedWith(flame)) {
+        return 2;
+      }
+    }
+    return 0;
+  }
+
   public void explode() {
     Board.addEntity(new Flame(0, x, y));
-    Board.addEntity(new Flame(2, x + 32, y));
-    Board.addEntity(new Flame(1, x - 32, y));
-    Board.addEntity(new Flame(4, x, y + 32));
-    Board.addEntity(new Flame(3, x, y - 32));
+    int length = Board.getBomber().getFlameLength();
+
+    for (int i = 1; i <= length; i++) {
+      int pos = 5;
+      if (i == length) {
+        pos = 2;
+      }
+      Flame flame = new Flame(pos, x + 32 * i, y);
+      int check = checkHit(flame);
+      if (check == 1) {
+        break;
+      } else {
+        Board.addEntity(flame);
+        if (check == 2) {
+          break;
+        }
+      }
+    }
+    for (int i = 1; i <= length; i++) {
+      int pos = 5;
+      if (i == length) {
+        pos = 1;
+      }
+      Flame flame = new Flame(pos, x - 32 * i, y);
+      int check = checkHit(flame);
+      if (check == 1) {
+        break;
+      } else {
+        Board.addEntity(flame);
+        if (check == 2) {
+          break;
+        }
+      }
+    }
+    for (int i = 1; i <= length; i++) {
+      int pos = 6;
+      if (i == length) {
+        pos = 4;
+      }
+      Flame flame = new Flame(pos, x, y + 32 * i);
+      int check = checkHit(flame);
+      if (check == 1) {
+        break;
+      } else {
+        Board.addEntity(flame);
+        if (check == 2) {
+          break;
+        }
+      }
+    }
+    for (int i = 1; i <= length; i++) {
+      int pos = 6;
+      if (i == length) {
+        pos = 3;
+      }
+      Flame flame = new Flame(pos, x, y - 32 * i);
+      int check = checkHit(flame);
+      if (check == 1) {
+        break;
+      } else {
+        Board.addEntity(flame);
+        if (check == 2) {
+          break;
+        }
+      }
+    }
     Board.removeEntity(this);
     Bomber.allowThroughBomb = true;
   }

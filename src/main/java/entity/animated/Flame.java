@@ -9,10 +9,6 @@ public class Flame extends AnimatedEntity {
   private int timer = 30;
   int pos;
 
-  protected Flame(int x, int y) {
-    super(x, y);
-  }
-
   protected Flame(int pos, int x, int y) {
     super(x, y);
     this.pos = pos;
