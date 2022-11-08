@@ -33,9 +33,10 @@ public class Oneal extends Enemy {
     int enemyY = (y + 16) / 32;
     int bomberX = (Board.getBomber().getX() + 12) / 32;
     int bomberY = (Board.getBomber().getY() + 16) / 32;
+    follow = false;
 
     // khoảng cách gần thì sẽ đuổi, nếu không thì đi random (đang cho đi ngang)
-    if (Math.pow(enemyX - bomberX, 2) + Math.pow(enemyY - bomberY, 2) < 50) {
+    if (Math.pow(enemyX - bomberX, 2) + Math.pow(enemyY - bomberY, 2) < 25) {
       timeFollow--;
       if (timeFollow < 0) {
         follow = true;

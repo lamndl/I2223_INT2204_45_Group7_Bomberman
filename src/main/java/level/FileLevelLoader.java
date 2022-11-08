@@ -6,6 +6,9 @@ import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Portal;
 import entity.tile.Wall;
+import entity.tile.powerup.PowerUpBomb;
+import entity.tile.powerup.PowerUpFlame;
+import entity.tile.powerup.PowerUpSpeed;
 import java.io.FileReader;
 import java.util.Scanner;
 import mainClass.Board;
@@ -78,43 +81,27 @@ public class FileLevelLoader extends LevelLoader {
             Board.addEntity(new Oneal(x * 32, y * 32));
             break;
 
-          //add portal: cong ket thuc game
+          // add portal: cong ket thuc game
           case 'x':
-            Board.addEntity(new Grass(x * 32, y *32));
+            Board.addEntity(new Grass(x * 32, y * 32));
             Board.addEntity(new Portal(x * 32, y * 32));
             Board.addEntity(new Brick(x * 32, y * 32));
             break;
           // //add Bomb Item: vat pham tang so luong bom
-          // case 'b':
-          // _board.addEntity(pos,
-          // new LayeredEntity(x, y,
-          // new Grass(x, y, Sprite.grass),
-          // new BombItem(x, y, Sprite.powerup_bombs),
-          // new Brick(x, y, Sprite.brick)
-          // )
-          // );
-          // break;
-          // //add Flame Item: vat pham tang suc cong pha
-          // case 'f':
-          // _board.addEntity(pos,
-          // new LayeredEntity(x, y,
-          // new Grass(x, y, Sprite.grass),
-          // new FlameItem(x, y, Sprite.powerup_flames),
-          // new Brick(x, y, Sprite.brick)
-          // )
-          // );
-          // break;
-          // //add Speed Item: vat pham tang toc do
-          // case 's':
-          // _board.addEntity(pos,
-          // new LayeredEntity(x, y,
-          // new Grass(x, y, Sprite.grass),
-          // new BombItem(x, y, Sprite.powerup_speed),
-          // new Brick(x, y, Sprite.brick)
-          // )
-          // );
-          // break;
-          // //con lai la grass
+          case 'b':
+            Board.addEntity(new PowerUpBomb(x * 32, y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
+          // add Flame Item: vat pham tang suc cong pha
+          case 'f':
+            Board.addEntity(new PowerUpFlame(x * 32, y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
+          // add Speed Item: vat pham tang toc do
+          case 's':
+            Board.addEntity(new PowerUpSpeed(x * 32, y * 32));
+            Board.addEntity(new Brick(x * 32, y * 32));
+            break;
           default:
             Board.addEntity(new Grass(x * 32, y * 32));
             break;

@@ -11,10 +11,11 @@ import sprite.Sprite;
 
 public class Balloom extends Enemy {
 
-  private boolean[] canMove = new boolean[]{true, true, true, true};
+  private boolean[] canMove = new boolean[] {true, true, true, true};
 
   public Balloom(int x, int y) {
     super(x, y);
+    randomMove();
   }
 
   @Override
@@ -28,10 +29,6 @@ public class Balloom extends Enemy {
 
   @Override
   public void calculateMove() {
-    if (x % 32 == 0 && y % 32 == 0) {
-      randomMove();
-    }
-
     move();
   }
 
@@ -59,6 +56,8 @@ public class Balloom extends Enemy {
       case 3:
         velocityY = 1;
         break;
+        default:
+            break;
     }
   }
 
@@ -92,24 +91,26 @@ public class Balloom extends Enemy {
       if (isCollidedWith(i)) {
         x -= velocityX;
         velocityX = -velocityX;
+        randomMove();
         break;
       }
-
-      for (Bomb j : Board.getBombList()) {
-        if (isCollidedWith(j)) {
-          x -= velocityX;
-          velocityX = -velocityX;
-          break;
-        }
-      }
-
     }
+    for (Bomb j : Board.getBombList()) {
+      if (isCollidedWith(j)) {
+        x -= velocityX;
+        velocityX = -velocityX;
+        randomMove();
+        break;
+      }
+    }
+
 
     y += velocityY;
     for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         y -= velocityY;
         velocityY = -velocityY;
+        randomMove();
         break;
       }
 
@@ -117,6 +118,7 @@ public class Balloom extends Enemy {
         if (isCollidedWith(j)) {
           y -= velocityY;
           velocityY = -velocityY;
+          randomMove();
           break;
         }
       }

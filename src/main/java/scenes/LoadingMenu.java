@@ -1,4 +1,5 @@
 package scenes;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -27,7 +28,7 @@ public class LoadingMenu {
 
 
   protected static ArrayList<String> helpfulTips = new ArrayList<String>(100);
-  private int currentIndex = (int)Math.round(Math.random()*10);
+  private int currentIndex = (int) Math.round(Math.random() * 10);
   public TextArea tipTextField;
 
   public FXMLLoader testing = new FXMLLoader(getClass().getResource("/scenes/loadingMenu.fxml"));
@@ -36,12 +37,12 @@ public class LoadingMenu {
 
   public ProgressBar progressBar = new ProgressBar();
 
-  Task<Void> goButtonSleep = new Task<Void>(){
+  Task<Void> goButtonSleep = new Task<Void>() {
     @Override
-    protected Void call() throws Exception{
-      try{
-        Thread.sleep(500); //change to 5000 later
-      }catch(InterruptedException e){
+    protected Void call() throws Exception {
+      try {
+        Thread.sleep(500); // change to 5000 later
+      } catch (InterruptedException e) {
 
       }
       return null;
@@ -53,20 +54,17 @@ public class LoadingMenu {
     App.setRoot("/scenes/mainMenu");
   }
 
-  public void initialize(){
+  public void initialize() {
     progressBar.setProgress(0.0);
     goButton.setText("Please wait few seconds...");
     goButton.setDisable(true);
     tipTextField.setStyle("-fx-font-size: 22");
     tipTextField.setCursor(Cursor.OPEN_HAND);
-    try{
+    try {
       changeTip();
-    }catch (Exception e){
+    } catch (Exception e) {
       System.out.println("Sth wrong when init the changetip()");
     }
-
-
-
 
 
 
@@ -81,7 +79,7 @@ public class LoadingMenu {
 
 
     new Thread(goButtonSleep).start();
-    //progressBar.progressProperty().bind(goButtonSleep.progressProperty());
+    // progressBar.progressProperty().bind(goButtonSleep.progressProperty());
 
   }
 
@@ -90,7 +88,8 @@ public class LoadingMenu {
     if (helpfulTips.isEmpty()) {
       helpfulTips.add("Turn off the Unikey if you wonder why your character doesn't move.");
       helpfulTips.add("Sometimes it's better to get score instead of killing enemies.");
-      helpfulTips.add("Fortunately we won't randomly order the tips, so you can read in the sequence.");
+      helpfulTips
+          .add("Fortunately we won't randomly order the tips, so you can read in the sequence.");
       helpfulTips.add("Game too hard? It means you're a noob.");
       helpfulTips.add("Don't move the character adjacent to the bomb and you will alive.");
       helpfulTips.add("You can change the character image in main menu by clicking its image.");
