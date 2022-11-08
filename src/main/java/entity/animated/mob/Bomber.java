@@ -9,6 +9,7 @@ import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import mainClass.Board;
+import mainClass.Sound;
 import sprite.Sprite;
 
 public class Bomber extends Mob {
@@ -35,21 +36,26 @@ public class Bomber extends Mob {
         direction = 2;
         velocityY = -2;
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getMoveDown()) {
         direction = 3;
         velocityY = 2;
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getMoveLeft()) {
         direction = 0;
         velocityX = -2;
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getMoveRight()) {
         direction = 1;
         velocityX = 2;
         moving = 1;
+        Sound.playInGameSound(3);
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
         Board.input.remove(KeyCode.SPACE);
+        Sound.playInGameSound(4);
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
         // respawn
@@ -102,6 +108,7 @@ public class Bomber extends Mob {
   public void die() {
     timer--;
     if (timer == 0) {
+      Sound.playInGameSound(2);
       Board.removeEntity(this);
 
       // go to scene end game and replay

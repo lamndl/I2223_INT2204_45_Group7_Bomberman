@@ -59,6 +59,8 @@ public class Sound {
     soundList.add(new Media(getClass().getResource("/audio/PlayerMove.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/PlayerPlaceBomb.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/Start.wav").toExternalForm()));
+    soundList.add(new Media(getClass().getResource("/audio/clickButton.mp3").toExternalForm()));
+
     for(Media m: soundList){
       mediaPlayers.add(new MediaPlayer(m));
     }
@@ -144,8 +146,12 @@ public class Sound {
 
   public static void playInGameSound(int index){
     mediaPlayers.get(index).stop();
+    if(index==6){ //decrease volume when moving
+      mediaPlayers.get(index).setVolume(0.4);
+    }
     mediaPlayers.get(index).play();
     //System.out.println(mediaPlayers.get(index).getStatus());
+
   }
 
 }

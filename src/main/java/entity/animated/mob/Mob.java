@@ -3,6 +3,7 @@ package entity.animated.mob;
 import entity.animated.AnimatedEntity;
 import javafx.geometry.BoundingBox;
 import mainClass.Board;
+import mainClass.Sound;
 
 public abstract class Mob extends AnimatedEntity {
   protected int hp;
@@ -20,6 +21,11 @@ public abstract class Mob extends AnimatedEntity {
     if (timer == 0) {
       Board.removeEntity(this);
     }
+    if(this instanceof Enemy){
+      Sound.playInGameSound(0);
+    }
+
+
   }
 
   protected void checkHit() {
