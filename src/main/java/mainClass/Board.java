@@ -5,7 +5,7 @@ import entity.animated.Bomb;
 import entity.animated.Flame;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
-import entity.tile.PowerUp;
+import entity.tile.powerup.PowerUp;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;

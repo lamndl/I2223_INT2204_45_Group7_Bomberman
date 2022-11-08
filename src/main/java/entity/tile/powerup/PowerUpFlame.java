@@ -1,7 +1,6 @@
 package entity.tile.powerup;
 
 import entity.animated.mob.Bomber;
-import entity.tile.PowerUp;
 import javafx.scene.image.Image;
 import sprite.Sprite;
 

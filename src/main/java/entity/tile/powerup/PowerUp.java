@@ -1,6 +1,8 @@
-package entity.tile;
+package entity.tile.powerup;
 
 import entity.animated.mob.Bomber;
+import entity.tile.Grass;
+import entity.tile.Tile;
 import javafx.geometry.BoundingBox;
 import mainClass.Board;
 
