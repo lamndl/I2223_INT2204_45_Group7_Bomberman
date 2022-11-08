@@ -1,7 +1,7 @@
 package entity.animated.mob;
 
 import static mainClass.App.KB;
-
+import java.util.Iterator;
 import entity.animated.Bomb;
 import entity.tile.Portal;
 import entity.tile.Tile;
@@ -30,7 +30,9 @@ public class Bomber extends Mob {
   }
 
   public void calculateMove() {
-    for (KeyCode i : Board.input) {
+    Iterator<KeyCode> iterator = Board.input.iterator();
+    while (iterator.hasNext()) {
+      KeyCode i = iterator.next();
       if (i == KB.getMoveUp()) {
         direction = 2;
         velocityY = -2;
@@ -49,7 +51,7 @@ public class Bomber extends Mob {
         moving = 1;
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
-        Board.input.remove(KeyCode.SPACE);
+        iterator.remove();
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
         // respawn
