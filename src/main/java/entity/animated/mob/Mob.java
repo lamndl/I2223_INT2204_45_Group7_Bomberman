@@ -21,20 +21,24 @@ public abstract class Mob extends AnimatedEntity {
     if (timer == 0) {
       Board.removeEntity(this);
     }
-    if(this instanceof Enemy){
-      Sound.playInGameSound(0);
-    }
-
-
   }
 
   protected void checkHit() {
     for (AnimatedEntity i : Board.getFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         alive = false;
+        if (this instanceof Enemy) {
+          Sound.playInGameSound(0);
+        } else {
+          Sound.playInGameSound(2);
+        }
         return;
       }
     }
+  }
+
+  public int getMoving() {
+    return moving;
   }
 
   @Override

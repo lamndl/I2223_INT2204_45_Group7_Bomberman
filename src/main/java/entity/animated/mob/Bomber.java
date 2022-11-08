@@ -38,22 +38,18 @@ public class Bomber extends Mob {
         direction = 2;
         velocityY = -2;
         moving = 1;
-        Sound.playInGameSound(3);
       } else if (i == KB.getMoveDown()) {
         direction = 3;
         velocityY = 2;
         moving = 1;
-        Sound.playInGameSound(3);
       } else if (i == KB.getMoveLeft()) {
         direction = 0;
         velocityX = -2;
         moving = 1;
-        Sound.playInGameSound(3);
       } else if (i == KB.getMoveRight()) {
         direction = 1;
         velocityX = 2;
         moving = 1;
-        Sound.playInGameSound(3);
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
         Sound.playInGameSound(4);
@@ -102,6 +98,7 @@ public class Bomber extends Mob {
     for (Enemy i : Board.getEnemyList()) {
       if (isCollidedWith(i)) {
         alive = false;
+        Sound.playInGameSound(2);
         return;
       }
     }
@@ -111,7 +108,6 @@ public class Bomber extends Mob {
   public void die() {
     timer--;
     if (timer == 0) {
-      Sound.playInGameSound(2);
       Board.removeEntity(this);
 
       // go to scene end game and replay
