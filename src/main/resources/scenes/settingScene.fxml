@@ -4,14 +4,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.util.Duration?>
-
 
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="background" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.SettingScene">
   <stylesheets>
@@ -38,28 +37,28 @@
         <Font size="20.0" />
       </font>
     </Text>
-    <Text fill="WHITE" layoutX="74.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move up">
+    <Text fill="WHITE" layoutX="74.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move up">
       <font>
         <Font size="20.0" />
       </font>
     </Text>
-    <Text fill="WHITE" layoutX="74.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move down">
+    <Text fill="WHITE" layoutX="74.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move down">
       <font>
         <Font size="20.0" />
       </font>
     </Text>
-    <Text fill="WHITE" layoutX="74.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move left">
+    <Text fill="WHITE" layoutX="74.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move left">
       <font>
         <Font size="20.0" />
       </font>
     </Text>
-    <Text fill="WHITE" layoutX="74.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move right">
+    <Text fill="WHITE" layoutX="74.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move right">
       <font>
         <Font size="20.0" />
       </font>
     </Text>
 
-    <Slider fx:id="soundSlider" layoutX="266.0" layoutY="124.0" onDragDetected="#changeSound" onDragDone="#changeSound" onDragDropped="#changeSound" onDragExited="#changeSound" onMouseDragExited="#changeSound" onMouseDragOver="#changeSound" onMouseDragReleased="#changeSound" onMouseExited="#changeSound" onMouseMoved="#changeSound" onMouseReleased="#changeSound" prefHeight="14.0" prefWidth="551.0" value="50.0">
+    <Slider fx:id="soundSlider" layoutX="266.0" layoutY="124.0" onDragDetected="#changeSound" onDragDone="#changeSound" onDragDropped="#changeSound" onDragExited="#changeSound" onMouseDragExited="#changeSound" onMouseDragOver="#changeSound" onMouseDragReleased="#changeSound" onMouseExited="#changeSound" onMouseMoved="#changeSound" onMouseReleased="#changeSound" prefHeight="14.0" prefWidth="252.0" value="50.0">
 
       <cursor>
         <Cursor fx:constant="HAND" />
@@ -75,7 +74,7 @@
         </Tooltip>
       </tooltip>
     </Slider>
-    <Button fx:id="moveUpButton" alignment="CENTER" layoutX="462.0" layoutY="193.0" mnemonicParsing="false" onAction="#changeMoveUp" prefHeight="26.0" prefWidth="158.0" text="Button">
+    <Button fx:id="moveUpButton" alignment="CENTER" layoutX="313.0" layoutY="300.0" mnemonicParsing="false" onAction="#changeMoveUp" prefHeight="26.0" prefWidth="158.0" text="Button">
       <cursor>
         <Cursor fx:constant="HAND" />
       </cursor>
@@ -90,7 +89,7 @@
         </Tooltip>
       </tooltip>
     </Button>
-    <Button fx:id="moveDownButton" layoutX="462.0" layoutY="269.0" mnemonicParsing="false" onAction="#changeMoveDown" prefHeight="26.0" prefWidth="158.0" text="Button">
+    <Button fx:id="moveDownButton" layoutX="313.0" layoutY="360.0" mnemonicParsing="false" onAction="#changeMoveDown" prefHeight="26.0" prefWidth="158.0" text="Button">
       <tooltip>
         <Tooltip text="Change move down button (default S)">
           <showDelay>
@@ -102,7 +101,7 @@
         </Tooltip>
       </tooltip>
     </Button>
-    <Button fx:id="moveLeftButton" layoutX="462.0" layoutY="345.0" mnemonicParsing="false" onAction="#changeMoveLeft" prefHeight="26.0" prefWidth="158.0" text="Button">
+    <Button fx:id="moveLeftButton" layoutX="313.0" layoutY="420.0" mnemonicParsing="false" onAction="#changeMoveLeft" prefHeight="26.0" prefWidth="158.0" text="Button">
       <tooltip>
         <Tooltip text="Change move left button (default A)">
           <showDelay>
@@ -114,7 +113,7 @@
         </Tooltip>
       </tooltip>
     </Button>
-    <Button fx:id="moveRightButton" layoutX="462.0" layoutY="420.0" mnemonicParsing="false" onAction="#changeMoveRight" prefHeight="26.0" prefWidth="158.0" text="Button">
+    <Button fx:id="moveRightButton" layoutX="313.0" layoutY="480.0" mnemonicParsing="false" onAction="#changeMoveRight" prefHeight="26.0" prefWidth="158.0" text="Button">
       <tooltip>
         <Tooltip text="Change move right button (default D)">
           <showDelay>
@@ -126,12 +125,12 @@
         </Tooltip>
       </tooltip>
     </Button>
-    <Text fill="WHITE" layoutX="74.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bomb placement">
+    <Text fill="WHITE" layoutX="74.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bomb placement">
       <font>
         <Font size="20.0" />
       </font>
     </Text>
-    <Button fx:id="bombPlacementButton" layoutX="462.0" layoutY="495.0" mnemonicParsing="false" onAction="#changeBombPlacement" prefHeight="26.0" prefWidth="158.0" text="Button">
+    <Button fx:id="bombPlacementButton" layoutX="313.0" layoutY="540.0" mnemonicParsing="false" onAction="#changeBombPlacement" prefHeight="26.0" prefWidth="158.0" text="Button">
       <tooltip>
         <Tooltip text="Change keyCode to place a bomb">
           <showDelay>
@@ -142,13 +141,13 @@
           </font></Tooltip>
       </tooltip>
     </Button>
-    <Text fx:id="statusText" fill="WHITE" layoutX="74.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changing" />
-    <Text fill="WHITE" layoutX="74.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game menu">
+    <Text fx:id="statusText" fill="WHITE" layoutX="74.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changing" />
+    <Text fill="WHITE" layoutX="74.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game menu">
       <font>
         <Font size="20.0" />
       </font>
     </Text>
-    <Button fx:id="inGameMenuButton" layoutX="461.0" layoutY="565.0" mnemonicParsing="false" onAction="#changeInGameMenu" prefHeight="26.0" prefWidth="158.0" text="Button">
+    <Button fx:id="inGameMenuButton" layoutX="313.0" layoutY="600.0" mnemonicParsing="false" onAction="#changeInGameMenu" prefHeight="26.0" prefWidth="158.0" text="Button">
       <tooltip>
         <Tooltip text="Change in-game menu button">
           <showDelay>
@@ -159,5 +158,17 @@
           </font>
         </Tooltip>
       </tooltip></Button>
+      <Text fill="WHITE" layoutX="74.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Background sound">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <ComboBox layoutX="313.0" layoutY="180.0" prefHeight="26.0" prefWidth="158.0" />
+      <Text fill="WHITE" layoutX="74.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game sound">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="313.0" layoutY="240.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="158.0" text="Yes" />
   </children>
 </AnchorPane>

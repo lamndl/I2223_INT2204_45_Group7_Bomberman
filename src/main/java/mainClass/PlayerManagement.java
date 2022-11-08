@@ -7,14 +7,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 
 public class PlayerManagement {
 
-  private static ArrayList<Player> players = new ArrayList<Player>();
+  private static ArrayList<Player> players;
+
 
   public PlayerManagement() {
 
+  }
+
+  public static void init(){
+    players = new ArrayList<Player>();
+    System.out.println("inited");
   }
 
   public static void addPlayer(Player p) {
@@ -66,7 +74,9 @@ public class PlayerManagement {
 
       // adding header to csv
       String[] header = {"username", "password", "highestScore", "longestTimeSurvivalInEndlessMode",
-          "secondsPlayed", "enemiesKilled", "numberOfDead", "blocksBroke", "accumulateScore"};
+          "secondsPlayed", "enemiesKilled", "numberOfDead", "blocksBroke", "accumulateScore","lastestScore",
+          "logged","dummy"};
+
       writer.writeNext(header);
 
       for (Player p : players) {
@@ -75,7 +85,10 @@ public class PlayerManagement {
             Integer.toString(p.getSecondsPlayed()),
             Integer.toString(p.getEnemiesKilled()), Integer.toString(p.getNumberOfDead()),
             Integer.toString(p.getBlocksBroke()),
-            Long.toString(p.getAccumulateScore())};
+            Long.toString(p.getAccumulateScore()),
+            Long.toString(p.getLastestScore()),
+            Boolean.toString(p.isLogged()).toLowerCase(),
+            Boolean.toString(p.isDummyAccount()).toLowerCase()};
         writer.writeNext(temp);
       }
 
@@ -112,16 +125,52 @@ public class PlayerManagement {
 
         players.add(new Player(nextRecord[0], nextRecord[1], Double.parseDouble(nextRecord[2]),
             Double.parseDouble(nextRecord[3]),Integer.parseInt(nextRecord[4]) ,
-            Integer.parseInt(nextRecord[5]), Integer.parseInt(nextRecord[6]),
-            Integer.parseInt(nextRecord[7])));
+            Integer.parseInt(nextRecord[5]), Integer.parseInt(nextRecord[6]),Integer.parseInt(nextRecord[7]),Long.parseLong(nextRecord[8]),
+            Long.parseLong(nextRecord[9]),trueOfFalse(nextRecord[10]),
+            trueOfFalse(nextRecord[11])));
+        System.out.println(players.get(players.size()-1).isLogged());
       }
+      System.out.println("read successfully");
+
     }
     catch (Exception e) {
       e.printStackTrace();
     }
+
   }
 
 
+  public static String generateRandomString() {
+    int leftLimit = 48; // numeral '0'
+    int rightLimit = 122; // letter 'z'
+    int targetStringLength = 10;
+    Random random = new Random();
+
+    String generatedString = random.ints(leftLimit, rightLimit + 1)
+        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+        .limit(targetStringLength)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
+
+    return generatedString;
+  }
+
+  public static Player getLoggedAccount(){
+    for(Player p: players){
+      if(p.isLogged()){
+        return p;
+      }
+    }
+    return null;
+  }
+
+  public static Boolean trueOfFalse(String text){
+    if(text.equals("true")||text.equals("TRUE")||text.equals("1")){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 
 }
