@@ -1,6 +1,7 @@
-package entity.animated.mob;
+package entity.animated.mob.enemy;
 
 import entity.animated.Bomb;
+import entity.animated.mob.enemy.Enemy;
 import entity.tile.Tile;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -123,13 +124,5 @@ public class Oneal extends Enemy {
     }
   }
 
-  @Override
-  public void update() {
-    if (alive) {
-      checkHit();
-      calculateMove();
-    } else {
-      die();
-    }
-  }
+
 }

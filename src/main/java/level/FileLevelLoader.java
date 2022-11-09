@@ -1,8 +1,11 @@
 package level;
 
-import entity.animated.mob.Balloom;
-import entity.animated.mob.Bomber;
-import entity.animated.mob.Oneal;
+import entity.animated.mob.enemy.Balloom;
+import entity.animated.mob.enemy.Doll;
+import entity.animated.mob.enemy.Kondoria;
+import entity.animated.mob.enemy.Minvo;
+import entity.animated.mob.enemy.Oneal;
+import entity.animated.mob.enemy.Rescer;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Portal;
@@ -95,6 +98,26 @@ public class FileLevelLoader extends LevelLoader {
             Board.addEntity(new Oneal(x * 32, y * 32));
             break;
 
+          case '3':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Doll(x * 32, y * 32));
+            break;
+
+          case '4':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Minvo(x * 32, y * 32));
+            break;
+
+          case '5':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Kondoria(x * 32, y * 32));
+            break;
+
+          case '6':
+            Board.addEntity(new Grass(x * 32, y * 32));
+            Board.addEntity(new Rescer(x * 32, y * 32));
+            break;
+
           // add portal: cong ket thuc game
           case 'x':
             Board.addEntity(new Grass(x * 32, y * 32));
@@ -152,7 +175,7 @@ public class FileLevelLoader extends LevelLoader {
         }
 
         if (!isAdd) {
-          if (randomList.get('1') > 0) {
+          if (randomList.get('1') != null && randomList.get('1') > 0) {
             int ran = random.nextInt(0, 50);
             if (ran == 0 && !(x < 5 && y < 5)) {
               // add enemy 1
@@ -164,7 +187,7 @@ public class FileLevelLoader extends LevelLoader {
             }
           }
 
-          if (randomList.get('2') > 0) {
+          if (randomList.get('2') != null && randomList.get('2') > 0) {
             int ran = random.nextInt(0, 50);
             if (ran == 0 && !(x < 5 && y < 5)) {
               // add enemy 2
@@ -174,6 +197,52 @@ public class FileLevelLoader extends LevelLoader {
               continue;
             }
           }
+
+          if (randomList.get('3') != null && randomList.get('3') > 0) {
+            int ran = random.nextInt(0, 50);
+            if (ran == 0 && !(x < 5 && y < 5)) {
+              // add enemy 3
+              Board.addEntity(new Grass(x * 32, y * 32));
+              Board.addEntity(new Doll(x * 32, y * 32));
+              randomList.replace('3', randomList.get('3'), randomList.get('3') - 1);
+              continue;
+            }
+          }
+
+          if (randomList.get('4') != null && randomList.get('4') > 0) {
+            int ran = random.nextInt(0, 50);
+            if (ran == 0 && !(x < 5 && y < 5)) {
+              // add enemy 4
+              Board.addEntity(new Grass(x * 32, y * 32));
+              Board.addEntity(new Minvo(x * 32, y * 32));
+              randomList.replace('4', randomList.get('4'), randomList.get('4') - 1);
+              continue;
+            }
+          }
+
+          if (randomList.get('5') != null && randomList.get('5') > 0) {
+            int ran = random.nextInt(0, 50);
+            if (ran == 0 && !(x < 5 && y < 5)) {
+              // add enemy 5
+              Board.addEntity(new Grass(x * 32, y * 32));
+              Board.addEntity(new Kondoria(x * 32, y * 32));
+              randomList.replace('5', randomList.get('5'), randomList.get('5') - 1);
+              continue;
+            }
+          }
+
+          if (randomList.get('6') != null && randomList.get('6') > 0) {
+            int ran = random.nextInt(0, 50);
+            if (ran == 0 && !(x < 5 && y < 5)) {
+              // add enemy 6
+              Board.addEntity(new Grass(x * 32, y * 32));
+              Board.addEntity(new Minvo(x * 32, y * 32));
+              randomList.replace('6', randomList.get('6'), randomList.get('6') - 1);
+              continue;
+            }
+          }
+
+
 
           if (randomList.get('x') > 0) {
             int ran = random.nextInt(0, 150);

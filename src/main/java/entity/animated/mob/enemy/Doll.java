@@ -1,6 +1,7 @@
-package entity.animated.mob;
+package entity.animated.mob.enemy;
 
 import entity.animated.Bomb;
+import entity.animated.mob.enemy.Enemy;
 import entity.tile.Brick;
 import entity.tile.Tile;
 import entity.tile.Wall;
@@ -9,21 +10,23 @@ import javafx.scene.image.Image;
 import mainClass.Board;
 import sprite.Sprite;
 
-public class Balloom extends Enemy {
+// like Balloom random speed
+public class Doll extends Enemy {
 
   private boolean[] canMove = new boolean[] {true, true, true, true};
 
-  public Balloom(int x, int y) {
+  public Doll(int x, int y) {
     super(x, y);
     randomMove();
   }
 
+
   @Override
   public Image getImage() {
     if (alive) {
-      return Sprite.balloom[direction % 2 * 3 + (int) (moving * Board.frame / 20)];
+      return Sprite.doll[direction % 2 * 3 + (int) (moving * Board.frame / 20)];
     } else {
-      return Sprite.balloom_dead;
+      return Sprite.doll_dead;
     }
   }
 
@@ -41,23 +44,25 @@ public class Balloom extends Enemy {
       ran = random.nextInt(0, 4);
     }
 
+    speed = random.nextInt(1, 5);
+
     velocityX = 0;
     velocityY = 0;
     switch (ran) {
       case 0:
-        velocityX = -1;
+        velocityX = -speed;
         break;
       case 1:
-        velocityX = 1;
+        velocityX = speed;
         break;
       case 2:
-        velocityY = -1;
+        velocityY = -speed;
         break;
       case 3:
-        velocityY = 1;
+        velocityY = speed;
         break;
-        default:
-            break;
+      default:
+        break;
     }
   }
 
@@ -87,10 +92,13 @@ public class Balloom extends Enemy {
   protected void move() {
     moving = 1;
     x += velocityX;
+    y += velocityY;
     for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         x -= velocityX;
+        y -= velocityY;
         velocityX = -velocityX;
+        velocityY = -velocityY;
         randomMove();
         break;
       }
@@ -98,29 +106,11 @@ public class Balloom extends Enemy {
     for (Bomb j : Board.getBombList()) {
       if (isCollidedWith(j)) {
         x -= velocityX;
-        velocityX = -velocityX;
-        randomMove();
-        break;
-      }
-    }
-
-
-    y += velocityY;
-    for (Tile i : Board.getTileList()) {
-      if (isCollidedWith(i)) {
         y -= velocityY;
+        velocityX = -velocityX;
         velocityY = -velocityY;
         randomMove();
         break;
-      }
-
-      for (Bomb j : Board.getBombList()) {
-        if (isCollidedWith(j)) {
-          y -= velocityY;
-          velocityY = -velocityY;
-          randomMove();
-          break;
-        }
       }
     }
 
@@ -129,15 +119,5 @@ public class Balloom extends Enemy {
     } else {
       direction = 0;
     }
-  }
-
-  public void update() {
-    if (alive) {
-      checkHit();
-      calculateMove();
-    } else {
-      die();
-    }
-
   }
 }
