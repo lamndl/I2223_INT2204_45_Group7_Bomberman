@@ -118,10 +118,19 @@ public class AStar {
     Node adjacentNode = getSearchArea()[row][col];
     if (!adjacentNode.isBlock() && !getClosedSet().contains(adjacentNode)) {
       if (!getOpenList().contains(adjacentNode)) {
-        adjacentNode.setNodeData(currentNode, cost);
+        if (adjacentNode.isBrick()) {
+          adjacentNode.setNodeData(currentNode, 7);
+        } else {
+          adjacentNode.setNodeData(currentNode, cost);
+        }
         getOpenList().add(adjacentNode);
       } else {
-        boolean changed = adjacentNode.checkBetterPath(currentNode, cost);
+        boolean changed;
+        if (adjacentNode.isBrick()) {
+          changed = adjacentNode.checkBetterPath(currentNode, 7);
+        } else {
+          changed = adjacentNode.checkBetterPath(currentNode, cost);
+        }
         if (changed) {
           // Remove and Add the changed node, so that the PriorityQueue can sort again its
           // contents with the modified "finalCost" value of the modified node
@@ -142,6 +151,10 @@ public class AStar {
 
   public void setBlock(int row, int col) {
     this.searchArea[row][col].setBlock(true);
+  }
+
+  public void setBrick(int row, int col) {
+    this.searchArea[row][col].setBrick(true);
   }
 
   public Node getInitialNode() {

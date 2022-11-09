@@ -8,7 +8,6 @@ import entity.animated.mob.Enemy;
 import entity.tile.powerup.PowerUp;
 import entity.tile.Overlay;
 import entity.tile.Tile;
-import exceptions.LoadLevelException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;

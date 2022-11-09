@@ -7,6 +7,7 @@ import ai.Node;
 import entity.Entity;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
+import entity.tile.Brick;
 import entity.tile.Overlay;
 import entity.tile.Tile;
 import entity.tile.Wall;
@@ -77,6 +78,9 @@ public abstract class Mob extends AnimatedEntity {
     for (Tile t : Board.getTileList()) {
       if (t instanceof Wall) {
         aStar.setBlock(t.getY() / 32, t.getX() / 32);
+      }
+      if (t instanceof Brick) {
+        aStar.setBrick(t.getY() / 32, t.getX() / 32);
       }
     }
     for (Bomb t : Board.getBombList()) {
