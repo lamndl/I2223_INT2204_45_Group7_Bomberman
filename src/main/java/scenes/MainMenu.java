@@ -84,6 +84,8 @@ public class MainMenu {
     insidePaneLogoutButton.setVisible(false);
     insidePaneTextArea.setVisible(false);
     setUpAfterLoginAndRegister();
+
+    musicCheckBox.setSelected(!Sound.isBackgroundMute());
   }
 
   @FXML

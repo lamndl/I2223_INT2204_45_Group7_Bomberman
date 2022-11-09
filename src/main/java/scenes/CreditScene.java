@@ -37,9 +37,11 @@ public void initialize(){
 public void facebookOpen(String fxId){
   try{
     if(fxId.equals("facebookNDL")){
-      browserOpener.open("www.google.com");
+      browserOpener.open("https://www.facebook.com/clumsyonce");
+    }else if(fxId.equals("facebookTBH")){
+      browserOpener.open("https://www.facebook.com/hoang.bet.90");
     }else{
-      browserOpener.open("www.youtube.com");
+      browserOpener.open("https://www.facebook.com/vitkondz");
     }
 
   }catch (Exception e){
@@ -66,7 +68,7 @@ public void switchToMainMenu() throws IOException{
 
 public void openGithub()throws IOException{
   try{
-    browserOpener.open("www.github.com");
+    browserOpener.open("https://github.com/lamndl/I2223_INT2204_45_Group7_Bomberman");
   }catch(Exception e){
     System.out.println("There is a error in openGithub");
   }
@@ -82,7 +84,7 @@ public void openMusic() throws IOException{
 
 public void openDocumentation() throws IOException{
   try{
-    browserOpener.open("www.docs.google.com");
+    browserOpener.open("https://docs.google.com/document/d/1Tn18yhuzQIhZt_ZR80_5EUIo4GPmHcR5u_6tk8Q__qE/edit");
   }catch(Exception e){
     System.out.println("There is a error in openDocumentation");
   }

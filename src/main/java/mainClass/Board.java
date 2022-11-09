@@ -3,7 +3,7 @@ package mainClass;
 import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
-import entity.animated.mob.Balloom;
+import entity.animated.mob.enemy.Balloom;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.enemy.Enemy;
 import entity.tile.powerup.PowerUp;

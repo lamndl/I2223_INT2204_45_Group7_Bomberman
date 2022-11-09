@@ -13,8 +13,8 @@ public class HowToPlayScene {
   public ImageView imageViewHowToPlay = new ImageView();
 
   public Image introductionImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/Introduction.png").toString());
-  public Image charactersImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/ComingSoon.png").toString());
-  public Image enemiesImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/ComingSoon.png").toString());
+  public Image charactersImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/Character.png").toString());
+  public Image enemiesImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/Enemies.png").toString());
   public Image keyboardImage = new Image(App.class.getResource("/Pictures/HowToPlayScene/Keyboard-new.png").toString());
   public void switchToIntroductionTab() throws IOException{
     imageViewHowToPlay.setImage(introductionImage);

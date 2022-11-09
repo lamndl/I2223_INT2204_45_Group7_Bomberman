@@ -31,6 +31,8 @@ public class Sound {
 
   private static boolean ingameSound =true;
 
+  private static boolean backgroundMute = false;
+
   /**
    * constructor. HAVE TO CALLED TO INIT BELOW IMPORTANT FUNCTIONS. welcome to change if there's a
    * better way.
@@ -131,6 +133,7 @@ public class Sound {
     for (MediaPlayer mp : backgroundSoundMediaPlayer) {
       mp.setMute(bool);
     }
+    setBackgroundMute(!isBackgroundMute());
   }
 
   /**
@@ -174,5 +177,13 @@ public class Sound {
 
   public static void setCurrentIndexBackgroundSound(int currentIndexBackgroundSound) {
     Sound.currentIndexBackgroundSound = currentIndexBackgroundSound;
+  }
+
+  public static boolean isBackgroundMute() {
+    return backgroundMute;
+  }
+
+  public static void setBackgroundMute(boolean backgroundMute) {
+    Sound.backgroundMute = backgroundMute;
   }
 }
