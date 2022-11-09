@@ -8,12 +8,21 @@ public class Node {
   private int row;
   private int col;
   private boolean isBlock;
+  private boolean isBrick = false;
   private Node parent;
 
   public Node(int row, int col) {
     super();
     this.row = row;
     this.col = col;
+  }
+
+  public boolean isBrick() {
+    return isBrick;
+  }
+
+  public void setBrick(boolean isBrick) {
+    this.isBrick = isBrick;
   }
 
   public void calculateHeuristic(Node finalNode) {
