@@ -6,7 +6,7 @@ import mainClass.Board;
 import sprite.Sprite;
 
 public class Flame extends AnimatedEntity {
-  private int timer = 30;
+  private int timer = 21;
   int pos;
 
   protected Flame(int pos, int x, int y) {
@@ -24,10 +24,10 @@ public class Flame extends AnimatedEntity {
 
   @Override
   public Image getImage() {
-    if (timer > 20) {
+    if (timer > 14) {
       return Sprite.flame[pos * 3];
     }
-    if (timer > 10) {
+    if (timer > 7) {
       return Sprite.flame[pos * 3 + 1];
     }
     return Sprite.flame[pos * 3 + 2];

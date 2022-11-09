@@ -1,7 +1,6 @@
 package level;
 
 import entity.animated.mob.Balloom;
-import entity.animated.mob.Bomber;
 import entity.animated.mob.Oneal;
 import entity.tile.Brick;
 import entity.tile.Grass;

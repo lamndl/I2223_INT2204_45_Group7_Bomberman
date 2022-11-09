@@ -5,7 +5,10 @@ import static mainClass.App.KB;
 import entity.animated.Bomb;
 import entity.tile.Portal;
 import entity.tile.Tile;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import ai.Node;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -16,12 +19,14 @@ import sprite.Sprite;
 public class Bomber extends Mob {
 
   private int bombCount = 1;
-  private int flameLength = 1;
+  private int flameLength = 2;
   private double speedMultiplier = 1;
   protected int timer = 120;
+  public List<Node> path = new ArrayList<>();
 
   public void placeBomb() {
     if (bombCount > 0) {
+      Sound.playInGameSound(4);
       bombCount--;
       Board.addEntity(new Bomb((x + 13) / 32 * 32, (y + 15) / 32 * 32));
       allowThroughBomb = true;
@@ -30,6 +35,40 @@ public class Bomber extends Mob {
 
   public Bomber(int x, int y) {
     super(x, y);
+  }
+
+  public void aiCalculateMove() {
+    if (!path.isEmpty() && path.size() >= 2) {
+      Node nearestNode = path.get(1);
+      if (nearestNode.isBrick()) {
+        placeBomb();
+        return;
+      }
+      if (path.size() <= 3 && !Board.getEnemyList().isEmpty()) {
+        placeBomb();
+        return;
+      }
+      int xx = x - nearestNode.getCol() * 32;
+      int yy = y - nearestNode.getRow() * 32;
+      if (xx < 0) {
+        direction = 1;
+        velocityX = 2;
+        moving = 1;
+      } else if (xx > 0) {
+        direction = 0;
+        velocityX = -2;
+        moving = 1;
+      }
+      if (yy > 0) {
+        direction = 2;
+        velocityY = -2;
+        moving = 1;
+      } else if (yy < 0) {
+        direction = 3;
+        velocityY = 2;
+        moving = 1;
+      }
+    }
   }
 
   public void calculateMove() {
@@ -54,7 +93,6 @@ public class Bomber extends Mob {
         moving = 1;
       } else if (i == KB.getBombPlacement()) {
         placeBomb();
-        Sound.playInGameSound(4);
         iterator.remove();
 
       } else if (i == KB.getInGameMenu()) {
@@ -90,6 +128,7 @@ public class Bomber extends Mob {
       velocityX = 0;
       velocityY = 0;
       moving = 0;
+      aiCalculateMove();
       calculateMove();
       move();
     } else {
@@ -116,7 +155,7 @@ public class Bomber extends Mob {
     if (timer == 0) {
       Board.removeEntity(this);
 
-//       go to scene end game and replay
+      // go to scene end game and replay
       Board.goEndGame();
     }
 
@@ -139,14 +178,17 @@ public class Bomber extends Mob {
 
   @Override
   protected void move() {
-    y += velocityY;
     x += velocityX;
-
     checkWin();
-
     for (Tile i : Board.getTileList()) {
       if (isCollidedWith(i)) {
         x -= velocityX;
+      }
+    }
+    y += velocityY;
+    checkWin();
+    for (Tile i : Board.getTileList()) {
+      if (isCollidedWith(i)) {
         y -= velocityY;
         return;
       }
