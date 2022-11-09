@@ -163,12 +163,18 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <ComboBox layoutX="313.0" layoutY="180.0" prefHeight="26.0" prefWidth="158.0" />
+      <ComboBox fx:id="backgroundSoundBox" layoutX="313.0" layoutY="180.0" onAction="#changeBackgroundSound" prefHeight="26.0" prefWidth="158.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
       <Text fill="WHITE" layoutX="74.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game sound">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button layoutX="313.0" layoutY="240.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="158.0" text="Yes" />
+      <Button fx:id="ingameSoundButton" layoutX="313.0" layoutY="240.0" mnemonicParsing="false" onAction="#toogleIngameSound" prefHeight="16.0" prefWidth="158.0" text="Yes">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
   </children>
 </AnchorPane>
