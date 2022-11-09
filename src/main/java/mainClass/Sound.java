@@ -30,6 +30,8 @@ public class Sound {
    */
   private static ArrayList<Media> soundList = new ArrayList<Media>();
 
+  private static boolean ingameSound =true;
+
   /**
    * constructor. HAVE TO CALLED TO INIT BELOW IMPORTANT FUNCTIONS. welcome to change if there's a
    * better way.
@@ -70,6 +72,7 @@ public class Sound {
    * @param index to choose soundtrack
    */
   public static void playMedia(int index) {
+    backgroundSoundMediaPlayer.get(index).stop();
     backgroundSoundMediaPlayer.get(index).play();
     /**
      * get background replay.
@@ -79,6 +82,7 @@ public class Sound {
       public void run() {
         backgroundSoundMediaPlayer.get(index).seek(Duration.ZERO);
         backgroundSoundMediaPlayer.get(index).play();
+        backgroundSoundMediaPlayer.get(index).dispose();
       }
     });
     currentIndexBackgroundSound = index;
@@ -142,16 +146,34 @@ public class Sound {
   }
 
   public static void playInGameSound(int index) {
-    MediaPlayer player = new MediaPlayer(soundList.get(index));
-    if (index == 3) { // decrease volume when moving
-      player.setVolume(0.1);
-    }
-    player.play();
-    player.setOnEndOfMedia(new Runnable() {
-      @Override
-      public void run() {
-          player.dispose();
+    if(ingameSound) {
+      MediaPlayer player = new MediaPlayer(soundList.get(index));
+      if (index == 3) { // decrease volume when moving
+        player.setVolume(0.1);
       }
-    });
+      player.play();
+      player.setOnEndOfMedia(new Runnable() {
+        @Override
+        public void run() {
+          player.dispose();
+        }
+      });
+    }
+  }
+
+  public static boolean isIngameSound() {
+    return ingameSound;
+  }
+
+  public static void setIngameSound(boolean ingameSound) {
+    Sound.ingameSound = ingameSound;
+  }
+
+  public static int getCurrentIndexBackgroundSound() {
+    return currentIndexBackgroundSound;
+  }
+
+  public static void setCurrentIndexBackgroundSound(int currentIndexBackgroundSound) {
+    Sound.currentIndexBackgroundSound = currentIndexBackgroundSound;
   }
 }
