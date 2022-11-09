@@ -57,8 +57,6 @@ public class MainMenu {
    * If no logged account -> Create new dummy account
    */
 
-  public Button leaderboardButton = new Button();
-
   public void initialize(){
 
     csm = new CharacterSceneManagement();
@@ -273,7 +271,4 @@ public class MainMenu {
     nameButton.setText(label);
   }
 
-  public void switchToLeaderboardScene() throws IOException{
-    App.setRoot("/scenes/leaderboardScene");
-  }
 }

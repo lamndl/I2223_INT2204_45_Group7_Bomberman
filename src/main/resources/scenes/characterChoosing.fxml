@@ -64,8 +64,5 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Text fx:id="informationText" fill="WHITE" layoutX="144.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="365.3367156982422" />
-      <Text fx:id="mapText" fill="WHITE" layoutX="144.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="365.3367156982422" />
-      <Text fx:id="modeText" fill="WHITE" layoutX="144.0" layoutY="561.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="365.3367156982422" />
    </children>
 </AnchorPane>

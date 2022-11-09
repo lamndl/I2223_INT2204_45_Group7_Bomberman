@@ -26,29 +26,11 @@ public class CharacterChoosing {
   private static boolean campaignOrEndless = true;
   private CharacterSceneManagement csm;
   private int currentIndex;
-  public Text informationText = new Text();
-  public Text mapText = new Text();
-  public Text modeText = new Text();
 
   public void initialize() {
     csm = new CharacterSceneManagement();
     currentIndex = csm.getCurrentLength() * 100;
     applyToScene();
-    if(App.mapLevel <=3){
-      informationText.setText("Normal difficulty");
-    }else{
-      informationText.setText("May make you die some more");
-
-    }
-
-    mapText.setText("Map " + App.mapLevel);
-    if(isCampaignOrEndless()){
-      modeText.setText("Campaign mode");
-    }else{
-      modeText.setText("Endless mode");
-    }
-
-
   }
 
   public void goBack() throws IOException {
