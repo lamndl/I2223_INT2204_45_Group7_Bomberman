@@ -34,7 +34,13 @@ public class CharacterChoosing {
     csm = new CharacterSceneManagement();
     currentIndex = csm.getCurrentLength() * 100;
     applyToScene();
-    informationText.setText("No information");
+    if(App.mapLevel <=3){
+      informationText.setText("Normal difficulty");
+    }else{
+      informationText.setText("May make you die some more");
+
+    }
+
     mapText.setText("Map " + App.mapLevel);
     if(isCampaignOrEndless()){
       modeText.setText("Campaign mode");

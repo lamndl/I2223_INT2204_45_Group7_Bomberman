@@ -49,19 +49,34 @@ public Text usernameText1= new Text();
 
   public void comboboxChange(){
     ArrayList<Player> toPrintOut = new ArrayList<>();
+    int status=0;
     if(combobox.getValue().equals("highest score")){
       toPrintOut = PlayerManagement.sortedLeaderboardList(1);
+      status = 1;
     }else if(combobox.getValue().equals("longest time survival")){
       toPrintOut = PlayerManagement.sortedLeaderboardList(2);
+      status = 2;
     }else if(combobox.getValue().equals("enemies killed")){
+      status =3;
       toPrintOut = PlayerManagement.sortedLeaderboardList(3);
     }else if(combobox.getValue().equals("accumulate score")){
       toPrintOut = PlayerManagement.sortedLeaderboardList(4);
+      status = 4;
     }
-//    for(int i = 0 ; i< toPrintOut.size();i++){
-//      usernameText.get(i).setText(toPrintOut.get(i).getUsername());
-//      scoreText.get(i).setText(toPrintOut.get(i).);
-//    }
+    for(int i = 0 ; i< toPrintOut.size();i++){
+      System.out.println(toPrintOut.get(i).toString());
+      usernameText.get(i).setText(toPrintOut.get(i).getUsername());
+      if(status==1){
+        scoreText.get(i).setText(String.valueOf(toPrintOut.get(i).getHighestScore()));
+      }else if(status==2){
+        scoreText.get(i).setText(String.valueOf(toPrintOut.get(i).getLongestTimeSurvivalInEndlessMode()));
+      }else if(status ==3){
+        scoreText.get(i).setText(String.valueOf(toPrintOut.get(i).getEnemiesKilled()));
+      }else if(status ==4){
+        scoreText.get(i).setText(String.valueOf(toPrintOut.get(i).getAccumulateScore()));
+      }
+    }
+
   }
 
   public void goBackMainMenu() throws IOException {

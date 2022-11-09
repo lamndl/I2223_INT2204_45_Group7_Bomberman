@@ -186,7 +186,7 @@ public class PlayerManagement {
     while(count>0){
       count--;
       for(Player p: players){
-        if(idx.contains(p)){
+        if(idx.contains(players.indexOf(p))){
           continue;
         }
         switch (type){
