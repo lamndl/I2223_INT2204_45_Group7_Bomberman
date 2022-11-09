@@ -37,13 +37,13 @@ public class App extends Application {
      * vao in-game bomberman:
      */
     this.stage = stage;
-    //toMainGame();
+    toMainGame();
 
     /**
      * vao menu:
      */
-    scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
-    stage.setScene(scene);
+    // scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
+    // stage.setScene(scene);
 
     stage.getIcons().add(icon);
     stage.setResizable(false);

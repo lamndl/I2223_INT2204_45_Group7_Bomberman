@@ -44,8 +44,6 @@ public class Board {
     return width;
   }
 
-  static LevelLoader lvd;
-
   public static List<Tile> getTileList() {
     return tileList;
   }
@@ -221,7 +219,7 @@ public class Board {
     lvd.clearAll();
     lvd = new FileLevelLoader(level);
 
-    //test random map
+    // test random map
     if (level == 3) {
       lvd.createEntities(3);
     } else {
