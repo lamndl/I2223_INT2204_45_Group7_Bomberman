@@ -41,8 +41,6 @@ public class SettingScene {
   public Button bombPlacementButton = new Button();
 
   public Button inGameMenuButton = new Button();
-  public ComboBox backgroundSoundBox=new ComboBox<String>();
-  public Button ingameSoundButton = new Button();
 
   ///public KeyEvent moveUpKey = new KeyEvent();
 
@@ -84,13 +82,29 @@ public class SettingScene {
     KB.printKeyCodeStatus();
     setTextForButtons();
 
-    backgroundSoundBox.getItems().addAll(
-        "Background 1",
-        "Background 2",
-        "Background 3"
+    //fucking struggling. Luckily not vital.
+    diNgu.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+      @Override
+      public void handle(WorkerStateEvent workerStateEvent) {
+        statusText.setText("");
+      }
+    });
+    diNgu.setOnCancelled(
+        new EventHandler<WorkerStateEvent>() {
+          @Override
+          public void handle(WorkerStateEvent workerStateEvent) {
+            statusText.setText("");
+          }
+        }
     );
-    ingameSoundButton.setText("True");
-
+    diNgu.setOnFailed(
+        new EventHandler<WorkerStateEvent>() {
+          @Override
+          public void handle(WorkerStateEvent workerStateEvent) {
+            statusText.setText("");
+          }
+        }
+    );
   }
 
 
@@ -298,29 +312,5 @@ public class SettingScene {
     bombPlacementButton.setText(KB.getBombPlacement().toString());
     inGameMenuButton.setText(KB.getInGameMenu().toString());
     new Thread(diNgu).start();
-  }
-
-  public void changeBackgroundSound(){
-    Sound.stopBackgroundSound();
-    if(backgroundSoundBox.getValue().equals("Background 1")){
-      Sound.setCurrentIndexBackgroundSound(0);
-      Sound.playMedia(0);
-    }else if(backgroundSoundBox.getValue().equals("Background 2")){
-      Sound.setCurrentIndexBackgroundSound(1);
-      Sound.playMedia(1);
-      System.out.println("chganged");
-    }else if(backgroundSoundBox.getValue().equals("Background 3")){
-      Sound.setCurrentIndexBackgroundSound(2);
-      Sound.playMedia(2);
-    }
-  }
-
-  public void toogleIngameSound(){
-    Sound.setIngameSound(!Sound.isIngameSound());
-    if(Sound.isIngameSound()){
-      ingameSoundButton.setText("True");
-    }else{
-      ingameSoundButton.setText("False");
-    }
   }
 }//end of class
