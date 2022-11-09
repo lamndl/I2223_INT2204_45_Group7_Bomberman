@@ -130,7 +130,7 @@ public class Board {
         frame %= 60;
         if (frame % 20 == 0) {
           overlays.clear();
-          bomber.findPath(enemyList.get(0));
+          // bomber.findPath(enemyList.get(0));
         }
         if (frame % 2 == 0) {
           update();
