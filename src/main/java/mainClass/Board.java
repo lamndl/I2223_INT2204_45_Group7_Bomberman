@@ -8,6 +8,7 @@ import entity.animated.mob.Enemy;
 import entity.tile.powerup.PowerUp;
 import entity.tile.Overlay;
 import entity.tile.Tile;
+import exceptions.LoadLevelException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,6 +45,7 @@ public class Board {
     return width;
   }
 
+  static LevelLoader lvd;
 
   public static List<Tile> getTileList() {
     return tileList;
@@ -64,6 +66,9 @@ public class Board {
     return enemyList;
   }
 
+  public static List<PowerUp> getPowerUpList() {
+    return powerUpList;
+  }
 
   public static Bomber getBomber() {
     return bomber;
@@ -97,7 +102,8 @@ public class Board {
     }
 
     scene = new Scene(root);
-    LevelLoader lvd = new FileLevelLoader(1);
+    bomber = new Bomber(32, 32);
+    lvd = new FileLevelLoader(1);
     lvd.createEntities();
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
@@ -105,7 +111,6 @@ public class Board {
     // ve lai background tu y=476
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
-    bomber = new Bomber(32, 32);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {
@@ -204,6 +209,22 @@ public class Board {
     }
   }
 
+  public static void nextLevel() {
+    loadLevel(lvd.getLevel() + 1);
+  }
+
+  private static void loadLevel(int level) {
+    lvd.clearAll();
+    lvd = new FileLevelLoader(level);
+
+    //test random map
+    if (level == 3) {
+      lvd.createEntities(3);
+    } else {
+      lvd.createEntities();
+    }
+  }
+
   public static void setHeight(int height) {
     Board.height = height;
   }
@@ -211,6 +232,7 @@ public class Board {
   public static void setWidth(int width) {
     Board.width = width;
   }
+
 
   // demo
   public static void goEndGame() {
