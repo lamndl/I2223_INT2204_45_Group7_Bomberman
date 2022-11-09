@@ -3,10 +3,13 @@ package mainClass;
 import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
+import entity.animated.mob.Balloom;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.enemy.Enemy;
 import entity.tile.powerup.PowerUp;
+import entity.tile.Grass;
 import entity.tile.Overlay;
+import entity.tile.Portal;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,6 +79,7 @@ public class Board {
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static List<PowerUp> powerUpList = new ArrayList<>();
+  private static Portal portal;
   public static List<Overlay> overlays = new ArrayList<>();
 
   private static Bomber bomber;
@@ -134,9 +138,26 @@ public class Board {
       public void handle(long now) {
         frame++;
         frame %= 60;
-        if (frame % 20 == 0) {
+        if (frame % 15 == 0) {
           overlays.clear();
-          // bomber.findPath(enemyList.get(0));
+          if (bombList.isEmpty() && !enemyList.isEmpty()) {
+            Enemy nearestEnemy = enemyList.get(0);
+            for (Enemy e : enemyList) {
+              if (e.calculateDistance(bomber) < nearestEnemy.calculateDistance(bomber)) {
+                nearestEnemy = e;
+              }
+            }
+            bomber.path = bomber.findPath(nearestEnemy);
+          } else if (bombList.isEmpty() && enemyList.isEmpty()) {
+            for (Tile t : tileList) {
+              if (t instanceof Portal) {
+                bomber.path = bomber.findPath(t);
+                break;
+              }
+            }
+          } else {
+            bomber.path = bomber.findPath(new Grass(32, 32));
+          }
         }
         if (frame % 2 == 0) {
           update();
@@ -148,6 +169,7 @@ public class Board {
       }
     };
     timer.start();
+
   }
 
   public static void addEntity(Entity entity) {
@@ -228,6 +250,25 @@ public class Board {
       lvd.createEntities(3);
     } else {
       lvd.createEntities();
+    }
+    overlays.clear();
+    if (bombList.isEmpty() && !enemyList.isEmpty()) {
+      Enemy nearestEnemy = enemyList.get(0);
+      for (Enemy e : enemyList) {
+        if (e.calculateDistance(bomber) < nearestEnemy.calculateDistance(bomber)) {
+          nearestEnemy = e;
+        }
+      }
+      bomber.path = bomber.findPath(nearestEnemy);
+    } else if (bombList.isEmpty() && enemyList.isEmpty()) {
+      for (Tile t : tileList) {
+        if (t instanceof Portal) {
+          bomber.path = bomber.findPath(t);
+          break;
+        }
+      }
+    } else {
+      bomber.path = bomber.findPath(new Grass(32, 32));
     }
   }
 

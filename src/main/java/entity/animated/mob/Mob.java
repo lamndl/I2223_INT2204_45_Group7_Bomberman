@@ -69,23 +69,20 @@ public abstract class Mob extends AnimatedEntity {
     this.moving = moving;
   }
 
-  public Node getNode() {
-    return new Node((y + 10) / 32, (x + 10) / 32);
-  }
-
+  /** Hiện giờ đang chỉ để bomber dùng. */
   public List<Node> findPath(Entity entity) {
-    AStar aStar = new AStar(Board.getHeight() / 32, Board.getWidth() / 32, getNode(),
-        ((Mob) entity).getNode());
+    AStar aStar =
+        new AStar(Board.getHeight() / 32, Board.getWidth() / 32, getNode(), entity.getNode());
     for (Tile t : Board.getTileList()) {
-      if (t instanceof Wall || t instanceof Brick) {
+      if (t instanceof Wall) {
         aStar.setBlock(t.getY() / 32, t.getX() / 32);
       }
       if (t instanceof Brick) {
         aStar.setBrick(t.getY() / 32, t.getX() / 32);
       }
     }
-    for (Bomb t : Board.getBombList()) {
-      aStar.setBlock(t.getY() / 32, t.getX() / 32);
+    for (Enemy e : Board.getEnemyList()) {
+      aStar.setBrick((e.getY() + 13) / 32, (e.getX() + 15) / 32);
     }
     List<Node> path = aStar.findPath();
     for (Node i : path) {
@@ -93,5 +90,9 @@ public abstract class Mob extends AnimatedEntity {
       // System.out.println(i);
     }
     return path;
+  }
+
+  public int calculateDistance(Entity entity) {
+    return Math.abs(x - entity.getX()) + Math.abs(y - entity.getY());
   }
 }
