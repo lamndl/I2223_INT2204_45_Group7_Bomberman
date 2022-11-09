@@ -17,6 +17,5 @@ x 1
 2 5
 
 //entity_number
-Có Portal(x), Ballom(1), Oneal(2)
-Không có powerUp
+Có 1 portal, tối đa 4 Balloom và 5 Oneal
 

@@ -280,6 +280,16 @@ public class Sprite {
   public static Image[] oneal =
       {oneal_left1, oneal_left2, oneal_left3, oneal_right1, oneal_right2, oneal_right3};
 
+  public static Image[] doll = {
+      doll_left1, doll_left2, doll_left3, doll_right1, doll_right2, doll_right3};
+
+  public static Image[] minvo = {
+      minvo_left1, minvo_left2, minvo_left3, minvo_right1, minvo_right2, minvo_right3};
+
+  public static Image[] kondoria = {
+      kondoria_left1, kondoria_left2, kondoria_left3, kondoria_right1, kondoria_right2,
+      kondoria_right3};
+
   public static Image[] flame = {bomb_exploded, bomb_exploded1, bomb_exploded2,
       explosion_horizontal_left_last, explosion_horizontal_left_last1,
       explosion_horizontal_left_last2, explosion_horizontal_right_last,
