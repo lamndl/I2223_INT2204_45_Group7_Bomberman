@@ -118,7 +118,7 @@ public class Bomber extends Mob {
       Board.removeEntity(this);
 
 //       go to scene end game and replay
-//      Board.goEndGame();
+      Board.goEndGame();
     }
 
   }
