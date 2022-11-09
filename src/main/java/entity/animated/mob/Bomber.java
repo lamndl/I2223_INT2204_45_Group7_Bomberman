@@ -65,7 +65,6 @@ public class Bomber extends Mob {
       }
     }
 
-
     if (allowThroughBomb) {
       boolean fl = false;
       for (Bomb i : Board.getBombList()) {
@@ -86,6 +85,7 @@ public class Bomber extends Mob {
 
   public void update() {
     if (alive) {
+
       checkHit();
       velocityX = 0;
       velocityY = 0;
@@ -116,8 +116,8 @@ public class Bomber extends Mob {
     if (timer == 0) {
       Board.removeEntity(this);
 
-      // go to scene end game and replay
-      // Board.goEndGame();
+//       go to scene end game and replay
+      Board.goEndGame();
     }
 
   }
@@ -161,7 +161,12 @@ public class Bomber extends Mob {
         }
       }
     }
+  }
 
+
+  public void setLocation(int x, int y) {
+    this.x = x;
+    this.y = y;
   }
 
   @Override
@@ -188,7 +193,7 @@ public class Bomber extends Mob {
     for (Tile i : Board.getTileList()) {
       if ((i instanceof Portal) && this.isCollidedWith(i)) {
         // to next level
-        Board.goEndGame();
+        Board.nextLevel();
         return;
       }
     }

@@ -6,6 +6,7 @@ import entity.animated.Flame;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
 import entity.tile.powerup.PowerUp;
+import entity.tile.Overlay;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +35,17 @@ public class Board {
   private static int height;
   private static int width;
 
+  public static int getHeight() {
+    return height;
+  }
+
+
+  public static int getWidth() {
+    return width;
+  }
+
+  static LevelLoader lvd;
+
   public static List<Tile> getTileList() {
     return tileList;
   }
@@ -53,6 +65,9 @@ public class Board {
     return enemyList;
   }
 
+  public static List<PowerUp> getPowerUpList() {
+    return powerUpList;
+  }
 
   public static Bomber getBomber() {
     return bomber;
@@ -63,6 +78,7 @@ public class Board {
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static List<PowerUp> powerUpList = new ArrayList<>();
+  public static List<Overlay> overlays = new ArrayList<>();
 
   private static Bomber bomber;
 
@@ -87,7 +103,11 @@ public class Board {
     }
 
     scene = new Scene(root);
+
     lvd = new FileLevelLoader(App.mapLevel);
+
+    bomber = new Bomber(32, 32);
+
     lvd.createEntities();
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
@@ -95,7 +115,6 @@ public class Board {
     // ve lai background tu y=476
     root.getChildren().add(canvas);
     graphicsContext = canvas.getGraphicsContext2D();
-    bomber = new Bomber(32, 32);
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent event) {
@@ -113,6 +132,10 @@ public class Board {
       public void handle(long now) {
         frame++;
         frame %= 60;
+        if (frame % 20 == 0) {
+          overlays.clear();
+          bomber.findPath(enemyList.get(0));
+        }
         if (frame % 2 == 0) {
           update();
           render();
@@ -137,6 +160,8 @@ public class Board {
       flameList.add((Flame) entity);
     } else if (entity instanceof Enemy) {
       enemyList.add((Enemy) entity);
+    } else if (entity instanceof Overlay) {
+      overlays.add((Overlay) entity);
     } else {
       bomber = (Bomber) entity;
     }
@@ -166,7 +191,7 @@ public class Board {
     bombList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
     flameList.forEach(i -> i.draw(graphicsContext));
-
+    overlays.forEach(i -> i.draw(graphicsContext));
   }
 
   public static void update() {
@@ -188,6 +213,22 @@ public class Board {
     }
   }
 
+  public static void nextLevel() {
+    loadLevel(lvd.getLevel() + 1);
+  }
+
+  private static void loadLevel(int level) {
+    lvd.clearAll();
+    lvd = new FileLevelLoader(level);
+
+    //test random map
+    if (level == 3) {
+      lvd.createEntities(3);
+    } else {
+      lvd.createEntities();
+    }
+  }
+
   public static void setHeight(int height) {
     Board.height = height;
   }
@@ -195,6 +236,7 @@ public class Board {
   public static void setWidth(int width) {
     Board.width = width;
   }
+
 
   // demo
   public static void goEndGame() {
