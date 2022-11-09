@@ -6,6 +6,7 @@ import entity.animated.Flame;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.Enemy;
 import entity.tile.powerup.PowerUp;
+import entity.tile.Overlay;
 import entity.tile.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +34,16 @@ public class Board {
   private static GraphicsContext graphicsContext;
   private static int height;
   private static int width;
+
+  public static int getHeight() {
+    return height;
+  }
+
+
+  public static int getWidth() {
+    return width;
+  }
+
 
   public static List<Tile> getTileList() {
     return tileList;
@@ -63,6 +74,7 @@ public class Board {
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static List<PowerUp> powerUpList = new ArrayList<>();
+  public static List<Overlay> overlays = new ArrayList<>();
 
   private static Bomber bomber;
 
@@ -111,6 +123,10 @@ public class Board {
       public void handle(long now) {
         frame++;
         frame %= 60;
+        if (frame % 20 == 0) {
+          overlays.clear();
+          bomber.findPath(enemyList.get(0));
+        }
         if (frame % 2 == 0) {
           update();
           render();
@@ -135,6 +151,8 @@ public class Board {
       flameList.add((Flame) entity);
     } else if (entity instanceof Enemy) {
       enemyList.add((Enemy) entity);
+    } else if (entity instanceof Overlay) {
+      overlays.add((Overlay) entity);
     } else {
       bomber = (Bomber) entity;
     }
@@ -164,7 +182,7 @@ public class Board {
     bombList.forEach(i -> i.draw(graphicsContext));
     bomber.draw(graphicsContext);
     flameList.forEach(i -> i.draw(graphicsContext));
-
+    overlays.forEach(i -> i.draw(graphicsContext));
   }
 
   public static void update() {
