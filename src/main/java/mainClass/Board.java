@@ -69,6 +69,8 @@ public class Board {
   public static long frame;
   public static Set<KeyCode> input = new HashSet<>();
 
+  private static LevelLoader lvd;
+
   public static Scene getScene() {
     return scene;
   }
@@ -85,7 +87,7 @@ public class Board {
     }
 
     scene = new Scene(root);
-    LevelLoader lvd = new FileLevelLoader(1);
+    lvd = new FileLevelLoader(App.mapLevel);
     lvd.createEntities();
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
@@ -203,4 +205,11 @@ public class Board {
     root.getChildren().add(b);
   }
 
+  public static LevelLoader getLvd() {
+    return lvd;
+  }
+
+  public static void setLvd(LevelLoader lvd) {
+    Board.lvd = lvd;
+  }
 }

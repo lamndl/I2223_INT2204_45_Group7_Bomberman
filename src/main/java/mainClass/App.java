@@ -1,5 +1,7 @@
 package mainClass;
 
+import static mainClass.Sound.playMedia;
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,8 @@ public class App extends Application {
   public static final int WIDTH = 1024;
   public static final int HEIGHT = 768;
 
+  public static int mapLevel = 1;
+
   @Override
   public void start(Stage stage) throws IOException {
 
@@ -33,20 +37,20 @@ public class App extends Application {
      * vao in-game bomberman:
      */
     this.stage = stage;
-    toMainGame();
+    //toMainGame();
 
     /**
      * vao menu:
      */
-//    scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
-//    stage.setScene(scene);
+    scene = new Scene(loadFxml("/scenes/loadingMenu"), WIDTH, HEIGHT);
+    stage.setScene(scene);
 
     stage.getIcons().add(icon);
     stage.setResizable(false);
     stage.setFullScreen(false);
     stage.show();
     sound = new Sound();
-    //playMedia(0);
+    playMedia(0);
     /**
      * Tam thoi tat tieng. Dcm tieng game buoi dem nghe kinh vcl
      */

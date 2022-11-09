@@ -172,5 +172,54 @@ public class PlayerManagement {
     }
   }
 
+  public static ArrayList<Player> sortedLeaderboardList(int type){
+    /**
+     * type 1 highest score
+     * type 2 longest time
+     * type 4 enemies kill
+     * type 6 accu score
+     */
+    ArrayList<Player> result = new ArrayList<>();
+    ArrayList<Integer> idx = new ArrayList<>();
+    Player hs = new Player("null","null",-10,-10,-10,-10,-10,-10,-10,-10,false,false);
+    int count = Math.min(5,players.size());
+    while(count>0){
+      count--;
+      for(Player p: players){
+        if(idx.contains(p)){
+          continue;
+        }
+        switch (type){
+          case 1:
+            if(p.getHighestScore()>hs.getHighestScore()){
+              hs=p;
+            }
+            break;
+          case 2:
+            if(p.getLongestTimeSurvivalInEndlessMode()>hs.getLongestTimeSurvivalInEndlessMode()){
+              hs=p;
+            }
+            break;
+          case 3:
+            if(p.getEnemiesKilled()>hs.getEnemiesKilled()){
+              hs=p;
+            }
+            break;
+          case 4:
+            if(p.getAccumulateScore()>hs.getAccumulateScore()){
+              hs=p;
+            }
+            break;
+          default:
+            break;
+        }
+      }
+      result.add(new Player(hs));
+      idx.add(players.indexOf(hs));
+      hs = new Player("null","null",-10,-10,-10,-10,-10,-10,-10,-10,false,false);
+    }
+    return result;
+  }
+
 
 }

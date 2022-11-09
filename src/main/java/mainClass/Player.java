@@ -63,6 +63,21 @@ public class Player {
     dummyAccount=dum;
   }
 
+  public Player(Player p) {
+    this.username = p.getUsername();
+    this.password = p.getPassword();
+    this.highestScore = p.getHighestScore();
+    longestTimeSurvivalInEndlessMode = p.getLongestTimeSurvivalInEndlessMode();
+    enemiesKilled= p.getEnemiesKilled();
+    secondsPlayed = p.getSecondsPlayed();
+    numberOfDead = p.getNumberOfDead();
+    blocksBroke = p.getBlocksBroke();
+    accumulateScore = p.getAccumulateScore();
+    lastestScore=p.getLastestScore();
+    logged=p.isLogged();
+    dummyAccount=p.isDummyAccount();
+  }
+
   public String getUserName() {
     return username;
   }

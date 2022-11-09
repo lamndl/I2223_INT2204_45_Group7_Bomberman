@@ -29,20 +29,14 @@ public class CampaignScene {
       final ImageView pic = new ImageView(image);
       vb.getChildren().add(pic);
     }
-//    sc.valueProperty().addListener(new ChangeListener<Number>() {
-//      public void changed(ObservableValue<? extends Number> ov,
-//          Number old_val, Number new_val) {
-//        vb.setLayoutY(-new_val.doubleValue());
-//      }
-//    });
 
     mapView.setImage(getImageSample());
 
   }
 
   public void goMainMenu() throws IOException {
-    App.setRoot("/scenes/mainMenu");
     Sound.playInGameSound(6);
+    App.setRoot("/scenes/mainMenu");
   }
 
   public Image getImageSample(){
@@ -55,8 +49,9 @@ public class CampaignScene {
   }
 
   public void goChoosingCharacterScene() throws IOException{
-    App.setRoot("/scenes/characterChoosing");
     Sound.playInGameSound(6);
+    App.setRoot("/scenes/characterChoosing");
+
   }
 
 }
