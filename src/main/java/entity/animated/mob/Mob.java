@@ -1,14 +1,13 @@
 package entity.animated.mob;
 
+import entity.animated.mob.enemy.Enemy;
 import entity.tile.Brick;
-import java.util.ArrayList;
 import java.util.List;
 import ai.AStar;
 import ai.Node;
 import entity.Entity;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
-import entity.tile.Brick;
 import entity.tile.Overlay;
 import entity.tile.Tile;
 import entity.tile.Wall;

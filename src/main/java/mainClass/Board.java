@@ -5,7 +5,7 @@ import entity.animated.Bomb;
 import entity.animated.Flame;
 import entity.animated.mob.Balloom;
 import entity.animated.mob.Bomber;
-import entity.animated.mob.Enemy;
+import entity.animated.mob.enemy.Enemy;
 import entity.tile.powerup.PowerUp;
 import entity.tile.Grass;
 import entity.tile.Overlay;
@@ -110,7 +110,11 @@ public class Board {
 
     bomber = new Bomber(32, 32);
 
-    lvd.createEntities();
+    if (lvd.getLevel() == 3) {
+      lvd.createEntities(3);
+    } else {
+      lvd.createEntities();
+    }
     canvas = new Canvas(width, height);
     canvas.setLayoutX(16);
     canvas.setLayoutY(30);

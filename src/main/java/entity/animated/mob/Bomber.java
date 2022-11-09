@@ -3,6 +3,7 @@ package entity.animated.mob;
 import static mainClass.App.KB;
 
 import entity.animated.Bomb;
+import entity.animated.mob.enemy.Enemy;
 import entity.tile.Portal;
 import entity.tile.Tile;
 import java.util.ArrayList;
