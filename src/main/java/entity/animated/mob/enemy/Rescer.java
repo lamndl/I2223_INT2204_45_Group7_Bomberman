@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import mainClass.Board;
 import sprite.Sprite;
 
-public class Rescer extends Enemy{
+public class Rescer extends Enemy {
 
   public Rescer(int x, int y) {
     super(x, y);

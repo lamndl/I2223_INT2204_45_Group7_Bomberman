@@ -13,7 +13,7 @@ import sprite.Sprite;
 // like Balloom random speed
 public class Doll extends Enemy {
 
-  private boolean[] canMove = new boolean[] {true, true, true, true};
+  private boolean[] canMove = new boolean[]{true, true, true, true};
 
   public Doll(int x, int y) {
     super(x, y);

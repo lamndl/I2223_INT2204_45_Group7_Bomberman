@@ -61,8 +61,8 @@ public class Bomber extends Mob {
       } else if (i == KB.getInGameMenu()) {
         // To do: tao in game menu
         // respawn
-        x = 32 * 14;
-        y = 32 * 6;
+        x = 32;
+        y = 32;
       }
     }
 

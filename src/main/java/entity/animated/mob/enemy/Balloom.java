@@ -12,7 +12,7 @@ import sprite.Sprite;
 
 public class Balloom extends Enemy {
 
-  private boolean[] canMove = new boolean[] {true, true, true, true};
+  private boolean[] canMove = new boolean[]{true, true, true, true};
 
   public Balloom(int x, int y) {
     super(x, y);
@@ -57,8 +57,8 @@ public class Balloom extends Enemy {
       case 3:
         velocityY = 1;
         break;
-        default:
-            break;
+      default:
+        break;
     }
   }
 

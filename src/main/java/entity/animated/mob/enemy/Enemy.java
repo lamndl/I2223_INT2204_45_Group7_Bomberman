@@ -10,6 +10,7 @@ public abstract class Enemy extends Mob {
     super(x, y);
     moving = 1; //aesthetic purpose only
   }
+
   public void update() {
     if (alive) {
       checkHit();

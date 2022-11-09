@@ -1,11 +1,6 @@
 package level;
 
-import entity.animated.mob.enemy.Balloom;
-import entity.animated.mob.enemy.Doll;
-import entity.animated.mob.enemy.Kondoria;
-import entity.animated.mob.enemy.Minvo;
-import entity.animated.mob.enemy.Oneal;
-import entity.animated.mob.enemy.Rescer;
+import entity.animated.mob.enemy.*;
 import entity.tile.Brick;
 import entity.tile.Grass;
 import entity.tile.Portal;
@@ -241,8 +236,6 @@ public class FileLevelLoader extends LevelLoader {
               continue;
             }
           }
-
-
 
           if (randomList.get('x') > 0) {
             int ran = random.nextInt(0, 150);

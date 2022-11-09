@@ -7,7 +7,7 @@ import mainClass.Board;
 import sprite.Sprite;
 
 //like Oneal but follow with random speed
-public class Minvo extends Enemy{
+public class Minvo extends Enemy {
 
   private boolean follow = false;
   private long timeFollow = 0;  // khi chạm bom sẽ tự né
