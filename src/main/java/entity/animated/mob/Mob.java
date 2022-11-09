@@ -12,6 +12,7 @@ import entity.tile.Overlay;
 import entity.tile.Tile;
 import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
+import mainClass.App;
 import mainClass.Board;
 import mainClass.Sound;
 
@@ -31,6 +32,11 @@ public abstract class Mob extends AnimatedEntity {
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
+      if(this instanceof Enemy){
+        App.currentPlayer.setLastestScore(App.currentPlayer.getLastestScore()+50);
+        App.currentPlayer.setEnemiesKilled(App.currentPlayer.getEnemiesKilled()+1);
+      }
+
     }
   }
 

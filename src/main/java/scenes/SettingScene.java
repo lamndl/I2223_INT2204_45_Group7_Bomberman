@@ -50,12 +50,9 @@ public class SettingScene {
 
 
   private double soundValue; // have to refactor later to use in-game
-  //first show that status is changing
-  //then show finished after changed
-  //then disappear after 3 seconds
-  //remember the method taskname.cancel();
-  private ArrayList<Integer> statusKeyEvent = new ArrayList<Integer>();
 
+  private ArrayList<Integer> statusKeyEvent = new ArrayList<Integer>();
+  public Button ingameAIButton = new Button();
 
 
   Task<Void> diNgu = new Task<Void>(){
@@ -90,7 +87,8 @@ public class SettingScene {
         "Background 3"
     );
     ingameSoundButton.setText("True");
-
+    ingameAIButton.setText("True");
+    //todo:
   }
 
 
@@ -321,6 +319,16 @@ public class SettingScene {
       ingameSoundButton.setText("True");
     }else{
       ingameSoundButton.setText("False");
+    }
+  }
+
+  public void toogleAI(){
+    App.toogleAI = !App.toogleAI;
+    if(App.toogleAI){
+      ingameAIButton.setText("True");
+    }else{
+      ingameAIButton.setText("False");
+
     }
   }
 }//end of class

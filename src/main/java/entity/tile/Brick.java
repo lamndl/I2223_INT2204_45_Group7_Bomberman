@@ -2,6 +2,7 @@ package entity.tile;
 
 import entity.animated.AnimatedEntity;
 import javafx.scene.image.Image;
+import mainClass.App;
 import mainClass.Board;
 import sprite.Sprite;
 
@@ -18,6 +19,7 @@ public class Brick extends Tile {
     for (AnimatedEntity i : Board.getFlameList()) {
       if (getBoundingBox().intersects(i.getBoundingBox())) {
         destroy = true;
+        App.currentPlayer.setBlocksBroke(App.currentPlayer.getBlocksBroke()+1);
         Board.removeEntity(i);
         return;
       }

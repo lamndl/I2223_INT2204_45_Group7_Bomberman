@@ -13,6 +13,7 @@ import ai.Node;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import mainClass.App;
 import mainClass.Board;
 import mainClass.Sound;
 import sprite.Sprite;
@@ -129,8 +130,12 @@ public class Bomber extends Mob {
       velocityX = 0;
       velocityY = 0;
       moving = 0;
-      aiCalculateMove();
-      // calculateMove();
+      if(App.toogleAI){
+        aiCalculateMove();
+      }else{
+        calculateMove();
+      }
+
       move();
     } else {
       die();
@@ -155,7 +160,13 @@ public class Bomber extends Mob {
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
-
+      //check score
+      if(App.currentPlayer.getHighestScore()<App.currentPlayer.getLastestScore()){
+        App.currentPlayer.setHighestScore(App.currentPlayer.getLastestScore());
+      }
+      App.currentPlayer.setAccumulateScore(App.currentPlayer.getAccumulateScore()+App.currentPlayer.getLastestScore());
+      App.currentPlayer.setNumberOfDead(App.currentPlayer.getNumberOfDead()+1);
+      App.currentPlayer.setLastestScore(0);
       // go to scene end game and replay
       Board.goEndGame();
     }
@@ -165,7 +176,16 @@ public class Bomber extends Mob {
   @Override
   public Image getImage() {
     if (alive) {
-      return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+      if(Board.getPlayerNumber()==0){
+        return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
+      } else if(Board.getPlayerNumber()==2){
+        return Sprite.player1[(int) (direction * 3 + moving * (Board.frame / 20))];
+      }else if(Board.getPlayerNumber()==1){
+        return Sprite.player2[(int) (direction * 3 + moving * (Board.frame / 20))];
+      }else{
+        return Sprite.player3[(int) (direction * 3 + moving * (Board.frame / 20))];
+      }
+      //return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
     } else {
       if (timer > 80) {
         return Sprite.player_dead1;
@@ -235,6 +255,7 @@ public class Bomber extends Mob {
     }
     for (Tile i : Board.getTileList()) {
       if ((i instanceof Portal) && this.isCollidedWith(i)) {
+        App.currentPlayer.setLastestScore(App.currentPlayer.getLastestScore()+500);
         // to next level
         Board.nextLevel();
         return;

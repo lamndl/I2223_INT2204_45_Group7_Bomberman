@@ -74,6 +74,99 @@ public class Sprite {
   public static Image player_dead3 =
       new Sprite(DEFAULT_SIZE, 6, 2, SpriteSheet.tiles, 16, 16).getFxImage();
 
+  /**
+   * player1 (red character)
+   */
+  public static Image player1_up =
+      new Sprite(DEFAULT_SIZE, 0, 12, SpriteSheet.tiles, 12, 16).getFxImage();
+  public static Image player1_down =
+      new Sprite(DEFAULT_SIZE, 2, 12, SpriteSheet.tiles, 12, 15).getFxImage();
+  public static Image player1_left =
+      new Sprite(DEFAULT_SIZE, 3, 12, SpriteSheet.tiles, 10, 15).getFxImage();
+  public static Image player1_right =
+      new Sprite(DEFAULT_SIZE, 1, 12, SpriteSheet.tiles, 10, 16).getFxImage();
+
+  public static Image player1_up_1 =
+      new Sprite(DEFAULT_SIZE, 0, 13, SpriteSheet.tiles, 12, 16).getFxImage();
+  public static Image player1_up_2 =
+      new Sprite(DEFAULT_SIZE, 0, 14, SpriteSheet.tiles, 12, 15).getFxImage();
+
+  public static Image player1_down_1 =
+      new Sprite(DEFAULT_SIZE, 2, 13, SpriteSheet.tiles, 12, 15).getFxImage();
+  public static Image player1_down_2 =
+      new Sprite(DEFAULT_SIZE, 2, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+
+  public static Image player1_left_1 =
+      new Sprite(DEFAULT_SIZE, 3, 13, SpriteSheet.tiles, 11, 16).getFxImage();
+  public static Image player1_left_2 =
+      new Sprite(DEFAULT_SIZE, 3, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+
+  public static Image player1_right_1 =
+      new Sprite(DEFAULT_SIZE, 1, 13, SpriteSheet.tiles, 11, 16).getFxImage();
+  public static Image player1_right_2 =
+      new Sprite(DEFAULT_SIZE, 1, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+  /**
+   * player2(green character).
+   */
+  public static Image player2_up =
+      new Sprite(DEFAULT_SIZE, 4, 12, SpriteSheet.tiles, 12, 16).getFxImage();
+  public static Image player2_down =
+      new Sprite(DEFAULT_SIZE, 6, 12, SpriteSheet.tiles, 12, 15).getFxImage();
+  public static Image player2_left =
+      new Sprite(DEFAULT_SIZE, 7, 12, SpriteSheet.tiles, 10, 15).getFxImage();
+  public static Image player2_right =
+      new Sprite(DEFAULT_SIZE, 5, 12, SpriteSheet.tiles, 10, 16).getFxImage();
+
+  public static Image player2_up_1 =
+      new Sprite(DEFAULT_SIZE, 4, 13, SpriteSheet.tiles, 12, 16).getFxImage();
+  public static Image player2_up_2 =
+      new Sprite(DEFAULT_SIZE, 4, 14, SpriteSheet.tiles, 12, 15).getFxImage();
+
+  public static Image player2_down_1 =
+      new Sprite(DEFAULT_SIZE, 6, 13, SpriteSheet.tiles, 12, 15).getFxImage();
+  public static Image player2_down_2 =
+      new Sprite(DEFAULT_SIZE, 6, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+
+  public static Image player2_left_1 =
+      new Sprite(DEFAULT_SIZE, 7, 13, SpriteSheet.tiles, 11, 16).getFxImage();
+  public static Image player2_left_2 =
+      new Sprite(DEFAULT_SIZE, 7, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+
+  public static Image player2_right_1 =
+      new Sprite(DEFAULT_SIZE, 5, 13, SpriteSheet.tiles, 11, 16).getFxImage();
+  public static Image player2_right_2 =
+      new Sprite(DEFAULT_SIZE, 5, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+  /**
+   * player3(blue character)
+   */
+  public static Image player3_up =
+      new Sprite(DEFAULT_SIZE, 8, 12, SpriteSheet.tiles, 12, 16).getFxImage();
+  public static Image player3_down =
+      new Sprite(DEFAULT_SIZE, 10, 12, SpriteSheet.tiles, 12, 15).getFxImage();
+  public static Image player3_left =
+      new Sprite(DEFAULT_SIZE, 11, 12, SpriteSheet.tiles, 10, 15).getFxImage();
+  public static Image player3_right =
+      new Sprite(DEFAULT_SIZE, 9, 12, SpriteSheet.tiles, 10, 16).getFxImage();
+
+  public static Image player3_up_1 =
+      new Sprite(DEFAULT_SIZE, 8, 13, SpriteSheet.tiles, 12, 16).getFxImage();
+  public static Image player3_up_2 =
+      new Sprite(DEFAULT_SIZE, 8, 14, SpriteSheet.tiles, 12, 15).getFxImage();
+
+  public static Image player3_down_1 =
+      new Sprite(DEFAULT_SIZE, 10, 13, SpriteSheet.tiles, 12, 15).getFxImage();
+  public static Image player3_down_2 =
+      new Sprite(DEFAULT_SIZE, 10, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+
+  public static Image player3_left_1 =
+      new Sprite(DEFAULT_SIZE, 11, 13, SpriteSheet.tiles, 11, 16).getFxImage();
+  public static Image player3_left_2 =
+      new Sprite(DEFAULT_SIZE, 11, 14, SpriteSheet.tiles, 12, 16).getFxImage();
+
+  public static Image player3_right_1 =
+      new Sprite(DEFAULT_SIZE, 9, 13, SpriteSheet.tiles, 11, 16).getFxImage();
+  public static Image player3_right_2 =
+      new Sprite(DEFAULT_SIZE, 9, 14, SpriteSheet.tiles, 12, 16).getFxImage();
   /*
    * |-------------------------------------------------------------------------- | Character
    * |--------------------------------------------------------------------------
@@ -317,6 +410,18 @@ public class Sprite {
       explosion_vertical_down_last, explosion_vertical_down_last1, explosion_vertical_down_last2,
       explosion_horizontal, explosion_horizontal1, explosion_horizontal2, explosion_vertical,
       explosion_vertical1, explosion_vertical2};
+  public static Image[] player1 =
+      {player1_left, player1_left_1, player1_left_2, player1_right, player1_right_1,
+          player1_right_2,
+          player1_up, player1_up_1, player1_up_2, player1_down, player1_down_1, player1_down_2};
+  public static Image[] player2 =
+      {player2_left, player2_left_1, player2_left_2, player2_right, player2_right_1,
+          player2_right_2,
+          player2_up, player2_up_1, player2_up_2, player2_down, player2_down_1, player2_down_2};
+  public static Image[] player3 =
+      {player3_left, player3_left_1, player3_left_2, player3_right, player3_right_1,
+          player3_right_2,
+          player3_up, player3_up_1, player3_up_2, player3_down, player3_down_1, player3_down_2};
 
   /*
    * ---------------------------------------- End of sprite image

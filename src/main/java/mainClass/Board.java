@@ -1,5 +1,7 @@
 package mainClass;
 
+import static mainClass.App.currentPlayer;
+
 import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
@@ -26,6 +28,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import level.FileLevelLoader;
 import level.LevelLoader;
 
@@ -81,6 +86,14 @@ public class Board {
   private static List<PowerUp> powerUpList = new ArrayList<>();
   private static Portal portal;
   public static List<Overlay> overlays = new ArrayList<>();
+  /**
+   * ingame information
+   */
+  private static Text ingameName;
+  private static Text ingameScore;
+  private static Text ingameHealth;
+  private static Text ingameTime;
+  private static AnchorPane ap = new AnchorPane();
 
   private static Bomber bomber;
 
@@ -88,6 +101,9 @@ public class Board {
   public static Set<KeyCode> input = new HashSet<>();
 
   private static LevelLoader lvd;
+  private static int playerNumber = 1; //by default
+
+  public static long unresetFrame=0;
 
   public static Scene getScene() {
     return scene;
@@ -133,10 +149,49 @@ public class Board {
         input.remove(keyEvent.getCode());
       }
     });
+    /**
+     * ap and ingame text init
+     */
+    //ap init
+    ap = new AnchorPane();
+    //init of ingameInformation
+    ingameName = new Text();
+    ingameName.setWrappingWidth(500.0);
+    ingameName.setLayoutX(39.0);
+    ingameName.setLayoutY(503.0);
+    ingameName.setText("Name: " + currentPlayer.getUserName());
+    ingameHealth = new Text("Health: 1");
+    //change if we customize the characters
+    ingameHealth.setWrappingWidth(500.0);
+    ingameHealth.setLayoutX(39.0);
+    ingameHealth.setLayoutY(531.0);
+    ingameScore = new Text("Score: 0");
+    ingameScore.setWrappingWidth(500.0);
+    ingameScore.setLayoutX(39.0);
+    ingameScore.setLayoutY(559.0);
+    ingameTime = new Text("Time: 00:00");
+    ingameTime.setWrappingWidth(500.0);
+    ingameTime.setLayoutX(39.0);
+    ingameTime.setLayoutY(587.0);
+    ingameName.setFont(new Font("System",20));
+    ingameTime.setFont(new Font("System",20));
+    ingameHealth.setFont(new Font("System",20));
+    ingameScore.setFont(new Font("System",20));
+
+    root.getChildren().add(ingameName);
+    root.getChildren().add(ingameHealth);
+    root.getChildren().add(ingameScore);
+    root.getChildren().add(ingameTime);
+
+    /**
+     * timing init.
+     */
+    unresetFrame=0;
     AnimationTimer timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
         frame++;
+        unresetFrame++;
         frame %= 60;
         if (frame % 15 == 0) {
           overlays.clear();
@@ -166,6 +221,27 @@ public class Board {
         if (frame % 25 == 0 && bomber.getMoving() == 1) {
           Sound.playInGameSound(3);
         }
+        //for showing
+        if (unresetFrame == Long.MAX_VALUE) {
+          unresetFrame = 0;
+        }
+        if (unresetFrame % 180 == 0) { //increase point per 3 seconds
+          currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
+          ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+        }
+
+        if (unresetFrame % 60 == 0) { //increase second played
+          currentPlayer.setSecondsPlayed(currentPlayer.getSecondsPlayed() + 1);
+          currentPlayer.setDummyAccount(false);//not dummy account any more.
+          long tempSeconds = unresetFrame / 60;
+          long tempMinutes = tempSeconds / 60;
+          tempSeconds%=60;
+          String tempTime = "Time: "+
+              ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
+              (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+          ingameTime.setText(tempTime);
+        }
+
       }
     };
     timer.start();
@@ -296,5 +372,13 @@ public class Board {
 
   public static void setLvd(LevelLoader lvd) {
     Board.lvd = lvd;
+  }
+
+  public static int getPlayerNumber() {
+    return playerNumber;
+  }
+
+  public static void setPlayerNumber(int playerNumber) {
+    Board.playerNumber = playerNumber;
   }
 }

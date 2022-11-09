@@ -44,6 +44,7 @@ public class CampaignScene {
 
   public void setMapChoosing(int mapChoosing) {
     this.mapChoosing = mapChoosing;
+    App.mapLevel=mapChoosing;
   }
 
   public void goMainMenu() throws IOException {
@@ -80,6 +81,7 @@ public class CampaignScene {
     }
 
     mapView.setImage(getImageSample());
+    mapChoosingNotification.setText("You are choosing level " +getMapChoosing());
   }
 
 }

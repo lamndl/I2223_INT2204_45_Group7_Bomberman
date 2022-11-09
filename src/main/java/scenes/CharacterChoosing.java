@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
 import mainClass.App;
+import mainClass.Board;
 import mainClass.Sound;
 
 
@@ -99,6 +100,9 @@ public class CharacterChoosing {
   }
 
   public void switchToMainGame() throws IOException {
+    currentIndex = currentIndex % csm.getCurrentLength();
+
+    Board.setPlayerNumber(currentIndex+1);
     App.toMainGame();
     Sound.playInGameSound(6);
   }

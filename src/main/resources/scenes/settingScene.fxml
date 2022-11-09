@@ -141,7 +141,7 @@
           </font></Tooltip>
       </tooltip>
     </Button>
-    <Text fx:id="statusText" fill="WHITE" layoutX="74.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changing" />
+    <Text fx:id="statusText" fill="WHITE" layoutX="74.0" layoutY="710.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changing" />
     <Text fill="WHITE" layoutX="74.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game menu">
       <font>
         <Font size="20.0" />
@@ -176,5 +176,15 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Text fill="WHITE" layoutX="74.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI auto play">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="ingameAIButton" layoutX="313.0" layoutY="660.0" mnemonicParsing="false" onAction="#toogleAI" prefHeight="16.0" prefWidth="158.0" text="No">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
   </children>
 </AnchorPane>
