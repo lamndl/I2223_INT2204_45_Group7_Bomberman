@@ -1,5 +1,6 @@
 package entity.animated.mob;
 
+import entity.tile.Brick;
 import java.util.ArrayList;
 import java.util.List;
 import ai.AStar;
@@ -16,6 +17,7 @@ import mainClass.Board;
 import mainClass.Sound;
 
 public abstract class Mob extends AnimatedEntity {
+
   protected int hp;
   protected int velocityX;
   protected int velocityY;
@@ -76,7 +78,7 @@ public abstract class Mob extends AnimatedEntity {
     AStar aStar = new AStar(Board.getHeight() / 32, Board.getWidth() / 32, getNode(),
         ((Mob) entity).getNode());
     for (Tile t : Board.getTileList()) {
-      if (t instanceof Wall) {
+      if (t instanceof Wall || t instanceof Brick) {
         aStar.setBlock(t.getY() / 32, t.getX() / 32);
       }
       if (t instanceof Brick) {

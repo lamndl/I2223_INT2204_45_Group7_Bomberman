@@ -1,5 +1,7 @@
 package level;
 
+import java.util.HashMap;
+import java.util.Map;
 import mainClass.Board;
 
 public abstract class LevelLoader {
@@ -7,6 +9,8 @@ public abstract class LevelLoader {
   protected int width;
   protected int height;
   protected int level;
+
+  protected Map<Character, Integer> randomList = new HashMap<Character, Integer>();
 
   protected LevelLoader(int level) {
 
