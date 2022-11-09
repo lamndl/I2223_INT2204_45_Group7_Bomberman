@@ -44,7 +44,7 @@ public class Board {
     return width;
   }
 
-  static LevelLoader lvd;
+
 
   public static List<Tile> getTileList() {
     return tileList;

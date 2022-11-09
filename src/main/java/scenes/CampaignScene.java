@@ -76,10 +76,10 @@ public class CampaignScene {
       setMapChoosing(4);
     }else{
       setMapChoosing(5);
-
     }
-
     mapView.setImage(getImageSample());
   }
+
+
 
 }
