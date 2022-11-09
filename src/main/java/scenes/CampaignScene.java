@@ -56,7 +56,27 @@ public class CampaignScene {
 
   public void goChoosingCharacterScene() throws IOException{
     App.setRoot("/scenes/characterChoosing");
-    Sound.playInGameSound(6);
+
+
   }
+  public void changeMap(){
+    if(combobox.getValue().equals("Map 1")){
+      setMapChoosing(1);
+    }else if(combobox.getValue().equals("Map 2")){
+      setMapChoosing(2);
+    }else if(combobox.getValue().equals("Map 3")){
+      setMapChoosing(3);
+    }else if(combobox.getValue().equals("Map 4")){
+      setMapChoosing(4);
+    }else{
+      setMapChoosing(5);
+    }
+    mapView.setImage(getImageSample());
+
+    Sound.playInGameSound(6);
+
+  }
+
+
 
 }

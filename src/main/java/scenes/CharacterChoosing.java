@@ -81,7 +81,7 @@ public class CharacterChoosing {
   }
 
   public void switchToMainGame() throws IOException {
-    System.out.println("In developing...");
+    App.toMainGame();
     Sound.playInGameSound(6);
   }
 
