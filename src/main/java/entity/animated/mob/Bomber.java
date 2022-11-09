@@ -129,7 +129,7 @@ public class Bomber extends Mob {
       velocityY = 0;
       moving = 0;
       aiCalculateMove();
-      calculateMove();
+      // calculateMove();
       move();
     } else {
       die();

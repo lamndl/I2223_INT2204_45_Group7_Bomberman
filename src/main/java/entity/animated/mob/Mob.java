@@ -70,11 +70,12 @@ public abstract class Mob extends AnimatedEntity {
     this.moving = moving;
   }
 
+  /** Hiện giờ đang chỉ để bomber dùng. */
   public List<Node> findPath(Entity entity) {
     AStar aStar =
         new AStar(Board.getHeight() / 32, Board.getWidth() / 32, getNode(), entity.getNode());
     for (Tile t : Board.getTileList()) {
-      if (t instanceof Wall || t instanceof Brick) {
+      if (t instanceof Wall) {
         aStar.setBlock(t.getY() / 32, t.getX() / 32);
       }
       if (t instanceof Brick) {
