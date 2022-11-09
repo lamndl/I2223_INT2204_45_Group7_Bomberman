@@ -1,6 +1,15 @@
 package entity.animated.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+import ai.AStar;
+import ai.Node;
+import entity.Entity;
 import entity.animated.AnimatedEntity;
+import entity.animated.Bomb;
+import entity.tile.Overlay;
+import entity.tile.Tile;
+import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
 import mainClass.Board;
 import mainClass.Sound;
@@ -58,4 +67,26 @@ public abstract class Mob extends AnimatedEntity {
     this.moving = moving;
   }
 
+  public Node getNode() {
+    return new Node((y + 10) / 32, (x + 10) / 32);
+  }
+
+  public List<Node> findPath(Entity entity) {
+    AStar aStar = new AStar(Board.getHeight() / 32, Board.getWidth() / 32, getNode(),
+        ((Mob) entity).getNode());
+    for (Tile t : Board.getTileList()) {
+      if (t instanceof Wall) {
+        aStar.setBlock(t.getY() / 32, t.getX() / 32);
+      }
+    }
+    for (Bomb t : Board.getBombList()) {
+      aStar.setBlock(t.getY() / 32, t.getX() / 32);
+    }
+    List<Node> path = aStar.findPath();
+    for (Node i : path) {
+      Board.addEntity(new Overlay(i.getCol() * 32, i.getRow() * 32));
+      // System.out.println(i);
+    }
+    return path;
+  }
 }

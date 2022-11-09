@@ -85,6 +85,7 @@ public class Bomber extends Mob {
 
   public void update() {
     if (alive) {
+
       checkHit();
       velocityX = 0;
       velocityY = 0;
