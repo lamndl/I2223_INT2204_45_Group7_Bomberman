@@ -28,7 +28,7 @@ public class FileLevelLoader extends LevelLoader {
   @Override
   public void loadLevel(int level) {
     // TODO: đọc dữ liệu từ tệp cấu hình src/main/resources/levels/Level{level}.txt
-    // TODO: cập nhật các giá trị đọc được vào _width, _height, _level, _map
+    // TODO: cập nhật các giá trị đọc được vào width, height, level, map
     try {
       FileReader file =
           new FileReader("src/main/resources/levels/Level" + Integer.toString(level) + ".txt");
