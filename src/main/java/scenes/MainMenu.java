@@ -149,11 +149,21 @@ public class MainMenu {
 
   public boolean checkValidInformation() {
     if (insidePaneUsernameTextField.getText().length() >= 6
-        && insidePanePasswordTextField.getText().length() >= 6) {
+        && insidePanePasswordTextField.getText().length() >= 6 && checkDuplicate()) {
       return true;
     } else {
       return false;
     }
+  }
+
+  public boolean checkDuplicate() {
+    for (Player i : PlayerManagement.getArrayListPlayer()) {
+      if (insidePaneUsernameTextField.getText().equals(i.getUsername()) &&
+          insidePanePasswordTextField.getText().equals(i.getPassword())) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public void insidePaneShowGuide() {
@@ -219,8 +229,12 @@ public class MainMenu {
       }
 
     } else {
-      insidePaneResultText
-          .setText("Please conform the guide (click on i button for more information)");
+      if (!checkDuplicate()) {
+        insidePaneResultText.setText("Information duplicated");
+      } else {
+        insidePaneResultText
+            .setText("Please conform the guide (click on i button for more information)");
+      }
     }
   }
 
