@@ -72,6 +72,16 @@ public class Bomber extends Mob {
         moving = 1;
       }
     }
+    //in-game pause menu
+    Iterator<KeyCode> iterator = Board.input.iterator();
+    while (iterator.hasNext()) {
+      KeyCode i = iterator.next();
+      if (i == KB.getInGameMenu()) {
+        if (App.coe) {
+          Board.goIngameMenu();
+        }
+      }
+    }
   }
 
   public void calculateMove() {

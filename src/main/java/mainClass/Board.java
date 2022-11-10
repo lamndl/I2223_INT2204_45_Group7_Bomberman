@@ -322,6 +322,10 @@ public class Board {
     for (int i = 0; i < powerUpList.size(); i++) {
       powerUpList.get(i).update();
     }
+    //quick fix overlay, there may be a better way
+    if(!App.toggleAI){
+      overlays.removeAll(overlays);
+    }
   }
 
   public static void nextLevel() {
