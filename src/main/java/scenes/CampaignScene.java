@@ -35,6 +35,7 @@ public class CampaignScene {
 
     mapView.setImage(getImageSample());
     combobox.getItems().addAll("Map 1","Map 2", "Map 3", "Map 4", "Map 5");
+    mapChoosingNotification.setText("You are choosing level " +getMapChoosing());
 
   }
 
