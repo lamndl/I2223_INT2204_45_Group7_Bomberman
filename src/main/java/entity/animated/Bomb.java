@@ -7,6 +7,7 @@ import entity.tile.Wall;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import mainClass.Board;
+import mainClass.Sound;
 import sprite.Sprite;
 
 public class Bomb extends AnimatedEntity {
@@ -27,6 +28,7 @@ public class Bomb extends AnimatedEntity {
   public void explode() {
     Board.getBomber().increaseBomb();
     Board.addEntity(new Flame(0, x, y));
+    Sound.playInGameSound(7);
     int length = Board.getBomber().getFlameLength();
 
     for (int i = 1; i <= length; i++) {

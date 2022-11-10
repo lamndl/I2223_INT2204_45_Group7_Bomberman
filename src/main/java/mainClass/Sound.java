@@ -64,7 +64,7 @@ public class Sound {
     soundList.add(new Media(getClass().getResource("/audio/PlayerPlaceBomb.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/Start.wav").toExternalForm()));
     soundList.add(new Media(getClass().getResource("/audio/clickButton.mp3").toExternalForm()));
-
+    soundList.add(new Media(getClass().getResource("/audio/bombExplode.mp3").toExternalForm()));
   }
 
   /**
