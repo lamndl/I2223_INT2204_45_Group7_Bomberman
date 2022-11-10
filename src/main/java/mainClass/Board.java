@@ -1,6 +1,7 @@
 package mainClass;
 
 import static mainClass.App.currentPlayer;
+import static mainClass.App.toogleAI;
 
 import entity.Entity;
 import entity.animated.Bomb;
@@ -223,7 +224,7 @@ public class Board {
           unresetFrame = 0;
         }
         if (!gameOver) {
-          if (unresetFrame % 180 == 0) { // increase point per 3 seconds
+          if (unresetFrame % 180 == 0) { //increase point per 3 seconds
             currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
             ingameScore.setText("Score: " + currentPlayer.getLastestScore());
           }
@@ -234,9 +235,9 @@ public class Board {
             long tempSeconds = unresetFrame / 60;
             long tempMinutes = tempSeconds / 60;
             tempSeconds %= 60;
-            String tempTime =
-                "Time: " + ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes))
-                    + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+            String tempTime = "Time: " +
+                ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
+                (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
             ingameTime.setText(tempTime);
           }
         }
@@ -328,7 +329,7 @@ public class Board {
     if (App.coe) {
       loadLevel(lvd.getLevel() + 1);
     } else {
-      // get back
+      //get back
       if (lvd.getLevel() == 5) {
         loadLevel(1);
       } else {
@@ -476,7 +477,6 @@ public class Board {
       removeInRoot(canvas);
       removeAllEntity();
       gameOver = true;
-      // timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();

@@ -30,7 +30,7 @@ public class App extends Application {
   public static boolean coe = true;
   public static int mapLevel = 1;
 
-  public static boolean toggleAI = true;
+  public static boolean toogleAI = false;
 
   public static boolean secondTime = false;
 

@@ -231,7 +231,7 @@ public class FileLevelLoader extends LevelLoader {
             if (ran == 0 && !(x < 5 && y < 5)) {
               // add enemy 6
               Board.addEntity(new Grass(x * 32, y * 32));
-              Board.addEntity(new Minvo(x * 32, y * 32));
+              Board.addEntity(new Rescer(x * 32, y * 32));
               randomList.replace('6', randomList.get('6'), randomList.get('6') - 1);
               continue;
             }
