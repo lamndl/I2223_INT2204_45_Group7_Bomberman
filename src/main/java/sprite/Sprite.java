@@ -377,6 +377,8 @@ public class Sprite {
       new Sprite(DEFAULT_SIZE, 5, 10, SpriteSheet.tiles, 16, 16).getFxImage();
   public static Image powerup_flamepass =
       new Sprite(DEFAULT_SIZE, 6, 10, SpriteSheet.tiles, 16, 16).getFxImage();
+  public static Image AIDot =
+      new Sprite(DEFAULT_SIZE, 12, 12, SpriteSheet.tiles, 16, 16).getFxImage();
 
 
   public static Image[] player =

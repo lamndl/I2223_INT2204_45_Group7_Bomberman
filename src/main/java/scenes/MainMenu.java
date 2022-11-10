@@ -47,6 +47,7 @@ public class MainMenu {
   private boolean chaging = false;
   private Alert alert = new Alert(AlertType.ERROR);
   private int currentIndex;
+  //public Button insidePaneChangeInformationButton = new Button();
 
   //private boolean loginOrRegister = true;
   private boolean insidePaneStatClicked = false;

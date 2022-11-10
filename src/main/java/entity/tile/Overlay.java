@@ -21,7 +21,7 @@ public class Overlay extends Entity {
   @Override
   public Image getImage() {
     // TODO Auto-generated method stub
-    return Sprite.explosion_horizontal;
+    return Sprite.AIDot;
   }
 
   @Override
