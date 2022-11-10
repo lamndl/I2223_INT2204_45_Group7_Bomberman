@@ -7,6 +7,7 @@ import mainClass.Sound;
 public class EndlessScene {
 
   public void initialize() {
+    //
   }
 
   public void goBackMainMenu() throws IOException {

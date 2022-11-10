@@ -6,7 +6,6 @@ import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.mob.Bomber;
 import entity.tile.Brick;
-import entity.tile.Overlay;
 import entity.tile.Tile;
 import entity.tile.Wall;
 import java.util.ArrayList;
@@ -77,7 +76,7 @@ public class Rescer extends Enemy {
         path = null;
       }
     }
-    if (follow == true && path != null && !path.isEmpty()) {
+    if (follow && path != null && !path.isEmpty()) {
       Node nearestNode = path.get(1);
       int xx = x - nearestNode.getCol() * 32;
       int yy = y - nearestNode.getRow() * 32;
@@ -117,7 +116,6 @@ public class Rescer extends Enemy {
     for (Bomb t : Board.getBombList()) {
       aStar.setBlock(t.getY() / 32, t.getX() / 32);
     }
-    List<Node> path = aStar.findPath();
-    return path;
+    return aStar.findPath();
   }
 }

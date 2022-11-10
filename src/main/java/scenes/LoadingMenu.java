@@ -1,15 +1,4 @@
 package scenes;
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
-import mainClass.App;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,10 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import java.time.*;
-import mainClass.Keyboard;
+import mainClass.App;
 import mainClass.PlayerManagement;
 import mainClass.Sound;
 
@@ -31,7 +20,7 @@ public class LoadingMenu {
 
 
   protected static ArrayList<String> helpfulTips = new ArrayList<String>(100);
-  private int currentIndex = (int)Math.round(Math.random()*10);
+  private int currentIndex = (int) Math.round(Math.random() * 10);
   public TextArea tipTextField;
   public TextField indicationText = new TextField();
   public FXMLLoader testing = new FXMLLoader(getClass().getResource("/scenes/loadingMenu.fxml"));
@@ -40,9 +29,9 @@ public class LoadingMenu {
 
   public ProgressBar progressBar = new ProgressBar();
 
-  Task<Void> goButtonSleep = new Task<Void>(){
+  Task<Void> goButtonSleep = new Task<Void>() {
     @Override
-    protected Void call() throws Exception{
+    protected Void call() throws Exception {
       // Set the total number of steps in our process
       int steps = 500;
 
@@ -65,7 +54,7 @@ public class LoadingMenu {
     Sound.playInGameSound(6);
   }
 
-  public void initialize(){
+  public void initialize() {
     PlayerManagement.init();
     PlayerManagement.readDataLineByLine("/test.csv");
     progressBar.setProgress(0.0);
@@ -73,10 +62,10 @@ public class LoadingMenu {
     goButton.setDisable(true);
     tipTextField.setStyle("-fx-font-size: 22");
     tipTextField.setCursor(Cursor.OPEN_HAND);
-    try{
+    try {
       changeTip();
-    }catch (Exception e){
-      System.out.println("Sth wrong when init the changetip()");
+    } catch (Exception e) {
+      System.out.println("changetip()");
     }
 
 
@@ -88,7 +77,6 @@ public class LoadingMenu {
         goButton.setDisable(false);
       }
     });
-    //todo:Remove 2 below line after finish game.
     goButton.setText("Go!");
     goButton.setDisable(false);
 
@@ -104,7 +92,8 @@ public class LoadingMenu {
     if (helpfulTips.isEmpty()) {
       helpfulTips.add("Turn off the Unikey if you wonder why your character doesn't move.");
       helpfulTips.add("Sometimes it's better to get score instead of killing enemies.");
-      helpfulTips.add("Fortunately we won't randomly order the tips, so you can read in the sequence.");
+      helpfulTips
+          .add("Fortunately we won't randomly order the tips, so you can read in the sequence.");
       helpfulTips.add("Game too hard? It means you're a noob.");
       helpfulTips.add("Don't move the character adjacent to the bomb and you will alive.");
       helpfulTips.add("You can change the character image in main menu by clicking its image.");

@@ -1,23 +1,26 @@
 package entity.animated.mob;
 
-import entity.animated.mob.enemy.Enemy;
-import entity.tile.Brick;
-import java.util.List;
 import ai.AStar;
 import ai.Node;
 import entity.Entity;
 import entity.animated.AnimatedEntity;
-import entity.animated.Bomb;
 import entity.animated.Flame;
+import entity.animated.mob.enemy.Enemy;
+import entity.tile.Brick;
 import entity.tile.Overlay;
 import entity.tile.Tile;
 import entity.tile.Wall;
+import java.util.List;
 import javafx.geometry.BoundingBox;
 import mainClass.App;
 import mainClass.Board;
 import mainClass.Sound;
 
 public abstract class Mob extends AnimatedEntity {
+
+  public int getHp() {
+    return hp;
+  }
 
   protected int hp;
   protected int velocityX;

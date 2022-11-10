@@ -35,5 +35,6 @@ public class Grass extends Tile {
 
   @Override
   public void update() {
+    //
   }
 }
