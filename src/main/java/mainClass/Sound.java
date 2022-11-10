@@ -1,6 +1,5 @@
 package mainClass;
 
-// import java.time.Duration;
 import java.util.ArrayList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -9,27 +8,27 @@ import javafx.util.Duration;
 public class Sound {
 
   /**
-   * Media of background sound
+   * Media of background sound.
    */
   private static ArrayList<Media> backgroundSoundList = new ArrayList<Media>();
 
 
   /**
-   * MediaPlayer for background sound
+   * MediaPlayer for background sound.
    */
   private static ArrayList<MediaPlayer> backgroundSoundMediaPlayer = new ArrayList<MediaPlayer>();
 
   /**
-   * -1 mean no backgroundSound selected
+   * -1 mean no backgroundSound selected.
    */
-  private static int currentIndexBackgroundSound;
+  private static int currentIndexBackgroundSound = -1;
   /**
    * idea: Keep track of sound in-game, store by ArrayList to easily "throw" when needed not sure if
-   * these below arrayList should change to static or not (static right now)
+   * these below arrayList should change to static or not (static right now).
    */
-  private static ArrayList<Media> soundList = new ArrayList<Media>();
+  private static ArrayList<Media> soundList = new ArrayList<>();
 
-  private static boolean ingameSound =true;
+  private static boolean ingameSound = true;
 
   private static boolean backgroundMute = false;
 
@@ -39,7 +38,6 @@ public class Sound {
    */
   public Sound() {
     importBackgroundSound();
-    currentIndexBackgroundSound = -1;
   }
 
   /**
@@ -117,7 +115,7 @@ public class Sound {
   }
 
   /**
-   * stop all background sound. Game must be quited. No MediaPlayer running.
+   * stop all background sound. Game must be quiet. No MediaPlayer running.
    */
   public static void stopBackgroundSound() {
     for (MediaPlayer mp : backgroundSoundMediaPlayer) {
@@ -148,7 +146,7 @@ public class Sound {
   }
 
   public static void playInGameSound(int index) {
-    if(ingameSound) {
+    if (ingameSound) {
       MediaPlayer player = new MediaPlayer(soundList.get(index));
       if (index == 3) { // decrease volume when moving
         player.setVolume(0.1);

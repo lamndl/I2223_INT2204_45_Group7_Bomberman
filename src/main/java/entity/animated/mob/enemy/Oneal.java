@@ -1,7 +1,6 @@
 package entity.animated.mob.enemy;
 
 import entity.animated.Bomb;
-import entity.animated.mob.enemy.Enemy;
 import entity.tile.Tile;
 import javafx.scene.image.Image;
 import mainClass.Board;
@@ -46,6 +45,7 @@ public class Oneal extends Enemy {
       }
     } else {
       follow = false;
+      timeFollow = 0;
     }
 
     if (follow) {

@@ -5,14 +5,13 @@ import static mainClass.App.currentPlayer;
 import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
-import entity.animated.mob.enemy.Balloom;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.enemy.Enemy;
-import entity.tile.powerup.PowerUp;
 import entity.tile.Grass;
 import entity.tile.Overlay;
 import entity.tile.Portal;
 import entity.tile.Tile;
+import entity.tile.powerup.PowerUp;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -91,7 +90,6 @@ public class Board {
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static List<PowerUp> powerUpList = new ArrayList<>();
-  private static Portal portal;
   public static List<Overlay> overlays = new ArrayList<>();
   /**
    * ingame information
@@ -170,7 +168,7 @@ public class Board {
     ingameName.setLayoutX(39.0);
     ingameName.setLayoutY(503.0);
     ingameName.setText("Name: " + currentPlayer.getUserName());
-    ingameHealth = new Text("Health: 1");
+    ingameHealth = new Text("Health: "+bomber.getHp());
     // change if we customize the characters
     ingameHealth.setWrappingWidth(500.0);
     ingameHealth.setLayoutX(39.0);
@@ -223,9 +221,10 @@ public class Board {
           unresetFrame = 0;
         }
         if (!gameOver) {
-          if (unresetFrame % 180 == 0) { // increase point per 3 seconds
+          if (unresetFrame % 180 == 0) { //increase point per 3 seconds
             currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
             ingameScore.setText("Score: " + currentPlayer.getLastestScore());
+            ingameHealth.setText("Health: "+bomber.getHp());
           }
 
           if (unresetFrame % 60 == 0) { // increase second played
@@ -234,9 +233,9 @@ public class Board {
             long tempSeconds = unresetFrame / 60;
             long tempMinutes = tempSeconds / 60;
             tempSeconds %= 60;
-            String tempTime =
-                "Time: " + ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes))
-                    + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+            String tempTime = "Time: " +
+                ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
+                (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
             ingameTime.setText(tempTime);
           }
         }
@@ -332,7 +331,7 @@ public class Board {
     if (App.coe) {
       loadLevel(lvd.getLevel() + 1);
     } else {
-      // get back
+      //get back
       if (lvd.getLevel() == 5) {
         loadLevel(1);
       } else {
@@ -372,8 +371,6 @@ public class Board {
     Board.width = width;
   }
 
-
-  // demo
   public static void goEndGame() {
 
     timer.stop();
@@ -405,14 +402,10 @@ public class Board {
       removeInRoot(ap);
       removeInRoot(canvas);
       removeAllEntity();
-
-      // timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
       App.goBackMainMenu();
-
-      // setLevelLoader(1);
     });
     gameOver = true;
     ap.getChildren().add(statusText);
@@ -454,16 +447,9 @@ public class Board {
       removeInRoot(b3);
       removeInRoot(statusText);
       removeInRoot(ap);
-      // removeInRoot(canvas);
-      // removeAllEntity();
-
       timer.start();
-      // currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
-      // App.goBackMainMenu();
-
-      // setLevelLoader(1);
     });
 
     b3.setPadding(new Insets(10, 10, 10, 10));
@@ -480,13 +466,10 @@ public class Board {
       removeInRoot(canvas);
       removeAllEntity();
       gameOver = true;
-      // timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
       App.goBackMainMenu();
-
-      // setLevelLoader(1);
     });
     b1.setPadding(new Insets(10, 10, 10, 10));
     b1.setPrefWidth(100.0);
