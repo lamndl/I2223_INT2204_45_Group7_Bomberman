@@ -37,6 +37,7 @@ public class Bomber extends Mob {
 
   public Bomber(int x, int y) {
     super(x, y);
+    hp = 3;
   }
 
   public void aiCalculateMove() {
@@ -160,6 +161,14 @@ public class Bomber extends Mob {
   public void die() {
     timer--;
     if (timer == 0) {
+      hp--;
+      if (hp > 0) {
+        alive = true;
+        timer = 120;
+        x = 32;
+        y = 32;
+        return;
+      }
       Board.removeEntity(this);
       // check score
       if (App.currentPlayer.getHighestScore() < App.currentPlayer.getLastestScore()) {
