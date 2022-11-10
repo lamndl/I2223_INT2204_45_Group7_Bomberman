@@ -209,7 +209,8 @@ public class Board {
         frame++;
         unresetFrame++;
         frame %= 60;
-        if (toogleAI == true && frame % 15 == 0) {
+
+        if (toogleAI == true && frame % 6 == 0) {
           overlays.clear();
           if (bombList.isEmpty() && !enemyList.isEmpty()) {
             Enemy nearestEnemy = enemyList.get(0);

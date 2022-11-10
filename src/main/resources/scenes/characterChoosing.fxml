@@ -59,7 +59,7 @@
       <ImageView fx:id="currentCharacterImage" fitHeight="300.0" fitWidth="150.0" layoutX="455.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="previousCharacterImage" fitHeight="300.0" fitWidth="150.0" layoutX="79.0" layoutY="97.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="nextCharacterImage" fitHeight="300.0" fitWidth="150.0" layoutX="768.0" layoutY="97.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="goButton" layoutX="468.0" layoutY="687.0" mnemonicParsing="false" onAction="#switchToMainGame" text="Let's go">
+      <Button fx:id="goButton" layoutX="468.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToMainGame" text="Let's go">
          <font>
             <Font size="18.0" />
          </font>

@@ -3,6 +3,7 @@ package entity.animated.mob;
 import static mainClass.App.KB;
 
 import entity.animated.Bomb;
+import entity.animated.Flame;
 import entity.animated.mob.enemy.Enemy;
 import entity.tile.Portal;
 import entity.tile.Tile;
@@ -46,7 +47,7 @@ public class Bomber extends Mob {
         placeBomb();
         return;
       }
-      if (path.size() <= 3 && !Board.getEnemyList().isEmpty()) {
+      if (path.size() <= 3 && !Board.getEnemyList().isEmpty() && Board.getBombList().isEmpty()) {
         placeBomb();
         return;
       }

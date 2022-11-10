@@ -11,7 +11,7 @@ public class Oneal extends Enemy {
 
   private boolean follow = false;
 
-  private long timeFollow = 0;  // khi chạm bom sẽ tự né
+  private long timeFollow = 0; // khi chạm bom sẽ tự né
 
   public Oneal(int x, int y) {
     super(x, y);
@@ -34,10 +34,9 @@ public class Oneal extends Enemy {
     int enemyY = (y + 16) / 32;
     int bomberX = (Board.getBomber().getX() + 12) / 32;
     int bomberY = (Board.getBomber().getY() + 16) / 32;
-    follow = false;
 
     // khoảng cách gần thì sẽ đuổi, nếu không thì đi random (đang cho đi ngang)
-    if (Math.pow(enemyX - bomberX, 2) + Math.pow(enemyY - bomberY, 2) < 25) {
+    if (Math.pow(enemyX - bomberX, 2) + Math.pow(enemyY - bomberY, 2) < 10) {
       timeFollow--;
       if (timeFollow < 0) {
         follow = true;
@@ -52,17 +51,24 @@ public class Oneal extends Enemy {
     if (follow) {
       if (enemyX > bomberX) {
         direction = 0;
-        velocityX = -1;
+        velocityX = -2;
       } else if (enemyX < bomberX) {
         direction = 1;
-        velocityX = 1;
+        velocityX = 2;
       }
       if (enemyY > bomberY) {
         direction = 2;
-        velocityY = -1;
+        velocityY = -2;
       } else if (enemyY < bomberY) {
         direction = 3;
-        velocityY = 1;
+        velocityY = 2;
+      }
+    } else {
+      if (Math.abs(velocityX) > 1) {
+        velocityX /= Math.abs(velocityX);
+      }
+      if (Math.abs(velocityY) > 1) {
+        velocityY /= Math.abs(velocityY);
       }
     }
 

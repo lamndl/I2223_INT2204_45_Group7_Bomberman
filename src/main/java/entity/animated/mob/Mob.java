@@ -8,6 +8,7 @@ import ai.Node;
 import entity.Entity;
 import entity.animated.AnimatedEntity;
 import entity.animated.Bomb;
+import entity.animated.Flame;
 import entity.tile.Overlay;
 import entity.tile.Tile;
 import entity.tile.Wall;
@@ -32,9 +33,9 @@ public abstract class Mob extends AnimatedEntity {
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
-      if(this instanceof Enemy){
-        App.currentPlayer.setLastestScore(App.currentPlayer.getLastestScore()+50);
-        App.currentPlayer.setEnemiesKilled(App.currentPlayer.getEnemiesKilled()+1);
+      if (this instanceof Enemy) {
+        App.currentPlayer.setLastestScore(App.currentPlayer.getLastestScore() + 50);
+        App.currentPlayer.setEnemiesKilled(App.currentPlayer.getEnemiesKilled() + 1);
       }
 
     }
@@ -92,8 +93,14 @@ public abstract class Mob extends AnimatedEntity {
       }
     }
     for (Enemy e : Board.getEnemyList()) {
-      aStar.setBrick((e.getY() + 13) / 32, (e.getX() + 15) / 32);
+      if (e != entity) {
+        aStar.setBlock((e.getY() + 13) / 32, (e.getX() + 15) / 32);
+      }
     }
+    for (Flame f : Board.getFlameList()) {
+      aStar.setBlock((f.getY() + 13) / 32, (f.getX() + 15) / 32);
+    }
+
     List<Node> path = aStar.findPath();
     for (Node i : path) {
       Board.addEntity(new Overlay(i.getCol() * 32, i.getRow() * 32));
