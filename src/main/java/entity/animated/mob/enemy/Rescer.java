@@ -67,7 +67,7 @@ public class Rescer extends Enemy {
   @Override
   public void calculateMove() {
     Bomber bomber = Board.getBomber();
-    if (bomber.isAlive()) {
+    if (bomber.isAlive() && !(isCollidedWith(bomber))) {
       if (calculateDistance(bomber) < 300) {
         follow = true;
         path = findPath(bomber);
