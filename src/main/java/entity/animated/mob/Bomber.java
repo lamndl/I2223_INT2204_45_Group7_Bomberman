@@ -136,7 +136,7 @@ public class Bomber extends Mob {
       velocityX = 0;
       velocityY = 0;
       moving = 0;
-      if(App.toogleAI){
+      if(App.toggleAI){
         aiCalculateMove();
       }else{
         calculateMove();

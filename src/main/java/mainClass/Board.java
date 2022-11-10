@@ -108,9 +108,9 @@ public class Board {
   public static Set<KeyCode> input = new HashSet<>();
 
   private static LevelLoader lvd;
-  private static int playerNumber = 1; //by default
+  private static int playerNumber = 1; // by default
 
-  public static long unresetFrame=0;
+  public static long unresetFrame = 0;
   public static boolean gameOver = false;
 
   public static AnimationTimer timer;
@@ -162,16 +162,16 @@ public class Board {
     /**
      * ap and ingame text init
      */
-    //ap init
+    // ap init
     ap = new AnchorPane();
-    //init of ingameInformation
+    // init of ingameInformation
     ingameName = new Text();
     ingameName.setWrappingWidth(500.0);
     ingameName.setLayoutX(39.0);
     ingameName.setLayoutY(503.0);
     ingameName.setText("Name: " + currentPlayer.getUserName());
     ingameHealth = new Text("Health: 1");
-    //change if we customize the characters
+    // change if we customize the characters
     ingameHealth.setWrappingWidth(500.0);
     ingameHealth.setLayoutX(39.0);
     ingameHealth.setLayoutY(531.0);
@@ -183,10 +183,10 @@ public class Board {
     ingameTime.setWrappingWidth(500.0);
     ingameTime.setLayoutX(39.0);
     ingameTime.setLayoutY(587.0);
-    ingameName.setFont(new Font("System",20));
-    ingameTime.setFont(new Font("System",20));
-    ingameHealth.setFont(new Font("System",20));
-    ingameScore.setFont(new Font("System",20));
+    ingameName.setFont(new Font("System", 20));
+    ingameTime.setFont(new Font("System", 20));
+    ingameHealth.setFont(new Font("System", 20));
+    ingameScore.setFont(new Font("System", 20));
 
     root.getChildren().add(ingameName);
     root.getChildren().add(ingameHealth);
@@ -196,38 +196,20 @@ public class Board {
     /**
      * timing init.
      */
-    unresetFrame=0;
+    unresetFrame = 0;
     timerInit();
 
   }
 
-  public static void timerInit(){
+  public static void timerInit() {
     timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
         frame++;
         unresetFrame++;
         frame %= 60;
-        if (frame % 6 == 0) {
-          overlays.clear();
-          if (bombList.isEmpty() && !enemyList.isEmpty()) {
-            Enemy nearestEnemy = enemyList.get(0);
-            for (Enemy e : enemyList) {
-              if (e.calculateDistance(bomber) < nearestEnemy.calculateDistance(bomber)) {
-                nearestEnemy = e;
-              }
-            }
-            bomber.path = bomber.findPath(nearestEnemy);
-          } else if (bombList.isEmpty() && enemyList.isEmpty()) {
-            for (Tile t : tileList) {
-              if (t instanceof Portal) {
-                bomber.path = bomber.findPath(t);
-                break;
-              }
-            }
-          } else {
-            bomber.path = bomber.findPath(new Grass(32, 32));
-          }
+        if (App.toggleAI && frame % 6 == 0) {
+          findPath();
         }
         if (frame % 2 == 0) {
           update();
@@ -236,25 +218,25 @@ public class Board {
         if (frame % 25 == 0 && bomber.getMoving() == 1) {
           Sound.playInGameSound(3);
         }
-        //for showing
+        // for showing
         if (unresetFrame == Long.MAX_VALUE) {
           unresetFrame = 0;
         }
-        if(!gameOver){
-          if (unresetFrame % 180 == 0) { //increase point per 3 seconds
+        if (!gameOver) {
+          if (unresetFrame % 180 == 0) { // increase point per 3 seconds
             currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
-            ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+            ingameScore.setText("Score: " + currentPlayer.getLastestScore());
           }
 
-          if (unresetFrame % 60 == 0) { //increase second played
+          if (unresetFrame % 60 == 0) { // increase second played
             currentPlayer.setSecondsPlayed(currentPlayer.getSecondsPlayed() + 1);
-            currentPlayer.setDummyAccount(false);//not dummy account any more.
+            currentPlayer.setDummyAccount(false);// not dummy account any more.
             long tempSeconds = unresetFrame / 60;
             long tempMinutes = tempSeconds / 60;
-            tempSeconds%=60;
-            String tempTime = "Time: "+
-                ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
-                (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+            tempSeconds %= 60;
+            String tempTime =
+                "Time: " + ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes))
+                    + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
             ingameTime.setText(tempTime);
           }
         }
@@ -284,14 +266,14 @@ public class Board {
     }
   }
 
-  public static void removeAllEntity(){
+  public static void removeAllEntity() {
     powerUpList.removeAll(powerUpList);
     tileList.removeAll(tileList);
     bombList.removeAll(bombList);
     flameList.removeAll(flameList);
     enemyList.removeAll(enemyList);
     overlays.removeAll(overlays);
-    if(!gameOver){
+    if (!gameOver) {
       bomber.die();
     }
   }
@@ -343,13 +325,13 @@ public class Board {
   }
 
   public static void nextLevel() {
-    if(App.coe){
+    if (App.coe) {
       loadLevel(lvd.getLevel() + 1);
-    }else{
-      //get back
-      if(lvd.getLevel()==5){
+    } else {
+      // get back
+      if (lvd.getLevel() == 5) {
         loadLevel(1);
-      }else{
+      } else {
         loadLevel(lvd.getLevel() + 1);
 
       }
@@ -361,7 +343,7 @@ public class Board {
     /**
      * when reach the max level
      */
-    if(level>5){
+    if (level > 5) {
       goEndGame();
       return;
     }
@@ -375,25 +357,7 @@ public class Board {
     } else {
       lvd.createEntities();
     }
-    overlays.clear();
-    if (bombList.isEmpty() && !enemyList.isEmpty()) {
-      Enemy nearestEnemy = enemyList.get(0);
-      for (Enemy e : enemyList) {
-        if (e.calculateDistance(bomber) < nearestEnemy.calculateDistance(bomber)) {
-          nearestEnemy = e;
-        }
-      }
-      bomber.path = bomber.findPath(nearestEnemy);
-    } else if (bombList.isEmpty() && enemyList.isEmpty()) {
-      for (Tile t : tileList) {
-        if (t instanceof Portal) {
-          bomber.path = bomber.findPath(t);
-          break;
-        }
-      }
-    } else {
-      bomber.path = bomber.findPath(new Grass(32, 32));
-    }
+    findPath();
   }
 
   public static void setHeight(int height) {
@@ -417,7 +381,7 @@ public class Board {
     BackgroundFill bgfill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
     Background bg = new Background(bgfill);
     ap.setBackground(bg);
-    //Text
+    // Text
     Text statusText = new Text("Game over. Your score: " + ingameScore.getText().substring(7));
     Font f = new Font("System", 24);
     statusText.setFont(f);
@@ -438,22 +402,22 @@ public class Board {
       removeInRoot(canvas);
       removeAllEntity();
 
-      //timer.start();
+      // timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
       App.goBackMainMenu();
 
-      //setLevelLoader(1);
+      // setLevelLoader(1);
     });
-    gameOver=true;
+    gameOver = true;
     ap.getChildren().add(statusText);
     ap.getChildren().add(b2);
     root.getChildren().add(ap);
-    App.secondTime=true;
+    App.secondTime = true;
   }
 
-  public static void goIngameMenu(){
+  public static void goIngameMenu() {
     timer.stop();
     ap.setLayoutX(219.0);
     ap.setLayoutY(259.0);
@@ -463,7 +427,7 @@ public class Board {
     BackgroundFill bgfill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
     Background bg = new Background(bgfill);
     ap.setBackground(bg);
-    //Text
+    // Text
     Text statusText = new Text("Game paused");
     Font f = new Font("System", 24);
     statusText.setFont(f);
@@ -486,16 +450,16 @@ public class Board {
       removeInRoot(b3);
       removeInRoot(statusText);
       removeInRoot(ap);
-      //removeInRoot(canvas);
-      //removeAllEntity();
+      // removeInRoot(canvas);
+      // removeAllEntity();
 
       timer.start();
-      //currentPlayer.setLastestScore(0);
+      // currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
-      //App.goBackMainMenu();
+      // App.goBackMainMenu();
 
-      //setLevelLoader(1);
+      // setLevelLoader(1);
     });
 
     b3.setPadding(new Insets(10, 10, 10, 10));
@@ -511,14 +475,14 @@ public class Board {
       removeInRoot(ap);
       removeInRoot(canvas);
       removeAllEntity();
-      gameOver=true;
-      //timer.start();
+      gameOver = true;
+      // timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
       App.goBackMainMenu();
 
-      //setLevelLoader(1);
+      // setLevelLoader(1);
     });
     b1.setPadding(new Insets(10, 10, 10, 10));
     b1.setPrefWidth(100.0);
@@ -559,12 +523,12 @@ public class Board {
     Board.playerNumber = playerNumber;
   }
 
-  public static void clearInput(){
+  public static void clearInput() {
     input = new HashSet<>();
   }
 
-  public static void removeInRoot(Node n){
-    if(root.getChildren().contains(n)){
+  public static void removeInRoot(Node n) {
+    if (root.getChildren().contains(n)) {
       root.getChildren().remove(n);
     }
   }
@@ -577,5 +541,26 @@ public class Board {
     root = g;
   }
 
+  public static void findPath() {
+    overlays.clear();
+    if (bombList.isEmpty() && !enemyList.isEmpty()) {
+      Enemy nearestEnemy = enemyList.get(0);
+      for (Enemy e : enemyList) {
+        if (e.calculateDistance(bomber) < nearestEnemy.calculateDistance(bomber)) {
+          nearestEnemy = e;
+        }
+      }
+      bomber.path = bomber.findPath(nearestEnemy);
+    } else if (bombList.isEmpty() && enemyList.isEmpty()) {
+      for (Tile t : tileList) {
+        if (t instanceof Portal) {
+          bomber.path = bomber.findPath(t);
+          break;
+        }
+      }
+    } else {
+      bomber.path = bomber.findPath(new Grass(32, 32));
+    }
+  }
 
 }

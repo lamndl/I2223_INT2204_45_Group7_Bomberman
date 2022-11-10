@@ -87,7 +87,7 @@ public class SettingScene {
         "Background 3"
     );
     ingameSoundButton.setText(String.valueOf(Sound.isIngameSound()).toUpperCase());
-    ingameAIButton.setText(String.valueOf(App.toogleAI).toUpperCase());
+    ingameAIButton.setText(String.valueOf(App.toggleAI).toUpperCase());
 
   }
 
@@ -324,8 +324,8 @@ public class SettingScene {
   }
 
   public void toogleAI(){
-    App.toogleAI = !App.toogleAI;
-    if(App.toogleAI){
+    App.toggleAI = !App.toggleAI;
+    if(App.toggleAI){
       ingameAIButton.setText("True");
     }else{
       ingameAIButton.setText("False");

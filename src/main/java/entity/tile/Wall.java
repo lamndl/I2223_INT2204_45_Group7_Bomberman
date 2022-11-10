@@ -1,8 +1,6 @@
 package entity.tile;
 
-import entity.animated.AnimatedEntity;
 import javafx.scene.image.Image;
-import mainClass.Board;
 import sprite.Sprite;
 
 public class Wall extends Tile {

@@ -30,7 +30,7 @@ public class App extends Application {
   public static boolean coe = true;
   public static int mapLevel = 1;
 
-  public static boolean toogleAI = true;
+  public static boolean toggleAI = true;
 
   public static boolean secondTime = false;
 
@@ -57,9 +57,6 @@ public class App extends Application {
     stage.show();
     sound = new Sound();
     playMedia(0);
-    /**
-     * Tam thoi tat tieng. Dcm tieng game buoi dem nghe kinh vcl
-     */
   }
 
   public static void toMainGame() {
