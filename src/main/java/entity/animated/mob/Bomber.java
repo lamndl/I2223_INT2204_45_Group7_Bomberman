@@ -2,15 +2,14 @@ package entity.animated.mob;
 
 import static mainClass.App.KB;
 
+import ai.Node;
 import entity.animated.Bomb;
-import entity.animated.Flame;
 import entity.animated.mob.enemy.Enemy;
 import entity.tile.Portal;
 import entity.tile.Tile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import ai.Node;
 import javafx.geometry.BoundingBox;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -99,14 +98,10 @@ public class Bomber extends Mob {
         iterator.remove();
 
       } else if (i == KB.getInGameMenu()) {
-        if(App.coe){
-          // To do: tao in game menu
-          // respawn
-          //x = 32;
-          //y = 32;
+        if (App.coe) {
           Board.goIngameMenu();
         }
-      } else if(i ==KeyCode.F5){
+      } else if (i == KeyCode.F5) {
         Board.nextLevel();
       }
     }
@@ -136,11 +131,11 @@ public class Bomber extends Mob {
       velocityX = 0;
       velocityY = 0;
       moving = 0;
-      if(App.toggleAI){
+      if (App.toggleAI) {
         aiCalculateMove();
-      }else{
-        calculateMove();
       }
+      calculateMove();
+
 
       move();
     } else {
@@ -166,18 +161,19 @@ public class Bomber extends Mob {
     timer--;
     if (timer == 0) {
       Board.removeEntity(this);
-      //check score
-      if(App.currentPlayer.getHighestScore()<App.currentPlayer.getLastestScore()){
+      // check score
+      if (App.currentPlayer.getHighestScore() < App.currentPlayer.getLastestScore()) {
         App.currentPlayer.setHighestScore(App.currentPlayer.getLastestScore());
       }
-      App.currentPlayer.setAccumulateScore(App.currentPlayer.getAccumulateScore()+App.currentPlayer.getLastestScore());
-      App.currentPlayer.setNumberOfDead(App.currentPlayer.getNumberOfDead()+1);
+      App.currentPlayer.setAccumulateScore(
+          App.currentPlayer.getAccumulateScore() + App.currentPlayer.getLastestScore());
+      App.currentPlayer.setNumberOfDead(App.currentPlayer.getNumberOfDead() + 1);
       App.currentPlayer.setLastestScore(0);
       // go to scene end game and replay
 
-      if(!App.coe){
-        if(App.currentPlayer.getLongestTimeSurvivalInEndlessMode()<Board.unresetFrame/60){
-          App.currentPlayer.setLongestTimeSurvivalInEndlessMode(Board.unresetFrame/60);
+      if (!App.coe) {
+        if (App.currentPlayer.getLongestTimeSurvivalInEndlessMode() < Board.unresetFrame / 60) {
+          App.currentPlayer.setLongestTimeSurvivalInEndlessMode(Board.unresetFrame / 60);
         }
       }
       Board.goEndGame();
@@ -188,16 +184,15 @@ public class Bomber extends Mob {
   @Override
   public Image getImage() {
     if (alive) {
-      if(Board.getPlayerNumber()==0){
+      if (Board.getPlayerNumber() == 0) {
         return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
-      } else if(Board.getPlayerNumber()==2){
+      } else if (Board.getPlayerNumber() == 2) {
         return Sprite.player1[(int) (direction * 3 + moving * (Board.frame / 20))];
-      }else if(Board.getPlayerNumber()==1){
+      } else if (Board.getPlayerNumber() == 1) {
         return Sprite.player2[(int) (direction * 3 + moving * (Board.frame / 20))];
-      }else{
+      } else {
         return Sprite.player3[(int) (direction * 3 + moving * (Board.frame / 20))];
       }
-      //return Sprite.player[(int) (direction * 3 + moving * (Board.frame / 20))];
     } else {
       if (timer > 80) {
         return Sprite.player_dead1;
@@ -267,7 +262,7 @@ public class Bomber extends Mob {
     }
     for (Tile i : Board.getTileList()) {
       if ((i instanceof Portal) && this.isCollidedWith(i)) {
-        App.currentPlayer.setLastestScore(App.currentPlayer.getLastestScore()+500);
+        App.currentPlayer.setLastestScore(App.currentPlayer.getLastestScore() + 500);
         // to next level
         Board.nextLevel();
         return;
