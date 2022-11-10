@@ -1,19 +1,17 @@
 package mainClass;
 
 import static mainClass.App.currentPlayer;
-import static mainClass.App.toogleAI;
 
 import entity.Entity;
 import entity.animated.Bomb;
 import entity.animated.Flame;
-import entity.animated.mob.enemy.Balloom;
 import entity.animated.mob.Bomber;
 import entity.animated.mob.enemy.Enemy;
-import entity.tile.powerup.PowerUp;
 import entity.tile.Grass;
 import entity.tile.Overlay;
 import entity.tile.Portal;
 import entity.tile.Tile;
+import entity.tile.powerup.PowerUp;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -92,7 +90,6 @@ public class Board {
   private static List<Flame> flameList = new ArrayList<>();
   private static List<Enemy> enemyList = new ArrayList<>();
   private static List<PowerUp> powerUpList = new ArrayList<>();
-  private static Portal portal;
   public static List<Overlay> overlays = new ArrayList<>();
   /**
    * ingame information
@@ -369,8 +366,6 @@ public class Board {
     Board.width = width;
   }
 
-
-  // demo
   public static void goEndGame() {
 
     timer.stop();
@@ -402,14 +397,10 @@ public class Board {
       removeInRoot(ap);
       removeInRoot(canvas);
       removeAllEntity();
-
-      // timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
       App.goBackMainMenu();
-
-      // setLevelLoader(1);
     });
     gameOver = true;
     ap.getChildren().add(statusText);
@@ -451,16 +442,9 @@ public class Board {
       removeInRoot(b3);
       removeInRoot(statusText);
       removeInRoot(ap);
-      // removeInRoot(canvas);
-      // removeAllEntity();
-
       timer.start();
-      // currentPlayer.setLastestScore(0);
       statusText.setText("");
       clearInput();
-      // App.goBackMainMenu();
-
-      // setLevelLoader(1);
     });
 
     b3.setPadding(new Insets(10, 10, 10, 10));
@@ -481,8 +465,6 @@ public class Board {
       statusText.setText("");
       clearInput();
       App.goBackMainMenu();
-
-      // setLevelLoader(1);
     });
     b1.setPadding(new Insets(10, 10, 10, 10));
     b1.setPrefWidth(100.0);
