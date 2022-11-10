@@ -43,7 +43,7 @@ public class App extends Application {
      * vao in-game bomberman:
      */
     this.stage = stage;
-//    toMainGame();
+    //toMainGame();
 
     /**
      * vao menu:
