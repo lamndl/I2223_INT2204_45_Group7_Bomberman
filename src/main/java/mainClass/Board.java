@@ -168,7 +168,7 @@ public class Board {
     ingameName.setLayoutX(39.0);
     ingameName.setLayoutY(503.0);
     ingameName.setText("Name: " + currentPlayer.getUserName());
-    ingameHealth = new Text("Health: 1");
+    ingameHealth = new Text("Health: "+bomber.getHp());
     // change if we customize the characters
     ingameHealth.setWrappingWidth(500.0);
     ingameHealth.setLayoutX(39.0);
@@ -224,6 +224,7 @@ public class Board {
           if (unresetFrame % 180 == 0) { //increase point per 3 seconds
             currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
             ingameScore.setText("Score: " + currentPlayer.getLastestScore());
+            ingameHealth.setText("Health: "+bomber.getHp());
           }
 
           if (unresetFrame % 60 == 0) { // increase second played

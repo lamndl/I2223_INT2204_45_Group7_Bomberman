@@ -1,7 +1,6 @@
 package entity.animated.mob.enemy;
 
 import entity.animated.Bomb;
-import entity.animated.mob.enemy.Enemy;
 import entity.tile.Brick;
 import entity.tile.Tile;
 import entity.tile.Wall;
