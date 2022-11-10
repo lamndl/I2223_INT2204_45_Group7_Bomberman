@@ -107,6 +107,7 @@ public class CharacterChoosing {
     Board.setPlayerNumber(currentIndex+1);
     App.toMainGame();
     Board.unresetFrame=0;
+    Board.gameOver=false;
     Sound.playInGameSound(6);
   }
 

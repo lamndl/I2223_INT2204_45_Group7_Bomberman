@@ -105,6 +105,8 @@ public class Bomber extends Mob {
           //y = 32;
           Board.goIngameMenu();
         }
+      } else if(i ==KeyCode.F5){
+        Board.nextLevel();
       }
     }
 

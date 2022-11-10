@@ -349,6 +349,9 @@ public class Board {
       //get back
       if(lvd.getLevel()==5){
         loadLevel(1);
+      }else{
+        loadLevel(lvd.getLevel() + 1);
+
       }
     }
 
@@ -363,6 +366,8 @@ public class Board {
       return;
     }
     lvd.clearAll();
+    removeAllEntity();
+    clearInput();
     lvd = new FileLevelLoader(level);
     // test random map
     if (level == 3) {
@@ -466,6 +471,7 @@ public class Board {
     statusText.setLayoutX(145.0);
     statusText.setLayoutY(54.0);
     statusText.setTextAlignment(TextAlignment.valueOf("CENTER"));
+
     Button b2 = new Button("Continue");
     b2.setPadding(new Insets(10, 10, 10, 10));
     b2.setPrefWidth(100.0);
@@ -487,7 +493,6 @@ public class Board {
 
       //setLevelLoader(1);
     });
-    gameOver=true;
     ap.getChildren().add(statusText);
     ap.getChildren().add(b2);
     root.getChildren().add(ap);
