@@ -30,7 +30,7 @@ public class App extends Application {
   public static boolean coe = true;
   public static int mapLevel = 1;
 
-  public static boolean toogleAI = true;
+  public static boolean toogleAI = false;
 
   public static boolean secondTime = false;
 
@@ -43,7 +43,7 @@ public class App extends Application {
      * vao in-game bomberman:
      */
     this.stage = stage;
-    //toMainGame();
+//    toMainGame();
 
     /**
      * vao menu:

@@ -18,7 +18,6 @@ public abstract class Enemy extends Mob {
     } else {
       die();
     }
-
   }
 
 }

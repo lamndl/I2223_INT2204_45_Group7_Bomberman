@@ -1,6 +1,7 @@
 package mainClass;
 
 import static mainClass.App.currentPlayer;
+import static mainClass.App.toogleAI;
 
 import entity.Entity;
 import entity.animated.Bomb;
@@ -110,7 +111,7 @@ public class Board {
   private static LevelLoader lvd;
   private static int playerNumber = 1; //by default
 
-  public static long unresetFrame=0;
+  public static long unresetFrame = 0;
   public static boolean gameOver = false;
 
   public static AnimationTimer timer;
@@ -183,10 +184,10 @@ public class Board {
     ingameTime.setWrappingWidth(500.0);
     ingameTime.setLayoutX(39.0);
     ingameTime.setLayoutY(587.0);
-    ingameName.setFont(new Font("System",20));
-    ingameTime.setFont(new Font("System",20));
-    ingameHealth.setFont(new Font("System",20));
-    ingameScore.setFont(new Font("System",20));
+    ingameName.setFont(new Font("System", 20));
+    ingameTime.setFont(new Font("System", 20));
+    ingameHealth.setFont(new Font("System", 20));
+    ingameScore.setFont(new Font("System", 20));
 
     root.getChildren().add(ingameName);
     root.getChildren().add(ingameHealth);
@@ -196,19 +197,19 @@ public class Board {
     /**
      * timing init.
      */
-    unresetFrame=0;
+    unresetFrame = 0;
     timerInit();
 
   }
 
-  public static void timerInit(){
+  public static void timerInit() {
     timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
         frame++;
         unresetFrame++;
         frame %= 60;
-        if (frame % 15 == 0) {
+        if (toogleAI == true && frame % 15 == 0) {
           overlays.clear();
           if (bombList.isEmpty() && !enemyList.isEmpty()) {
             Enemy nearestEnemy = enemyList.get(0);
@@ -240,10 +241,10 @@ public class Board {
         if (unresetFrame == Long.MAX_VALUE) {
           unresetFrame = 0;
         }
-        if(!gameOver){
+        if (!gameOver) {
           if (unresetFrame % 180 == 0) { //increase point per 3 seconds
             currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
-            ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+            ingameScore.setText("Score: " + currentPlayer.getLastestScore());
           }
 
           if (unresetFrame % 60 == 0) { //increase second played
@@ -251,8 +252,8 @@ public class Board {
             currentPlayer.setDummyAccount(false);//not dummy account any more.
             long tempSeconds = unresetFrame / 60;
             long tempMinutes = tempSeconds / 60;
-            tempSeconds%=60;
-            String tempTime = "Time: "+
+            tempSeconds %= 60;
+            String tempTime = "Time: " +
                 ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
                 (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
             ingameTime.setText(tempTime);
@@ -284,14 +285,14 @@ public class Board {
     }
   }
 
-  public static void removeAllEntity(){
+  public static void removeAllEntity() {
     powerUpList.removeAll(powerUpList);
     tileList.removeAll(tileList);
     bombList.removeAll(bombList);
     flameList.removeAll(flameList);
     enemyList.removeAll(enemyList);
     overlays.removeAll(overlays);
-    if(!gameOver){
+    if (!gameOver) {
       bomber.die();
     }
   }
@@ -343,13 +344,13 @@ public class Board {
   }
 
   public static void nextLevel() {
-    if(App.coe){
+    if (App.coe) {
       loadLevel(lvd.getLevel() + 1);
-    }else{
+    } else {
       //get back
-      if(lvd.getLevel()==5){
+      if (lvd.getLevel() == 5) {
         loadLevel(1);
-      }else{
+      } else {
         loadLevel(lvd.getLevel() + 1);
 
       }
@@ -361,7 +362,7 @@ public class Board {
     /**
      * when reach the max level
      */
-    if(level>5){
+    if (level > 5) {
       goEndGame();
       return;
     }
@@ -446,14 +447,14 @@ public class Board {
 
       //setLevelLoader(1);
     });
-    gameOver=true;
+    gameOver = true;
     ap.getChildren().add(statusText);
     ap.getChildren().add(b2);
     root.getChildren().add(ap);
-    App.secondTime=true;
+    App.secondTime = true;
   }
 
-  public static void goIngameMenu(){
+  public static void goIngameMenu() {
     timer.stop();
     ap.setLayoutX(219.0);
     ap.setLayoutY(259.0);
@@ -511,7 +512,7 @@ public class Board {
       removeInRoot(ap);
       removeInRoot(canvas);
       removeAllEntity();
-      gameOver=true;
+      gameOver = true;
       //timer.start();
       currentPlayer.setLastestScore(0);
       statusText.setText("");
@@ -559,12 +560,12 @@ public class Board {
     Board.playerNumber = playerNumber;
   }
 
-  public static void clearInput(){
+  public static void clearInput() {
     input = new HashSet<>();
   }
 
-  public static void removeInRoot(Node n){
-    if(root.getChildren().contains(n)){
+  public static void removeInRoot(Node n) {
+    if (root.getChildren().contains(n)) {
       root.getChildren().remove(n);
     }
   }

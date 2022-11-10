@@ -75,6 +75,10 @@ public abstract class Mob extends AnimatedEntity {
     this.moving = moving;
   }
 
+  public boolean isAlive() {
+    return alive;
+  }
+
   /** Hiện giờ đang chỉ để bomber dùng. */
   public List<Node> findPath(Entity entity) {
     AStar aStar =
@@ -93,7 +97,6 @@ public abstract class Mob extends AnimatedEntity {
     List<Node> path = aStar.findPath();
     for (Node i : path) {
       Board.addEntity(new Overlay(i.getCol() * 32, i.getRow() * 32));
-      // System.out.println(i);
     }
     return path;
   }

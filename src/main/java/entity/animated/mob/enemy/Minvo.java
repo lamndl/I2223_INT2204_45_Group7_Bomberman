@@ -15,8 +15,7 @@ public class Minvo extends Enemy {
   public Minvo(int x, int y) {
     super(x, y);
     velocityX = speed;
-    velocityX = 1;
-    velocityY = 1;
+    velocityY = speed;
   }
 
   @Override
