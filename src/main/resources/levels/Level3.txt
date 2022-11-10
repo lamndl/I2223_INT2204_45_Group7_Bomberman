@@ -17,7 +17,7 @@ x 1
 2 5
 3 2
 4 2
-5 1
+6 1
 
 //entity_number
 Có 1 portal, tối đa 4 Balloom và 5 Oneal
