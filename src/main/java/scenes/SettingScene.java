@@ -86,9 +86,9 @@ public class SettingScene {
         "Background 2",
         "Background 3"
     );
-    ingameSoundButton.setText("True");
-    ingameAIButton.setText("True");
-    //todo:
+    ingameSoundButton.setText(String.valueOf(Sound.isIngameSound()).toUpperCase());
+    ingameAIButton.setText(String.valueOf(App.toogleAI).toUpperCase());
+
   }
 
 
@@ -320,6 +320,7 @@ public class SettingScene {
     }else{
       ingameSoundButton.setText("False");
     }
+    cancelAllChangeButton(true);
   }
 
   public void toogleAI(){
@@ -328,7 +329,8 @@ public class SettingScene {
       ingameAIButton.setText("True");
     }else{
       ingameAIButton.setText("False");
-
     }
+    cancelAllChangeButton(true);
+
   }
 }//end of class

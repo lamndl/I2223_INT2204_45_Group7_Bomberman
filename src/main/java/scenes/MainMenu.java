@@ -96,6 +96,7 @@ public class MainMenu {
       App.setRoot("/scenes/campaignScene");
       CharacterChoosing.setCampaignOrEndless(true);
     }
+    App.coe=true;
 
   }
 
@@ -106,6 +107,9 @@ public class MainMenu {
       App.setRoot("/scenes/endlessScene");
       CharacterChoosing.setCampaignOrEndless(false);
     }
+    App.coe=false;
+    App.mapLevel=1;
+
   }
 
   public void switchToSettingScene() throws IOException {

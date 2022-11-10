@@ -98,10 +98,13 @@ public class Bomber extends Mob {
         iterator.remove();
 
       } else if (i == KB.getInGameMenu()) {
-        // To do: tao in game menu
-        // respawn
-        x = 32;
-        y = 32;
+        if(App.coe){
+          // To do: tao in game menu
+          // respawn
+          //x = 32;
+          //y = 32;
+          Board.goIngameMenu();
+        }
       }
     }
 
@@ -168,6 +171,12 @@ public class Bomber extends Mob {
       App.currentPlayer.setNumberOfDead(App.currentPlayer.getNumberOfDead()+1);
       App.currentPlayer.setLastestScore(0);
       // go to scene end game and replay
+
+      if(App.coe){
+        if(App.currentPlayer.getLongestTimeSurvivalInEndlessMode()<Board.unresetFrame/60){
+          App.currentPlayer.setLongestTimeSurvivalInEndlessMode(Board.unresetFrame/60);
+        }
+      }
       Board.goEndGame();
     }
 

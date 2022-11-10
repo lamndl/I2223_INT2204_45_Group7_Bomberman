@@ -21,7 +21,9 @@ import java.util.Set;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -29,8 +31,13 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import level.FileLevelLoader;
 import level.LevelLoader;
 
@@ -104,6 +111,9 @@ public class Board {
   private static int playerNumber = 1; //by default
 
   public static long unresetFrame=0;
+  public static boolean gameOver = false;
+
+  public static AnimationTimer timer;
 
   public static Scene getScene() {
     return scene;
@@ -187,7 +197,12 @@ public class Board {
      * timing init.
      */
     unresetFrame=0;
-    AnimationTimer timer = new AnimationTimer() {
+    timerInit();
+
+  }
+
+  public static void timerInit(){
+    timer = new AnimationTimer() {
       @Override
       public void handle(long now) {
         frame++;
@@ -225,27 +240,29 @@ public class Board {
         if (unresetFrame == Long.MAX_VALUE) {
           unresetFrame = 0;
         }
-        if (unresetFrame % 180 == 0) { //increase point per 3 seconds
-          currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
-          ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+        if(!gameOver){
+          if (unresetFrame % 180 == 0) { //increase point per 3 seconds
+            currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
+            ingameScore.setText("Score: "+currentPlayer.getLastestScore());
+          }
+
+          if (unresetFrame % 60 == 0) { //increase second played
+            currentPlayer.setSecondsPlayed(currentPlayer.getSecondsPlayed() + 1);
+            currentPlayer.setDummyAccount(false);//not dummy account any more.
+            long tempSeconds = unresetFrame / 60;
+            long tempMinutes = tempSeconds / 60;
+            tempSeconds%=60;
+            String tempTime = "Time: "+
+                ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
+                (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+            ingameTime.setText(tempTime);
+          }
         }
 
-        if (unresetFrame % 60 == 0) { //increase second played
-          currentPlayer.setSecondsPlayed(currentPlayer.getSecondsPlayed() + 1);
-          currentPlayer.setDummyAccount(false);//not dummy account any more.
-          long tempSeconds = unresetFrame / 60;
-          long tempMinutes = tempSeconds / 60;
-          tempSeconds%=60;
-          String tempTime = "Time: "+
-              ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
-              (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
-          ingameTime.setText(tempTime);
-        }
 
       }
     };
     timer.start();
-
   }
 
   public static void addEntity(Entity entity) {
@@ -264,6 +281,18 @@ public class Board {
       overlays.add((Overlay) entity);
     } else {
       bomber = (Bomber) entity;
+    }
+  }
+
+  public static void removeAllEntity(){
+    powerUpList.removeAll(powerUpList);
+    tileList.removeAll(tileList);
+    bombList.removeAll(bombList);
+    flameList.removeAll(flameList);
+    enemyList.removeAll(enemyList);
+    overlays.removeAll(overlays);
+    if(!gameOver){
+      bomber.die();
     }
   }
 
@@ -314,13 +343,27 @@ public class Board {
   }
 
   public static void nextLevel() {
-    loadLevel(lvd.getLevel() + 1);
+    if(App.coe){
+      loadLevel(lvd.getLevel() + 1);
+    }else{
+      //get back
+      if(lvd.getLevel()==5){
+        loadLevel(1);
+      }
+    }
+
   }
 
   private static void loadLevel(int level) {
+    /**
+     * when reach the max level
+     */
+    if(level>5){
+      goEndGame();
+      return;
+    }
     lvd.clearAll();
     lvd = new FileLevelLoader(level);
-
     // test random map
     if (level == 3) {
       lvd.createEntities(3);
@@ -359,11 +402,95 @@ public class Board {
 
   // demo
   public static void goEndGame() {
-    Button b = new Button("END GAME");
-    b.setMinSize(200, 200);
-    b.setLayoutX(width / 2 - 100);
-    b.setLayoutY(50);
-    root.getChildren().add(b);
+
+    timer.stop();
+    ap.setLayoutX(219.0);
+    ap.setLayoutY(259.0);
+    ap.setPrefHeight(250.0);
+    ap.setPrefWidth(586.0);
+    ap.setMinSize(290.0, 250.0);
+    BackgroundFill bgfill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
+    Background bg = new Background(bgfill);
+    ap.setBackground(bg);
+    //Text
+    Text statusText = new Text("Game over. Your score: " + ingameScore.getText().substring(7));
+    Font f = new Font("System", 24);
+    statusText.setFont(f);
+    statusText.setWrappingWidth(296.607);
+    statusText.setLayoutX(145.0);
+    statusText.setLayoutY(54.0);
+    statusText.setTextAlignment(TextAlignment.valueOf("CENTER"));
+    Button b2 = new Button("Back");
+    b2.setPadding(new Insets(10, 10, 10, 10));
+    b2.setPrefWidth(100.0);
+    b2.setPrefHeight(38.0);
+    b2.setLayoutX(243.0);
+    b2.setLayoutY(164.0);
+    b2.setOnAction(e -> {
+      removeInRoot(b2);
+      removeInRoot(statusText);
+      removeInRoot(ap);
+      removeInRoot(canvas);
+      removeAllEntity();
+
+      //timer.start();
+      currentPlayer.setLastestScore(0);
+      statusText.setText("");
+      clearInput();
+      App.goBackMainMenu();
+
+      //setLevelLoader(1);
+    });
+    gameOver=true;
+    ap.getChildren().add(statusText);
+    ap.getChildren().add(b2);
+    root.getChildren().add(ap);
+    App.secondTime=true;
+  }
+
+  public static void goIngameMenu(){
+    timer.stop();
+    ap.setLayoutX(219.0);
+    ap.setLayoutY(259.0);
+    ap.setPrefHeight(250.0);
+    ap.setPrefWidth(586.0);
+    ap.setMinSize(290.0, 250.0);
+    BackgroundFill bgfill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
+    Background bg = new Background(bgfill);
+    ap.setBackground(bg);
+    //Text
+    Text statusText = new Text("Game paused");
+    Font f = new Font("System", 24);
+    statusText.setFont(f);
+    statusText.setWrappingWidth(296.607);
+    statusText.setLayoutX(145.0);
+    statusText.setLayoutY(54.0);
+    statusText.setTextAlignment(TextAlignment.valueOf("CENTER"));
+    Button b2 = new Button("Continue");
+    b2.setPadding(new Insets(10, 10, 10, 10));
+    b2.setPrefWidth(100.0);
+    b2.setPrefHeight(38.0);
+    b2.setLayoutX(243.0);
+    b2.setLayoutY(164.0);
+    b2.setOnAction(e -> {
+      removeInRoot(b2);
+      removeInRoot(statusText);
+      removeInRoot(ap);
+      //removeInRoot(canvas);
+      //removeAllEntity();
+
+      timer.start();
+      //currentPlayer.setLastestScore(0);
+      statusText.setText("");
+      clearInput();
+      //App.goBackMainMenu();
+
+      //setLevelLoader(1);
+    });
+    gameOver=true;
+    ap.getChildren().add(statusText);
+    ap.getChildren().add(b2);
+    root.getChildren().add(ap);
   }
 
   public static LevelLoader getLvd() {
@@ -381,4 +508,24 @@ public class Board {
   public static void setPlayerNumber(int playerNumber) {
     Board.playerNumber = playerNumber;
   }
+
+  public static void clearInput(){
+    input = new HashSet<>();
+  }
+
+  public static void removeInRoot(Node n){
+    if(root.getChildren().contains(n)){
+      root.getChildren().remove(n);
+    }
+  }
+
+  public static Group getRoot() {
+    return root;
+  }
+
+  public static void setRoot(Group g) {
+    root = g;
+  }
+
+
 }

@@ -5,6 +5,7 @@ import static mainClass.Sound.playMedia;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,7 +18,7 @@ public class App extends Application {
 
   public static Keyboard KB = new Keyboard();
   private static Scene scene;
-  private static Stage stage;
+  public static Stage stage;
   public Sound sound;
 
   public static boolean inAccount = false;
@@ -26,9 +27,12 @@ public class App extends Application {
   public static final int WIDTH = 1024;
   public static final int HEIGHT = 768;
 
+  public static boolean coe = true;
   public static int mapLevel = 1;
 
   public static boolean toogleAI = true;
+
+  public static boolean secondTime = false;
 
   @Override
   public void start(Stage stage) throws IOException {
@@ -80,6 +84,18 @@ public class App extends Application {
     return fxmlLoader.load();
   }
 
+  public static void goBackMainMenu(){
+    Board.setRoot(new Group());
+    stage.setScene(null);
+    try{
+      setRoot("/scenes/mainMenu");
+    }catch(Exception eie){
+      System.out.println(eie);
+    }
+
+    stage.setScene(scene);
+
+  }
   public static void main(String[] args) {
     launch();
   }

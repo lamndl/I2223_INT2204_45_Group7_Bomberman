@@ -1,5 +1,7 @@
 package scenes;
 
+import static mainClass.App.secondTime;
+
 import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
@@ -24,7 +26,7 @@ public class CharacterChoosing {
   public ImageView previousCharacterImage = new ImageView();
   public ImageView currentCharacterImage = new ImageView();
   public ImageView nextCharacterImage = new ImageView();
-  private static boolean campaignOrEndless = true;
+  private static boolean campaignOrEndless = App.coe;
   private CharacterSceneManagement csm;
   private int currentIndex;
   public Text informationText = new Text();
@@ -104,6 +106,7 @@ public class CharacterChoosing {
 
     Board.setPlayerNumber(currentIndex+1);
     App.toMainGame();
+    Board.unresetFrame=0;
     Sound.playInGameSound(6);
   }
 
