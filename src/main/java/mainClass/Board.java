@@ -168,7 +168,7 @@ public class Board {
     ingameName.setLayoutX(39.0);
     ingameName.setLayoutY(503.0);
     ingameName.setText("Name: " + currentPlayer.getUserName());
-    ingameHealth = new Text("Health: "+bomber.getHp());
+    ingameHealth = new Text("Health: " + bomber.getHp());
     // change if we customize the characters
     ingameHealth.setWrappingWidth(500.0);
     ingameHealth.setLayoutX(39.0);
@@ -221,10 +221,10 @@ public class Board {
           unresetFrame = 0;
         }
         if (!gameOver) {
-          if (unresetFrame % 180 == 0) { //increase point per 3 seconds
+          if (unresetFrame % 180 == 0) { // increase point per 3 seconds
             currentPlayer.setLastestScore(currentPlayer.getLastestScore() + 1);
             ingameScore.setText("Score: " + currentPlayer.getLastestScore());
-            ingameHealth.setText("Health: "+bomber.getHp());
+            ingameHealth.setText("Health: " + bomber.getHp());
           }
 
           if (unresetFrame % 60 == 0) { // increase second played
@@ -233,9 +233,9 @@ public class Board {
             long tempSeconds = unresetFrame / 60;
             long tempMinutes = tempSeconds / 60;
             tempSeconds %= 60;
-            String tempTime = "Time: " +
-                ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes)) + ":" + (
-                (tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
+            String tempTime =
+                "Time: " + ((tempMinutes < 10) ? ("0" + tempMinutes) : Long.toString(tempMinutes))
+                    + ":" + ((tempSeconds < 10) ? ("0" + tempSeconds) : Long.toString(tempSeconds));
             ingameTime.setText(tempTime);
           }
         }
@@ -327,7 +327,7 @@ public class Board {
     if (App.coe) {
       loadLevel(lvd.getLevel() + 1);
     } else {
-      //get back
+      // get back
       if (lvd.getLevel() == 5) {
         loadLevel(1);
       } else {
@@ -356,7 +356,9 @@ public class Board {
     } else {
       lvd.createEntities();
     }
-    findPath();
+    if (App.toggleAI) {
+      findPath();
+    }
   }
 
   public static void setHeight(int height) {

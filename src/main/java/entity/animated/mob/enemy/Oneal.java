@@ -51,17 +51,17 @@ public class Oneal extends Enemy {
     if (follow) {
       if (enemyX > bomberX) {
         direction = 0;
-        velocityX = -2;
+        velocityX = -(int)(Math.random() + 1);
       } else if (enemyX < bomberX) {
         direction = 1;
-        velocityX = 2;
+        velocityX = (int)(Math.random() + 1);
       }
       if (enemyY > bomberY) {
         direction = 2;
-        velocityY = -2;
+        velocityY = -(int)(Math.random() + 1);
       } else if (enemyY < bomberY) {
         direction = 3;
-        velocityY = 2;
+        velocityY = (int)(Math.random() + 1);
       }
     } else {
       if (Math.abs(velocityX) > 1) {

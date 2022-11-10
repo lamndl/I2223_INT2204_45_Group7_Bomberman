@@ -164,6 +164,9 @@ public class Bomber extends Mob {
       hp--;
       if (hp > 0) {
         alive = true;
+        if (App.toggleAI) {
+          Board.findPath();
+        }
         timer = 120;
         x = 32;
         y = 32;
