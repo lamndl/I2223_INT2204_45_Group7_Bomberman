@@ -74,7 +74,7 @@ public class PlayerManagement {
       // adding header to csv
       String[] header = {"username", "password", "highestScore", "longestTimeSurvivalInEndlessMode",
           "secondsPlayed", "enemiesKilled", "numberOfDead", "blocksBroke", "accumulateScore",
-          "lastestScore", "logged", "dummy"};
+          "latestScore", "logged", "dummy"};
 
       writer.writeNext(header);
 
@@ -142,12 +142,10 @@ public class PlayerManagement {
     int targetStringLength = 10;
     Random random = new Random();
 
-    String generatedString = random.ints(leftLimit, rightLimit + 1)
+    return random.ints(leftLimit, rightLimit + 1)
         .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(targetStringLength)
         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
         .toString();
-
-    return generatedString;
   }
 
   public static Player getLoggedAccount() {
@@ -169,7 +167,7 @@ public class PlayerManagement {
 
   public static ArrayList<Player> sortedLeaderboardList(int type) {
     /**
-     * type 1 highest score type 2 longest time type 4 enemies kill type 6 accu score
+     * type 1 highest score type 2 longest time type 4 enemies kill type 6 accu score .
      */
     ArrayList<Player> result = new ArrayList<>();
     ArrayList<Integer> idx = new ArrayList<>();

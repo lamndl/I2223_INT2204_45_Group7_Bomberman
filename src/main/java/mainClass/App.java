@@ -19,7 +19,7 @@ public class App extends Application {
   public static Keyboard KB = new Keyboard();
   private static Scene scene;
   public static Stage stage;
-  public Sound sound;
+  public static Sound sound;
 
   public static boolean inAccount = false;
   public static Player currentPlayer;
@@ -43,7 +43,7 @@ public class App extends Application {
      * vao in-game bomberman:
      */
     this.stage = stage;
-    //toMainGame();
+    // toMainGame();
 
     /**
      * vao menu:
@@ -81,18 +81,19 @@ public class App extends Application {
     return fxmlLoader.load();
   }
 
-  public static void goBackMainMenu(){
+  public static void goBackMainMenu() {
     Board.setRoot(new Group());
     stage.setScene(null);
-    try{
+    try {
       setRoot("/scenes/mainMenu");
-    }catch(Exception eie){
+    } catch (Exception eie) {
       System.out.println(eie);
     }
 
     stage.setScene(scene);
 
   }
+
   public static void main(String[] args) {
     launch();
   }

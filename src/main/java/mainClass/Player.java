@@ -4,16 +4,16 @@ public class Player {
 
   private String username;
   private String password;
-  private double highestScore; //ok
+  private double highestScore; // ok
   private double longestTimeSurvivalInEndlessMode;
-  private int secondsPlayed; //ok
-  private int enemiesKilled; //ok
-  private int numberOfDead; //ok
-  private int blocksBroke; //ok
+  private int secondsPlayed; // ok
+  private int enemiesKilled; // ok
+  private int numberOfDead; // ok
+  private int blocksBroke; // ok
   private long accumulateScore;
-  private long lastestScore; //ok
-  private boolean logged; //must be set individually
-  private boolean dummyAccount;//not dummy anymore if scored.
+  private long latestScore; // ok
+  private boolean logged; // must be set individually
+  private boolean dummyAccount;// not dummy anymore if scored.
 
   public Player(String userName, String password) {
     this.username = userName;
@@ -21,19 +21,19 @@ public class Player {
     this.highestScore = 0.0;
     longestTimeSurvivalInEndlessMode = 0.0;
     secondsPlayed = 0;
-    enemiesKilled=0;
+    enemiesKilled = 0;
     numberOfDead = 0;
     blocksBroke = 0;
     accumulateScore = 0;
-    lastestScore =0;
+    latestScore = 0;
     logged = false;
-    dummyAccount=false;
+    dummyAccount = false;
   }
 
   /**
    * dummy account creation
    */
-  public Player(String u1, String p1, boolean da){
+  public Player(String u1, String p1, boolean da) {
     this.username = u1;
     this.password = p1;
     this.highestScore = 0.0;
@@ -42,25 +42,25 @@ public class Player {
     numberOfDead = 0;
     blocksBroke = 0;
     accumulateScore = 0;
-    lastestScore =0;
+    latestScore = 0;
     logged = false;
-    dummyAccount=da;
+    dummyAccount = da;
   }
 
-  public Player(String u1, String p1, double hs, double lts, int sp, int ek, int nod,
-      int bb, long as, long ls, boolean log, boolean dum){
+  public Player(String u1, String p1, double hs, double lts, int sp, int ek, int nod, int bb,
+      long as, long ls, boolean log, boolean dum) {
     this.username = u1;
     this.password = p1;
     this.highestScore = hs;
     longestTimeSurvivalInEndlessMode = lts;
-    enemiesKilled=ek;
+    enemiesKilled = ek;
     secondsPlayed = sp;
     numberOfDead = nod;
     blocksBroke = bb;
     accumulateScore = as;
-    lastestScore=ls;
-    logged=log;
-    dummyAccount=dum;
+    latestScore = ls;
+    logged = log;
+    dummyAccount = dum;
   }
 
   public Player(Player p) {
@@ -68,14 +68,14 @@ public class Player {
     this.password = p.getPassword();
     this.highestScore = p.getHighestScore();
     longestTimeSurvivalInEndlessMode = p.getLongestTimeSurvivalInEndlessMode();
-    enemiesKilled= p.getEnemiesKilled();
+    enemiesKilled = p.getEnemiesKilled();
     secondsPlayed = p.getSecondsPlayed();
     numberOfDead = p.getNumberOfDead();
     blocksBroke = p.getBlocksBroke();
     accumulateScore = p.getAccumulateScore();
-    lastestScore=p.getLastestScore();
-    logged=p.isLogged();
-    dummyAccount=p.isDummyAccount();
+    latestScore = p.getLastestScore();
+    logged = p.isLogged();
+    dummyAccount = p.isDummyAccount();
   }
 
   public String getUserName() {
@@ -151,11 +151,11 @@ public class Player {
   }
 
   public long getLastestScore() {
-    return lastestScore;
+    return latestScore;
   }
 
   public void setLastestScore(long lastestScore) {
-    this.lastestScore = lastestScore;
+    this.latestScore = lastestScore;
   }
 
   public String getUsername() {
@@ -184,15 +184,10 @@ public class Player {
 
   @Override
   public String toString() {
-    return
-        "username='" + username + '\'' +
-            "\n password='" + password + '\'' +
-            "\n highestScore=" + highestScore +
-            "\n longestTimeSurvivalInEndlessMode=" + longestTimeSurvivalInEndlessMode +
-            "\n secondsPlayed=" + secondsPlayed +
-            "\n enemiesKilled=" + enemiesKilled +
-            "\n numberOfDead=" + numberOfDead +
-            "\n blocksBroke=" + blocksBroke +
-            "\n accumulateScore=" + accumulateScore;
+    return "username='" + username + '\'' + "\n password='" + password + '\'' + "\n highestScore="
+        + highestScore + "\n longestTimeSurvivalInEndlessMode=" + longestTimeSurvivalInEndlessMode
+        + "\n secondsPlayed=" + secondsPlayed + "\n enemiesKilled=" + enemiesKilled
+        + "\n numberOfDead=" + numberOfDead + "\n blocksBroke=" + blocksBroke
+        + "\n accumulateScore=" + accumulateScore;
   }
 }
