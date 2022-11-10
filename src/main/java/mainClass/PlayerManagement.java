@@ -19,7 +19,7 @@ public class PlayerManagement {
 
   }
 
-  public static void init(){
+  public static void init() {
     players = new ArrayList<Player>();
     System.out.println("inited");
   }
@@ -39,7 +39,7 @@ public class PlayerManagement {
     return null;
   }
 
-  public static void removeAll(){
+  public static void removeAll() {
     players = new ArrayList<Player>();
   }
 
@@ -47,13 +47,13 @@ public class PlayerManagement {
     return players;
   }
 
-  public static Player createNewPlayer(String username, String password){
-    return new Player(username,password);
+  public static Player createNewPlayer(String username, String password) {
+    return new Player(username, password);
   }
 
-  public static int checkIfExistPlayer(String username, String password){
-    for(Player p : players){
-      if(p.getUserName().equals(username)&&p.getPassword().equals(password)){
+  public static int checkIfExistPlayer(String username, String password) {
+    for (Player p : players) {
+      if (p.getUserName().equals(username) && p.getPassword().equals(password)) {
         return players.indexOf(p);
       }
     }
@@ -73,19 +73,17 @@ public class PlayerManagement {
 
       // adding header to csv
       String[] header = {"username", "password", "highestScore", "longestTimeSurvivalInEndlessMode",
-          "secondsPlayed", "enemiesKilled", "numberOfDead", "blocksBroke", "accumulateScore","lastestScore",
-          "logged","dummy"};
+          "secondsPlayed", "enemiesKilled", "numberOfDead", "blocksBroke", "accumulateScore",
+          "lastestScore", "logged", "dummy"};
 
       writer.writeNext(header);
 
       for (Player p : players) {
         String[] temp = {p.getUserName(), p.getPassword(), Double.toString(p.getHighestScore()),
             Double.toString(p.getLongestTimeSurvivalInEndlessMode()),
-            Integer.toString(p.getSecondsPlayed()),
-            Integer.toString(p.getEnemiesKilled()), Integer.toString(p.getNumberOfDead()),
-            Integer.toString(p.getBlocksBroke()),
-            Long.toString(p.getAccumulateScore()),
-            Long.toString(p.getLastestScore()),
+            Integer.toString(p.getSecondsPlayed()), Integer.toString(p.getEnemiesKilled()),
+            Integer.toString(p.getNumberOfDead()), Integer.toString(p.getBlocksBroke()),
+            Long.toString(p.getAccumulateScore()), Long.toString(p.getLastestScore()),
             Boolean.toString(p.isLogged()).toLowerCase(),
             Boolean.toString(p.isDummyAccount()).toLowerCase()};
         writer.writeNext(temp);
@@ -100,14 +98,13 @@ public class PlayerManagement {
     }
   }
 
-  public static void readDataLineByLine(String file)
-  {
+  public static void readDataLineByLine(String file) {
 
     try {
 
       // Create an object of filereader
       // class with CSV file as a parameter.
-      FileReader filereader = new FileReader("./src/main/resources" +file);
+      FileReader filereader = new FileReader("./src/main/resources" + file);
 
       // create csvReader object passing
       // file reader as a parameter
@@ -117,22 +114,22 @@ public class PlayerManagement {
       boolean firstLine = true;
       // we are going to read data line by line
       while ((nextRecord = csvReader.readNext()) != null) {
-        if(firstLine){
-          firstLine= false;
+        if (firstLine) {
+          firstLine = false;
           continue;
         }
 
         players.add(new Player(nextRecord[0], nextRecord[1], Double.parseDouble(nextRecord[2]),
-            Double.parseDouble(nextRecord[3]),Integer.parseInt(nextRecord[4]) ,
-            Integer.parseInt(nextRecord[5]), Integer.parseInt(nextRecord[6]),Integer.parseInt(nextRecord[7]),Long.parseLong(nextRecord[8]),
-            Long.parseLong(nextRecord[9]),trueOfFalse(nextRecord[10]),
+            Double.parseDouble(nextRecord[3]), Integer.parseInt(nextRecord[4]),
+            Integer.parseInt(nextRecord[5]), Integer.parseInt(nextRecord[6]),
+            Integer.parseInt(nextRecord[7]), Long.parseLong(nextRecord[8]),
+            Long.parseLong(nextRecord[9]), trueOfFalse(nextRecord[10]),
             trueOfFalse(nextRecord[11])));
-        System.out.println(players.get(players.size()-1).isLogged());
+        System.out.println(players.get(players.size() - 1).isLogged());
       }
       System.out.println("read successfully");
 
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
@@ -146,67 +143,64 @@ public class PlayerManagement {
     Random random = new Random();
 
     String generatedString = random.ints(leftLimit, rightLimit + 1)
-        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-        .limit(targetStringLength)
+        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(targetStringLength)
         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
         .toString();
 
     return generatedString;
   }
 
-  public static Player getLoggedAccount(){
-    for(Player p: players){
-      if(p.isLogged()){
+  public static Player getLoggedAccount() {
+    for (Player p : players) {
+      if (p.isLogged()) {
         return p;
       }
     }
     return null;
   }
 
-  public static Boolean trueOfFalse(String text){
-    if(text.equals("true")||text.equals("TRUE")||text.equals("1")){
+  public static Boolean trueOfFalse(String text) {
+    if (text.equals("true") || text.equals("TRUE") || text.equals("1")) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  public static ArrayList<Player> sortedLeaderboardList(int type){
+  public static ArrayList<Player> sortedLeaderboardList(int type) {
     /**
-     * type 1 highest score
-     * type 2 longest time
-     * type 4 enemies kill
-     * type 6 accu score
+     * type 1 highest score type 2 longest time type 4 enemies kill type 6 accu score
      */
     ArrayList<Player> result = new ArrayList<>();
     ArrayList<Integer> idx = new ArrayList<>();
-    Player hs = new Player("null","null",-10,-10,-10,-10,-10,-10,-10,-10,false,false);
-    int count = Math.min(5,players.size());
-    while(count>0){
+    Player hs = new Player("null", "null", -10, -10, -10, -10, -10, -10, -10, -10, false, false);
+    int count = Math.min(5, players.size());
+    while (count > 0) {
       count--;
-      for(Player p: players){
-        if(idx.contains(players.indexOf(p))){
+      for (Player p : players) {
+        if (idx.contains(players.indexOf(p))) {
           continue;
         }
-        switch (type){
+        switch (type) {
           case 1:
-            if(p.getHighestScore()>hs.getHighestScore()){
-              hs=p;
+            if (p.getHighestScore() > hs.getHighestScore()) {
+              hs = p;
             }
             break;
           case 2:
-            if(p.getLongestTimeSurvivalInEndlessMode()>hs.getLongestTimeSurvivalInEndlessMode()){
-              hs=p;
+            if (p.getLongestTimeSurvivalInEndlessMode() > hs
+                .getLongestTimeSurvivalInEndlessMode()) {
+              hs = p;
             }
             break;
           case 3:
-            if(p.getEnemiesKilled()>hs.getEnemiesKilled()){
-              hs=p;
+            if (p.getEnemiesKilled() > hs.getEnemiesKilled()) {
+              hs = p;
             }
             break;
           case 4:
-            if(p.getAccumulateScore()>hs.getAccumulateScore()){
-              hs=p;
+            if (p.getAccumulateScore() > hs.getAccumulateScore()) {
+              hs = p;
             }
             break;
           default:
@@ -215,7 +209,7 @@ public class PlayerManagement {
       }
       result.add(new Player(hs));
       idx.add(players.indexOf(hs));
-      hs = new Player("null","null",-10,-10,-10,-10,-10,-10,-10,-10,false,false);
+      hs = new Player("null", "null", -10, -10, -10, -10, -10, -10, -10, -10, false, false);
     }
     return result;
   }

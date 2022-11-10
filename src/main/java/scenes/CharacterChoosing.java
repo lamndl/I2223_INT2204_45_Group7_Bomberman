@@ -1,14 +1,9 @@
 package scenes;
 
-import static mainClass.App.secondTime;
-
 import java.io.IOException;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-
 import javafx.scene.text.Text;
 import mainClass.App;
 import mainClass.Board;
@@ -37,17 +32,17 @@ public class CharacterChoosing {
     csm = new CharacterSceneManagement();
     currentIndex = csm.getCurrentLength() * 100;
     applyToScene();
-    if(App.mapLevel <=3){
+    if (App.mapLevel <= 3) {
       informationText.setText("Normal difficulty");
-    }else{
+    } else {
       informationText.setText("May make you die some more");
 
     }
 
     mapText.setText("Map " + App.mapLevel);
-    if(isCampaignOrEndless()){
+    if (isCampaignOrEndless()) {
       modeText.setText("Campaign mode");
-    }else{
+    } else {
       modeText.setText("Endless mode");
     }
 
@@ -78,12 +73,13 @@ public class CharacterChoosing {
     Sound.playInGameSound(6);
   }
 
-  public void applyToScene(){
-    previousCharacterImage.setImage(
-        csm.getImageFromIndex((currentIndex - 1) % csm.getCurrentLength()));
+  public void applyToScene() {
+    previousCharacterImage
+        .setImage(csm.getImageFromIndex((currentIndex - 1) % csm.getCurrentLength()));
     currentCharacterImage.setImage(csm.getImageFromIndex(currentIndex % csm.getCurrentLength()));
     nextCharacterImage.setImage(csm.getImageFromIndex((currentIndex + 1) % csm.getCurrentLength()));
-    showCharacterName.setText(csm.getTextFromIndex(currentIndex % csm.getCurrentLength())+" character");
+    showCharacterName
+        .setText(csm.getTextFromIndex(currentIndex % csm.getCurrentLength()) + " character");
 
   }
 
@@ -104,10 +100,10 @@ public class CharacterChoosing {
   public void switchToMainGame() throws IOException {
     currentIndex = currentIndex % csm.getCurrentLength();
 
-    Board.setPlayerNumber(currentIndex+1);
+    Board.setPlayerNumber(currentIndex + 1);
     App.toMainGame();
-    Board.unresetFrame=0;
-    Board.gameOver=false;
+    Board.unresetFrame = 0;
+    Board.gameOver = false;
     Sound.playInGameSound(6);
   }
 
