@@ -174,7 +174,7 @@ public class Bomber extends Mob {
       App.currentPlayer.setLastestScore(0);
       // go to scene end game and replay
 
-      if(App.coe){
+      if(!App.coe){
         if(App.currentPlayer.getLongestTimeSurvivalInEndlessMode()<Board.unresetFrame/60){
           App.currentPlayer.setLongestTimeSurvivalInEndlessMode(Board.unresetFrame/60);
         }

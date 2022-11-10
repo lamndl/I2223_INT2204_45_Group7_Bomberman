@@ -64,7 +64,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <CheckBox fx:id="musicCheckBox" layoutX="746.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleMusicCheckBox" selected="true" style="-fx-background-color: green;" stylesheets="@mainMenu.css" text="Music" textFill="WHITE">
+      <CheckBox fx:id="musicCheckBox" layoutX="712.0" layoutY="37.0" mnemonicParsing="false" onAction="#toggleMusicCheckBox" selected="true" style="-fx-background-color: green;" stylesheets="@mainMenu.css" text="Background music" textFill="WHITE">
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>

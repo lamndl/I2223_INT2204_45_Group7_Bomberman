@@ -471,8 +471,10 @@ public class Board {
     statusText.setLayoutX(145.0);
     statusText.setLayoutY(54.0);
     statusText.setTextAlignment(TextAlignment.valueOf("CENTER"));
-
+    Button b3 = new Button("Back");
     Button b2 = new Button("Continue");
+    Button b1 = new Button("Replay");
+
     b2.setPadding(new Insets(10, 10, 10, 10));
     b2.setPrefWidth(100.0);
     b2.setPrefHeight(38.0);
@@ -480,6 +482,8 @@ public class Board {
     b2.setLayoutY(164.0);
     b2.setOnAction(e -> {
       removeInRoot(b2);
+      removeInRoot(b1);
+      removeInRoot(b3);
       removeInRoot(statusText);
       removeInRoot(ap);
       //removeInRoot(canvas);
@@ -493,8 +497,49 @@ public class Board {
 
       //setLevelLoader(1);
     });
+
+    b3.setPadding(new Insets(10, 10, 10, 10));
+    b3.setPrefWidth(100.0);
+    b3.setPrefHeight(38.0);
+    b3.setLayoutX(57.0);
+    b3.setLayoutY(164.0);
+    b3.setOnAction(e -> {
+      removeInRoot(b2);
+      removeInRoot(b1);
+      removeInRoot(b3);
+      removeInRoot(statusText);
+      removeInRoot(ap);
+      removeInRoot(canvas);
+      removeAllEntity();
+      gameOver=true;
+      //timer.start();
+      currentPlayer.setLastestScore(0);
+      statusText.setText("");
+      clearInput();
+      App.goBackMainMenu();
+
+      //setLevelLoader(1);
+    });
+    b1.setPadding(new Insets(10, 10, 10, 10));
+    b1.setPrefWidth(100.0);
+    b1.setPrefHeight(38.0);
+    b1.setLayoutX(422.0);
+    b1.setLayoutY(164.0);
+    b1.setOnAction(e -> {
+      timer.start();
+      currentPlayer.setLastestScore(0);
+      statusText.setText("");
+      removeInRoot(b2);
+      removeInRoot(b1);
+      removeInRoot(b3);
+      removeInRoot(statusText);
+      removeInRoot(ap);
+      loadLevel(lvd.getLevel());
+    });
     ap.getChildren().add(statusText);
     ap.getChildren().add(b2);
+    ap.getChildren().add(b3);
+    ap.getChildren().add(b1);
     root.getChildren().add(ap);
   }
 

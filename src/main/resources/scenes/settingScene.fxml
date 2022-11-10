@@ -32,7 +32,7 @@
         <Font size="25.0" />
       </font>
     </Text>
-    <Text fx:id="testChangeText" fill="WHITE" layoutX="74.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound">
+    <Text fx:id="testChangeText" fill="WHITE" layoutX="74.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Volume">
       <font>
         <Font size="20.0" />
       </font>
@@ -167,7 +167,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <Text fill="WHITE" layoutX="74.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game sound">
+      <Text fill="WHITE" layoutX="74.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In-game sound effect">
          <font>
             <Font size="20.0" />
          </font>
