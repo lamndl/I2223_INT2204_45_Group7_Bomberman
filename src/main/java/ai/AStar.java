@@ -119,7 +119,7 @@ public class AStar {
     if (!adjacentNode.isBlock() && !getClosedSet().contains(adjacentNode)) {
       if (!getOpenList().contains(adjacentNode)) {
         if (adjacentNode.isBrick()) {
-          adjacentNode.setNodeData(currentNode, 14);
+          adjacentNode.setNodeData(currentNode, 30);
         } else {
           adjacentNode.setNodeData(currentNode, cost);
         }
@@ -127,7 +127,7 @@ public class AStar {
       } else {
         boolean changed;
         if (adjacentNode.isBrick()) {
-          changed = adjacentNode.checkBetterPath(currentNode, 14);
+          changed = adjacentNode.checkBetterPath(currentNode, 30);
         } else {
           changed = adjacentNode.checkBetterPath(currentNode, cost);
         }

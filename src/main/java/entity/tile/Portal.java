@@ -21,6 +21,6 @@ public class Portal extends Tile {
 
   @Override
   public BoundingBox getBoundingBox() {
-    return new BoundingBox(x + 14, y + 14, 1 , 1);
+    return new BoundingBox(x + 4, y + 4, 28 , 28);
   }
 }

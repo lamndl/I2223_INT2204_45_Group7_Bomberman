@@ -53,7 +53,7 @@ public class App extends Application {
 
     stage.getIcons().add(icon);
     stage.setResizable(false);
-    stage.setFullScreen(false);
+    stage.setFullScreen(true);
     stage.show();
     sound = new Sound();
     playMedia(0);
